@@ -5,7 +5,7 @@ const { verifyToken } = require("../utils/token");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const isAuth = async (req, res, next) => {
+const isAuthUser = async (req, res, next) => {
   //le quitamos el prefijo Bearer al token
   const token = req.headers.authorization?.replace("Bearer ", "");
   if (!token) {
@@ -39,6 +39,6 @@ const isAuthAdmin = async (req, res, next) => {
 };
 
 module.exports = {
-  isAuth,
+  isAuth: isAuthUser,
   isAuthAdmin,
 };
