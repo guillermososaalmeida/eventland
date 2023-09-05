@@ -39,6 +39,6 @@ const isAuthAdmin = async (req, res, next) => {
 };
 
 module.exports = {
-  isAuth: isAuthUser,
+  isAuthUser,
   isAuthAdmin,
 };

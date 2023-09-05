@@ -8,7 +8,6 @@ const EventSchema = new Schema(
     image: { type: String, required: false },
     description: { type: String, required: false },
     usersAssist: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
     establishment: {
       type: mongoose.Schema.Types.ObjectId,
