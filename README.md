@@ -17,3 +17,8 @@ cambiamos en el package json los scripts a:
 
 - start: node index.js
 - dev: nodemon index.js
+
+# configuracion prettier(extension)
+
+cambiamos la configuración del prettier del Visual Studio:
+en el apartado "Trailing comma" lo cambiamos a "all".
