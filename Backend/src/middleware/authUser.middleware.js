@@ -1,6 +1,6 @@
 //? Aquí haremos la autentificación de usuarios y usuarios-Administradores
 
-const User = require("../api/models/user.model");
+const User = require("../api/models/User.model");
 const { verifyToken } = require("../utils/token");
 const dotenv = require("dotenv");
 dotenv.config();

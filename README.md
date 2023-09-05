@@ -16,6 +16,7 @@ luego instalamos:
 - npm i jsonwebtoken
 - npm i bcrypt
 - npm i validator
+- npm i nodemailer
 
 cambiamos en el package json los scripts a:
 

@@ -15,10 +15,13 @@ const EstablishmentSchema = new Schema(
     year: { type: Number, required: false },
     email: {
       type: String,
-      required: true,
       trim: true,
       unique: true,
       validate: [validator.isEmail, "Email not valid"],
+    },
+    contact: {
+      type: Number,
+      required: false,
     },
   },
   {
