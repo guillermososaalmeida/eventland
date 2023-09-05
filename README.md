@@ -26,3 +26,7 @@ cambiamos en el package json los scripts a:
 
 cambiamos la configuración del prettier del Visual Studio:
 en el apartado "Trailing comma" lo cambiamos a "all".
+
+# format eslint antes de commit
+
+- npm run format:fix
