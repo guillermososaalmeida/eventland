@@ -26,3 +26,5 @@ cambiamos en el package json los scripts a:
 
 -cambiamos la configuración del prettier del Visual Studio:
 en el apartado "Trailing comma" lo cambiamos a "all".
+-Para que dejara de salir el error de formato de "Delete `CR`" hemos puesto en el "extends"
+del .eslintrc.json lo siguiente: "prettier"
