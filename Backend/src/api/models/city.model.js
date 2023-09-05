@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema(
+const CitySchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     image: { type: String, required: false },
@@ -23,6 +23,6 @@ const EventSchema = new Schema(
   },
 );
 
-const Event = mongoose.model("Event", EventSchema);
+const City = mongoose.model("City", CitySchema);
 
-module.exports = Event;
+module.exports = City;

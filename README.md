@@ -24,9 +24,7 @@ cambiamos en el package json los scripts a:
 
 # configuracion prettier(extension)
 
-cambiamos la configuración del prettier del Visual Studio:
+-cambiamos la configuración del prettier del Visual Studio:
 en el apartado "Trailing comma" lo cambiamos a "all".
-
-# format eslint antes de commit
-
-- npm run format:fix
+-Para que dejara de salir el error de formato de "Delete `CR`" hemos puesto en el "extends"
+del .eslintrc.json lo siguiente: "prettier"
