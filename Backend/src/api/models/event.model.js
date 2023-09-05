@@ -2,47 +2,28 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const IngredientSchema = new Schema(
+const EventSchema = new Schema(
   {
-    //Es importante: azúcares simples, azúcares totales, grasa, proteína, sal, fibra
     name: { type: String, required: true, unique: true },
-    simpleSugars: { type: Number, required: false },
-    totalSugars: { type: Number, required: false },
-    fat: { type: Number, required: false },
-    protein: { type: Number, required: false },
-    salt: { type: Number, required: false },
-    fiber: { type: Number, required: false },
-    //Lo suyo es hacer una tabla en la BBDD para los alérgenos.
-    allergenGroup: {
-      type: String,
-      enum: [
-        "Gluten",
-        "Crustáceos",
-        "Huevo",
-        "Pescado",
-        "Altramuces",
-        "Soja",
-        "Leche",
-        "Frutos secos",
-        "Mostaza",
-        "Cacahuetes",
-        "Sésamo",
-        "Sulfitos",
-        "Apio",
-        "Moluscos",
-      ],
-      required: false,
-    },
     image: { type: String, required: false },
-    recipes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Recipe" }],
-    usersFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    description: { type: String, required: false },
+    usersAssist: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
+    establishment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Establishment",
+    },
+    organization: { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
+    favsFromUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    video: { type: String, required: false },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     timestamps: true,
   },
 );
 
-const Ingredient = mongoose.model("Ingredient", IngredientSchema);
+const Event = mongoose.model("Event", EventSchema);
 
-module.exports = Ingredient;
+module.exports = Event;
