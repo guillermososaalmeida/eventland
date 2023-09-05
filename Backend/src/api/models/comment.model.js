@@ -6,7 +6,7 @@ const EventSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     eventName: { type: String, required: true },
-    cityOfEvent: { type: String, required: false },
+    cityOfEvent: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
     userImage: { type: String, required: false },
     establishment: [
       {
