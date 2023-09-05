@@ -1,0 +1,12 @@
+para iniciar el proyecto, empezamos con npm init -y
+
+luego instalamos: 
+- npm i express
+- npm i dotenv
+- npm i mongoose
+- npm i nodemon -D (dependencia de desarrollo)
+- npm i cloudinary multer multer-storage-cloudinary (gestión de archivos multimedia, almacenarlos en una nube)
+
+cambiamos en el package json los scripts a:
+- start: node index.js
+- dev: nodemon index.js
