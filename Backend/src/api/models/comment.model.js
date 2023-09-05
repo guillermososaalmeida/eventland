@@ -16,6 +16,7 @@ const EventSchema = new Schema(
     ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+    review: { type: String, required: false },
   },
   {
     timestamps: true,
