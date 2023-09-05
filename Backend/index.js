@@ -1,4 +1,3 @@
-//!-------------------------------------ABAJO EL DE LAURA--------------
 const cors = require("cors");
 
 const express = require("express");
@@ -31,19 +30,19 @@ app.use(express.urlencoded({ limit: "5mb", extended: false }));
 
 //RUTAS
 
-const UserRoutes = require("./src/api/routes/User.routes");
-const CityRoutes = require("./src/api/routes/City.routes");
-const CommentsRoutes = require("./src/api/routes/Commets.routes");
-const EstablishmentRoutes = require("./src/api/routes/Establishment.routes");
-const EventRoutes = require("./src/api/routes/Event.routes");
-const OrganizationRoutes = require("./src/api/routes/Organization.routes");
+// const UserRoutes = require("./src/api/routes/User.routes");
+// const CityRoutes = require("./src/api/routes/City.routes");
+// const CommentRoutes = require("./src/api/routes/Comment.routes");
+// const EstablishmentRoutes = require("./src/api/routes/Establishment.routes");
+// const EventRoutes = require("./src/api/routes/Event.routes");
+// const OrganizationRoutes = require("./src/api/routes/Organization.routes");
 
-app.use("/api/v1/users", UserRoutes);
-app.use("/api/v1/cities", CityRoutes);
-app.use("/api/v1/comments", CommentsRoutes);
-app.use("/api/v1/establishments", EstablishmentRoutes);
-app.use("/api/v1/events", EventRoutes);
-app.use("/api/v1/organizations", OrganizationRoutes);
+// app.use("/api/v1/users", UserRoutes);
+// app.use("/api/v1/cities", CityRoutes);
+// app.use("/api/v1/comments", CommentRoutes);
+// app.use("/api/v1/establishments", EstablishmentRoutes);
+// app.use("/api/v1/events", EventRoutes);
+// app.use("/api/v1/organizations", OrganizationRoutes);
 
 app.use("*", (req, res, next) => {
   const error = new Error("Ruta no encontrada");
@@ -61,7 +60,5 @@ app.use((error, req, res) => {
 app.disable("x-powered-by");
 
 app.listen(PORT, () => {
-  console.log(
-    `Servidor escuchando en el puerto: ${PORT}, en http://localhost:${PORT}`,
-  );
+  console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
