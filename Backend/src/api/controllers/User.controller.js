@@ -13,13 +13,10 @@ const { generateToken } = require("../../utils/token");
 const setError = require("../../helpers/handle-error");
 const randomPassword = require("../../utils/randomPassword");
 
-//const City = require("../models/City.model");
-
 const dotenv = require("dotenv");
 dotenv.config();
 
 const User = require("../models/User.model");
-/* const City = require("../models/City.model"); */
 
 //!-------Register
 const register = async (req, res, next) => {

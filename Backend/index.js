@@ -35,14 +35,14 @@ const CommentRoutes = require("./src/api/routes/Comment.routes");
 const CityRoutes = require("./src/api/routes/City.routes");
 const EstablishmentRoutes = require("./src/api/routes/Establishment.routes");
 const EventRoutes = require("./src/api/routes/Event.routes");
-// const OrganizationRoutes = require("./src/api/routes/Organization.routes");
+const OrganizationRoutes = require("./src/api/routes/Organization.routes");
 
 app.use("/api/v1/users", UserRoutes);
 app.use("/api/v1/comments", CommentRoutes);
 app.use("/api/v1/cities", CityRoutes);
 app.use("/api/v1/establishments", EstablishmentRoutes);
 app.use("/api/v1/events", EventRoutes);
-// app.use("/api/v1/organizations", OrganizationRoutes);
+app.use("/api/v1/organizations", OrganizationRoutes);
 
 app.use("*", (req, res, next) => {
   const error = new Error("Ruta no encontrada");

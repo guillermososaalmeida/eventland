@@ -1,6 +1,6 @@
 //? Aquí haremos la autentificación de organizaciones
 
-const Organization = require("../api/models/Organization");
+const Organization = require("../api/models/Organization.model");
 const { verifyToken } = require("../utils/token");
 const dotenv = require("dotenv");
 dotenv.config();

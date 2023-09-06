@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const Event = require("../models/Event.model");
-/* const User = require("../models/User.model"); */
 
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {

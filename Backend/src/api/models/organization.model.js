@@ -45,6 +45,7 @@ const OrganizationSchema = new Schema(
     timestamps: true,
   },
 );
+
 OrganizationSchema.pre("save", async function (next) {
   try {
     this.password = await bcrypt.hash(this.password, 10);
