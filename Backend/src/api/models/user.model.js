@@ -46,6 +46,11 @@ const UserSchema = new mongoose.Schema(
       { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
     ],
     city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
+    dateOfBirth: {
+      type: Date,
+      required: true,
+      trim: true,
+    },
   },
   {
     timestamps: true,
