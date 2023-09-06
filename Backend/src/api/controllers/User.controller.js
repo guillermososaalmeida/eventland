@@ -19,7 +19,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const User = require("../models/User.model");
-const City = require("../models/City.model");
+/* const City = require("../models/City.model"); */
 
 //!-------Register
 const register = async (req, res, next) => {
@@ -143,7 +143,7 @@ const resendCode = async (req, res, next) => {
 
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.log(error);
+          return res.status(404).json("Email not sent ❌");
         } else {
           console.log("Email sent: " + info.response);
           return res.status(200).json({
@@ -213,9 +213,9 @@ const autoLogin = async (req, res, next) => {
   }
 };
 
-//! --------------CAMBIAR CONTRASEÑA ANTES DE LOGGEARSE
+//! -------------- CONTRASEÑA OLVIDADA
 
-const changePassword = async (req, res, next) => {
+const forgotPassword = async (req, res, next) => {
   try {
     const { email } = req.body;
     const userDb = await User.findOne({ email });
@@ -252,7 +252,6 @@ const sendPassword = async (req, res, next) => {
 
     // Generamos la password secura con la funcion randomPassword
     let passwordSecure = randomPassword();
-    console.log(passwordSecure);
     const mailOptions = {
       from: email,
       to: userDb.email,
@@ -264,7 +263,6 @@ const sendPassword = async (req, res, next) => {
     transporter.sendMail(mailOptions, async function (error, info) {
       if (error) {
         // si hay error quiere decir que ni hemos actualizado el user, ni enviamos email
-        console.log(error);
         return res.status(404).json("email not sent and user not updated");
       } else {
         console.log("Email sent: " + info.response);
@@ -462,7 +460,7 @@ module.exports = {
   register,
   resendCode,
   login,
-  changePassword,
+  forgotPassword,
   sendPassword,
   modifyPassword,
   update,

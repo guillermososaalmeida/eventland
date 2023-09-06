@@ -16,9 +16,9 @@ const sendEmail = (userEmail, name, confirmationCode) => {
       user: email,
       pass: password,
     },
-    // tls: {
-    //   rejectUnauthorized: false,
-    // },
+    tls: {
+      rejectUnauthorized: false,
+    },
   });
   const mailOptions = {
     from: email,

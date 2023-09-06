@@ -5,7 +5,7 @@ const {
   register,
   resendCode,
   login,
-  changePassword,
+  forgotPassword,
   sendPassword,
   modifyPassword,
   update,
@@ -17,7 +17,7 @@ const UserRoutes = express.Router();
 
 UserRoutes.post("/register", uploadUser.single("image"), register);
 UserRoutes.post("/resend", resendCode);
-UserRoutes.patch("/forgotpassword/forgotpassword", changePassword);
+UserRoutes.patch("/forgotpassword/forgotpassword", forgotPassword);
 UserRoutes.post("/login", login);
 UserRoutes.post("/login/autologin", autoLogin);
 UserRoutes.patch("/changepassword", [isAuthUser], modifyPassword);
