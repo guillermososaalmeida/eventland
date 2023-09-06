@@ -29,3 +29,7 @@ cambiamos en el package json los scripts a:
 en el apartado "Trailing comma" lo cambiamos a "all".
 -Para que dejara de salir el error de formato de "Delete `CR`" hemos puesto en el "extends"
 del .eslintrc.json lo siguiente: "prettier"
+
+# configuración nodemailer
+
+Importante, en cuentas de Google, verificación en 2 pasos. Luego ir a Contraseñas de aplicaciones. Escribir "Nodemailer" y ahí te genera una contraseña. Contraseña que debe ir en el .env acompañando al correo.

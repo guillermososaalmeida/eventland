@@ -30,7 +30,7 @@ const sendEmail = (userEmail, name, confirmationCode) => {
 
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error, "error ❌");
+      console.log(error, "error sending email ❌");
       setTestEmailSend(false);
     } else {
       console.log("Email sent: " + info.response);
