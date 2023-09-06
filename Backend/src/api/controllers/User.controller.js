@@ -459,3 +459,16 @@ const update = async (req, res, next) => {
 //     return next(error);
 //   }
 // };
+
+module.exports = {
+  autoLogin,
+  register,
+  resendCode,
+  login,
+  changePassword,
+  sendPassword,
+  modifyPassword,
+  update,
+  //deleteUser,
+  checkNewUser,
+};
