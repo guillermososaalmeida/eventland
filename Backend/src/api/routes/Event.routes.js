@@ -15,6 +15,6 @@ EventRoutes.post("/", uploadEvent.single("image"), postEvent); //luego poner la 
 EventRoutes.get("/:id", getById);
 EventRoutes.get("/getbyname/:name", getByName);
 EventRoutes.get("/get/all", getAllEvents);
-EventRoutes.patch("/update/:id", updateEvent);
+EventRoutes.patch("/update/:id", uploadEvent.single("image"), updateEvent);
 
 module.exports = EventRoutes;

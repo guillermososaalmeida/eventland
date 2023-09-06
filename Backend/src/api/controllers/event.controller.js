@@ -120,7 +120,7 @@ const updateEvent = async (req, res, next) => {
       const elementUpdate = Object.keys(req.body);
       let test = {};
       elementUpdate.forEach((item) => {
-        if (req?.body[item] == updateNewEvent[item]) {
+        if (req.body[item] == updateNewEvent[item]) {
           test[item] = true;
         } else {
           test[item] = false;
