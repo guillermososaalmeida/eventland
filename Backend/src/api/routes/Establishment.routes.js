@@ -1,3 +1,4 @@
+const { isAuthAdmin } = require("../../middleware/authUser.middleware");
 const { uploadEstablishment } = require("../../middleware/files.middleware");
 const {
   updateEstablishment,
@@ -9,14 +10,10 @@ const {
 
 const EstablishmentRoutes = require("express").Router();
 
-//!-----------------AUTORIZACIONES???????????
-//!-----------------AUTORIZACIONES???????????
-//!-----------------AUTORIZACIONES???????????
-//!-----------------AUTORIZACIONES???????????
-
 EstablishmentRoutes.post(
   "/",
   uploadEstablishment.single("image"),
+  [isAuthAdmin],
   postEstablishment,
 );
 EstablishmentRoutes.get("/getbyname/:name", getByNameEstablishment);
@@ -25,6 +22,7 @@ EstablishmentRoutes.get("/getbyid/:id", getEstablishmentById);
 EstablishmentRoutes.patch(
   "/updateestablishment/:id",
   uploadEstablishment.single("image"),
+  [isAuthAdmin],
   updateEstablishment,
 );
 
