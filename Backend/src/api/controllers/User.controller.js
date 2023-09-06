@@ -1,3 +1,7 @@
+const nodemailer = require("nodemailer");
+const bcrypt = require("bcrypt");
+const validator = require("validator");
+
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const {
   getTestEmailSend,
@@ -7,10 +11,11 @@ const randomCode = require("../../utils/randomCode");
 const sendEmail = require("../../utils/sendEmail");
 const { generateToken } = require("../../utils/token");
 const setError = require("../helpers/handle-error");
-const User = require("../models/User.model");
-const nodemailer = require("nodemailer");
-const bcrypt = require("bcrypt");
 const randomPassword = require("../../utils/randomPassword");
+const dotenv = require("dotenv");
+dotenv.config();
+
+const User = require("../models/User.model");
 const City = require("../models/City.model");
 
 //!-------Register
@@ -73,6 +78,8 @@ const register = async (req, res, next) => {
       return res.status(409).json("this user already exist");
     }
   } catch (error) {
+    if (req.file) deleteImgCloudinary(catchImg);
+
     return next(error);
   }
 };
@@ -107,20 +114,7 @@ const checkNewUser = async (req, res, next) => {
         }
       } else {
         /// En caso dec equivocarse con el codigo lo borramos de la base datos y lo mandamos al registro
-        await User.findByIdAndDelete(userExists._id);
-
-        // borramos la imagen
-        deleteImgCloudinary(userExists.image);
-        // metemos 200 aunque no ha salido bien el controlador porque sino salta el error primero
-        /// si le ponemos 404 salta el error de arriba de User not found aunque si lo ha borrado
-        // devolvemos un 200 con el test de ver si el delete se ha hecho correctamente
-        return res.status(200).json({
-          userExists,
-          check: false,
-          delete: (await User.findById(userExists._id))
-            ? "error delete user"
-            : "ok delete user",
-        });
+        return res.status(404).json("invalid code");
       }
     }
   } catch (error) {
@@ -141,6 +135,9 @@ const resendCode = async (req, res, next) => {
         user: email,
         pass: password,
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
     //! hay que ver que el usuario exista porque si no existe no tiene sentido hacer ninguna verificacion
     const userExists = await User.findOne({ email: req.body.email });
@@ -150,7 +147,7 @@ const resendCode = async (req, res, next) => {
         from: email,
         to: req.body.email,
         subject: "Confirmation code",
-        text: `tu codigo es ${userExists.confirmationCode}`,
+        text: `Tu código es ${userExists.confirmationCode}`,
       };
 
       transporter.sendMail(mailOptions, (error, info) => {
@@ -227,7 +224,7 @@ const autoLogin = async (req, res, next) => {
 
 //! --------------CAMBIAR CONTRASEÑA ANTES DE LOGGEARSE
 
-const changePassword = async (req, res) => {
+const changePassword = async (req, res, next) => {
   try {
     const { email } = req.body;
     const userDb = await User.findOne({ email });
@@ -240,7 +237,7 @@ const changePassword = async (req, res) => {
       return res.status(404).json("User no register");
     }
   } catch (error) {
-    console.log(error);
+    return next(error);
   }
 };
 
@@ -257,6 +254,9 @@ const sendPassword = async (req, res, next) => {
         user: email,
         pass: password,
       },
+      tls: {
+        rejectUnauthorized: false,
+      },
     });
 
     // Generamos la password secura con la funcion randomPassword
@@ -266,7 +266,7 @@ const sendPassword = async (req, res, next) => {
       from: email,
       to: userDb.email,
       subject: "-----",
-      text: `User: ${userDb.name}. Your new code login is ${passwordSecure} Hemos enviado esto porque tenemos una solicitud de cambio de contraseña, si no has sido ponte en contacto con nosotros, gracias.`,
+      text: `${userDb.name}.Tu nueva contraseña es ${passwordSecure} . Hemos enviado esto porque tenemos una solicitud de cambio de contraseña, si no has sido ponte en contacto con nosotros, gracias.`,
     };
 
     // enviamos el email
@@ -274,7 +274,7 @@ const sendPassword = async (req, res, next) => {
       if (error) {
         // si hay error quiere decir que ni hemos actualizado el user, ni enviamos email
         console.log(error);
-        return res.status(404).json("dont send email and dont update user");
+        return res.status(404).json("email not sent and user not updated");
       } else {
         console.log("Email sent: " + info.response);
         // ----> si hemos enviado el correo, hasheamos la contraseña y actualizamos el user
@@ -290,8 +290,7 @@ const sendPassword = async (req, res, next) => {
               sendPassword: true,
             });
           } else {
-            //// si no se ha actualizado damos feedback de que se envio la contraseña pero
-            // ... no se actualizo
+            // si no se ha actualizado damos feedback de que se envio la contraseña pero no se actualizó
             return res.status(404).json({
               updateUser: false,
               sendPassword: true,
@@ -313,40 +312,47 @@ const modifyPassword = async (req, res, next) => {
   try {
     const { password, newPassword } = req.body;
     const { _id } = req.user;
-    if (bcrypt.compareSync(password, req.user.password)) {
-      const newPasswordHashed = bcrypt.hashSync(newPassword, 10);
-      try {
-        /// hacemos la actualizacion si las contraseñas coinciden
-        await User.findByIdAndUpdate(_id, { password: newPasswordHashed });
+    const validated = validator.isStrongPassword(newPassword);
 
-        /// hacemos una comprobacion para ver si se ha actualizado las contraseñas
-        const userUpdate = await User.findById(_id);
-        if (bcrypt.compareSync(newPassword, userUpdate.password)) {
-          return res.status(200).json({
-            updateUser: true,
-          });
-        } else {
-          return res.status(200).json({
-            updateUser: false,
-          });
+    if (validated) {
+      if (bcrypt.compareSync(password, req.user.password)) {
+        const newPasswordHashed = bcrypt.hashSync(newPassword, 10);
+        try {
+          /// hacemos la actualizacion si las contraseñas coinciden
+          await User.findByIdAndUpdate(_id, { password: newPasswordHashed });
+
+          /// hacemos una comprobacion para ver si se ha actualizado las contraseñas
+          const userUpdate = await User.findById(_id);
+          if (bcrypt.compareSync(newPassword, userUpdate.password)) {
+            return res.status(200).json({
+              updateUser: true,
+            });
+          } else {
+            return res.status(200).json({
+              updateUser: false,
+            });
+          }
+        } catch (error) {
+          return res.status(404).json(error.message);
         }
-      } catch (error) {
-        return res.status(404).json(error.message);
+      } else {
+        return res.status(404).json("password dont match");
       }
     } else {
-      return res.status(404).json("password dont match");
+      return res.status(404).json("new password is not strong enough");
     }
   } catch (error) {
     return next(error);
   }
 };
 
-//!----------ACTUALIZAR INOFO USUARIO------------
+//!----------ACTUALIZAR INFO USUARIO------------
 
 const update = async (req, res, next) => {
   // guardamos la imagen para si luego hay un error utilizar la URL para borrarla
   let catchImg = req.file?.path;
   try {
+    await User.syncIndexes();
     // creamos una nueva instancia del modelo User con el req.body
     const patchUser = new User(req.body);
     // si tiene archivo la request entonces le metemos al usuario creado esa imagen
@@ -392,7 +398,7 @@ const update = async (req, res, next) => {
         }
       });
 
-      //// lo mismo que arriba pero ahora con el req.file en caso de haberlo recibido
+      // lo mismo que arriba pero ahora con el req.file en caso de haberlo recibido
       if (req.file) {
         updateUser.image == req.file.path
           ? testUpdate.push({
