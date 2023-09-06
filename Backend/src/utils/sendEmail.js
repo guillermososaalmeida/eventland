@@ -16,18 +16,17 @@ const sendEmail = (userEmail, name, confirmationCode) => {
       user: email,
       pass: password,
     },
-    tls: {
-      rejectUnauthorized: false,
-    },
+    // tls: {
+    //   rejectUnauthorized: false,
+    // },
   });
-
   const mailOptions = {
     from: email,
     to: userEmail,
     subject: "Código de confirmación",
     text: `Tu código es ${confirmationCode}, gracias por confiar en Eventland, ${name}`,
   };
-
+  console.log("mailoptions", mailOptions);
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error, "error sending email ❌");
