@@ -30,6 +30,6 @@ UserRoutes.patch(
 //UserRoutes.delete('/', [isAuth], deleteUser);
 UserRoutes.post("/check", checkNewUser);
 
-UserRoutes.patch("/sendPassword/:id", sendPassword);
+UserRoutes.patch("/sendpassword/:id", sendPassword);
 
 module.exports = UserRoutes;

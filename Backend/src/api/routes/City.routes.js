@@ -11,11 +11,11 @@ const {
 const CityRoutes = require("express").Router();
 
 CityRoutes.post("/", uploadCity.single("image"), [isAuthAdmin], postCity);
-CityRoutes.get("/getByName/:name", getByNameCity);
-CityRoutes.get("/getAllCities/", getAllCities);
-CityRoutes.get("/getById/:id", getCityById);
+CityRoutes.get("/getbyname/:name", getByNameCity);
+CityRoutes.get("/getallcities/", getAllCities);
+CityRoutes.get("/getbyid/:id", getCityById);
 CityRoutes.patch(
-  "/updateCity/:id",
+  "/updatecity/:id",
   uploadCity.single("image"),
   [isAuthAdmin],
   updateCity,
