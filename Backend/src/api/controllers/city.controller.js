@@ -19,9 +19,7 @@ const postCity = async (req, res, next) => {
     if (savedCity) {
       return res.status(200).json(savedCity);
     } else {
-      return res
-        .status(404)
-        .json("No se ha podido guardar la ciudad en la bbdd");
+      return res.status(404).json("Couldn't save the city in the DB");
     }
   } catch (error) {
     req.file?.path && deleteImgCloudinary(cathCity);
@@ -39,7 +37,7 @@ const getByNameCity = async (req, res, next) => {
     if (filterCity.length > 0) {
       return res.status(200).json({ data: cityByName });
     } else {
-      return res.status(404).json("No se ha podido encontrar la ciudad");
+      return res.status(404).json("Couldn't find the city");
     }
   } catch (error) {
     return next(error);
@@ -52,7 +50,7 @@ const getAllCities = async (req, res, next) => {
     if (allCities.length > 0) {
       return res.status(200).json({ data: allCities });
     } else {
-      return res.status(404).json("events not found");
+      return res.status(404).json("cities not found");
     }
   } catch (error) {
     return next(error);
@@ -66,11 +64,76 @@ const getCityById = async (req, res, next) => {
     if (cityById) {
       return res.status(200).json({ data: cityById });
     } else {
-      res.status(404).json("Ciudad no encontrado");
+      res.status(404).json("city not found");
     }
   } catch (error) {
     return next(error);
   }
 };
 
-module.exports = { postCity, getByNameCity, getAllCities, getCityById };
+const updateCity = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const city = await City.findById(req.params.id);
+    console.log("cityById", city);
+    console.log("id", id);
+    if (city) {
+      const customBody = {
+        _id: city._id,
+        image: req.file?.path ? req.file?.path : city.image,
+        name: req.body?.name ? req.body?.name : city.name,
+        country: req.body?.country ? req.body?.country : city.country,
+        province: req.body?.province ? req.body?.province : city.province,
+        community: req.body?.community ? req.body?.community : city.community,
+      };
+      await City.findByIdAndUpdate(id, customBody);
+      if (req.file?.path) {
+        deleteImgCloudinary(city.image);
+      }
+
+      const updateNewCity = await City.findById(id);
+      const elementUpdate = Object.keys(req.body);
+      let test = {};
+      elementUpdate.forEach((item) => {
+        if (req.body[item] == updateNewCity[item]) {
+          test[item] = true;
+        } else {
+          test[item] = false;
+        }
+        if (req.file) {
+          updateNewCity.image == req.file?.path
+            ? (test = { ...test, file: true })
+            : (test = { ...test, file: false });
+        }
+      });
+      let acc = 0;
+      for (let clave in test) {
+        if (test[clave] == false) acc++;
+      }
+
+      if (acc > 0) {
+        return res.status(404).json({
+          dataTest: test,
+          update: false,
+        });
+      } else {
+        return res.status(200).json({
+          dataTest: test,
+          update: updateNewCity,
+        });
+      }
+    } else {
+      return res.status(404).json("City not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = {
+  postCity,
+  getByNameCity,
+  getAllCities,
+  getCityById,
+  updateCity,
+};
