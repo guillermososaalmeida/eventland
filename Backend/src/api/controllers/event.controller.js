@@ -56,8 +56,8 @@ const getById = async (req, res, next) => {
           .populate("city")
           .populate("establishment")
           .populate("organization")
-          .populate("favsFromUsers")
-          .populate("comments"),
+          .populate("comments")
+          .populate("favsFromUsers"),
       });
     } else {
       res.status(404).json("event not found");

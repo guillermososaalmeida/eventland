@@ -13,10 +13,10 @@ const EventSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Establishment",
     },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     organization: { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
     favsFromUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     video: { type: String, required: false },
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     timestamps: true,

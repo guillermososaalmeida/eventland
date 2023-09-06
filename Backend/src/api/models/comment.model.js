@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema(
+const CommentSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     eventName: { type: String, required: true },
@@ -23,6 +23,6 @@ const EventSchema = new Schema(
   },
 );
 
-const Event = mongoose.model("Event", EventSchema);
+const Comment = mongoose.model("Comment", CommentSchema);
 
-module.exports = Event;
+module.exports = Comment;
