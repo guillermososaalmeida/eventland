@@ -39,7 +39,8 @@ const register = async (req, res, next) => {
       if (req.file) {
         newUser.image = catchImg;
       } else {
-        newUser.image = "https://pic.onlinewebfonts.com/svg/img_181369.png";
+        newUser.image =
+          "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994545/proyectoEventland/userAssets/unknown-512_zlung8.webp";
       }
 
       try {
@@ -62,7 +63,9 @@ const register = async (req, res, next) => {
           return res.status(404).json("not saved user1");
         }
       } catch (error) {
-        return res.status(404).json("error saving user", error.message);
+        return res
+          .status(404)
+          .json({ error: error, message: "error saving user" });
       }
     } else {
       if (req.file) deleteImgCloudinary(catchImg);
