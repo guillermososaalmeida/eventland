@@ -4,10 +4,7 @@ const Schema = mongoose.Schema;
 
 const CommentSchema = new Schema(
   {
-    name: { type: String, required: true, unique: true },
-    eventName: { type: String, required: true },
     cityOfEvent: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
-    userImage: { type: String, required: false },
     establishment: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -16,6 +13,7 @@ const CommentSchema = new Schema(
     ],
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+    score: { type: Number, required: true },
     review: { type: String, required: false },
   },
   {
