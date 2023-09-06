@@ -51,13 +51,15 @@ const getById = async (req, res, next) => {
 
     if (eventById) {
       return res.status(200).json({
-        data: await Event.findById(id)
+        data: await Event.findById(id).populate(
+          "comments usersAssist city establishment organization favsFromUsers",
+        ),
+        /* .populate("comments")
           .populate("usersAssist")
           .populate("city")
           .populate("establishment")
           .populate("organization")
-          .populate("comments")
-          .populate("favsFromUsers"),
+          .populate("favsFromUsers"), */
       });
     } else {
       res.status(404).json("event not found");

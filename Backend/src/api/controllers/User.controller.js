@@ -10,7 +10,7 @@ const {
 const randomCode = require("../../utils/randomCode");
 const sendEmail = require("../../utils/sendEmail");
 const { generateToken } = require("../../utils/token");
-const setError = require("../helpers/handle-error");
+const setError = require("../../helpers/handle-error");
 const randomPassword = require("../../utils/randomPassword");
 
 //const City = require("../models/City.model");
