@@ -2,17 +2,17 @@ const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const City = require("../models/City.model");
 
 const postCity = async (req, res, next) => {
-  let cathCity = req.file?.path;
+  let catchCity = req.file?.path;
   try {
     await City.syncIndexes();
 
     const newCity = new City(req.body);
     //ponemos imagen por defecto si no hay una.
     if (req.file) {
-      newCity.image = cathCity;
+      newCity.image = catchCity;
     } else {
       newCity.image =
-        "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994443/proyectoEventland/cityStorage/defaultCity.jpg";
+        "https://res.cloudinary.com/dhr13yihn/image/upload/v1694008280/proyectoEventland/cityAssets/cityDefault.jpg";
     }
     //guardamos el Citye en la bbdd
     const savedCity = await newCity.save();
@@ -22,7 +22,7 @@ const postCity = async (req, res, next) => {
       return res.status(404).json("Couldn't save the city in the DB");
     }
   } catch (error) {
-    req.file?.path && deleteImgCloudinary(cathCity);
+    req.file?.path && deleteImgCloudinary(catchCity);
     return next(error);
   }
 };
