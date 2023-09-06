@@ -1,5 +1,5 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
-const Establishment = require("../models/City.model");
+const Establishment = require("../models/Establishment.model");
 
 const postEstablishment = async (req, res, next) => {
   let catchEstablishment = req.file?.path;
@@ -13,9 +13,9 @@ const postEstablishment = async (req, res, next) => {
       newEstablishment.image =
         "https://res.cloudinary.com/dhr13yihn/image/upload/v1694009594/proyectoEventland/establishmentAssets/EstablishmentDefault.jpg";
     }
-    const savedCity = await newEstablishment.save();
-    if (savedCity) {
-      return res.status(200).json(savedCity);
+    const savedEstablishment = await newEstablishment.save();
+    if (savedEstablishment) {
+      return res.status(200).json(savedEstablishment);
     } else {
       return res.status(404).json("Couldn't save the establishment in the DB");
     }
@@ -55,77 +55,100 @@ const getAllEstablishments = async (req, res, next) => {
   }
 };
 
-const getCityById = async (req, res, next) => {
+const getEstablishmentById = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const cityById = await City.findById(id);
-    if (cityById) {
-      return res.status(200).json({ data: cityById });
+    const establishmentById = await Establishment.findById(id);
+    if (establishmentById) {
+      return res.status(200).json({ data: establishmentById });
     } else {
-      res.status(404).json("city not found");
+      res.status(404).json("establishment not found");
     }
   } catch (error) {
     return next(error);
   }
 };
 
-// const updateCity = async (req, res, next) => {
-//   try {
-//     const id = req.params.id;
-//     const city = await City.findById(req.params.id);
-//     console.log("cityById", city);
-//     console.log("id", id);
-//     if (city) {
-//       const customBody = {
-//         _id: city._id,
-//         image: req.file?.path ? req.file?.path : city.image,
-//         name: req.body?.name ? req.body?.name : city.name,
-//         country: req.body?.country ? req.body?.country : city.country,
-//         province: req.body?.province ? req.body?.province : city.province,
-//         community: req.body?.community ? req.body?.community : city.community,
-//       };
-//       await City.findByIdAndUpdate(id, customBody);
-//       if (req.file?.path) {
-//         deleteImgCloudinary(city.image);
-//       }
+const updateEstablishment = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const establishment = await Establishment.findById(req.params.id);
+    if (establishment) {
+      const customBody = {
+        _id: establishment._id,
+        image: req.file?.path ? req.file?.path : establishment.image,
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        name: req.body?.name ? req.body?.name : establishment.name,
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        //!!!!!!!!!!!!!!!!!!!!EL NAME SE PUEDE CAMBIAR??????????????????
+        description: req.body?.description
+          ? req.body?.description
+          : establishment.description,
+        capacity: req.body?.capacity
+          ? req.body?.capacity
+          : establishment.capacity,
+        kindOfPlace: req.body?.kindOfPlace
+          ? req.body?.kindOfPlace
+          : establishment.kindOfPlace,
+        hours: req.body?.hours ? req.body?.hours : establishment.hours,
+        year: req.body?.year ? req.body?.year : establishment.year,
+        email: req.body?.email ? req.body?.email : establishment.email,
+        contact: req.body?.contact ? req.body?.contact : establishment.contact,
+      };
 
-//       const updateNewCity = await City.findById(id);
-//       const elementUpdate = Object.keys(req.body);
-//       let test = {};
-//       elementUpdate.forEach((item) => {
-//         if (req.body[item] == updateNewCity[item]) {
-//           test[item] = true;
-//         } else {
-//           test[item] = false;
-//         }
-//         if (req.file) {
-//           updateNewCity.image == req.file?.path
-//             ? (test = { ...test, file: true })
-//             : (test = { ...test, file: false });
-//         }
-//       });
-//       let acc = 0;
-//       for (let clave in test) {
-//         if (test[clave] == false) acc++;
-//       }
+      await Establishment.findByIdAndUpdate(id, customBody);
+      if (req.file?.path) {
+        deleteImgCloudinary(establishment.image);
+      }
 
-//       if (acc > 0) {
-//         return res.status(404).json({
-//           dataTest: test,
-//           update: false,
-//         });
-//       } else {
-//         return res.status(200).json({
-//           dataTest: test,
-//           update: updateNewCity,
-//         });
-//       }
-//     } else {
-//       return res.status(404).json("City not found");
-//     }
-//   } catch (error) {
-//     return next(error);
-//   }
-// };
+      const updateNewEstablishment = await Establishment.findById(id);
+      const elementUpdate = Object.keys(req.body);
+      let test = {};
+      elementUpdate.forEach((item) => {
+        if (req.body[item] == updateNewEstablishment[item]) {
+          test[item] = true;
+        } else {
+          test[item] = false;
+        }
+        if (req.file) {
+          updateNewEstablishment.image == req.file?.path
+            ? (test = { ...test, file: true })
+            : (test = { ...test, file: false });
+        }
+      });
+      let acc = 0;
+      for (let clave in test) {
+        if (test[clave] == false) acc++;
+      }
 
-module.exports = {};
+      if (acc > 0) {
+        return res.status(404).json({
+          dataTest: test,
+          update: false,
+        });
+      } else {
+        return res.status(200).json({
+          dataTest: test,
+          update: updateNewEstablishment,
+        });
+      }
+    } else {
+      return res.status(404).json("Establishment not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = {
+  updateEstablishment,
+  getEstablishmentById,
+  getByNameEstablishment,
+  getAllEstablishments,
+  postEstablishment,
+};

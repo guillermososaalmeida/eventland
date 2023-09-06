@@ -75,8 +75,6 @@ const updateCity = async (req, res, next) => {
   try {
     const id = req.params.id;
     const city = await City.findById(req.params.id);
-    console.log("cityById", city);
-    console.log("id", id);
     if (city) {
       const customBody = {
         _id: city._id,
