@@ -5,6 +5,7 @@ dotenv.config();
 
 const Event = require("../models/Event.model");
 const Establishment = require("../models/Establishment.model");
+const User = require("../models/User.model");
 
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
@@ -180,10 +181,41 @@ const updateEvent = async (req, res, next) => {
   }
 };
 
+//!DELETE
+
+const deleteEvent = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    await User.updateMany(
+      { eventsInterested: id },
+      { $pull: { eventsInterested: id } },
+    );
+
+    await User.updateMany(
+      { eventsAssist: id },
+      { $pull: { eventsAssist: id } },
+    );
+
+    await Establishment.updateMany({ events: id }, { $pull: { events: id } });
+
+    const deletedEvent = await Event.findByIdAndDelete(id);
+
+    if (deletedEvent) {
+      return res.status(200).json({ message: "Evento eliminado exitosamente" });
+    } else {
+      return res.status(404).json({ error: "Evento no encontrado" });
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   getAllEvents,
   getByName,
   getById,
   postEvent,
   updateEvent,
+  deleteEvent,
 };
