@@ -13,6 +13,7 @@ const {
   getAllUsers,
   getByName,
   getById,
+  toggleAssistEvent,
 } = require("../controllers/User.controller");
 
 const express = require("express");
@@ -23,6 +24,7 @@ UserRoutes.post("/register", uploadUser.single("image"), register);
 UserRoutes.post("/resend", resendCode);
 UserRoutes.post("/login", login);
 UserRoutes.post("/login/autologin", autoLogin);
+UserRoutes.post("/check", checkNewUser);
 
 //! PATCH
 UserRoutes.patch("/forgotpassword/forgotpassword", forgotPassword);
@@ -33,8 +35,8 @@ UserRoutes.patch(
   uploadUser.single("image"),
   update,
 );
-UserRoutes.post("/check", checkNewUser);
 UserRoutes.patch("/sendpassword/:id", sendPassword);
+UserRoutes.patch("/add/:event", [isAuthUser], toggleAssistEvent);
 
 //! DELETE
 //UserRoutes.delete('/', [isAuth], deleteUser);

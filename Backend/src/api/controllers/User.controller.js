@@ -17,6 +17,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const User = require("../models/User.model");
+const Event = require("../models/Event.model");
 
 //!-------Register
 const register = async (req, res, next) => {
@@ -507,6 +508,73 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
+//! ASSIST EVENT
+
+const toggleAssistEvent = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const eventToAssist = req.params.event;
+    console.log(
+      "----------------------------------------------------------------------👀👀",
+      eventToAssist,
+    );
+    if (req.user.eventsAssist.includes(eventToAssist)) {
+      // si lo incluye lo sacamos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $pull: { eventsAssist: eventToAssist },
+        });
+
+        try {
+          await Event.findByIdAndUpdate(eventToAssist, {
+            $pull: { usersAssist: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pulling user from event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pulling event from user model",
+          message: error.message,
+        });
+      }
+    } else {
+      // si no lo incluye lo metemos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { eventsAssist: eventToAssist },
+        });
+        try {
+          await Event.findByIdAndUpdate(eventToAssist, {
+            $push: { usersAssist: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pushing user  in event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pushing event in user model",
+          message: error.message,
+        });
+      }
+    }
+
+    setTimeout(async () => {
+      return res
+        .status(200)
+        .json(await User.findById(_id).populate("eventsAssist"));
+    }, 1000);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   autoLogin,
   register,
@@ -521,4 +589,5 @@ module.exports = {
   getAllUsers,
   getByName,
   getById,
+  toggleAssistEvent,
 };
