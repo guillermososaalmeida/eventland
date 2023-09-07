@@ -514,10 +514,7 @@ const toggleAssistEvent = async (req, res, next) => {
   try {
     const { _id } = req.user;
     const eventToAssist = req.params.event;
-    console.log(
-      "----------------------------------------------------------------------👀👀",
-      eventToAssist,
-    );
+
     if (req.user.eventsAssist.includes(eventToAssist)) {
       // si lo incluye lo sacamos
       try {
@@ -575,6 +572,74 @@ const toggleAssistEvent = async (req, res, next) => {
   }
 };
 
+//! ADD FAVORITE ORGANIZATION
+
+const toggleFavOrganization = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const { organization } = req.params;
+    console.log(
+      "organization------------------------------------👀👀👀",
+      organization,
+    );
+
+    if (req.user.organizationsFav.includes(organization)) {
+      // si lo incluye lo sacamos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $pull: { organizationsFav: organization },
+        });
+
+        try {
+          await Event.findByIdAndUpdate(organization, {
+            $pull: { usersFav: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pulling user from event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pulling event from user model",
+          message: error.message,
+        });
+      }
+    } else {
+      // si no lo incluye lo metemos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { organizationsFav: organization },
+        });
+        try {
+          await Event.findByIdAndUpdate(organization, {
+            $push: { usersFav: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pushing user  in event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pushing event in user model",
+          message: error.message,
+        });
+      }
+    }
+
+    setTimeout(async () => {
+      return res
+        .status(200)
+        .json(await User.findById(_id).populate("organizationsFav"));
+    }, 1000);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   autoLogin,
   register,
@@ -590,4 +655,5 @@ module.exports = {
   getByName,
   getById,
   toggleAssistEvent,
+  toggleFavOrganization,
 };
