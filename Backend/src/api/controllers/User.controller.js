@@ -440,22 +440,28 @@ const deleteUser = async (req, res, next) => {
           } catch (error) {
             return res
               .status(400)
-              .json("error borrando las recetas cuando borras user");
+              .json(
+                "error borrando el user a causa del modelo de Organization",
+              );
           }
         } catch (error) {
           return res
             .status(400)
-            .json("error borrando las recetas cuando borras user");
+            .json(
+              "error borrando el user a causa del modelo de Event(favsFromUser)",
+            );
         }
       } catch (error) {
         return res
           .status(400)
-          .json("error borrando las recetas cuando borras user");
+          .json(
+            "error borrando el user a causa del modelo de Event(usersAssist)",
+          );
       }
     } catch (error) {
       return res
         .status(400)
-        .json("error borrando los ingredientes cuando borras user");
+        .json("error borrando el user a causa del modelo de Comment");
     }
     //
     if (await User.findById(_id)) {
