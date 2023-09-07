@@ -723,16 +723,79 @@ const toggleFavOrganization = async (req, res, next) => {
 
 const getPastEvents = async (req, res, next) => {
   try {
+    //si hay eventos en el campo de eventsAttend
+    if (req.user.eventsAttend?.length > 0) {
+      //guardo los ids de eventos de eventsAttend
+      const events = req.user.eventsAttend;
+      //guardo la fecha actual
+      const currentDate = new Date();
+      //creo un array donde pushearé los eventos que cumplan la condición (eventos anteriores a fecha actual)
+      const arrayPastEvents = [];
+      //con el promise.all esperamos a que se cumplan las promesas de este iterable(map)
+      await Promise.all(
+        events.map(async (event) => {
+          //por cada id de evento, lo busco con el método de Mongo
+          const currentEvent = await Event.findById(event);
+          //si es anterior (menor) lo pusheo al array
+          currentEvent.date < currentDate && arrayPastEvents.push(currentEvent);
+        }),
+      );
+      return res.status(200).json({ data: arrayPastEvents });
+    } else {
+      return res.status(404).json("there's no events yet!");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET NEXT EVENTS
+//mirar comentarios del anterior controlador
+const getNextEvents = async (req, res, next) => {
+  try {
     if (req.user.eventsAttend?.length > 0) {
       const events = req.user.eventsAttend;
       const currentDate = new Date();
-      const pastEvents = await Promise.all(
+      const arrayNextEvents = [];
+      await Promise.all(
         events.map(async (event) => {
           const currentEvent = await Event.findById(event);
-          return currentEvent.date < currentDate && currentEvent;
+          return (
+            //el único cambio es la condición, que buscamos que la fecha del evento sea posterior (mayor)
+            currentEvent.date > currentDate &&
+            arrayNextEvents.push(currentEvent)
+          );
         }),
       );
-      return res.status(200).json({ data: pastEvents });
+      return res.status(200).json({ data: arrayNextEvents });
+    } else {
+      return res.status(404).json("there's no events yet!");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET JUST THE NEXT EVENT
+//mirar comentarios del anterior controlador
+const getSingleNextEvent = async (req, res, next) => {
+  try {
+    if (req.user.eventsAttend?.length > 0) {
+      const events = req.user.eventsAttend;
+      const currentDate = new Date();
+      const arrayNextEvents = [];
+      await Promise.all(
+        events.map(async (event) => {
+          const currentEvent = await Event.findById(event);
+          return (
+            //el único cambio es la condición, que buscamos que la fecha del evento sea posterior (mayor)
+            currentEvent.date > currentDate &&
+            arrayNextEvents.push(currentEvent)
+          );
+        }),
+      );
+      const nextEvent = arrayNextEvents.sort((a, b) => a.date - b.date);
+      return res.status(200).json({ data: nextEvent[0] });
     } else {
       return res.status(404).json("there's no events yet!");
     }
@@ -759,4 +822,6 @@ module.exports = {
   toggleFavOrganization,
   toggleLikedEvent,
   getPastEvents,
+  getNextEvents,
+  getSingleNextEvent,
 };

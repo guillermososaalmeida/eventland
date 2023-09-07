@@ -16,10 +16,10 @@ const {
   toggleAttendEvent,
   toggleFavOrganization,
   toggleLikedEvent,
-
   getPastEvents,
-
   deleteUser,
+  getNextEvents,
+  getSingleNextEvent,
 } = require("../controllers/User.controller");
 
 const express = require("express");
@@ -54,5 +54,7 @@ UserRoutes.get("/:id", getById);
 UserRoutes.get("/getbyname/:name", getByName);
 UserRoutes.get("/get/all", getAllUsers);
 UserRoutes.get("/get/past/events", [isAuthUser], getPastEvents);
+UserRoutes.get("/get/next/events", [isAuthUser], getNextEvents);
+UserRoutes.get("/get/single/next/event", [isAuthUser], getSingleNextEvent);
 
 module.exports = UserRoutes;
