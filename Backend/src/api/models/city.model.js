@@ -12,7 +12,6 @@ const CitySchema = new Schema(
         ref: "Establishment",
       },
     ],
-    users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     organizations: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Organizations" },
