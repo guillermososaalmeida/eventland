@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const Event = require("../models/Event.model");
+const Establishment = require("../models/Establishment.model");
 
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
@@ -110,9 +111,34 @@ const updateEvent = async (req, res, next) => {
           : event.description,
         video: req.body?.video ? req.body?.video : event.video,
       };
-      await Event.findByIdAndUpdate(id, customBody);
-      if (req.file?.path) {
-        deleteImgCloudinary(event.image);
+
+      // Verificar si hay un nuevo establecimiento asociado
+      if (req.body.establishment) {
+        const newEstablishmentId = req.body.establishment;
+
+        // Obtener el establecimiento anterior asociado al evento
+        const oldEstablishmentId = event.establishment;
+
+        // Actualizar el evento con el nuevo establecimiento
+        customBody.establishment = newEstablishmentId;
+
+        // Guardar el evento actualizado
+        await Event.findByIdAndUpdate(id, customBody);
+
+        // Si había un establecimiento anteriormente asociado, eliminar la referencia al evento
+        if (oldEstablishmentId) {
+          await Establishment.findByIdAndUpdate(oldEstablishmentId, {
+            $pull: { events: id },
+          });
+        }
+
+        // Asociar el evento al nuevo establecimiento
+        await Establishment.findByIdAndUpdate(newEstablishmentId, {
+          $addToSet: { events: id },
+        });
+      } else {
+        // Si no se proporciona un nuevo establecimiento, simplemente actualizar el evento
+        await Event.findByIdAndUpdate(id, customBody);
       }
 
       const updateNewEvent = await Event.findById(id);
