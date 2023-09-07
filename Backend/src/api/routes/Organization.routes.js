@@ -15,6 +15,7 @@ const {
   getById,
   getByName,
   getAllOrganizations,
+  deleteOrganization,
 } = require("../controllers/Organization.controller");
 
 const express = require("express");
@@ -47,7 +48,7 @@ OrganizationRoutes.patch(
 OrganizationRoutes.patch("/sendpassword/:id", sendPassword);
 
 //! DELETE
-//UserRoutes.delete('/', [isAuth], deleteUser);
+OrganizationRoutes.delete("/", [isAuthOrganization], deleteOrganization);
 
 //! GET
 OrganizationRoutes.get("/:id", getById);

@@ -16,6 +16,8 @@ const setError = require("../../helpers/handle-error");
 const randomPassword = require("../../utils/randomPassword");
 
 const Organization = require("../models/Organization.model");
+const City = require("../models/City.model");
+const User = require("../models/User.model");
 
 //! REGISTER ORGANIZATION
 
@@ -487,6 +489,69 @@ const getAllOrganizations = async (req, res, next) => {
   }
 };
 
+//!DELETE
+
+const deleteOrganization = async (req, res, next) => {
+  try {
+    const { _id, image } = req.user;
+    await Organization.findByIdAndDelete(_id);
+    try {
+      await City.updateMany(
+        { organizations: _id },
+        { $pull: { organizations: _id } },
+      );
+      try {
+        await Event.updateMany(
+          { usersAssist: _id },
+          { $pull: { usersAssist: _id } },
+        );
+        try {
+          await Event.updateMany(
+            { organization: _id },
+            { $pull: { organization: _id } },
+          );
+          try {
+            await User.updateMany(
+              { organizationsFav: _id },
+              { $pull: { organizationsFav: _id } },
+            );
+          } catch (error) {
+            return res
+              .status(400)
+              .json(
+                "error borrando la organización a causa del modelo de User",
+              );
+          }
+        } catch (error) {
+          return res
+            .status(400)
+            .json(
+              "error borrando la organización a causa del modelo de Event(organization)",
+            );
+        }
+      } catch (error) {
+        return res
+          .status(400)
+          .json(
+            "error borrando la organización a causa del modelo de Event(userAssist)",
+          );
+      }
+    } catch (error) {
+      return res
+        .status(400)
+        .json("error borrando la organización a causa del modelo de City");
+    }
+    //
+    if (await User.findById(_id)) {
+      return res.status(404).json("Dont delete");
+    } else {
+      deleteImgCloudinary(image);
+      return res.status(200).json("ok delete");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
 module.exports = {
   registerOrganization,
   checkNewOrganization,
@@ -500,4 +565,5 @@ module.exports = {
   getById,
   getByName,
   getAllOrganizations,
+  deleteOrganization,
 };
