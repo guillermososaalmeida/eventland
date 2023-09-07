@@ -19,6 +19,7 @@ const EventSchema = new Schema(
     organization: { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
     favsFromUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     video: { type: String, required: false },
+    date: { type: Date, required: true },
   },
   {
     timestamps: true,
