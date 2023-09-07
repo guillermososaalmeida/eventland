@@ -19,7 +19,7 @@ EventRoutes.post(
   uploadEvent.single("image"),
   [isAuthOrganization],
   postEvent,
-); //luego poner la authOrganization
+);
 EventRoutes.get("/:id", getById);
 EventRoutes.get("/getbyname/:name", getByName);
 EventRoutes.get("/get/all", getAllEvents);
