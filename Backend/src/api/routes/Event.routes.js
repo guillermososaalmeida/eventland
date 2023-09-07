@@ -7,6 +7,7 @@ const {
   getById,
   postEvent,
   updateEvent,
+  getNextEvent,
 } = require("../controllers/Event.controller");
 const {
   isAuthOrganization,
@@ -23,6 +24,7 @@ EventRoutes.post(
 EventRoutes.get("/:id", getById);
 EventRoutes.get("/getbyname/:name", getByName);
 EventRoutes.get("/get/all", getAllEvents);
+EventRoutes.get("/get/next/event", getNextEvent);
 EventRoutes.patch(
   "/update/:id",
   uploadEvent.single("image"),
