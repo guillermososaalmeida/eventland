@@ -18,6 +18,8 @@ dotenv.config();
 
 const User = require("../models/User.model");
 const Event = require("../models/Event.model");
+const Comment = require("../models/Comment.model");
+const Organization = require("../models/Organization.model");
 
 //!-------Register
 const register = async (req, res, next) => {
@@ -414,47 +416,58 @@ const update = async (req, res, next) => {
 };
 
 //!--------------------------DELETE------------------
-// const deleteUser = async (req, res, next) => {
-//   try {
-//     const { _id, image } = req.user;
-//     await User.findByIdAndDelete(_id);
-//     //
-//     try {
-//       await Event.updateMany(
-//         { usersAssist: _id },
-//         { $pull: { usersAssist: _id } },
-//         { favsFromUsers: _id },
-//         { $pull: { favsFromUsers: _id } },
-//       );
-//       try {
-//         await City.updateMany({ users: _id }, { $pull: { users: _id } });
-//         try {
-
-//         } catch (error) {
-//             .status(400)
-//             .json("error borrando las recetas cuando borras user");
-//         }
-//       } catch (error) {
-//         return res
-//           .status(400)
-//           .json("error borrando los users de las ciudades");
-//       }
-//     } catch (error) {
-//       return res
-//         .status(400)
-//         .json("error borrando users de los eventos");
-//     }
-//     //
-//     if (await User.findById(_id)) {
-//       return res.status(404).json("Dont delete");
-//     } else {
-//       deleteImgCloudinary(image);
-//       return res.status(200).json("ok delete");
-//     }
-//   } catch (error) {
-//     return next(error);
-//   }
-// };
+const deleteUser = async (req, res, next) => {
+  try {
+    const { _id, image } = req.user;
+    await User.findByIdAndDelete(_id);
+    try {
+      await Comment.updateMany({ user: _id }, { $pull: { user: _id } });
+      try {
+        await Event.updateMany(
+          { usersAssist: _id },
+          { $pull: { usersAssist: _id } },
+        );
+        try {
+          await Event.updateMany(
+            { favsFromUsers: _id },
+            { $pull: { favsFromUsers: _id } },
+          );
+          try {
+            await Organization.updateMany(
+              { usersFav: _id },
+              { $pull: { usersFav: _id } },
+            );
+          } catch (error) {
+            return res
+              .status(400)
+              .json("error borrando las recetas cuando borras user");
+          }
+        } catch (error) {
+          return res
+            .status(400)
+            .json("error borrando las recetas cuando borras user");
+        }
+      } catch (error) {
+        return res
+          .status(400)
+          .json("error borrando las recetas cuando borras user");
+      }
+    } catch (error) {
+      return res
+        .status(400)
+        .json("error borrando los ingredientes cuando borras user");
+    }
+    //
+    if (await User.findById(_id)) {
+      return res.status(404).json("Dont delete");
+    } else {
+      deleteImgCloudinary(image);
+      return res.status(200).json("ok delete");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
 
 //! GET BY ID
 const getById = async (req, res, next) => {
@@ -709,7 +722,7 @@ module.exports = {
   sendPassword,
   modifyPassword,
   update,
-  //deleteUser,
+  deleteUser,
   checkNewUser,
   getAllUsers,
   getByName,
