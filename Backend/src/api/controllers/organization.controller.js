@@ -435,6 +435,58 @@ const update = async (req, res, next) => {
   }
 };
 
+//! GET BY ID
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const organizationById = await Organization.findById(id);
+
+    if (organizationById) {
+      return res.status(200).json({
+        data: await Organization.findById(id).populate(
+          "establishment events city",
+        ),
+      });
+    } else {
+      res.status(404).json("organization not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET BY NAME
+const getByName = async (req, res, next) => {
+  try {
+    const { name = "" } = req.params;
+    const organizationByName = await Organization.find();
+    const filterOrganization = organizationByName.filter((element) =>
+      element.name.toLowerCase().includes(name.toLowerCase()),
+    );
+    if (filterOrganization.length > 0) {
+      return res.status(200).json({ data: filterOrganization });
+    } else {
+      res.status(404).json("organization not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET ALL
+const getAllOrganizations = async (req, res, next) => {
+  try {
+    const allOrganizations = await Organization.find();
+    if (allOrganizations.length > 0) {
+      return res.status(200).json({ data: allOrganizations });
+    } else {
+      return res.status(404).json("organizations not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   registerOrganization,
   checkNewOrganization,
@@ -445,4 +497,7 @@ module.exports = {
   sendPassword,
   modifyPassword,
   update,
+  getById,
+  getByName,
+  getAllOrganizations,
 };
