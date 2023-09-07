@@ -572,16 +572,76 @@ const toggleAssistEvent = async (req, res, next) => {
   }
 };
 
+//! LIKE EVENT
+
+const toggleLikedEvent = async (req, res, next) => {
+  try {
+    const { _id } = req.user;
+    const eventToLike = req.params.event;
+
+    if (req.user.eventsInterested.includes(eventToLike)) {
+      // si lo incluye lo sacamos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $pull: { eventsInterested: eventToLike },
+        });
+
+        try {
+          await Event.findByIdAndUpdate(eventToLike, {
+            $pull: { favsFromUsers: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pulling user from event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pulling event from user model",
+          message: error.message,
+        });
+      }
+    } else {
+      // si no lo incluye lo metemos
+      try {
+        await User.findByIdAndUpdate(_id, {
+          $push: { eventsInterested: eventToLike },
+        });
+        try {
+          await Event.findByIdAndUpdate(eventToLike, {
+            $push: { favsFromUsers: _id },
+          });
+        } catch (error) {
+          return res.status(404).json({
+            error: "error pushing user  in event model",
+            message: error.message,
+          });
+        }
+      } catch (error) {
+        return res.status(404).json({
+          error: "error pushing event in user model",
+          message: error.message,
+        });
+      }
+    }
+
+    setTimeout(async () => {
+      return res
+        .status(200)
+        .json(await User.findById(_id).populate("eventsInterested"));
+    }, 1000);
+  } catch (error) {
+    return next(error);
+  }
+};
+
 //! ADD FAVORITE ORGANIZATION
 
 const toggleFavOrganization = async (req, res, next) => {
   try {
     const { _id } = req.user;
     const { organization } = req.params;
-    console.log(
-      "organization------------------------------------👀👀👀",
-      organization,
-    );
 
     if (req.user.organizationsFav.includes(organization)) {
       // si lo incluye lo sacamos
@@ -656,4 +716,5 @@ module.exports = {
   getById,
   toggleAssistEvent,
   toggleFavOrganization,
+  toggleLikedEvent,
 };

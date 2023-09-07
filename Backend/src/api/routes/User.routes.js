@@ -15,6 +15,7 @@ const {
   getById,
   toggleAssistEvent,
   toggleFavOrganization,
+  toggleLikedEvent,
 } = require("../controllers/User.controller");
 
 const express = require("express");
@@ -39,6 +40,7 @@ UserRoutes.patch(
 UserRoutes.patch("/sendpassword/:id", sendPassword);
 UserRoutes.patch("/add/:event", [isAuthUser], toggleAssistEvent);
 UserRoutes.patch("/fav/:organization", [isAuthUser], toggleFavOrganization);
+UserRoutes.patch("/fav/interest/:event", [isAuthUser], toggleLikedEvent);
 
 //! DELETE
 //UserRoutes.delete('/', [isAuth], deleteUser);
