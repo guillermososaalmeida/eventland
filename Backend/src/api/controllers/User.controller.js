@@ -465,7 +465,7 @@ const getById = async (req, res, next) => {
     if (userById) {
       return res.status(200).json({
         data: await User.findById(id).populate(
-          "eventsInterested eventsInterested organizationsFav city",
+          "eventsInterested eventsAssist organizationsFav city",
         ),
       });
     } else {
