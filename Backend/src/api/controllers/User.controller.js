@@ -18,6 +18,7 @@ dotenv.config();
 
 const User = require("../models/User.model");
 const Event = require("../models/Event.model");
+const Organization = require("../models/Organization.model");
 
 //!-------Register
 const register = async (req, res, next) => {
@@ -651,7 +652,7 @@ const toggleFavOrganization = async (req, res, next) => {
         });
 
         try {
-          await Event.findByIdAndUpdate(organization, {
+          await Organization.findByIdAndUpdate(organization, {
             $pull: { usersFav: _id },
           });
         } catch (error) {
@@ -673,7 +674,7 @@ const toggleFavOrganization = async (req, res, next) => {
           $push: { organizationsFav: organization },
         });
         try {
-          await Event.findByIdAndUpdate(organization, {
+          await Organization.findByIdAndUpdate(organization, {
             $push: { usersFav: _id },
           });
         } catch (error) {
@@ -700,6 +701,28 @@ const toggleFavOrganization = async (req, res, next) => {
   }
 };
 
+//! GET PAST EVENTS
+
+const getPastEvents = async (req, res, next) => {
+  try {
+    if (req.user.eventsAssist?.length > 0) {
+      const events = req.user.eventsAssist;
+      const currentDate = new Date();
+      const pastEvents = await Promise.all(
+        events.map(async (event) => {
+          const currentEvent = await Event.findById(event);
+          return currentEvent.date < currentDate && currentEvent;
+        }),
+      );
+      return res.status(200).json({ data: pastEvents });
+    } else {
+      return res.status(404).json("there's no events yet!");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   autoLogin,
   register,
@@ -717,4 +740,5 @@ module.exports = {
   toggleAssistEvent,
   toggleFavOrganization,
   toggleLikedEvent,
+  getPastEvents,
 };

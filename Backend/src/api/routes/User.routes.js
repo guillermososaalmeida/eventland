@@ -16,6 +16,7 @@ const {
   toggleAssistEvent,
   toggleFavOrganization,
   toggleLikedEvent,
+  getPastEvents,
 } = require("../controllers/User.controller");
 
 const express = require("express");
@@ -49,5 +50,6 @@ UserRoutes.patch("/fav/interest/:event", [isAuthUser], toggleLikedEvent);
 UserRoutes.get("/:id", getById);
 UserRoutes.get("/getbyname/:name", getByName);
 UserRoutes.get("/get/all", getAllUsers);
+UserRoutes.get("/get/past/events", [isAuthUser], getPastEvents);
 
 module.exports = UserRoutes;
