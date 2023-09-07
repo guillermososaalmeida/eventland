@@ -79,13 +79,13 @@ const register = async (req, res, next) => {
 
 const checkNewUser = async (req, res, next) => {
   try {
-    //! nos traemos de la req.body el email y codigo de confirmation
+    // nos traemos de la req.body el email y codigo de confirmation
     const { email, confirmationCode } = req.body;
 
-    //! hay que ver que el usuario exista porque si no existe no tiene sentido hacer ninguna verificacion
+    // hay que ver que el usuario exista porque si no existe no tiene sentido hacer ninguna verificacion
     const userExists = await User.findOne({ email });
     if (!userExists) {
-      //!No existe----> 404 de no se encuentra
+      //No existe----> 404 de no se encuentra
       return res.status(404).json("User not found");
     } else {
       // cogemos que comparamos que el codigo que recibimos por la req.body y el del userExists es igual
@@ -455,6 +455,58 @@ const update = async (req, res, next) => {
 //   }
 // };
 
+//! GET BY ID
+const getById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const userById = await User.findById(id);
+
+    if (userById) {
+      return res.status(200).json({
+        data: await User.findById(id).populate(
+          "eventsInterested eventsInterested organizationsFav city",
+        ),
+      });
+    } else {
+      res.status(404).json("user not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET BY NAME
+const getByName = async (req, res, next) => {
+  try {
+    const { name = "" } = req.params;
+    const userByName = await User.find();
+    const filterUser = userByName.filter((element) =>
+      element.name.toLowerCase().includes(name.toLowerCase()),
+    );
+    if (filterUser.length > 0) {
+      return res.status(200).json({ data: filterUser });
+    } else {
+      res.status(404).json("user not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET ALL
+const getAllUsers = async (req, res, next) => {
+  try {
+    const allUsers = await User.find();
+    if (allUsers.length > 0) {
+      return res.status(200).json({ data: allUsers });
+    } else {
+      return res.status(404).json("users not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   autoLogin,
   register,
@@ -466,4 +518,7 @@ module.exports = {
   update,
   //deleteUser,
   checkNewUser,
+  getAllUsers,
+  getByName,
+  getById,
 };
