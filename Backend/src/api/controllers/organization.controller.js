@@ -502,8 +502,8 @@ const deleteOrganization = async (req, res, next) => {
       );
       try {
         await Event.updateMany(
-          { usersAssist: _id },
-          { $pull: { usersAssist: _id } },
+          { usersAttend: _id },
+          { $pull: { usersAttend: _id } },
         );
         try {
           await Event.updateMany(
@@ -533,7 +533,7 @@ const deleteOrganization = async (req, res, next) => {
         return res
           .status(400)
           .json(
-            "error borrando la organización a causa del modelo de Event(userAssist)",
+            "error borrando la organización a causa del modelo de Event(usersAttend)",
           );
       }
     } catch (error) {

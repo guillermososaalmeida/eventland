@@ -53,7 +53,7 @@ const getById = async (req, res, next) => {
     if (eventById) {
       return res.status(200).json({
         data: await Event.findById(id).populate(
-          "comments usersAssist city establishment organization favsFromUsers",
+          "comments usersAttend city establishment organization favsFromUsers",
         ),
       });
     } else {
@@ -193,8 +193,8 @@ const deleteEvent = async (req, res, next) => {
     );
 
     await User.updateMany(
-      { eventsAssist: id },
-      { $pull: { eventsAssist: id } },
+      { eventsAttend: id },
+      { $pull: { eventsAttend: id } },
     );
 
     await Establishment.updateMany({ events: id }, { $pull: { events: id } });

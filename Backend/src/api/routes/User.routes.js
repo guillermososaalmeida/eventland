@@ -13,7 +13,7 @@ const {
   getAllUsers,
   getByName,
   getById,
-  toggleAssistEvent,
+  toggleAttendEvent,
   toggleFavOrganization,
   toggleLikedEvent,
 
@@ -42,7 +42,7 @@ UserRoutes.patch(
   update,
 );
 UserRoutes.patch("/sendpassword/:id", sendPassword);
-UserRoutes.patch("/add/:event", [isAuthUser], toggleAssistEvent);
+UserRoutes.patch("/add/:event", [isAuthUser], toggleAttendEvent);
 UserRoutes.patch("/fav/:organization", [isAuthUser], toggleFavOrganization);
 UserRoutes.patch("/fav/interest/:event", [isAuthUser], toggleLikedEvent);
 

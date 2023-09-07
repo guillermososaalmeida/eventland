@@ -424,8 +424,8 @@ const deleteUser = async (req, res, next) => {
       await Comment.updateMany({ user: _id }, { $pull: { user: _id } });
       try {
         await Event.updateMany(
-          { usersAssist: _id },
-          { $pull: { usersAssist: _id } },
+          { usersAttend: _id },
+          { $pull: { usersAttend: _id } },
         );
         try {
           await Event.updateMany(
@@ -455,7 +455,7 @@ const deleteUser = async (req, res, next) => {
         return res
           .status(400)
           .json(
-            "error borrando el user a causa del modelo de Event(usersAssist)",
+            "error borrando el user a causa del modelo de Event(usersAttend)",
           );
       }
     } catch (error) {
@@ -484,7 +484,7 @@ const getById = async (req, res, next) => {
     if (userById) {
       return res.status(200).json({
         data: await User.findById(id).populate(
-          "eventsInterested eventsAssist organizationsFav city",
+          "eventsInterested eventsAttend organizationsFav city",
         ),
       });
     } else {
@@ -527,23 +527,23 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-//! ASSIST EVENT
+//! ATTEND EVENT
 
-const toggleAssistEvent = async (req, res, next) => {
+const toggleAttendEvent = async (req, res, next) => {
   try {
     const { _id } = req.user;
-    const eventToAssist = req.params.event;
+    const eventToAttend = req.params.event;
 
-    if (req.user.eventsAssist.includes(eventToAssist)) {
+    if (req.user.eventsAttend.includes(eventToAttend)) {
       // si lo incluye lo sacamos
       try {
         await User.findByIdAndUpdate(_id, {
-          $pull: { eventsAssist: eventToAssist },
+          $pull: { eventsAttend: eventToAttend },
         });
 
         try {
-          await Event.findByIdAndUpdate(eventToAssist, {
-            $pull: { usersAssist: _id },
+          await Event.findByIdAndUpdate(eventToAttend, {
+            $pull: { usersAttend: _id },
           });
         } catch (error) {
           return res.status(404).json({
@@ -561,11 +561,11 @@ const toggleAssistEvent = async (req, res, next) => {
       // si no lo incluye lo metemos
       try {
         await User.findByIdAndUpdate(_id, {
-          $push: { eventsAssist: eventToAssist },
+          $push: { eventsAttend: eventToAttend },
         });
         try {
-          await Event.findByIdAndUpdate(eventToAssist, {
-            $push: { usersAssist: _id },
+          await Event.findByIdAndUpdate(eventToAttend, {
+            $push: { usersAttend: _id },
           });
         } catch (error) {
           return res.status(404).json({
@@ -584,7 +584,7 @@ const toggleAssistEvent = async (req, res, next) => {
     setTimeout(async () => {
       return res
         .status(200)
-        .json(await User.findById(_id).populate("eventsAssist"));
+        .json(await User.findById(_id).populate("eventsAttend"));
     }, 1000);
   } catch (error) {
     return next(error);
@@ -723,8 +723,8 @@ const toggleFavOrganization = async (req, res, next) => {
 
 const getPastEvents = async (req, res, next) => {
   try {
-    if (req.user.eventsAssist?.length > 0) {
-      const events = req.user.eventsAssist;
+    if (req.user.eventsAttend?.length > 0) {
+      const events = req.user.eventsAttend;
       const currentDate = new Date();
       const pastEvents = await Promise.all(
         events.map(async (event) => {
@@ -755,7 +755,7 @@ module.exports = {
   getAllUsers,
   getByName,
   getById,
-  toggleAssistEvent,
+  toggleAttendEvent,
   toggleFavOrganization,
   toggleLikedEvent,
   getPastEvents,

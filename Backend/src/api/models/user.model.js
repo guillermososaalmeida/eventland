@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
     },
     eventsInterested: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-    eventsAssist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    eventsAttend: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     organizationsFav: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
     ],
