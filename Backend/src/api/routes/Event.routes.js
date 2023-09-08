@@ -39,5 +39,5 @@ EventRoutes.patch(
 );
 
 //! DELETE
-EventRoutes.delete("/", [isAuthOrganization], deleteEvent);
+EventRoutes.delete("/:id", [isAuthOrganization], deleteEvent);
 module.exports = EventRoutes;
