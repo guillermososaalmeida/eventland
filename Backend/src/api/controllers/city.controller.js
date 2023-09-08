@@ -141,16 +141,24 @@ const deleteCity = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedCity = await City.findByIdAndDelete(id);
+    const city = await City.findById(id);
 
-    if (deletedCity) {
-      // Eliminar la referencia en los eventos
-      await Event.updateMany({ city: id }, { $pull: { city: id } });
+    if (city) {
+      const deletedCity = await City.findByIdAndDelete(id);
 
-      // Eliminar la referencia en los establecimientos
-      await Establishment.updateMany({ city: id }, { $pull: { city: id } });
+      if (deletedCity) {
+        if (city.image) {
+          deleteImgCloudinary(city.image);
+        }
+        await Event.updateMany({ city: id }, { $pull: { city: id } });
+        await Establishment.updateMany({ city: id }, { $pull: { city: id } });
 
-      return res.status(200).json({ message: "Ciudad eliminada exitosamente" });
+        return res
+          .status(200)
+          .json({ message: "Ciudad eliminada exitosamente" });
+      } else {
+        return res.status(404).json({ error: "Ciudad no encontrada" });
+      }
     } else {
       return res.status(404).json({ error: "Ciudad no encontrada" });
     }
@@ -158,6 +166,7 @@ const deleteCity = async (req, res, next) => {
     return next(error);
   }
 };
+
 module.exports = {
   postCity,
   getByNameCity,
