@@ -7,6 +7,8 @@ const {
   getCityById,
   updateCity,
   deleteCity,
+  getNextEvents,
+  getPastEvents,
 } = require("../controllers/City.controller");
 
 const CityRoutes = require("express").Router();
@@ -18,6 +20,8 @@ CityRoutes.post("/", uploadCity.single("image"), [isAuthAdmin], postCity);
 CityRoutes.get("/getbyname/:name", getByNameCity);
 CityRoutes.get("/getallcities/", getAllCities);
 CityRoutes.get("/getbyid/:id", getCityById);
+CityRoutes.get("/get/next/events/:city", getNextEvents);
+CityRoutes.get("/get/past/events/:city", getPastEvents);
 
 //! PATCH
 CityRoutes.patch(

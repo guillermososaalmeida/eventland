@@ -6,6 +6,7 @@ dotenv.config();
 const Event = require("../models/Event.model");
 const Establishment = require("../models/Establishment.model");
 const User = require("../models/User.model");
+const City = require("../models/City.model");
 
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
@@ -28,6 +29,17 @@ const postEvent = async (req, res, next) => {
         const savedEvent = await newEvent.save();
 
         if (savedEvent) {
+          const { _id } = savedEvent;
+          await City.findByIdAndUpdate(
+            req.body.city,
+            { events: _id },
+            { $push: { events: _id } },
+          );
+          await Establishment.findByIdAndUpdate(
+            req.body.establishment,
+            { events: _id },
+            { $push: { events: _id } },
+          );
           return res.status(200).json(savedEvent);
         } else {
           return res.status(404).json("Event not saved in database");

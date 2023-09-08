@@ -167,6 +167,58 @@ const deleteCity = async (req, res, next) => {
   }
 };
 
+//! GET NEXT EVENTS
+
+const getNextEvents = async (req, res, next) => {
+  try {
+    if (req.city.events?.length > 0) {
+      const events = req.city.events;
+      const currentDate = new Date();
+      const arrayNextEvents = [];
+      await Promise.all(
+        events.map(async (event) => {
+          const currentEvent = await Event.findById(event);
+          return (
+            currentEvent.date > currentDate &&
+            arrayNextEvents.push(currentEvent)
+          );
+        }),
+      );
+      return res.status(200).json({ data: arrayNextEvents });
+    } else {
+      return res.status(404).json("there's no events in this city yet!");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+//! GET PAST EVENTS
+
+const getPastEvents = async (req, res, next) => {
+  try {
+    if (req.city.events?.length > 0) {
+      const events = req.city.events;
+      const currentDate = new Date();
+      const arrayNextEvents = [];
+      await Promise.all(
+        events.map(async (event) => {
+          const currentEvent = await Event.findById(event);
+          return (
+            currentEvent.date < currentDate &&
+            arrayNextEvents.push(currentEvent)
+          );
+        }),
+      );
+      return res.status(200).json({ data: arrayNextEvents });
+    } else {
+      return res.status(404).json("there's no events in this city yet!");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   postCity,
   getByNameCity,
@@ -174,4 +226,6 @@ module.exports = {
   getCityById,
   updateCity,
   deleteCity,
+  getNextEvents,
+  getPastEvents,
 };

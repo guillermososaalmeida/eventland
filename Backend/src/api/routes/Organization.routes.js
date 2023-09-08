@@ -16,6 +16,8 @@ const {
   getByName,
   getAllOrganizations,
   deleteOrganization,
+  getNextEvents,
+  getPastEvents,
 } = require("../controllers/Organization.controller");
 
 const express = require("express");
@@ -54,5 +56,7 @@ OrganizationRoutes.delete("/", [isAuthOrganization], deleteOrganization);
 OrganizationRoutes.get("/:id", getById);
 OrganizationRoutes.get("/name/:name", getByName);
 OrganizationRoutes.get("/get/all", getAllOrganizations);
+OrganizationRoutes.get("/get/next/events/:organization", getNextEvents);
+OrganizationRoutes.get("/get/past/events/:organization", getPastEvents);
 
 module.exports = OrganizationRoutes;
