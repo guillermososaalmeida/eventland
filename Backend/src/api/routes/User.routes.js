@@ -1,4 +1,7 @@
-const { isAuthUser } = require("../../middleware/authUser.middleware");
+const {
+  isAuthUser,
+  isAuthUserOrAdmin,
+} = require("../../middleware/authUser.middleware");
 const { uploadUser } = require("../../middleware/files.middleware");
 const {
   autoLogin,
@@ -47,7 +50,7 @@ UserRoutes.patch("/fav/:organization", [isAuthUser], toggleFavOrganization);
 UserRoutes.patch("/fav/interest/:event", [isAuthUser], toggleLikedEvent);
 
 //! DELETE
-UserRoutes.delete("/", [isAuthUser], deleteUser);
+UserRoutes.delete("/", [isAuthUserOrAdmin], deleteUser);
 
 //! GET
 UserRoutes.get("/:id", getById);
