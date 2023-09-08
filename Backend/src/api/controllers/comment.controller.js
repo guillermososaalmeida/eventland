@@ -1,4 +1,6 @@
 const Comment = require("../models/Comment.model");
+const Event = require("../models/Event.model");
+const Establishment = require("../models/Establishment.model");
 
 //! CREATE COMMENT
 const postComment = async (req, res, next) => {
@@ -59,6 +61,39 @@ const getAllComments = async (req, res, next) => {
   } catch (error) {
     return next(error);
   }
+};
+
+//!DELETE
+
+const deleteComment = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deletedComment = await Comment.findByIdAndDelete(id);
+
+    if (deletedComment) {
+      // Eliminar la referencia en los eventos
+      await Event.updateMany({ comments: id }, { $pull: { comments: id } });
+
+      // Eliminar la referencia en los establecimientos
+      await Establishment.updateMany(
+        { comments: id },
+        { $pull: { comments: id } },
+      );
+
+      return res
+        .status(200)
+        .json({ message: "Comentario eliminado exitosamente" });
+    } else {
+      return res.status(404).json({ error: "Comentario no encontrado" });
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = {
+  deleteComment,
 };
 
 module.exports = { postComment, getById, getAllComments };
