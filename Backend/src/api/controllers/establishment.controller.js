@@ -148,31 +148,6 @@ const updateEstablishment = async (req, res, next) => {
 
 const deleteEstablishment = async (req, res, next) => {
   const { id } = req.params;
-
-  //   try {
-  //     const establishment = await Establishment.findById(id);
-  //     if (!establishment) {
-  //       return res.status(404).json({ error: "Establecimiento no encontrado" });
-  //     }
-  //     if (establishment.image) {
-  //       deleteImgCloudinary(establishment.image);
-  //     }
-  //     const deletedEstablishment = await Establishment.findByIdAndDelete(id);
-  //     if (deletedEstablishment) {
-  //       await Event.updateMany(
-  //         { establishment: id },
-  //         { $pull: { establishment: id } },
-  //       );
-  //       return res
-  //         .status(200)
-  //         .json({ message: "Establecimiento eliminado exitosamente" });
-  //     } else {
-  //       return res.status(404).json({ error: "Establecimiento no encontrado" });
-  //     }
-  //   } catch (error) {
-  //     return next(error);
-  //   }
-  // };
   try {
     const establishment = await Establishment.findByIdAndDelete(id);
     if (establishment) {
