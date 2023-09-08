@@ -32,5 +32,5 @@ CityRoutes.patch(
 );
 
 //! DELETE
-CityRoutes.delete("/", [isAuthAdmin], deleteCity);
+CityRoutes.delete("/:id", [isAuthAdmin], deleteCity);
 module.exports = CityRoutes;

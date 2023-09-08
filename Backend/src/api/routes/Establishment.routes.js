@@ -34,5 +34,5 @@ EstablishmentRoutes.patch(
 
 //! DELETE
 
-EstablishmentRoutes.delete("/", [isAuthAdmin], deleteEstablishment);
+EstablishmentRoutes.delete("/:id", [isAuthAdmin], deleteEstablishment);
 module.exports = EstablishmentRoutes;

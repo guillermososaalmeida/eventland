@@ -65,29 +65,6 @@ const isAuthUserOrAdmin = async (req, res, next) => {
   }
 };
 
-/* const isAuthUserOwnerDelete = async (req, res, next) => {
-  const token = req.headers.authorization?.replace("Bearer ", "");
-  if (!token) {
-    return next(new Error("You're not authorized ❌"));
-  }
-  try {
-    const decoded = verifyToken(token, process.env.JWT_SECRET);
-    req.user = await User?.findById(decoded.id);
-    const commentId = req.params.id;
-    const comment = await Comment.findById(commentId);
-    console.log("commentId", commentId);
-    console.log("comment.user 🤗", comment.user);
-    console.log("decoded.id 💃", decoded.id);
-    if (req.user?.role !== "admin" && !comment.user === decoded.id) {
-      return next(new Error("You're not the owner of this comment ❌"));
-    }
-
-    next();
-  } catch (error) {
-    return next(error);
-  }
-}; */
-
 const isAuthUserOwnerDelete = async (req, res, next) => {
   const token = req.headers.authorization?.replace("Bearer ", "");
   if (!token) {

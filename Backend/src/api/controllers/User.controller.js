@@ -42,12 +42,16 @@ const register = async (req, res, next) => {
         newUser.image =
           "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994551/proyectoEventland/userAssets/istockphoto-1300845620-612x612_wf50h4.jpg";
       }
-
+      console.log(req.body.dateOfBirth);
       try {
+        const dateOfBirthUTC = new Date(req.body.dateOfBirth);
+        dateOfBirthUTC.setHours(dateOfBirthUTC.getHours() + 2);
+        newUser.dateOfBirth = dateOfBirthUTC;
+
         const userSave = await newUser.save();
+
         if (userSave) {
           //! TO DO pasarlo por UTC+2
-          userSave.dateOfBirth = new Date(req.body.date);
           sendEmail(email, name, confirmationCode);
           setTimeout(() => {
             if (getTestEmailSend()) {
