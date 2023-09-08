@@ -7,6 +7,7 @@ const Event = require("../models/Event.model");
 const Establishment = require("../models/Establishment.model");
 const User = require("../models/User.model");
 const City = require("../models/City.model");
+const Organization = require("../models/Organization.model");
 
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
@@ -18,6 +19,7 @@ const postEvent = async (req, res, next) => {
         await Event.syncIndexes();
 
         const newEvent = new Event(req.body);
+        newEvent.organization = req.organization;
 
         if (req.file) {
           newEvent.image = catchImage;
@@ -37,6 +39,11 @@ const postEvent = async (req, res, next) => {
           );
           await Establishment.findByIdAndUpdate(
             req.body.establishment,
+            { events: _id },
+            { $push: { events: _id } },
+          );
+          await Organization.findByIdAndUpdate(
+            req.organization,
             { events: _id },
             { $push: { events: _id } },
           );
