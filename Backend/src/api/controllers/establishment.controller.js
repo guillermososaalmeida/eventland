@@ -1,5 +1,6 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const City = require("../models/City.model");
+const Comment = require("../models/Comment.model");
 const Establishment = require("../models/Establishment.model");
 const Event = require("../models/Event.model");
 
@@ -148,20 +149,49 @@ const updateEstablishment = async (req, res, next) => {
 const deleteEstablishment = async (req, res, next) => {
   const { id } = req.params;
 
+  //   try {
+  //     const establishment = await Establishment.findById(id);
+  //     if (!establishment) {
+  //       return res.status(404).json({ error: "Establecimiento no encontrado" });
+  //     }
+  //     if (establishment.image) {
+  //       deleteImgCloudinary(establishment.image);
+  //     }
+  //     const deletedEstablishment = await Establishment.findByIdAndDelete(id);
+  //     if (deletedEstablishment) {
+  //       await Event.updateMany(
+  //         { establishment: id },
+  //         { $pull: { establishment: id } },
+  //       );
+  //       return res
+  //         .status(200)
+  //         .json({ message: "Establecimiento eliminado exitosamente" });
+  //     } else {
+  //       return res.status(404).json({ error: "Establecimiento no encontrado" });
+  //     }
+  //   } catch (error) {
+  //     return next(error);
+  //   }
+  // };
   try {
-    const establishment = await Establishment.findById(id);
-    if (!establishment) {
-      return res.status(404).json({ error: "Establecimiento no encontrado" });
-    }
-    if (establishment.image) {
-      deleteImgCloudinary(establishment.image);
-    }
-    const deletedEstablishment = await Establishment.findByIdAndDelete(id);
-    if (deletedEstablishment) {
+    const establishment = await Establishment.findByIdAndDelete(id);
+    if (establishment) {
+      if (establishment.image) {
+        deleteImgCloudinary(establishment.image);
+      }
       await Event.updateMany(
+        { establishment: id },
+        { $unset: { establishment: id } },
+      );
+      await City.updateMany(
         { establishment: id },
         { $pull: { establishment: id } },
       );
+      await Comment.updateMany(
+        { establishment: id },
+        { $unset: { establishment: id } },
+      );
+
       return res
         .status(200)
         .json({ message: "Establecimiento eliminado exitosamente" });
@@ -172,7 +202,6 @@ const deleteEstablishment = async (req, res, next) => {
     return next(error);
   }
 };
-
 module.exports = {
   updateEstablishment,
   getEstablishmentById,
