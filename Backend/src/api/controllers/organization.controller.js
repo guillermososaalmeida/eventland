@@ -51,6 +51,10 @@ const registerOrganization = async (req, res, next) => {
       try {
         const organizationSave = await newOrganization.save();
         if (organizationSave) {
+          const { _id } = organizationSave;
+          await City.findByIdAndUpdate(req.body.city, {
+            $push: { organizations: _id },
+          });
           sendEmail(email, name, confirmationCode);
           setTimeout(() => {
             if (getTestEmailSend()) {

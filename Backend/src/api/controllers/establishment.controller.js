@@ -1,4 +1,5 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
+const City = require("../models/City.model");
 const Establishment = require("../models/Establishment.model");
 const Event = require("../models/Event.model");
 
@@ -16,6 +17,10 @@ const postEstablishment = async (req, res, next) => {
     }
     const savedEstablishment = await newEstablishment.save();
     if (savedEstablishment) {
+      const { _id } = savedEstablishment;
+      await City.findByIdAndUpdate(req.body.city, {
+        $push: { establishment: _id },
+      });
       return res.status(200).json(savedEstablishment);
     } else {
       return res.status(404).json("Couldn't save the establishment in the DB");

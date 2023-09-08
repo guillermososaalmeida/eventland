@@ -34,6 +34,7 @@ const OrganizationSchema = new Schema(
     },
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     usersFav: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
   },
   {
     timestamps: true,
