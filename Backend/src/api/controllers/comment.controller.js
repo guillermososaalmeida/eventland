@@ -11,16 +11,15 @@ const postComment = async (req, res, next) => {
 
         const newComment = new Comment(req.body);
         const { _id } = newComment;
-        const savedComment = await newComment.save();
         const eventId = req.params.event;
+        newComment.event = eventId;
         const eventToComment = await Event.findById(eventId);
+        newComment.cityOfEvent = eventToComment.city;
+        newComment.establishment = eventToComment.establishment;
+        newComment.user = req.user;
+        const savedComment = await newComment.save();
         if (savedComment) {
-          savedComment.event = eventId;
-          savedComment.cityOfEvent = eventToComment.city;
-          savedComment.establishment = eventToComment.establishment;
-          savedComment.user = req.user;
           await Event.findByIdAndUpdate(eventId, { $push: { comments: _id } });
-
           return res.status(200).json(savedComment);
         } else {
           return res.status(404).json("Comment not saved in database");
