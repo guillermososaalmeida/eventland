@@ -6,6 +6,7 @@ const {
   getAllCities,
   getCityById,
   updateCity,
+  deleteCity,
 } = require("../controllers/City.controller");
 
 const CityRoutes = require("express").Router();
@@ -27,5 +28,5 @@ CityRoutes.patch(
 );
 
 //! DELETE
-
+CityRoutes.delete("/", [isAuthAdmin], deleteCity);
 module.exports = CityRoutes;

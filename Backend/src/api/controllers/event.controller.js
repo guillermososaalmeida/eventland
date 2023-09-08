@@ -235,35 +235,6 @@ const getNextEvent = async (req, res, next) => {
   }
 };
 
-//!Otra opción para get the next event
-// const getNextEvent = async (req, res, next) => {
-//   try {
-//     const currentDate = new Date();
-//     const events = await Event.find();
-
-//     let closestEvent = null;
-//     let timeDifference = Infinity;
-
-//     events.forEach((event) => {
-//       const eventDate = new Date(event.date);
-//       const difference = eventDate - currentDate;
-
-//       if (difference >= 0 && difference < timeDifference) {
-//         closestEvent = event;
-//         timeDifference = difference;
-//       }
-//     });
-
-//     if (closestEvent) {
-//       return res.status(200).json({ closestEvent });
-//     } else {
-//       return res.status(404).json({ message: "No upcoming events found" });
-//     }
-//   } catch (error) {
-//     return next(error);
-//   }
-// };
-
 module.exports = {
   getAllEvents,
   getByName,
