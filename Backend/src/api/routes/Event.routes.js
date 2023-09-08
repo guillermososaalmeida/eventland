@@ -8,6 +8,7 @@ const {
   postEvent,
   updateEvent,
   getNextEvent,
+  deleteEvent,
 } = require("../controllers/Event.controller");
 const {
   isAuthOrganization,
@@ -38,5 +39,5 @@ EventRoutes.patch(
 );
 
 //! DELETE
-
+EventRoutes.delete("/", [isAuthOrganization], deleteEvent);
 module.exports = EventRoutes;
