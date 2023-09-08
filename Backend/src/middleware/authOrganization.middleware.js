@@ -15,14 +15,19 @@ const isAuthOrganization = async (req, res, next) => {
   }
   try {
     const decoded = verifyToken(token, process.env.JWT_SECRET);
-    //?Lo comentado está para cuando queramos hacer que los admins
-    //?puedan incluirse en esta restricción de acceso.
     req.user = await User?.findById(decoded.id);
     req.organization = await Organization?.findById(decoded.id);
     if (!req.organization && req.user?.role !== "admin") {
       return next(
         new Error("You need to be Admin or Organization for this ❌"),
       );
+    }
+    if (req.organization) {
+      const eventId = req.params.id;
+      const event = await Event.findById(eventId);
+      if (!event || !event.organization.equals(decoded.id)) {
+        return next(new Error("You're not the owner of event ❌"));
+      }
     }
     next();
   } catch (error) {
