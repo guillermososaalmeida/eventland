@@ -1,6 +1,10 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const City = require("../models/City.model");
+const Comment = require("../models/Comment.model");
 const Establishment = require("../models/Establishment.model");
+const Event = require("../models/Event.model");
+const Organization = require("../models/Organization.model");
+const User = require("../models/User.model");
 
 const postCity = async (req, res, next) => {
   let catchCity = req.file?.path;
@@ -137,26 +141,21 @@ const updateCity = async (req, res, next) => {
 
 const deleteCity = async (req, res, next) => {
   const { id } = req.params;
-
   try {
-    const city = await City.findById(id);
-
+    const city = await City.findByIdAndDelete(id);
     if (city) {
-      const deletedCity = await City.findByIdAndDelete(id);
-
-      if (deletedCity) {
-        if (city.image) {
-          deleteImgCloudinary(city.image);
-        }
-        await Event.updateMany({ city: id }, { $pull: { city: id } });
-        await Establishment.updateMany({ city: id }, { $pull: { city: id } });
-
-        return res
-          .status(200)
-          .json({ message: "Ciudad eliminada exitosamente" });
-      } else {
-        return res.status(404).json({ error: "Ciudad no encontrada" });
+      if (city.image) {
+        deleteImgCloudinary(city.image);
       }
+      await Event.updateMany({ city: id }, { $unset: { city: id } });
+      await Establishment.updateMany({ city: id }, { $unset: { city: id } });
+      await Comment.updateMany(
+        { cityOfEvent: id },
+        { $unset: { cityOfEvent: id } },
+      );
+      await Organization.updateMany({ city: id }, { $unset: { city: id } });
+      await User.updateMany({ city: id }, { $unset: { city: id } });
+      return res.status(200).json({ message: "Ciudad eliminada exitosamente" });
     } else {
       return res.status(404).json({ error: "Ciudad no encontrada" });
     }
