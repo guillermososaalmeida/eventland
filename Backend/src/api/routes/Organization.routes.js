@@ -1,5 +1,6 @@
 const {
   isAuthOrganization,
+  isAuthOrganizationDeleteOrUpdate,
 } = require("../../middleware/authOrganization.middleware");
 const { uploadOrganization } = require("../../middleware/files.middleware");
 const {
@@ -43,14 +44,18 @@ OrganizationRoutes.patch(
 );
 OrganizationRoutes.patch(
   "/update/update",
-  [isAuthOrganization],
+  [isAuthOrganizationDeleteOrUpdate],
   uploadOrganization.single("image"),
   update,
 );
 OrganizationRoutes.patch("/sendpassword/:id", sendPassword);
 
 //! DELETE
-OrganizationRoutes.delete("/", [isAuthOrganization], deleteOrganization);
+OrganizationRoutes.delete(
+  "/",
+  [isAuthOrganizationDeleteOrUpdate],
+  deleteOrganization,
+);
 
 //! GET
 OrganizationRoutes.get("/:id", getById);
