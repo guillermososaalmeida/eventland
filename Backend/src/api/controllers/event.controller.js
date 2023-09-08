@@ -113,6 +113,11 @@ const updateEvent = async (req, res, next) => {
         video: req.body?.video ? req.body?.video : event.video,
       };
 
+      await Event.findByIdAndUpdate(id, customBody);
+      if (req.file?.path) {
+        deleteImgCloudinary(event.image);
+      }
+
       // Verificar si hay un nuevo establecimiento asociado
       if (req.body.establishment) {
         const newEstablishmentId = req.body.establishment;
