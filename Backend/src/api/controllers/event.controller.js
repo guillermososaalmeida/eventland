@@ -187,21 +187,24 @@ const deleteEvent = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    await User.updateMany(
-      { eventsInterested: id },
-      { $pull: { eventsInterested: id } },
-    );
-
-    await User.updateMany(
-      { eventsAttend: id },
-      { $pull: { eventsAttend: id } },
-    );
-
-    await Establishment.updateMany({ events: id }, { $pull: { events: id } });
-
     const deletedEvent = await Event.findByIdAndDelete(id);
 
     if (deletedEvent) {
+      if (deletedEvent.image) {
+        deleteImgCloudinary(deletedEvent.image);
+      }
+      await User.updateMany(
+        { eventsInterested: id },
+        { $pull: { eventsInterested: id } },
+      );
+
+      await User.updateMany(
+        { eventsAttend: id },
+        { $pull: { eventsAttend: id } },
+      );
+
+      await Establishment.updateMany({ events: id }, { $pull: { events: id } });
+
       return res.status(200).json({ message: "Evento eliminado exitosamente" });
     } else {
       return res.status(404).json({ error: "Evento no encontrado" });
