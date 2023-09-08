@@ -1,5 +1,6 @@
 const { deleteImgCloudinary } = require("../../middleware/files.middleware");
 const Establishment = require("../models/Establishment.model");
+const Event = require("../models/Event.model");
 
 const postEstablishment = async (req, res, next) => {
   let catchEstablishment = req.file?.path;
@@ -137,10 +138,37 @@ const updateEstablishment = async (req, res, next) => {
   }
 };
 
+//!DELETE
+
+const deleteEstablishment = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const deletedEstablishment = await Establishment.findByIdAndDelete(id);
+
+    if (deletedEstablishment) {
+      // Eliminar la referencia en los eventos
+      await Event.updateMany(
+        { establishment: id },
+        { $pull: { establishment: id } },
+      );
+
+      return res
+        .status(200)
+        .json({ message: "Establecimiento eliminado exitosamente" });
+    } else {
+      return res.status(404).json({ error: "Establecimiento no encontrado" });
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   updateEstablishment,
   getEstablishmentById,
   getByNameEstablishment,
   getAllEstablishments,
   postEstablishment,
+  deleteEstablishment,
 };
