@@ -6,6 +6,7 @@ const {
   getByNameEstablishment,
   getAllEstablishments,
   postEstablishment,
+  deleteEstablishment,
 } = require("../controllers/Establishment.controller");
 
 const EstablishmentRoutes = require("express").Router();
@@ -33,4 +34,5 @@ EstablishmentRoutes.patch(
 
 //! DELETE
 
+EstablishmentRoutes.delete("/", [isAuthAdmin], deleteEstablishment);
 module.exports = EstablishmentRoutes;
