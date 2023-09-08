@@ -6,7 +6,10 @@ const {
   getAllComments,
   deleteComment,
 } = require("../controllers/Comment.controller");
-const { isAuthUser } = require("../../middleware/authUser.middleware");
+const {
+  isAuthUser,
+  isAuthUserOwnerDelete,
+} = require("../../middleware/authUser.middleware");
 
 const CommentRoutes = express.Router();
 
@@ -18,5 +21,5 @@ CommentRoutes.get("/:id", getById);
 CommentRoutes.get("/get/all", getAllComments);
 
 //! DELETE
-CommentRoutes.delete("/:id", [isAuthUser], deleteComment);
+CommentRoutes.delete("/:id", [isAuthUserOwnerDelete], deleteComment);
 module.exports = CommentRoutes;
