@@ -19,7 +19,6 @@ const postEvent = async (req, res, next) => {
         await Event.syncIndexes();
 
         const newEvent = new Event(req.body);
-        newEvent.organization = req.organization;
 
         if (req.file) {
           newEvent.image = catchImage;
@@ -31,6 +30,7 @@ const postEvent = async (req, res, next) => {
         const savedEvent = await newEvent.save();
 
         if (savedEvent) {
+          newEvent.organization = req.organization;
           const { _id } = savedEvent;
           await City.findByIdAndUpdate(
             req.body.city,

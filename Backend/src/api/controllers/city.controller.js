@@ -63,13 +63,11 @@ const getCityById = async (req, res, next) => {
     const { id } = req.params;
     const cityById = await City.findById(id);
     if (cityById) {
-      return res
-        .status(200)
-        .json(
-          await City.findById(id).populate(
-            "events organizations establishment",
-          ),
-        );
+      return res.status(200).json({
+        data: await City.findById(id).populate(
+          "events organizations establishment",
+        ),
+      });
     } else {
       res.status(404).json("city not found");
     }

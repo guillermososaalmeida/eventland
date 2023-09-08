@@ -14,7 +14,7 @@ const CitySchema = new Schema(
     ],
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
     organizations: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "Organizations" },
+      { type: mongoose.Schema.Types.ObjectId, ref: "Organization" },
     ],
     country: { type: String, required: true },
     province: { type: String, required: true },

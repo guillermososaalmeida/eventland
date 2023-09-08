@@ -11,7 +11,7 @@ const { isAuthUser } = require("../../middleware/authUser.middleware");
 const CommentRoutes = express.Router();
 
 //! POST
-CommentRoutes.post("/", [isAuthUser], postComment);
+CommentRoutes.post("/:event", [isAuthUser], postComment);
 
 //! GET
 CommentRoutes.get("/:id", getById);
