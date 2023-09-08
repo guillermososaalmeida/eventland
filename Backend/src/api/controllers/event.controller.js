@@ -12,13 +12,14 @@ const Organization = require("../models/Organization.model");
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
   let catchImage = req.file?.path;
-
+  console.log("req.organization -------------------- 👀👀👀", req.organization);
   try {
     {
       try {
         await Event.syncIndexes();
 
         const newEvent = new Event(req.body);
+        newEvent.organization = req.organization;
 
         if (req.file) {
           newEvent.image = catchImage;
@@ -30,24 +31,29 @@ const postEvent = async (req, res, next) => {
         const savedEvent = await newEvent.save();
 
         if (savedEvent) {
-          newEvent.organization = req.organization;
           const { _id } = savedEvent;
-          await City.findByIdAndUpdate(
-            req.body.city,
-            { events: _id },
-            { $push: { events: _id } },
-          );
-          await Establishment.findByIdAndUpdate(
-            req.body.establishment,
-            { events: _id },
-            { $push: { events: _id } },
-          );
-          await Organization.findByIdAndUpdate(
-            req.organization,
-            { events: _id },
-            { $push: { events: _id } },
-          );
-          return res.status(200).json(savedEvent);
+          try {
+            await City.findByIdAndUpdate(req.body.city, {
+              $push: { events: _id },
+            });
+            try {
+              await Establishment.findByIdAndUpdate(req.body.establishment, {
+                $push: { events: _id },
+              });
+              try {
+                await Organization.findByIdAndUpdate(req.organization._id, {
+                  $push: { events: _id },
+                });
+                return res.status(200).json(savedEvent);
+              } catch (error) {
+                return next(error);
+              }
+            } catch (error) {
+              return next(error);
+            }
+          } catch (error) {
+            return next(error);
+          }
         } else {
           return res.status(404).json("Event not saved in database");
         }

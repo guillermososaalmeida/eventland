@@ -445,9 +445,7 @@ const getById = async (req, res, next) => {
 
     if (organizationById) {
       return res.status(200).json({
-        data: await Organization.findById(id).populate(
-          "establishment events city",
-        ),
+        data: await Organization.findById(id).populate("events"),
       });
     } else {
       res.status(404).json("organization not found");

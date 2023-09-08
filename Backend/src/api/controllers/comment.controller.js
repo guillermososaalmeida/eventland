@@ -10,16 +10,16 @@ const postComment = async (req, res, next) => {
         await Comment.syncIndexes();
 
         const newComment = new Comment(req.body);
-
+        const { _id } = newComment;
         const savedComment = await newComment.save();
         const eventId = req.params.event;
         const eventToComment = await Event.findById(eventId);
-        console.log(eventToComment);
         if (savedComment) {
           savedComment.event = eventId;
           savedComment.cityOfEvent = eventToComment.city;
           savedComment.establishment = eventToComment.establishment;
           savedComment.user = req.user;
+          await Event.findByIdAndUpdate(eventId, { $push: { comments: _id } });
 
           return res.status(200).json(savedComment);
         } else {
