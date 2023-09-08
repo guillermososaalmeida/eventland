@@ -5,12 +5,11 @@ const Schema = mongoose.Schema;
 const CommentSchema = new Schema(
   {
     cityOfEvent: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
-    establishment: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Establishment",
-      },
-    ],
+    establishment: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Establishment",
+    },
+
     //!El user y el event se rellena automáticamente cuando posteamos el comentario
     //!cogiendo los datos de los models correspondientes.
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },

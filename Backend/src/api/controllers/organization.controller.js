@@ -45,7 +45,7 @@ const registerOrganization = async (req, res, next) => {
         newOrganization.image = catchImg;
       } else {
         newOrganization.image =
-          "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994545/proyectoEventland/userAssets/unknown-512_zlung8.webp";
+          "https://res.cloudinary.com/dhr13yihn/image/upload/v1694194164/proyectoEventland/organizationAssets/team-building_iorpit.png";
       }
 
       try {

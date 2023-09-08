@@ -13,7 +13,7 @@ const postCity = async (req, res, next) => {
       newCity.image = catchCity;
     } else {
       newCity.image =
-        "https://res.cloudinary.com/dhr13yihn/image/upload/v1694008280/proyectoEventland/cityAssets/cityDefault.jpg";
+        "https://res.cloudinary.com/dhr13yihn/image/upload/v1694193903/proyectoEventland/cityAssets/village_lfiuho.png";
     }
     //guardamos el City en la bbdd
     const savedCity = await newCity.save();

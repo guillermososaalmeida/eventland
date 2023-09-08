@@ -13,7 +13,7 @@ const postEstablishment = async (req, res, next) => {
       newEstablishment.image = catchEstablishment;
     } else {
       newEstablishment.image =
-        "https://res.cloudinary.com/dhr13yihn/image/upload/v1694009594/proyectoEventland/establishmentAssets/EstablishmentDefault.jpg";
+        "https://res.cloudinary.com/dhr13yihn/image/upload/v1694194028/proyectoEventland/establishmentAssets/factory_lphswk.png";
     }
     const savedEstablishment = await newEstablishment.save();
     if (savedEstablishment) {
