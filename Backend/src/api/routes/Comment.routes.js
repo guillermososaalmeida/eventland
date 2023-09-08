@@ -18,5 +18,5 @@ CommentRoutes.get("/:id", getById);
 CommentRoutes.get("/get/all", getAllComments);
 
 //! DELETE
-CommentRoutes.delete("/", [isAuthUser], deleteComment);
+CommentRoutes.delete("/:id", [isAuthUser], deleteComment);
 module.exports = CommentRoutes;
