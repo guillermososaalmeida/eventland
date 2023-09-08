@@ -255,6 +255,25 @@ const getNextEvent = async (req, res, next) => {
   }
 };
 
+//!Get Event Date -> este controlador queda preparado para cuando desde el front
+//!queramos hacer el countdown.
+
+const getDateOfEvent = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const event = await Event.findById(id);
+
+    if (event) {
+      const eventDate = event.date;
+      return res.status(200).json({ date: eventDate });
+    } else {
+      return res.status(404).json("Event not found");
+    }
+  } catch (error) {
+    return next(error);
+  }
+};
+
 module.exports = {
   getAllEvents,
   getByName,
@@ -263,4 +282,5 @@ module.exports = {
   updateEvent,
   deleteEvent,
   getNextEvent,
+  getDateOfEvent,
 };
