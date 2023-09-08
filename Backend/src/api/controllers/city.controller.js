@@ -14,7 +14,7 @@ const postCity = async (req, res, next) => {
       newCity.image =
         "https://res.cloudinary.com/dhr13yihn/image/upload/v1694008280/proyectoEventland/cityAssets/cityDefault.jpg";
     }
-    //guardamos el Citye en la bbdd
+    //guardamos el City en la bbdd
     const savedCity = await newCity.save();
     if (savedCity) {
       return res.status(200).json(savedCity);

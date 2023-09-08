@@ -10,20 +10,27 @@ const {
 
 const EstablishmentRoutes = require("express").Router();
 
+//! POST
 EstablishmentRoutes.post(
   "/",
   uploadEstablishment.single("image"),
   [isAuthAdmin],
   postEstablishment,
 );
+
+//! GET
 EstablishmentRoutes.get("/getbyname/:name", getByNameEstablishment);
 EstablishmentRoutes.get("/getallestablishments/", getAllEstablishments);
 EstablishmentRoutes.get("/getbyid/:id", getEstablishmentById);
+
+//! PATCH
 EstablishmentRoutes.patch(
   "/updateestablishment/:id",
   uploadEstablishment.single("image"),
   [isAuthAdmin],
   updateEstablishment,
 );
+
+//! DELETE
 
 module.exports = EstablishmentRoutes;
