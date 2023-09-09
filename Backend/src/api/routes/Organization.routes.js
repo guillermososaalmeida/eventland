@@ -51,11 +51,7 @@ OrganizationRoutes.patch(
 OrganizationRoutes.patch("/sendpassword/:id", sendPassword);
 
 //! DELETE
-OrganizationRoutes.delete(
-  "/:id",
-  [isAuthOrganizationDeleteOrUpdate],
-  deleteOrganization,
-);
+OrganizationRoutes.delete("/", [isAuthOrganization], deleteOrganization);
 
 //! GET
 OrganizationRoutes.get("/:id", getById);

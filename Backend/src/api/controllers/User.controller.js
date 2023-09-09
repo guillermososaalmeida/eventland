@@ -51,7 +51,6 @@ const register = async (req, res, next) => {
         const userSave = await newUser.save();
 
         if (userSave) {
-          //! TO DO pasarlo por UTC+2
           sendEmail(email, name, confirmationCode);
           setTimeout(() => {
             if (getTestEmailSend()) {

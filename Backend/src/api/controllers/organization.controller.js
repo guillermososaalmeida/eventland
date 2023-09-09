@@ -18,6 +18,7 @@ const randomPassword = require("../../utils/randomPassword");
 const Organization = require("../models/Organization.model");
 const City = require("../models/City.model");
 const User = require("../models/User.model");
+const Event = require("../models/Event.model");
 
 //! REGISTER ORGANIZATION
 
@@ -495,47 +496,34 @@ const getAllOrganizations = async (req, res, next) => {
 
 const deleteOrganization = async (req, res, next) => {
   try {
-    const { _id, image } = req.user;
+    const { _id, image } = req.organization;
     await Organization.findByIdAndDelete(_id);
     try {
       await City.updateMany(
         { organizations: _id },
         { $pull: { organizations: _id } },
       );
+
       try {
         await Event.updateMany(
-          { usersAttend: _id },
-          { $pull: { usersAttend: _id } },
+          { organization: _id },
+          { $unset: { organization: _id } },
         );
         try {
-          await Event.updateMany(
-            { organization: _id },
-            { $pull: { organization: _id } },
+          await User.updateMany(
+            { organizationsFav: _id },
+            { $pull: { organizationsFav: _id } },
           );
-          try {
-            await User.updateMany(
-              { organizationsFav: _id },
-              { $pull: { organizationsFav: _id } },
-            );
-          } catch (error) {
-            return res
-              .status(400)
-              .json(
-                "error borrando la organización a causa del modelo de User",
-              );
-          }
         } catch (error) {
           return res
             .status(400)
-            .json(
-              "error borrando la organización a causa del modelo de Event(organization)",
-            );
+            .json("error borrando la organización a causa del modelo de User");
         }
       } catch (error) {
         return res
           .status(400)
           .json(
-            "error borrando la organización a causa del modelo de Event(usersAttend)",
+            "error borrando la organización a causa del modelo de Event(organization)",
           );
       }
     } catch (error) {
@@ -544,11 +532,11 @@ const deleteOrganization = async (req, res, next) => {
         .json("error borrando la organización a causa del modelo de City");
     }
     //
-    if (await User.findById(_id)) {
-      return res.status(404).json("Dont delete");
+    if (await Organization.findById(_id)) {
+      return res.status(404).json("Organization not deleted");
     } else {
       deleteImgCloudinary(image);
-      return res.status(200).json("ok delete");
+      return res.status(200).json("Organization succesfully deleted");
     }
   } catch (error) {
     return next(error);
