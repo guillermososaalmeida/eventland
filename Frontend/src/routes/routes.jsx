@@ -13,6 +13,7 @@ import {
   Register,
   Welcome,
 } from "../pages";
+import { Protected, ProtectedCheckChildren } from "../components";
 import App from "../App";
 
 export const routes = createBrowserRouter([
@@ -26,7 +27,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/home",
-        element: <Home />,
+        element: (
+          <Protected>
+            <Home />
+          </Protected>
+        ),
       },
       {
         path: "/register",
@@ -34,7 +39,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/check",
-        element: <CheckCode />,
+        element: (
+          <ProtectedCheckChildren>
+            <CheckCode />
+          </ProtectedCheckChildren>
+        ),
       },
       {
         path: "/login",
@@ -46,7 +55,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <Protected>
+            <Profile />
+          </Protected>
+        ),
       },
       {
         path: "/organizationprofile",
@@ -54,15 +67,27 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/eventdetail/:id",
-        element: <EventDetail />,
+        element: (
+          <Protected>
+            <EventDetail />
+          </Protected>
+        ),
       },
       {
         path: "/createevent",
         element: <CreateEvent />,
       },
       {
-        path: "/citydetail:id",
-        element: <CityDetail />,
+        path: "/citydetail/:id",
+        element: (
+          <Protected>
+            <CityDetail />
+          </Protected>
+        ),
+      },
+      {
+        path: "/registerorg",
+        element: <Register />,
       },
     ],
   },
