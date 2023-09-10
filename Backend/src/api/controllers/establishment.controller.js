@@ -18,11 +18,17 @@ const postEstablishment = async (req, res, next) => {
     }
     const savedEstablishment = await newEstablishment.save();
     if (savedEstablishment) {
-      const { _id } = savedEstablishment;
-      await City.findByIdAndUpdate(req.body.city, {
-        $push: { establishment: _id },
-      });
-      return res.status(200).json(savedEstablishment);
+      try {
+        const { _id } = savedEstablishment;
+        await City.findByIdAndUpdate(req.body.city, {
+          $push: { establishment: _id },
+        });
+        return res.status(200).json(savedEstablishment);
+      } catch (error) {
+        return res
+          .status(404)
+          .json("City not updated in field 'establishment'");
+      }
     } else {
       return res.status(404).json("Couldn't save the establishment in the DB");
     }
@@ -154,22 +160,39 @@ const deleteEstablishment = async (req, res, next) => {
       if (establishment.image) {
         deleteImgCloudinary(establishment.image);
       }
-      await Event.updateMany(
-        { establishment: id },
-        { $unset: { establishment: id } },
-      );
-      await City.updateMany(
-        { establishment: id },
-        { $pull: { establishment: id } },
-      );
-      await Comment.updateMany(
-        { establishment: id },
-        { $unset: { establishment: id } },
-      );
-
-      return res
-        .status(200)
-        .json({ message: "Establecimiento eliminado exitosamente" });
+      try {
+        await Event.updateMany(
+          { establishment: id },
+          { $unset: { establishment: id } },
+        );
+        try {
+          await City.updateMany(
+            { establishment: id },
+            { $pull: { establishment: id } },
+          );
+          try {
+            await Comment.updateMany(
+              { establishment: id },
+              { $unset: { establishment: id } },
+            );
+            return res
+              .status(200)
+              .json({ message: "Establecimiento eliminado exitosamente" });
+          } catch (error) {
+            return res
+              .status(404)
+              .json({ error: "Comment not updated in field 'establishment'" });
+          }
+        } catch (error) {
+          return res
+            .status(404)
+            .json({ error: "City not updated in field 'establishment'" });
+        }
+      } catch (error) {
+        return res
+          .status(404)
+          .json({ error: "Event not updated in field 'establishment'" });
+      }
     } else {
       return res.status(404).json({ error: "Establecimiento no encontrado" });
     }

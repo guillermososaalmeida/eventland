@@ -147,15 +147,49 @@ const deleteCity = async (req, res, next) => {
       if (city.image) {
         deleteImgCloudinary(city.image);
       }
-      await Event.updateMany({ city: id }, { $unset: { city: id } });
-      await Establishment.updateMany({ city: id }, { $unset: { city: id } });
-      await Comment.updateMany(
-        { cityOfEvent: id },
-        { $unset: { cityOfEvent: id } },
-      );
-      await Organization.updateMany({ city: id }, { $unset: { city: id } });
-      await User.updateMany({ city: id }, { $unset: { city: id } });
-      return res.status(200).json({ message: "Ciudad eliminada exitosamente" });
+      try {
+        await Event.updateMany({ city: id }, { $unset: { city: id } });
+        try {
+          await Establishment.updateMany(
+            { city: id },
+            { $unset: { city: id } },
+          );
+          try {
+            await Comment.updateMany(
+              { cityOfEvent: id },
+              { $unset: { cityOfEvent: id } },
+            );
+            try {
+              await Organization.updateMany(
+                { city: id },
+                { $unset: { city: id } },
+              );
+              try {
+                await User.updateMany({ city: id }, { $unset: { city: id } });
+                return res
+                  .status(200)
+                  .json({ message: "Ciudad eliminada exitosamente" });
+              } catch (error) {
+                return res.status(404).json("User not updated in field 'city'");
+              }
+            } catch (error) {
+              return res
+                .status(404)
+                .json("Organization not updated in field 'city'");
+            }
+          } catch (error) {
+            return res
+              .status(404)
+              .json("Comment not updated in field 'cityOfEvent'");
+          }
+        } catch (error) {
+          return res
+            .status(404)
+            .json("Establishment not updated in field 'city'");
+        }
+      } catch (error) {
+        return res.status(404).json("Event not updated in field 'city'");
+      }
     } else {
       return res.status(404).json({ error: "Ciudad no encontrada" });
     }

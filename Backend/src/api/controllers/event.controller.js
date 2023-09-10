@@ -223,19 +223,39 @@ const deleteEvent = async (req, res, next) => {
       if (deletedEvent.image) {
         deleteImgCloudinary(deletedEvent.image);
       }
-      await User.updateMany(
-        { eventsInterested: id },
-        { $pull: { eventsInterested: id } },
-      );
-
-      await User.updateMany(
-        { eventsAttend: id },
-        { $pull: { eventsAttend: id } },
-      );
-
-      await Establishment.updateMany({ events: id }, { $pull: { events: id } });
-
-      return res.status(200).json({ message: "Evento eliminado exitosamente" });
+      try {
+        await User.updateMany(
+          { eventsInterested: id },
+          { $pull: { eventsInterested: id } },
+        );
+        try {
+          await User.updateMany(
+            { eventsAttend: id },
+            { $pull: { eventsAttend: id } },
+          );
+          try {
+            await Establishment.updateMany(
+              { events: id },
+              { $pull: { events: id } },
+            );
+            return res
+              .status(200)
+              .json({ message: "Evento eliminado exitosamente" });
+          } catch (error) {
+            return res
+              .status(404)
+              .json({ error: "Establishment not updated in field 'event'" });
+          }
+        } catch (error) {
+          return res
+            .status(404)
+            .json({ error: "User not updated in field 'eventsAttend'" });
+        }
+      } catch (error) {
+        return res
+          .status(404)
+          .json({ error: "User not updated in field 'eventsInterested'" });
+      }
     } else {
       return res.status(404).json({ error: "Evento no encontrado" });
     }

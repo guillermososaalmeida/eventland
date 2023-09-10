@@ -19,8 +19,14 @@ const postComment = async (req, res, next) => {
         newComment.user = req.user;
         const savedComment = await newComment.save();
         if (savedComment) {
-          await Event.findByIdAndUpdate(eventId, { $push: { comments: _id } });
-          return res.status(200).json(savedComment);
+          try {
+            await Event.findByIdAndUpdate(eventId, {
+              $push: { comments: _id },
+            });
+            return res.status(200).json(savedComment);
+          } catch (error) {
+            return res.status(404).json("Event not updated in field'comments'");
+          }
         } else {
           return res.status(404).json("Comment not saved in database");
         }
@@ -79,17 +85,27 @@ const deleteComment = async (req, res, next) => {
 
     if (deletedComment) {
       // Eliminar la referencia en los eventos
-      await Event.updateMany({ comments: id }, { $pull: { comments: id } });
-
-      // Eliminar la referencia en los establecimientos
-      await Establishment.updateMany(
-        { comments: id },
-        { $pull: { comments: id } },
-      );
-
-      return res
-        .status(200)
-        .json({ message: "Comentario eliminado exitosamente" });
+      try {
+        await Event.updateMany({ comments: id }, { $pull: { comments: id } });
+        try {
+          // Eliminar la referencia en los establecimientos
+          await Establishment.updateMany(
+            { comments: id },
+            { $pull: { comments: id } },
+          );
+          return res
+            .status(200)
+            .json({ message: "Comentario eliminado exitosamente" });
+        } catch (error) {
+          return res
+            .status(404)
+            .json({ error: "Establishment not updated in field 'comments'" });
+        }
+      } catch (error) {
+        return res
+          .status(404)
+          .json({ error: "Event not updated in field 'comments'" });
+      }
     } else {
       return res.status(404).json({ error: "Comentario no encontrado" });
     }
