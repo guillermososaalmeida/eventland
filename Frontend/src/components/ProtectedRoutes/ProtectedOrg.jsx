@@ -4,7 +4,7 @@ import { useAuth } from "../../context/authContext";
 export const Protected = ({ children }) => {
   const { user } = useAuth();
   if (user?.role !== "organization" || user?.check == false) {
-    return <Navigate to="/registerorg" />;
+    return <Navigate to="/loginorg" />;
   }
 
   return children;

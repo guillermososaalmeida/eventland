@@ -1,18 +1,26 @@
 import { createBrowserRouter } from "react-router-dom";
 
+import { Welcome } from "../pages/Welcome/Welcome";
 import {
   CheckCode,
   CityDetail,
-  CreateEvent,
   EventDetail,
   ForgotPassword,
   Home,
   Login,
-  OrganizationProfile,
   Profile,
   Register,
-  Welcome,
-} from "../pages";
+} from "../pages/User Pages";
+import {
+  RegisterOrg,
+  LoginOrg,
+  CheckCodeOrg,
+  CreateEvent,
+  HomeOrg,
+  OrganizationProfile,
+  EventDetailOrg,
+} from "../pages/Organization pages";
+
 import { Protected, ProtectedCheckChildren } from "../components";
 import App from "../App";
 
@@ -28,9 +36,9 @@ export const routes = createBrowserRouter([
       {
         path: "/home",
         element: (
-          <Protected>
-            <Home />
-          </Protected>
+          //  <Protected>
+          <Home />
+          //   </Protected>
         ),
       },
       {
@@ -40,9 +48,9 @@ export const routes = createBrowserRouter([
       {
         path: "/check",
         element: (
-          <ProtectedCheckChildren>
-            <CheckCode />
-          </ProtectedCheckChildren>
+          //   <ProtectedCheckChildren>
+          <CheckCode />
+          //  </ProtectedCheckChildren>
         ),
       },
       {
@@ -56,9 +64,9 @@ export const routes = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <Protected>
-            <Profile />
-          </Protected>
+          //   <Protected>
+          <Profile />
+          // </Protected>
         ),
       },
       {
@@ -68,9 +76,9 @@ export const routes = createBrowserRouter([
       {
         path: "/eventdetail/:id",
         element: (
-          <Protected>
-            <EventDetail />
-          </Protected>
+          //  <Protected>
+          <EventDetail />
+          //</Protected>
         ),
       },
       {
@@ -80,14 +88,34 @@ export const routes = createBrowserRouter([
       {
         path: "/citydetail/:id",
         element: (
-          <Protected>
-            <CityDetail />
-          </Protected>
+          //  <Protected>
+          <CityDetail />
+          //  </Protected>
         ),
       },
       {
         path: "/registerorg",
-        element: <Register />,
+        element: <RegisterOrg />,
+      },
+      {
+        path: "/loginorg",
+        element: <LoginOrg />,
+      },
+      {
+        path: "/checkorg",
+        element: (
+          //   <ProtectedCheckChildren>
+          <CheckCodeOrg />
+          //  </ProtectedCheckChildren>
+        ),
+      },
+      {
+        path: "/homeorg",
+        element: <HomeOrg />,
+      },
+      {
+        path: "/eventdetailorg",
+        element: <EventDetailOrg />,
       },
     ],
   },
