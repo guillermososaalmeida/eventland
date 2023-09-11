@@ -20,6 +20,7 @@ export const InputHeader = () => {
           fontFamily="sans-serif"
           letterSpacing="2px"
           fontWeight={"100"}
+          transition="0.3s"
           _hover={{ border: "solid 1px black" }}
         />
       </InputGroup>
