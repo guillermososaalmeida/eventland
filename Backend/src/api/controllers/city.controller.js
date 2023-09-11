@@ -12,7 +12,7 @@ const postCity = async (req, res, next) => {
     await City.syncIndexes();
 
     const newCity = new City(req.body);
-    //ponemos imagen por defecto si no hay una.
+    //ponemos imagen por defecto si no hay ninguna
     if (req.file) {
       newCity.image = catchCity;
     } else {
