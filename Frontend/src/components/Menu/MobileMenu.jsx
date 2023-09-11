@@ -19,6 +19,7 @@ export const MobileMenu = () => {
         aria-label="Options"
         icon={<RxHamburgerMenu />}
         variant="outline"
+        m="5"
       />
       <MenuList>
         <MenuItemOption>New Tab</MenuItemOption>
