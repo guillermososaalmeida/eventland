@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Header, Input } from "../../components";
+import { Header, Input, MobileMenu } from "../../components";
 import { CiSearch } from "react-icons/ci";
 import "./Welcome.css";
 
@@ -17,6 +17,9 @@ export const Welcome = () => {
         <div>
           <CiSearch />
           <Input placeholder="Buscar" h="30px" w="120px" />
+        </div>
+        <div>
+          <MobileMenu />
         </div>
       </Header>
       <Link to="/register">Register</Link>
