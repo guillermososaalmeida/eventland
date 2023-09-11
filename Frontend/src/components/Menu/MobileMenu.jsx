@@ -4,20 +4,16 @@ import {
   MenuList,
   MenuItem,
   MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
   IconButton,
 } from "@chakra-ui/react";
-import { RxHamburgerMenu } from "react-icons/rx";
-
+import { HamburgerIcon } from "@chakra-ui/icons";
 export const MobileMenu = () => {
   return (
     <Menu>
       <MenuButton
         as={IconButton}
         aria-label="Options"
-        icon={<RxHamburgerMenu />}
+        icon={<HamburgerIcon />}
         variant="outline"
         m="5"
       />

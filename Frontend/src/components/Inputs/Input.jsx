@@ -1,27 +1,28 @@
-import styled from "styled-components";
+import { SearchIcon } from "@chakra-ui/icons";
+import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 
-const InputStyled = styled.input`
-  height: ${({ h }) => h};
-  width: ${({ w }) => w};
-  padding-left: 30px;
-  border-radius: 15px;
-  border: 1px solid #0f9989ff;
-  transition: 0.3s;
-
-  &:hover {
-    border: 1px solid #07443d;
-  }
-`;
-
-export const Input = ({ placeholder, type, h, w }) => {
+export const InputHeader = () => {
   return (
     <>
-      <InputStyled
-        placeholder={placeholder}
-        type={type}
-        h={h}
-        w={w}
-      ></InputStyled>
+      <InputGroup>
+        <InputLeftElement pointerEvents="none" p="5">
+          <SearchIcon color="gray" />
+        </InputLeftElement>
+        <Input
+          h="2.5em"
+          type="text"
+          placeholder="Buscar"
+          pl="3em"
+          pt="1"
+          rounded="40"
+          border="solid 1px #90a4ae"
+          fontSize="15"
+          fontFamily="sans-serif"
+          letterSpacing="2px"
+          fontWeight={"100"}
+          _hover={{ border: "solid 1px black" }}
+        />
+      </InputGroup>
     </>
   );
 };

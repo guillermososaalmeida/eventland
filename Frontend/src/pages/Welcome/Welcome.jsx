@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { CiSearch } from "react-icons/ci";
 import { Flex } from "@chakra-ui/react";
-import { Header, Input, MobileMenu } from "../../components";
+import { Header, InputHeader, MobileMenu } from "../../components";
 import "./Welcome.css";
 
 export const Welcome = () => {
@@ -17,8 +16,7 @@ export const Welcome = () => {
             />
           </div>
           <div>
-            <CiSearch />
-            <Input placeholder="Buscar" h="30px" w="120px" />
+            <InputHeader />
           </div>
         </Flex>
         <div>
