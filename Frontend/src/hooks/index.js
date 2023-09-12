@@ -5,4 +5,3 @@ export * from "./useRegisterError";
 export * from "./useResendCodeError";
 export * from "./useWidth";
 export * from "./useForgotPasswordError";
-export * from "./useCheckCode";

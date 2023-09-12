@@ -4,10 +4,13 @@ import {
   MenuList,
   MenuItem,
   IconButton,
+  useColorMode,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 export const MobileMenu = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <Menu>
       <MenuButton
@@ -43,6 +46,7 @@ export const MobileMenu = () => {
         >
           <Link to="/loginorg">Inicia sesión como organizadorx</Link>
         </MenuItem>
+
         <MenuItem
           background="white"
           border="none"
@@ -50,18 +54,9 @@ export const MobileMenu = () => {
           p="5"
           rounded="3"
           transition="0.3s"
+          onClick={toggleColorMode}
         >
-          Open Closed Tab
-        </MenuItem>
-        <MenuItem
-          background="white"
-          border="none"
-          _hover={{ background: "#ebeceeff" }}
-          p="5"
-          rounded="3"
-          transition="0.3s"
-        >
-          Open File...
+          Toggle {colorMode === "light" ? "Dark" : "Light"}
         </MenuItem>
       </MenuList>
     </Menu>
