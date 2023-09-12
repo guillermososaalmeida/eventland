@@ -3,7 +3,7 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
   //! ----------------------------- 404: 'User no register'
   if (
     res?.response?.status == 404 &&
-    res?.response?.data?.includes("User no register")
+    res?.response?.data?.includes("Organization no register")
   ) {
     setRes(() => ({}));
     Swal.fire({
@@ -18,7 +18,7 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
 
   if (
     res?.response?.status == 404 &&
-    res?.response?.data?.includes("dont send email and dont update user")
+    res?.response?.data?.includes("email not sent and user not updated")
   ) {
     setRes(() => ({}));
     Swal.fire({
@@ -32,17 +32,15 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
   //! ----------------------------- 200: {updateUser: true,sendPassword: true}
 
   if (res?.status == 200) {
-    if (res?.data?.sendPassword == true && res?.data?.updateUser == true) {
-      setForgotOk(() => true);
-      setRes(() => ({}));
-      Swal.fire({
-        icon: "success",
-        title: "Change password ok",
-        text: "Send email with your new password ✅",
-        showConfirmButton: false,
-        timer: 3000,
-      });
-    }
+    setForgotOk(() => true);
+    setRes(() => ({}));
+    Swal.fire({
+      icon: "success",
+      title: "Change password ok",
+      text: "Send email with your new password ✅",
+      showConfirmButton: false,
+      timer: 3000,
+    });
   }
 
   //! ----------------------------- 404: {updateUser: false,sendPassword: true}
