@@ -1,9 +1,151 @@
-import { Link } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../../../context/authContext";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { registerOrg } from "../../../services/org.service";
+import { useRegisterError } from "../../../hooks/useRegisterError";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  Text,
+} from "@chakra-ui/react";
+import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 
 export const RegisterOrg = () => {
+  const { allUser, setAllUser, bridgeData } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const [res, setRes] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [okRegister, setOkRegister] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useRegisterError(res, setOkRegister, setRes, setAllUser);
+    if (res?.status === 200) bridgeData("ALLUSER");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [res]);
+
+  const formSubmit = async (formData) => {
+    const inputFile = document.getElementById("file-upload").files;
+    if (inputFile.length !== 0) {
+      const customFormData = {
+        ...formData,
+        image: inputFile[0],
+      };
+      setIsLoading(true);
+      setRes(await registerOrg(customFormData));
+      setIsLoading(false);
+    } else {
+      const customFormData = {
+        ...formData,
+      };
+      setIsLoading(true);
+      setRes(await registerOrg(customFormData));
+      setIsLoading(false);
+    }
+  };
+
+  if (okRegister) {
+    return <Navigate to="/check" />;
+  }
   return (
-    <div>
-      <Link to="/loginorg">Login Organization</Link>
-    </div>
+    <>
+      <Box
+        as="div"
+        className="form-wrap"
+        width="100vw"
+        p="1"
+        background="#ff8243"
+        border="1px yellow"
+        borderRadius={10}
+        boxShadow="dark-lg"
+      >
+        <Text fontSize="3xl" as="b">
+          Sign in
+        </Text>
+        <form onSubmit={handleSubmit(formSubmit)}>
+          <FormControl isInvalid={errors.name} isRequired>
+            <FormLabel htmlFor="name">Name</FormLabel>
+            <Input
+              id="name"
+              variant="filled"
+              placeholder="name"
+              {...register("name", {
+                required: "This is required",
+                minLength: { value: 4, message: "Minimum length should be 4" },
+              })}
+            />
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="password">Password</FormLabel>
+            <Input
+              id="password"
+              type="password"
+              variant="filled"
+              autoComplete="false"
+              placeholder="password"
+              {...register("password", {
+                required: "This is required",
+              })}
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="email">Email</FormLabel>
+            <Input
+              id="email"
+              variant="filled"
+              placeholder="your email"
+              {...register("email", {
+                required: "This is required",
+              })}
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel htmlFor="description">Description</FormLabel>
+            <Input
+              id="description"
+              variant="filled"
+              placeholder="describe your organization"
+              {...register("description")}
+            />
+          </FormControl>
+
+          <Uploadfile />
+          {/* <FormControl isInvalid={errors.name}>
+            <FormLabel htmlFor="name">City</FormLabel>
+            <Input
+              id="city"
+              variant="filled"
+              placeholder="city"
+              {...register("city", {})}
+            />
+          </FormControl> */}
+          <FormControl isInvalid={errors.name}>
+            <FormLabel htmlFor="year">Date of birth</FormLabel>
+            <Input
+              type="year"
+              id="year"
+              variant="filled"
+              {...register("year")}
+            />
+          </FormControl>
+          <Button mt={4} colorScheme="teal" type="submit" isLoading={isLoading}>
+            Submit
+          </Button>
+        </form>
+      </Box>
+    </>
   );
 };

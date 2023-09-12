@@ -26,7 +26,7 @@ export const useRegisterError = (res, setRegisterOk, setRes, setAllUser) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Please , your email is incorrect !❎",
+      text: "Please , your email already exists !❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -66,7 +66,7 @@ export const useRegisterError = (res, setRegisterOk, setRes, setAllUser) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval server error!❎ Please try again.",
+      text: "Internal server error!❎ Please try again.",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -76,7 +76,7 @@ export const useRegisterError = (res, setRegisterOk, setRes, setAllUser) => {
   //! -------------------- 404: 'error, resend code'
   if (
     res?.response?.status == 404 &&
-    res?.response?.data?.confirmationCode.includes("error, resend code")
+    res?.response?.data?.confirmationCode.includes("Email not sent ❌")
   ) {
     Swal.fire({
       icon: "error",
