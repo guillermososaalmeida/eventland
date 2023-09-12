@@ -22,7 +22,6 @@ export const ForgotPasswordOrg = () => {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useForgotPasswordError(res, setRes, setForgotOk);
-    console.log(res);
   }, [res]);
 
   //! 3) ---------------- ESTADOS DE NAVEGACION O QUE LA fiuncion ESTA ok
