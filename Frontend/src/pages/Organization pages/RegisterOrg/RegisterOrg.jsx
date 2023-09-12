@@ -1,10 +1,8 @@
 /* eslint-disable no-unused-vars */
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../../context/authContext";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { registerOrg } from "../../../services/org.service";
-import { useRegisterError } from "../../../hooks/useRegisterError";
 import {
   Box,
   Button,
@@ -15,9 +13,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
+import { useOrgAuth } from "../../../context/authOrgContext";
+import { useOrgRegisterError } from "../../../hooks/useOrgRegisterError";
 
 export const RegisterOrg = () => {
-  const { allUser, setAllUser, bridgeData } = useAuth();
+  const { allOrganization, setAllOrganization, bridgeDataOrg } = useOrgAuth();
   const {
     register,
     handleSubmit,
@@ -29,8 +29,8 @@ export const RegisterOrg = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useRegisterError(res, setOkRegister, setRes, setAllUser);
-    if (res?.status === 200) bridgeData("ALLUSER");
+    useOrgRegisterError(res, setOkRegister, setRes, setAllOrganization);
+    if (res?.status === 200) bridgeDataOrg("ALLORGANIZATION");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
 
@@ -55,7 +55,7 @@ export const RegisterOrg = () => {
   };
 
   if (okRegister) {
-    return <Navigate to="/check" />;
+    return <Navigate to="/checkorg" />;
   }
   return (
     <>
