@@ -1,4 +1,4 @@
-import { updateToken } from "../util/updateToken";
+import { updateToken } from "../utils/updateToken";
 import { APIUser } from "./service.config";
 
 //!Para el register
