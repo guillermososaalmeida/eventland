@@ -6,7 +6,7 @@ export const registerUser = async (formData) => {
   return APIUser.post("/users/register", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   })
-    .then((res) => res) //promesa para gestionar la asincronia.
+    .then((res) => res)
     .catch((error) => error);
 };
 

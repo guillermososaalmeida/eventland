@@ -51,19 +51,23 @@ const register = async (req, res, next) => {
         const userSave = await newUser.save();
 
         if (userSave) {
-          sendEmail(email, name, confirmationCode);
-          setTimeout(() => {
-            if (getTestEmailSend()) {
-              setTestEmailSend(false);
-              return res.status(200).json({ user: userSave, confirmationCode });
-            } else {
-              setTestEmailSend(false);
-              return res.status(404).json({
-                user: userSave,
-                confirmationCode: "error, resend code",
-              });
-            }
-          }, 2000);
+          const info = await sendEmail(email, name, confirmationCode);
+
+          if (!info) setTestEmailSend(false);
+          else if (info.accepted.length) setTestEmailSend(true);
+          else setTestEmailSend(false);
+          // setTimeout(() => {
+          if (getTestEmailSend()) {
+            setTestEmailSend(false);
+            return res.status(200).json({ user: userSave, confirmationCode });
+          } else {
+            setTestEmailSend(false);
+            return res.status(404).json({
+              user: userSave,
+              confirmationCode: "error, resend code",
+            });
+          }
+          // }, 2000);
         } else {
           return res.status(404).json("not saved user1");
         }

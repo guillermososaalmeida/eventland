@@ -3,7 +3,7 @@ dotenv.config();
 const nodemailer = require("nodemailer");
 const { setTestEmailSend } = require("../state/state.data");
 
-const sendEmail = (userEmail, name, confirmationCode) => {
+const sendEmail = async (userEmail, name, confirmationCode) => {
   //siempre que utilizamos el estado, lo inicializamos a su valor inicial
   setTestEmailSend(false);
 
@@ -27,15 +27,21 @@ const sendEmail = (userEmail, name, confirmationCode) => {
     text: `Tu código es ${confirmationCode}, gracias por confiar en Eventland, ${name}`,
   };
   console.log("mailoptions", mailOptions);
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error, "error sending email ❌");
-      setTestEmailSend(false);
-    } else {
-      console.log("Email sent: " + info.response);
-      setTestEmailSend(true);
-    }
-  });
+
+  // transporter.sendMail(mailOptions, function (error, info) {
+  //   if (error) {
+  //     console.log(error, "error sending email ❌");
+  //     setTestEmailSend(false);
+  //   } else {
+  //     console.log("Email sent: " + info.response);
+  //     setTestEmailSend(true);
+  //     return info;
+  //   }
+  // });
+
+  const info = await transporter.sendMail(mailOptions);
+
+  return info;
 };
 
 module.exports = sendEmail;

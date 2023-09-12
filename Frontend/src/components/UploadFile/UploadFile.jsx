@@ -1,73 +1,73 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react"
-import "./Uploadfile.css"
+import { useEffect } from "react";
+import "./Uploadfile.css";
 export const Uploadfile = ({ registerForm }) => {
   const ekUpload = () => {
     const Init = () => {
-      var fileSelect = document.getElementById("file-upload")
-      fileSelect.addEventListener("change", fileSelectHandler, false)
-    }
+      var fileSelect = document.getElementById("file-upload");
+      fileSelect.addEventListener("change", fileSelectHandler, false);
+    };
 
     const fileDragHover = (e) => {
-      let fileDrag = document.getElementById("file-drag")
+      let fileDrag = document.getElementById("file-drag");
 
-      e.stopPropagation()
-      e.preventDefault()
+      e.stopPropagation();
+      e.preventDefault();
 
       fileDrag.className =
-        e.type === "dragover" ? "hover" : "modal-body file-upload"
-    }
+        e.type === "dragover" ? "hover" : "modal-body file-upload";
+    };
 
     const fileSelectHandler = (e) => {
       // Fetch FileList object
-      let files = e.target.files || e.dataTransfer.files
+      let files = e.target.files || e.dataTransfer.files;
 
       // Cancel event and hover styling
-      fileDragHover(e)
+      fileDragHover(e);
 
       // Process all File objects
       for (let i = 0, f; (f = files[i]); i++) {
-        parseFile(f)
+        parseFile(f);
       }
-    }
+    };
 
     // Output
     const output = (msg) => {
       // Response
-      let m = document.getElementById("messages")
-      m.innerHTML = msg
-    }
+      let m = document.getElementById("messages");
+      m.innerHTML = msg;
+    };
 
     function parseFile(file) {
-      output("<strong>" + encodeURI(file.name) + "</strong>")
-      let imageName = file.name
+      output("<strong>" + encodeURI(file.name) + "</strong>");
+      let imageName = file.name;
 
-      let isGood = /\.(?=gif|jpg|png|jpeg)/gi.test(imageName)
+      let isGood = /\.(?=gif|jpg|png|jpeg)/gi.test(imageName);
       if (isGood) {
-        document.getElementById("start").classList.add("hidden")
-        document.getElementById("response").classList.remove("hidden")
-        document.getElementById("notimage").classList.add("hidden")
+        document.getElementById("start").classList.add("hidden");
+        document.getElementById("response").classList.remove("hidden");
+        document.getElementById("notimage").classList.add("hidden");
         // Thumbnail Preview
-        document.getElementById("file-image").classList.remove("hidden")
-        document.getElementById("file-image").src = URL.createObjectURL(file)
+        document.getElementById("file-image").classList.remove("hidden");
+        document.getElementById("file-image").src = URL.createObjectURL(file);
       } else {
-        document.getElementById("file-image").classList.add("hidden")
-        document.getElementById("notimage").classList.remove("hidden")
-        document.getElementById("start").classList.remove("hidden")
-        document.getElementById("response").classList.add("hidden")
-        document.getElementById("file-upload-form").reset()
+        document.getElementById("file-image").classList.add("hidden");
+        document.getElementById("notimage").classList.remove("hidden");
+        document.getElementById("start").classList.remove("hidden");
+        document.getElementById("response").classList.add("hidden");
+        document.getElementById("file-upload-form").reset();
       }
     }
     if (window.File && window.FileList && window.FileReader) {
-      Init()
+      Init();
     } else {
-      document.getElementById("file-drag").style.display = "none"
+      document.getElementById("file-drag").style.display = "none";
     }
-  }
+  };
 
   useEffect(() => {
-    ekUpload()
-  })
+    ekUpload();
+  });
 
   return (
     <div id="file-upload-form" className="uploader">
@@ -96,5 +96,5 @@ export const Uploadfile = ({ registerForm }) => {
         </div>
       </label>
     </div>
-  )
-}
+  );
+};
