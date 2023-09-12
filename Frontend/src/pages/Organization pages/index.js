@@ -5,3 +5,4 @@ export * from "./LoginOrg/LoginOrg";
 export * from "./OrganizationProfile/OrganizationProfile";
 export * from "./RegisterOrg/RegisterOrg";
 export * from "./EventDetailOrg/EventDetailOrg";
+export * from "./ForgotPasswordOrg/ForgotPasswordOrg";

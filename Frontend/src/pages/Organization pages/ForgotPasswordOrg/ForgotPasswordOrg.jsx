@@ -5,7 +5,7 @@ import { forgotPasswordOrg } from "../../../services/org.service";
 import { useForgotPasswordError } from "../../../hooks";
 import { Button } from "@chakra-ui/react";
 
-export const ForgotPassword = () => {
+export const ForgotPasswordOrg = () => {
   const { handleSubmit, register } = useForm();
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);

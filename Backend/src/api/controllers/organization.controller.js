@@ -53,24 +53,33 @@ const registerOrganization = async (req, res, next) => {
         const organizationSave = await newOrganization.save();
         if (organizationSave) {
           const { _id } = organizationSave;
-          await City.findByIdAndUpdate(req.body.city, {
-            $push: { organizations: _id },
-          });
-          sendEmail(email, name, confirmationCode);
-          setTimeout(() => {
-            if (getTestEmailSend()) {
-              setTestEmailSend(false);
-              return res
-                .status(200)
-                .json({ organization: organizationSave, confirmationCode });
-            } else {
-              setTestEmailSend(false);
-              return res.status(404).json({
-                organization: organizationSave,
-                confirmationCode: "error, resend code",
-              });
-            }
-          }, 2000);
+          try {
+            await City.findByIdAndUpdate(req.body.city, {
+              $push: { organizations: _id },
+            });
+          } catch (error) {
+            return res
+              .status(404)
+              .json("Error updating City in field (organizations)");
+          }
+          const info = await sendEmail(email, name, confirmationCode);
+
+          if (!info) setTestEmailSend(false);
+          else if (info.accepted.length) setTestEmailSend(true);
+          else setTestEmailSend(false);
+
+          if (getTestEmailSend()) {
+            setTestEmailSend(false);
+            return res
+              .status(200)
+              .json({ organization: organizationSave, confirmationCode });
+          } else {
+            setTestEmailSend(false);
+            return res.status(404).json({
+              organization: organizationSave,
+              confirmationCode: "error, resend code",
+            });
+          }
         } else {
           return res.status(404).json("not saved organization");
         }
