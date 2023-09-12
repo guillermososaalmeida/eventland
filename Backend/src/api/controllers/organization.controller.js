@@ -140,6 +140,7 @@ const checkNewOrganization = async (req, res, next) => {
 
 //!----------------RESERND CODE CONFRIMATION USER NUEVO
 const resendCode = async (req, res, next) => {
+  const newConfirmationCode = randomCode();
   try {
     //! vamos a configurar nodemailer porque tenemos que enviar un codigo
     const email = process.env.EMAIL;
@@ -159,7 +160,12 @@ const resendCode = async (req, res, next) => {
       email: req.body.email,
     });
 
+    organizationExists.confirmationCode = newConfirmationCode;
     if (organizationExists) {
+      await Organization.findOneAndUpdate(
+        { email: req.body.email },
+        { confirmationCode: newConfirmationCode },
+      );
       const mailOptions = {
         from: email,
         to: req.body.email,

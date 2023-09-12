@@ -24,6 +24,7 @@ const Organization = require("../models/Organization.model");
 //!-------Register
 const register = async (req, res, next) => {
   let catchImg = req.file?.path;
+
   try {
     await User.syncIndexes();
 
@@ -125,6 +126,7 @@ const checkNewUser = async (req, res, next) => {
 
 //!----------------RESERND CODE CONFRIMATION USER NUEVO
 const resendCode = async (req, res, next) => {
+  const newConfirmationCode = randomCode();
   try {
     //! vamos a configurar nodemailer porque tenemos que enviar un codigo
     const email = process.env.EMAIL;
@@ -142,7 +144,12 @@ const resendCode = async (req, res, next) => {
     //! hay que ver que el usuario exista porque si no existe no tiene sentido hacer ninguna verificacion
     const userExists = await User.findOne({ email: req.body.email });
 
+    userExists.confirmationCode = newConfirmationCode;
     if (userExists) {
+      await User.findOneAndUpdate(
+        { email: req.body.email },
+        { confirmationCode: newConfirmationCode },
+      );
       const mailOptions = {
         from: email,
         to: req.body.email,
@@ -174,6 +181,7 @@ const login = async (req, res, next) => {
   try {
     // nos traemos
     const { email, password } = req.body;
+
     const userDB = await User.findOne({ email });
 
     if (userDB) {

@@ -24,6 +24,7 @@ import {
 
 import { Protected, ProtectedCheckChildren } from "../components";
 import App from "../App";
+import { ProtectedOrgCheckChildren } from "../components/ProtectedRoutes/ProtectecOrgChecChildren";
 
 export const routes = createBrowserRouter([
   {
@@ -97,6 +98,14 @@ export const routes = createBrowserRouter([
       {
         path: "/registerorg",
         element: <RegisterOrg />,
+      },
+      {
+        path: "/checkorg",
+        element: (
+          <ProtectedOrgCheckChildren>
+            <CheckCodeOrg />
+          </ProtectedOrgCheckChildren>
+        ),
       },
       {
         path: "/loginorg",
