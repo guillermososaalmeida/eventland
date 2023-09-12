@@ -12,7 +12,7 @@ export const registerOrg = async (formData) => {
 
 //! Para el confirmationCode
 
-export const checkConfirmationUser = async (formData) => {
+export const checkConfirmationOrg = async (formData) => {
   return APIUser.post("/organizations/check", formData)
     .then((res) => res)
     .catch((error) => error);
@@ -20,7 +20,7 @@ export const checkConfirmationUser = async (formData) => {
 
 //! Para el reenvio del confirmationCode
 
-export const resendCodeConfirmationUser = async (formData) => {
+export const resendCodeConfirmationOrg = async (formData) => {
   return APIUser.post("/organizations/resend", formData)
     .then((res) => res)
     .catch((error) => error);
@@ -28,7 +28,7 @@ export const resendCodeConfirmationUser = async (formData) => {
 
 //! Para el AutoLogin
 
-export const autoLoginUser = async (formData) => {
+export const autoLoginOrg = async (formData) => {
   return APIUser.post("organizations/login/autologin", formData)
     .then((res) => res)
     .catch((error) => error);
@@ -36,7 +36,7 @@ export const autoLoginUser = async (formData) => {
 
 //!Para el Login
 
-export const loginUserService = async (formData) => {
+export const loginOrgService = async (formData) => {
   return APIUser.post("/organizations/login", formData)
     .then((res) => res)
     .catch((error) => error);
@@ -44,7 +44,7 @@ export const loginUserService = async (formData) => {
 
 //! Para ChangePassword una vez logado
 
-export const changePasswordUserToken = async (formData) => {
+export const changePasswordOrgToken = async (formData) => {
   return APIUser.patch("/organizations/changepassword", formData, {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
@@ -54,9 +54,9 @@ export const changePasswordUserToken = async (formData) => {
     .catch((error) => error);
 };
 
-//! Update user
+//! Update Org
 
-export const updateUser = async (formData) => {
+export const updateOrg = async (formData) => {
   return APIUser.patch("/organizations/update/update", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
@@ -67,9 +67,9 @@ export const updateUser = async (formData) => {
     .catch((error) => error);
 };
 
-//! Delete User
+//! Delete Org
 // No le pasamos parametros, lo coge directamente del token
-export const deleteUserService = async () => {
+export const deleteOrgService = async () => {
   return APIUser.delete("organizations/", {
     headers: { Authorization: `Bearer ${updateToken()}` },
   })
@@ -79,7 +79,7 @@ export const deleteUserService = async () => {
 
 //! ForgotPassword
 
-export const forgotPasswordUser = async (formData) => {
+export const forgotPasswordOrg = async (formData) => {
   return APIUser.patch("/organizations/forgotpassword/forgotpassword", formData)
     .then((res) => res)
     .catch((error) => error);

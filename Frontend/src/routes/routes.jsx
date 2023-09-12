@@ -14,6 +14,7 @@ import {
 import {
   RegisterOrg,
   LoginOrg,
+  ForgotPasswordOrg,
   CheckCodeOrg,
   CreateEvent,
   HomeOrg,
@@ -100,6 +101,10 @@ export const routes = createBrowserRouter([
       {
         path: "/loginorg",
         element: <LoginOrg />,
+      },
+      {
+        path: "/forgotpassword/forgotpasswordorg",
+        element: <ForgotPasswordOrg />,
       },
       {
         path: "/checkorg",
