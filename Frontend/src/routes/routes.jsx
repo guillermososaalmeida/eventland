@@ -48,9 +48,9 @@ export const routes = createBrowserRouter([
       {
         path: "/check",
         element: (
-          //   <ProtectedCheckChildren>
-          <CheckCode />
-          //  </ProtectedCheckChildren>
+          <ProtectedCheckChildren>
+            <CheckCode />
+          </ProtectedCheckChildren>
         ),
       },
       {

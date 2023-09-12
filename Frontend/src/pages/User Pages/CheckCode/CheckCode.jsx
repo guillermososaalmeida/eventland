@@ -1,5 +1,3 @@
-// import { Link } from "react-router-dom";
-
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../../context/authContext";
 import { useForm } from "react-hook-form";
@@ -12,19 +10,10 @@ import { useCheckCodeError } from "../../../hooks/useCheckCodeError";
 import { useAutoLogin } from "../../../hooks/useAutoLogin";
 import { useResendCodeError } from "../../../hooks/useResendCodeError";
 
-// export const CheckCode = () => {
-//   return (
-//     <div>
-//       <Link to="/login">Login</Link>
-//     </div>
-//   );
-// };
-
 export const CheckCode = () => {
   // eslint-disable-next-line no-unused-vars
   const { allUser, userLogin, setUser } = useAuth();
   const { register, handleSubmit } = useForm();
-  // EL RES Va a ser para el check cdel code
   const [res, setRes] = useState({});
   // resResend va a ser para gestionar el renvio del codigo de confirmacion
   const [resResend, setResResend] = useState({});
