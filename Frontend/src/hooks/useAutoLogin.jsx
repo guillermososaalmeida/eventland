@@ -26,7 +26,7 @@ export const useAutoLogin = async (allUser, userLogin) => {
 
       const stringUser = JSON.stringify(userCustom);
       userLogin(stringUser);
-      return <Navigate to="/dashboard" />;
+      return <Navigate to="/home" />;
     } else {
       return <Navigate to="/login" />;
     }
