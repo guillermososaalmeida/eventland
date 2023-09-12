@@ -18,7 +18,7 @@ import { useOrgAuth } from "../../../context/authOrgContext";
 //   );
 // };
 
-export const Login = () => {
+export const LoginOrg = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loggedOrg, setLoggedOrg] = useState({});
   const [loginOk, setLoginOk] = useState(false);
