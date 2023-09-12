@@ -42,7 +42,6 @@ const register = async (req, res, next) => {
         newUser.image =
           "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994551/proyectoEventland/userAssets/istockphoto-1300845620-612x612_wf50h4.jpg";
       }
-      console.log(req.body.dateOfBirth);
       try {
         const dateOfBirthUTC = new Date(req.body.dateOfBirth);
         dateOfBirthUTC.setHours(dateOfBirthUTC.getHours() + 2);
@@ -56,7 +55,6 @@ const register = async (req, res, next) => {
           if (!info) setTestEmailSend(false);
           else if (info.accepted.length) setTestEmailSend(true);
           else setTestEmailSend(false);
-          // setTimeout(() => {
           if (getTestEmailSend()) {
             setTestEmailSend(false);
             return res.status(200).json({ user: userSave, confirmationCode });
@@ -67,7 +65,6 @@ const register = async (req, res, next) => {
               confirmationCode: "error, resend code",
             });
           }
-          // }, 2000);
         } else {
           return res.status(404).json("not saved user1");
         }
