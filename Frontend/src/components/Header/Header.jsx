@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex, useColorMode } from "@chakra-ui/react";
 import styled from "styled-components";
 import { InputHeader } from "../Inputs/Input";
 import { MobileMenu } from "../Menu/MobileMenu";
@@ -15,6 +15,7 @@ const HeaderStyled = styled.header`
 
 export const Header = () => {
   const { width } = useWidth();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <HeaderStyled>
@@ -31,6 +32,9 @@ export const Header = () => {
         </div>
       </Flex>
       <div>{width < 500 ? <MobileMenu /> : <DesktopMenu />} </div>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
     </HeaderStyled>
   );
 };
