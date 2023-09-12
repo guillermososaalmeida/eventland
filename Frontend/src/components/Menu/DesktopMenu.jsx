@@ -19,6 +19,20 @@ export const DesktopMenu = () => {
         >
           <Link to="/register">Registrarse</Link>
         </Button>
+        <Button
+          background="transparent"
+          transition="0.3s"
+          _hover={{ background: "#ebeceeff" }}
+        >
+          <Link to="/registerorg">Crea tus eventos</Link>
+        </Button>
+        <Button
+          background="transparent"
+          transition="0.3s"
+          _hover={{ background: "#ebeceeff" }}
+        >
+          <Link to="/loginorg">Inicia sesión como organizadorx</Link>
+        </Button>
       </ButtonGroup>
     </>
   );

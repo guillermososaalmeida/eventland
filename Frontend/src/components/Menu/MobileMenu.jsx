@@ -6,6 +6,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 export const MobileMenu = () => {
   return (
     <Menu>
@@ -28,7 +29,7 @@ export const MobileMenu = () => {
           rounded="3"
           transition="0.3s"
         >
-          New Tab
+          <Link to="/registerorg">Crea tus eventos</Link>
         </MenuItem>
         <MenuItem
           background="white"
@@ -40,7 +41,7 @@ export const MobileMenu = () => {
           rounded="3"
           transition="0.5s"
         >
-          New Window
+          <Link to="/loginorg">Inicia sesión como organizadorx</Link>
         </MenuItem>
         <MenuItem
           background="white"
