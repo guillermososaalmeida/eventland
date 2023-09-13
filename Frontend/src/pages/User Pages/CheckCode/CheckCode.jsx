@@ -1,14 +1,16 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../../context/authContext";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
+import { useAuth } from "../../../context/authContext";
 import {
   checkConfirmationUser,
   resendCodeConfirmationUser,
 } from "../../../services/user.service";
-import { useCheckCodeError } from "../../../hooks/useCheckCodeError";
-import { useAutoLogin } from "../../../hooks/useAutoLogin";
-import { useResendCodeError } from "../../../hooks/useResendCodeError";
+import {
+  useCheckCodeError,
+  useAutoLogin,
+  useResendCodeError,
+} from "../../../hooks";
 
 export const CheckCode = () => {
   // eslint-disable-next-line no-unused-vars

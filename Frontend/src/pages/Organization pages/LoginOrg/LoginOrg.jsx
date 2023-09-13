@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { loginOrgService } from "../../../services/org.service";
-import { useOrgLoginError } from "../../../hooks/useOrgLoginError";
 import { Link, Navigate } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
-import { useOrgAuth } from "../../../context/authOrgContext";
+import { loginOrgService } from "../../../services/org.service";
+import { useOrgLoginError, useOrgAuth } from "../../../hooks";
 
 // export const LoginOrg = () => {
 //   return (

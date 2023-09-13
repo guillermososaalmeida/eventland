@@ -2,7 +2,6 @@
 import { Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { registerOrg } from "../../../services/org.service";
 import {
   Box,
   Button,
@@ -12,10 +11,10 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
+import { registerOrg } from "../../../services/org.service";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 import { useOrgAuth } from "../../../context/authOrgContext";
-import { useOrgRegisterError } from "../../../hooks/useOrgRegisterError";
-
+import { useOrgRegisterError } from "../../../hooks";
 export const RegisterOrg = () => {
   const { allOrganization, setAllOrganization, bridgeDataOrg } = useOrgAuth();
   const {

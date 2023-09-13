@@ -1,24 +1,17 @@
-// import { Link } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useOrgAuth } from "../../../context/authOrgContext";
-import { useEffect, useState } from "react";
 import {
   checkConfirmationOrg,
   resendCodeConfirmationOrg,
 } from "../../../services/org.service";
-import { useOrgCheckCodeError } from "../../../hooks/useOrgCheckCodeError";
-import { useOrgResendCodeError } from "../../../hooks/useOrgResendCodeError";
-import { Navigate } from "react-router-dom";
-import { useOrgAutoLogin } from "../../../hooks/useOrgAutoLogin";
+import {
+  useOrgCheckCodeError,
+  useOrgResendCodeError,
+  useOrgAutoLogin,
+} from "../../../hooks";
 
-// export const CheckCodeOrg = () => {
-//   return (
-//     <div>
-//       <Link to="/loginorg">Login Organization</Link>
-//     </div>
-//   );
-// };
 export const CheckCodeOrg = () => {
   // eslint-disable-next-line no-unused-vars
   const { allOrganization, organizationLogin, setOrganization } = useOrgAuth();

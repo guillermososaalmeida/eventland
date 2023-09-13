@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { autoLoginOrg } from "../services/org.service";
+import { autoLoginOrg } from "../../services/org.service";
 
 export const useOrgAutoLogin = async (allOrganization, organizationLogin) => {
   try {

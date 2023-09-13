@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../../../context/authContext";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { registerUser } from "../../../services/user.service";
-import { useRegisterError } from "../../../hooks/useRegisterError";
 import {
   Box,
   Button,
@@ -14,6 +11,9 @@ import {
   Input,
   Text,
 } from "@chakra-ui/react";
+import { useRegisterError } from "../../../hooks";
+import { registerUser } from "../../../services/user.service";
+import { useAuth } from "../../../context/authContext";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 
 export const Register = () => {

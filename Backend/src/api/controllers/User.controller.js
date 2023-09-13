@@ -342,7 +342,7 @@ const modifyPassword = async (req, res, next) => {
           return res.status(404).json(error.message);
         }
       } else {
-        return res.status(404).json("password dont match");
+        return res.status(404).json("passwords don't match");
       }
     } else {
       return res.status(404).json("new password is not strong enough");
