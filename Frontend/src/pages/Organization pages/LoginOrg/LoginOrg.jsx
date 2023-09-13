@@ -1,5 +1,3 @@
-// import { Link } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
@@ -7,16 +5,6 @@ import { Button } from "@chakra-ui/react";
 import { loginOrgService } from "../../../services/org.service";
 import { useOrgLoginError } from "../../../hooks";
 import { useOrgAuth } from "../../../context/authOrgContext";
-
-// export const LoginOrg = () => {
-//   return (
-//     <div>
-//       <Link to="/homeorg">Home Organization</Link>
-//       <br />
-//       <Link to="/registerorg">Register Organization</Link>
-//     </div>
-//   );
-// };
 
 export const LoginOrg = () => {
   const [isLoading, setIsLoading] = useState(false);

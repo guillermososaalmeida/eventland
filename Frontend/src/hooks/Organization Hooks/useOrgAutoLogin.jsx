@@ -14,19 +14,22 @@ export const useOrgAutoLogin = async (allOrganization, organizationLogin) => {
 
     if (sendData?.status == 200) {
       // eslint-disable-next-line no-unsafe-optional-chaining
-      const { name, email, image, check } = sendData?.data?.organization;
+      const { name, email, image, check, description } =
+        // eslint-disable-next-line no-unsafe-optional-chaining
+        sendData?.data?.organization;
       const organizationCustom = {
         token: sendData.data.token,
         organization: name,
         email,
         image,
         check,
+        description,
         _id: sendData.data.organization._id,
       };
 
       const stringOrganization = JSON.stringify(organizationCustom);
       organizationLogin(stringOrganization);
-      return <Navigate to="/home" />;
+      return <Navigate to="/homeorg" />;
     } else {
       return <Navigate to="/loginorg" />;
     }

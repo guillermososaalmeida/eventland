@@ -14,6 +14,7 @@ export const useOrgLoginError = (
       email: res.data.organization.email,
       image: res.data.organization.image,
       check: res.data.organization.check,
+      description: res.data.organization.description,
       _id: res.data.organization._id,
     };
 

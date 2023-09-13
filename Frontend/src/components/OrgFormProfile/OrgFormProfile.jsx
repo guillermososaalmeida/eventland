@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-import { useAuth } from "../../context/authContext";
 import {
   Box,
   Button,
@@ -13,37 +12,28 @@ import {
   Input,
   Stack,
   Text,
-  useRadioGroup,
-  HStack,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { RadioCard } from "../RadioCard/RadioCard";
 import { Uploadfile } from "../UploadFile/UploadFile";
-import { FigureUser } from "../FigureUser/FigureUser";
-import { updateUser } from "../../services/user.service";
-import { useDeleteUser, useUpdateError } from "../../hooks";
+import { FigureOrg } from "../FigureOrg/FigureOrg";
+import { updateOrg } from "../../services/org.service";
+import { useOrgDelete, useOrgUpdateError } from "../../hooks";
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useOrgAuth } from "../../context/authOrgContext";
 import { useNavigate } from "react-router-dom";
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-export const FormProfile = () => {
-  const { user, setUser, logout } = useAuth(); // destructuring de lo que necesitamos del context
+export const OrgFormProfile = () => {
+  const { organization, setOrganization, logoutOrg } = useOrgAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
   const [res, setRes] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [gender, setGender] = useState();
-  const options = ["hombre", "mujer", "otros", "prefiero no decirlo"];
-
-  const { getRootProps, getRadioProps } = useRadioGroup({
-    name: "framework",
-    defaultValue: user?.user.gender,
-  });
-  const group = getRootProps();
   const navigate = useNavigate();
   const defauldData = {
-    name: user?.user,
+    name: organization?.organization,
+    description: organization?.description,
   };
   const bg = useColorModeValue("red.500", "blue.500");
 
@@ -64,28 +54,26 @@ export const FormProfile = () => {
         if (inputFile.length != 0) {
           const customFormData = {
             ...formData,
-            gender: gender,
             image: inputFile[0],
           };
           setIsLoading(true);
-          setRes(await updateUser(customFormData));
+          setRes(await updateOrg(customFormData));
           setIsLoading(false);
         } else {
           const customFormData = {
             ...formData,
-            gender: gender,
           };
 
           setIsLoading(true);
-          setRes(await updateUser(customFormData));
+          setRes(await updateOrg(customFormData));
           setIsLoading(false);
         }
       }
     });
   };
-
+  console.log(defauldData);
   useEffect(() => {
-    useUpdateError(res, setRes, setUser, logout);
+    useOrgUpdateError(res, setRes, setOrganization, logoutOrg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
@@ -98,16 +86,16 @@ export const FormProfile = () => {
         alignItems="center"
       >
         <Box paddingInline="10px">
-          <FigureUser user={user} />
+          <FigureOrg organization={organization} />
         </Box>
         <Box>
           <Stack>
-            <Text as="b">Change your data profile</Text>
-            <Text>Please, enter your new data profile</Text>
+            <Text as="b">Cambia tus datos de organizador</Text>
+            <Text>Por favor, introduce tus nuevos datos</Text>
           </Stack>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Nombre de la organización</FormLabel>
               <Input
                 type="text"
                 autoComplete="false"
@@ -116,23 +104,18 @@ export const FormProfile = () => {
                 {...register("name")}
               />
             </FormControl>
+            <FormControl>
+              <FormLabel>Descripción</FormLabel>
+              <Input
+                type="text"
+                autoComplete="false"
+                name="description"
+                defaultValue={defauldData?.description}
+                {...register("description")}
+              />
+            </FormControl>
             <Uploadfile />
-            <HStack
-              {...group}
-              onClick={(e) => {
-                console.log(e.target.value);
-                setGender(e.target.value);
-              }}
-            >
-              {options.map((value) => {
-                const radio = getRadioProps({ value });
-                return (
-                  <RadioCard key={value} {...radio}>
-                    {value}
-                  </RadioCard>
-                );
-              })}
-            </HStack>
+
             <Button type="submit" marginTop="5px" isLoading={isLoading} bg={bg}>
               Change data profile
             </Button>
@@ -143,12 +126,12 @@ export const FormProfile = () => {
           isAttached
           variant="outline"
           onClick={() => {
-            useDeleteUser(setUser, navigate);
+            useOrgDelete(setOrganization, navigate);
           }}
         >
-          <Button>Borrar usuario</Button>
+          <Button>Borrar organización</Button>
           <IconButton
-            aria-label="Borrar usuario"
+            aria-label="Borrar organización"
             icon={<DeleteIcon color="red" />}
           />
         </ButtonGroup>

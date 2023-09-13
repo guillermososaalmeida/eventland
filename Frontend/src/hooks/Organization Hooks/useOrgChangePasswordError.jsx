@@ -18,7 +18,7 @@ export const useOrgChangePasswordError = (res, setRes, setOrganization) => {
     setRes(() => ({}));
     return Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
+      title: "Internal server error ❎.",
       text: "Please, try again",
       showConfirmButton: false,
       timer: 2500,
@@ -43,7 +43,7 @@ export const useOrgChangePasswordError = (res, setRes, setOrganization) => {
     setRes(() => ({}));
     return Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
+      title: "Internal server error ❎.",
       text: "Please, try again",
       showConfirmButton: false,
       timer: 3000,
@@ -56,7 +56,7 @@ export const useOrgChangePasswordError = (res, setRes, setOrganization) => {
     return Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval Server Error ❎!",
+      text: "Internal Server Error ❎!",
       showConfirmButton: false,
       timer: 1500,
     });

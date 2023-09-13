@@ -7,7 +7,7 @@ export const ProtectedOrgCheckChildren = ({ children }) => {
     allOrganization?.data?.organization?.check == true ||
     organization?.check == true
   ) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/homeorg" />;
   }
   if (organization == null && allOrganization.data.confirmationCode === "") {
     return <Navigate to="/loginorg" />;

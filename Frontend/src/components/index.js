@@ -8,3 +8,6 @@ export * from "./UploadFile/UploadFile";
 export * from "./FigureUser/FigureUser";
 export * from "./FormProfile/FormProfile";
 export * from "./RadioCard/RadioCard";
+export * from "./OrgFormProfile/OrgFormProfile";
+export * from "./OrgChangePassword/OrgChangePassword";
+export * from "./FigureOrg/FigureOrg";

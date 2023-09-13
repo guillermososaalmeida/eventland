@@ -14,3 +14,5 @@ export * from "./Organization Hooks/useOrgCheckCodeError";
 export * from "./Organization Hooks/useOrgLoginError";
 export * from "./Organization Hooks/useOrgRegisterError";
 export * from "./Organization Hooks/useOrgResendCodeError";
+export * from "./Organization Hooks/useOrgUpdateError";
+export * from "./Organization Hooks/useOrgDelete";

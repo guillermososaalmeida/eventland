@@ -32,6 +32,7 @@ export const AuthOrgContextProvider = ({ children }) => {
       organization: {
         password: "",
         email: "",
+        description: "",
       },
     },
   });

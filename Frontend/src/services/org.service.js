@@ -1,4 +1,4 @@
-import { updateToken } from "../utils/updateToken";
+import { updateOrgToken } from "../utils/updateOrgToken";
 import { APIUser } from "./service.config";
 
 //!Para el register
@@ -47,7 +47,7 @@ export const loginOrgService = async (formData) => {
 export const changePasswordOrgToken = async (formData) => {
   return APIUser.patch("/organizations/changepassword", formData, {
     headers: {
-      Authorization: `Bearer ${updateToken()}`,
+      Authorization: `Bearer ${updateOrgToken()}`,
     },
   })
     .then((res) => res)
@@ -60,7 +60,7 @@ export const updateOrg = async (formData) => {
   return APIUser.patch("/organizations/update/update", formData, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${updateToken()}`,
+      Authorization: `Bearer ${updateOrgToken()}`,
     },
   })
     .then((res) => res)
@@ -71,7 +71,7 @@ export const updateOrg = async (formData) => {
 // No le pasamos parametros, lo coge directamente del token
 export const deleteOrgService = async () => {
   return APIUser.delete("organizations/", {
-    headers: { Authorization: `Bearer ${updateToken()}` },
+    headers: { Authorization: `Bearer ${updateOrgToken()}` },
   })
     .then((res) => res)
     .catch((error) => error);

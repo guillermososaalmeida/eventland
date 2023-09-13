@@ -52,7 +52,7 @@ export const useOrgCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
+      title: "Internal server error ❎.",
       text: "No delete organization. Try again, please.",
       showConfirmButton: false,
       timer: 2500,
@@ -92,7 +92,7 @@ export const useOrgCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
+      title: "Internal server error ❎.",
       text: "No delete organization. Try again, please.",
       showConfirmButton: false,
       timer: 1500,

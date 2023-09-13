@@ -105,7 +105,7 @@ export const CheckCodeOrg = () => {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       useOrgAutoLogin(allOrganization, organizationLogin);
     } else {
-      return <Navigate to="/home" />;
+      return <Navigate to="/homeorg" />;
     }
   }
 

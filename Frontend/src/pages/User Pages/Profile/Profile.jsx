@@ -4,7 +4,6 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Text,
   Center,
 } from "@chakra-ui/react";
 import { ChangePassword, FormProfile } from "../../../components";

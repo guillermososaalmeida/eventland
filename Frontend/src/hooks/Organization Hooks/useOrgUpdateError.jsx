@@ -1,5 +1,5 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-export const useUpdateError = (res, setRes, setUser, logout) => {
+export const useOrgUpdateError = (res, setRes, setOrg, logout) => {
   //!---------------------------------------> 200
   let contador;
   if (res?.data) {
@@ -42,7 +42,7 @@ export const useUpdateError = (res, setRes, setUser, logout) => {
     return Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Internal Server Error! Don't update user ❎ ",
+      text: "Internal Server Error! Don't update organization ❎ ",
       showConfirmButton: false,
       timer: 1500,
     });
