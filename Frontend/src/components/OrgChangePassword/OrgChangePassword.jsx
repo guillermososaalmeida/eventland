@@ -5,13 +5,15 @@ import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { Button } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { changePasswordOrgToken } from "../../services/org.service";
-import { useChangePasswordError } from "../../hooks";
+import { useOrgChangePasswordError } from "../../hooks";
+import { useNavigate } from "react-router-dom";
 
 export const OrgChangePassword = () => {
   const { setOrganization } = useOrgAuth();
   const { handleSubmit, register } = useForm();
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   //! -----------------1) LA FUNCIOON QUE GESTIONA EL FORMULARIO
 
@@ -46,7 +48,7 @@ export const OrgChangePassword = () => {
   //! ------------------2) GESTION DE LA RESPUESTA POR EL CUSTOMHOOK Y AYUDADO POR EL USEEFFECT
 
   useEffect(() => {
-    useChangePasswordError(res, setRes, setOrganization);
+    useOrgChangePasswordError(res, setRes, setOrganization, navigate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
 

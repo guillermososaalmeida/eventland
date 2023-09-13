@@ -1,11 +1,17 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-export const useOrgChangePasswordError = (res, setRes, setOrganization) => {
+export const useOrgChangePasswordError = (
+  res,
+  setRes,
+  setOrganization,
+  navigate,
+) => {
   console.log("entro al custom hook 💚");
   //!----------------- 200: updateOrganization: true,
   if (res?.data?.updateOrganization?.toString() == "true") {
     setOrganization(() => null);
     localStorage.removeItem("organization");
     setRes(() => ({}));
+    navigate("/loginorg");
     return Swal.fire({
       icon: "success",
       title: "Change password ok ✅",

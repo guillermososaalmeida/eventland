@@ -22,9 +22,13 @@ import {
   EventDetailOrg,
 } from "../pages/Organization pages";
 
-import { Protected, ProtectedCheckChildren } from "../components";
+import {
+  Protected,
+  ProtectedCheckChildren,
+  ProtectedOrg,
+  ProtectedOrgCheckChildren,
+} from "../components";
 import App from "../App";
-import { ProtectedOrgCheckChildren } from "../components/ProtectedRoutes/ProtectecOrgChecChildren";
 
 export const routes = createBrowserRouter([
   {
@@ -66,14 +70,18 @@ export const routes = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          //   <Protected>
-          <Profile />
-          // </Protected>
+          <Protected>
+            <Profile />
+          </Protected>
         ),
       },
       {
         path: "/organizationprofile",
-        element: <OrganizationProfile />,
+        element: (
+          <ProtectedOrg>
+            <OrganizationProfile />
+          </ProtectedOrg>
+        ),
       },
       {
         path: "/eventdetail/:id",
@@ -114,14 +122,6 @@ export const routes = createBrowserRouter([
       {
         path: "/forgotpassword/forgotpasswordorg",
         element: <ForgotPasswordOrg />,
-      },
-      {
-        path: "/checkorg",
-        element: (
-          //   <ProtectedCheckChildren>
-          <CheckCodeOrg />
-          //  </ProtectedCheckChildren>
-        ),
       },
       {
         path: "/homeorg",
