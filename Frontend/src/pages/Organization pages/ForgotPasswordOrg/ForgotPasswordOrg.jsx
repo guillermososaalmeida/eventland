@@ -27,7 +27,7 @@ export const ForgotPasswordOrg = () => {
   //! 3) ---------------- ESTADOS DE NAVEGACION O QUE LA fiuncion ESTA ok
 
   if (forgotOk) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/loginorg" />;
   }
 
   return (
