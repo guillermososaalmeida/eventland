@@ -24,12 +24,11 @@ export const Register = () => {
     formState: { errors },
   } = useForm();
   const [res, setRes] = useState({});
-  const [send, setSend] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [okRegister, setOkRegister] = useState(false);
   const [gender, setGender] = useState(null);
 
   useEffect(() => {
-    console.log("res", res);
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useRegisterError(res, setOkRegister, setRes, setAllUser);
     if (res?.status === 200) bridgeData("ALLUSER");
@@ -45,18 +44,18 @@ export const Register = () => {
         gender: gender,
         image: inputFile[0],
       };
-      setSend(true);
+      setIsLoading(true);
       setRes(await registerUser(customFormData));
-      setSend(false);
+      setIsLoading(false);
     } else {
       const customFormData = {
         ...formData,
         role: "user",
         gender: gender,
       };
-      setSend(true);
+      setIsLoading(true);
       setRes(await registerUser(customFormData));
-      setSend(false);
+      setIsLoading(false);
     }
   };
 
@@ -189,7 +188,7 @@ export const Register = () => {
               {...register("dateOfBirth", {})}
             />
           </FormControl>
-          <Button mt={4} colorScheme="teal" type="submit">
+          <Button mt={4} colorScheme="teal" type="submit" isLoading={isLoading}>
             Submit
           </Button>
         </form>

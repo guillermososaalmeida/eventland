@@ -1,30 +1,49 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { useAuth } from "../../context/authContext";
 import {
   Box,
   Button,
+  ButtonGroup,
   FormControl,
   FormLabel,
+  IconButton,
   Input,
   Stack,
   Text,
+  useRadioGroup,
+  HStack,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { FigureUser } from "../FigureUser/FigureUser";
+import { RadioCard } from "../RadioCard/RadioCard";
 import { Uploadfile } from "../UploadFile/UploadFile";
-import { useForm } from "react-hook-form";
-import { useUpdateError } from "../../hooks/useUpdateError";
-import Swal from "sweetalert2/dist/sweetalert2.all.js";
+import { FigureUser } from "../FigureUser/FigureUser";
 import { updateUser } from "../../services/user.service";
-
+import { useDeleteUser, useUpdateError } from "../../hooks";
+import { DeleteIcon } from "@chakra-ui/icons";
+//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
+//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
+//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
+//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 export const FormProfile = () => {
   const { user, setUser, logout } = useAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
   const [res, setRes] = useState();
-  const [send, setSend] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [gender, setGender] = useState();
+  const options = ["hombre", "mujer", "otros", "prefiero no decirlo"];
 
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "framework",
+    defaultValue: user?.user.gender,
+  });
+  const group = getRootProps();
   const defauldData = {
     name: user?.user,
   };
+  const bg = useColorModeValue("red.500", "blue.500");
 
   //!----------- cuestionario
 
@@ -43,19 +62,23 @@ export const FormProfile = () => {
         if (inputFile.length != 0) {
           const customFormData = {
             ...formData,
+            gender: gender,
             image: inputFile[0],
           };
-
-          setSend(true);
+          console.log("customFormData", customFormData);
+          setIsLoading(true);
           setRes(await updateUser(customFormData));
-          setSend(false);
+          setIsLoading(false);
         } else {
           const customFormData = {
             ...formData,
+            gender: gender,
           };
-          setSend(true);
+          console.log("customFormData", customFormData);
+
+          setIsLoading(true);
           setRes(await updateUser(customFormData));
-          setSend(false);
+          setIsLoading(false);
         }
       }
     });
@@ -63,6 +86,7 @@ export const FormProfile = () => {
 
   useEffect(() => {
     useUpdateError(res, setRes, setUser, logout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
     <>
@@ -93,16 +117,41 @@ export const FormProfile = () => {
               />
             </FormControl>
             <Uploadfile />
-            <Button
-              type="submit"
-              disabled={send}
-              style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-              marginTop="5px"
+            <HStack
+              {...group}
+              onClick={(e) => {
+                console.log(e.target.value);
+                setGender(e.target.value);
+              }}
             >
+              {options.map((value) => {
+                const radio = getRadioProps({ value });
+                return (
+                  <RadioCard key={value} {...radio}>
+                    {value}
+                  </RadioCard>
+                );
+              })}
+            </HStack>
+            <Button type="submit" marginTop="5px" isLoading={isLoading} bg={bg}>
               Change data profile
             </Button>
           </form>
         </Box>
+        <ButtonGroup
+          size="sm"
+          isAttached
+          variant="outline"
+          onClick={() => {
+            useDeleteUser(setUser);
+          }}
+        >
+          <Button>Borrar usuario</Button>
+          <IconButton
+            aria-label="Borrar usuario"
+            icon={<DeleteIcon color="red" />}
+          />
+        </ButtonGroup>
       </Box>
     </>
   );

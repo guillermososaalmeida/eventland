@@ -48,7 +48,6 @@ i.fa {
   width: 100%;
   padding: 2rem 1.5rem;
   text-align: center;
-  background: #fff;
   border-radius: 7px;
   border: 3px solid #37a08e53;
   transition: all 0.2s ease;
@@ -76,7 +75,6 @@ i.fa {
   padding: 0 1rem;
   height: 36px;
   line-height: 36px;
-  color: #fff;
   transition: all 0.2s ease-in-out;
   box-sizing: border-box;
   cursor: pointer;
@@ -88,7 +86,6 @@ i.fa {
 
 .uploader > div {
   margin: 0 0 0.5rem 0;
-  color: #5f6982;
 }
 input[type="file"] {
   display: none;

@@ -4,3 +4,7 @@ export * from "./Inputs/Input";
 export * from "./Header/Header";
 export * from "./Menu/MobileMenu";
 export * from "./ChangePassword/ChangePassword";
+export * from "./UploadFile/UploadFile";
+export * from "./FigureUser/FigureUser";
+export * from "./FormProfile/FormProfile";
+export * from "./RadioCard/RadioCard";

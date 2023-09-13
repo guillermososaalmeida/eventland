@@ -7,8 +7,7 @@ import {
   Text,
   Center,
 } from "@chakra-ui/react";
-/* import { useDeleteUser } from "../../hooks"; */
-import { ChangePassword } from "../../../components";
+import { ChangePassword, FormProfile } from "../../../components";
 
 export const Profile = () => {
   //? -------- Cambio de contraseña con token
@@ -37,23 +36,13 @@ export const Profile = () => {
             />
             <p>Change Password</p>
           </Tab>
-          <Tab flexDir="column">
-            <img
-              src="https://res.cloudinary.com/dq186ej4c/image/upload/v1686140226/eliminar_user_rmwoeg.png"
-              alt="user delete button"
-              className="iconNav iconDeleteUser"
-              // custom hook que hace la peticion al servicio de delete User y setea el usuario a null en el contexto
-              /* onClick={() => useDeleteUser(setUser)} */
-            />
-            <Text color="red">Delete User</Text>
-          </Tab>
         </TabList>
         <TabPanels mt="-5">
-          {/* <TabPanel>
+          <TabPanel>
             <Center>
               <FormProfile />
             </Center>
-          </TabPanel> */}
+          </TabPanel>
           <TabPanel>
             <Center>
               <ChangePassword />
