@@ -10,6 +10,8 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export const SingleEvent = () => {
   const [event, setEvent] = useState({});
@@ -38,15 +40,14 @@ export const SingleEvent = () => {
         <CardBody>
           <Heading size="md">{event.name}</Heading>
 
-          <Text py="2">
-            Caffè latte is a coffee beverage of Italian origin made with
-            espresso and steamed milk.
-          </Text>
+          <Text py="2">{event?.description}</Text>
         </CardBody>
 
         <CardFooter>
           <Button variant="solid" colorScheme="blue">
-            Buy Latte
+            <AddIcon />
+
+            <Link to="/eventdetail/:id">Info</Link>
           </Button>
         </CardFooter>
       </Stack>

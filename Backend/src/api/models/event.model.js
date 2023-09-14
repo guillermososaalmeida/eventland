@@ -6,7 +6,7 @@ const EventSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     image: { type: String, required: false },
-    description: { type: String, required: false },
+    description: { type: String, required: true },
     usersAttend: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     //!La ciudad se rellena automáticamente cuando seleccionamos el establecimiento
     //!cogiendo la ciudad del establecimiento para que haya consistencia de datos.
