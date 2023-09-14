@@ -12,7 +12,6 @@ const Organization = require("../models/Organization.model");
 //! CREATE EVENT
 const postEvent = async (req, res, next) => {
   let catchImage = req.file?.path;
-  console.log("req.organization -------------------- 👀👀👀", req.organization);
   try {
     {
       try {
@@ -32,25 +31,29 @@ const postEvent = async (req, res, next) => {
 
         if (savedEvent) {
           const { _id } = savedEvent;
-
+          const establishment = await Establishment.findById(
+            req.body.establishment,
+          );
           try {
             await Establishment.findByIdAndUpdate(req.body.establishment, {
               $push: { events: _id },
             });
             try {
-              let establishment = await Establishment.findById(
-                req.body.establishment,
-              );
-
               await City.findByIdAndUpdate(establishment.city, {
                 $push: { events: _id },
               });
-
               try {
                 await Organization.findByIdAndUpdate(req.organization._id, {
                   $push: { events: _id },
                 });
-                return res.status(200).json(savedEvent);
+                try {
+                  await Event.findByIdAndUpdate(_id, {
+                    $set: { city: establishment.city },
+                  });
+                  return res.status(200).json(savedEvent);
+                } catch (error) {
+                  return next(error);
+                }
               } catch (error) {
                 return next(error);
               }

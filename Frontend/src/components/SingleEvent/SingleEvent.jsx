@@ -8,7 +8,6 @@ import {
   Heading,
   Image,
   Stack,
-  Text,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
@@ -39,15 +38,13 @@ export const SingleEvent = () => {
       <Stack>
         <CardBody>
           <Heading size="md">{event.name}</Heading>
-
-          <Text py="2">{event?.description}</Text>
         </CardBody>
 
         <CardFooter>
           <Button variant="solid" colorScheme="blue">
             <AddIcon />
 
-            <Link to="/eventdetail/:id">Info</Link>
+            <Link to={`/eventdetail/${event._id}`}>Info</Link>
           </Button>
         </CardFooter>
       </Stack>
