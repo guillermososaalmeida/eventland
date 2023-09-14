@@ -1,0 +1,138 @@
+.generalContainer {
+  overflow: hidden;
+}
+.imageOuterContainer {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24rem;
+}
+.imageInnerContainer {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.image {
+  object-fit: cover;
+  height: 20rem;
+  width: 87%;
+}
+
+.sectionImage {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  position: absolute;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  z-index: 50;
+  background-color: blue;
+  padding: 1rem;
+  width: 80%;
+  min-width: 14rem;
+}
+
+.imageName {
+  font-weight: 800;
+}
+
+.imageNavigate {
+  border-top-left-radius: 0.5rem;
+  background-color: red;
+  padding: 0.5rem;
+  width: 25%;
+  min-width: 8rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+.buttonScrollContainer {
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+  top: -13rem;
+}
+
+.imagePrevious {
+  width: 1.75rem;
+}
+
+.imageNext {
+  transform: rotate(180deg);
+  width: 1.75rem;
+}
+
+.setActiveIndexOuterDiv {
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  place-self: center;
+}
+
+.setActiveIndexInnerDiv {
+  width: 50%;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.spanActive {
+  cursor: pointer;
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: aliceblue;
+  border-radius: 50%;
+}
+
+@media (min-width: 1280px) {
+  .image {
+    height: 425px;
+  }
+}
+
+@media (min-width: 768px) {
+  .sectionImage {
+    padding: 1.25rem;
+    width: 40%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .imageName {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .buttonScrollContainer {
+    top: -15rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .buttonScrollContainer {
+    top: -16rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .imagePrevious {
+    width: 2.5rem;
+  }
+}
+@media (min-width: 768px) {
+  .imageNext {
+    width: 2.5rem;
+  }
+}
