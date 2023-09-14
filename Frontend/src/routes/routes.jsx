@@ -30,6 +30,7 @@ import {
 } from "../components";
 import App from "../App";
 import { WelcomeOrg } from "../pages/WelcomeOrg/WelcomeOrg";
+import { EventList } from "../pages/EventList";
 
 export const routes = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ export const routes = createBrowserRouter([
       {
         path: "/eventdetailorg",
         element: <EventDetailOrg />,
+      },
+      {
+        path: "/eventlist/:name",
+        element: <EventList />,
       },
     ],
   },

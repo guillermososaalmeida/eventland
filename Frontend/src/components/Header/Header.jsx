@@ -34,21 +34,21 @@ export const Header = () => {
       </Flex>
       <Menu
         switchMode={
-          pathname === "/org" ? (
+          pathname.includes("org") ? (
             <Link to="/">Eventland para usuarios</Link>
           ) : (
             <Link to="/org">Crea tus propios eventos</Link>
           )
         }
         login={
-          pathname === "/org" ? (
+          pathname.includes("org") ? (
             <Link to="/loginorg">Inicia sesión</Link>
           ) : (
             <Link to="/login">Inicia sesión</Link>
           )
         }
         register={
-          pathname === "/org" ? (
+          pathname.includes("org") ? (
             <Link to="/registerorg">Regístrate</Link>
           ) : (
             <Link to="/register">Regístrate</Link>

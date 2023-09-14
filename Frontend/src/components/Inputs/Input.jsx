@@ -1,7 +1,17 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 export const InputHeader = () => {
+  const navigate = useNavigate();
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      const name = e.target.value;
+      name ? navigate(`/eventlist/${name}`) : navigate("/eventlist/");
+    }
+  };
+
   return (
     <>
       <InputGroup>
@@ -22,6 +32,7 @@ export const InputHeader = () => {
           fontWeight={"100"}
           transition="0.3s"
           _hover={{ border: "solid 1px black" }}
+          onKeyDown={handleEnter}
         />
       </InputGroup>
     </>
