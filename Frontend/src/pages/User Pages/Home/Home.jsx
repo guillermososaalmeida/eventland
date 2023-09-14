@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+/* import { Link } from "react-router-dom";
+ */
+import { Flex, Heading } from "@chakra-ui/react";
+import { FutureEvents, SingleEvent } from "../../../components";
 
 export const Home = () => {
   return (
-    <div>
-      <Link to="/profile">Profile</Link>
-      <br />
-      <Link to="/eventdetail/:id">Event Detail</Link>
-      <br />
-      <Link to="/citydetail/:id">City Detail</Link>
-    </div>
+    <>
+      <Flex>
+        <Heading>Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
+        <SingleEvent />
+      </Flex>
+      <FutureEvents />
+    </>
   );
 };

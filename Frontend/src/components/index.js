@@ -13,3 +13,5 @@ export * from "./OrgChangePassword/OrgChangePassword";
 export * from "./FigureOrg/FigureOrg";
 export * from "./ProtectedRoutes/ProtectedOrg";
 export * from "./ProtectedRoutes/ProtectedOrgCheckChildren";
+export * from "./SingleEvent/SingleEvent";
+export * from "./FutureEvents/FutureEvents";
