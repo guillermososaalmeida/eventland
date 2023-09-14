@@ -88,19 +88,19 @@ export const forgotPasswordUser = async (formData) => {
 //! Get single next event
 
 export const getSingleNextEvent = async () => {
-  return APIUser.get("/get/single/next/event", {
+  return APIUser.get("/users/get/single/next/event", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
   })
-    .then((res) => res)
+    .then((res) => res.data.data)
     .catch((error) => error);
 };
 
 //! Get next events
 
 export const nextEvents = async () => {
-  return APIUser.get("/get/next/events", {
+  return APIUser.get("/users/get/next/events", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
@@ -112,7 +112,7 @@ export const nextEvents = async () => {
 //! Get next events
 
 export const pastEvents = async () => {
-  return APIUser.get("/get/past/events", {
+  return APIUser.get("/users/get/past/events", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
@@ -124,7 +124,7 @@ export const pastEvents = async () => {
 //! Attend event
 
 export const attendEvent = async () => {
-  return APIUser.get("/add/:id", {
+  return APIUser.get("/users/add/:id", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
@@ -136,7 +136,7 @@ export const attendEvent = async () => {
 //! Fav organization
 
 export const favOrganization = async () => {
-  return APIUser.get("/fav/:id", {
+  return APIUser.get("/users/fav/:id", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
@@ -148,7 +148,7 @@ export const favOrganization = async () => {
 //!Like interested event
 
 export const likeInterestedEvent = async () => {
-  return APIUser.get("/fav/:id", {
+  return APIUser.get("/users/fav/:id", {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },
