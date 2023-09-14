@@ -4,7 +4,7 @@ import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-export const DesktopMenu = () => {
+export const DesktopMenu = ({ switchMode }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
@@ -18,10 +18,7 @@ export const DesktopMenu = () => {
           <Link to="/register">Registrarse</Link>
         </Button>
         <Button background="transparent" transition="0.3s">
-          <Link to="/registerorg">Crea tus eventos</Link>
-        </Button>
-        <Button background="transparent" transition="0.3s">
-          <Link to="/loginorg">Inicia sesión como organizadorx</Link>
+          {switchMode}
         </Button>
       </ButtonGroup>
       <Button

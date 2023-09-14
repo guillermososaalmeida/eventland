@@ -29,6 +29,7 @@ import {
   ProtectedOrgCheckChildren,
 } from "../components";
 import App from "../App";
+import { WelcomeOrg } from "../pages/WelcomeOrg/WelcomeOrg";
 
 export const routes = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const routes = createBrowserRouter([
       {
         path: "/",
         element: <Welcome />,
+      },
+      {
+        path: "/org",
+        element: <WelcomeOrg />,
       },
       {
         path: "/home",

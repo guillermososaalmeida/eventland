@@ -2,15 +2,15 @@ import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
   IconButton,
   useColorMode,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
-export const MobileMenu = () => {
+import { MobileMenuItem } from "./MobileMenuItem";
+
+export const MobileMenu = ({ switchMode, login, register }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
@@ -26,51 +26,19 @@ export const MobileMenu = () => {
         background="transparent"
         color="gray"
       />
-      <MenuList m="2" border="1px solid gray" rounded="3">
-        <MenuItem
-          border="none"
-          _hover={{ background: "#ebeceeff" }}
-          p="5"
-          rounded="3"
-          transition="0.3s"
-        >
-          <Link to="/registerorg">Crea tus eventos</Link>
-        </MenuItem>
-        <MenuItem
-          border="none"
-          _hover={{
-            background: "#ebeceeff",
-          }}
-          p="5"
-          rounded="3"
-          transition="0.5s"
-        >
-          <Link to="/loginorg">Inicia sesión como organizadorx</Link>
-        </MenuItem>
 
-        <MenuItem
-          border="none"
-          _hover={{ background: "#ebeceeff" }}
-          p="5"
-          rounded="3"
-          transition="0.3s"
-          onClick={toggleColorMode}
-        >
+      <MenuList m="2" border="1px solid gray" rounded="3">
+        <MobileMenuItem>{login}</MobileMenuItem>
+        <MobileMenuItem>{register}</MobileMenuItem>
+        <MobileMenuItem>{switchMode}</MobileMenuItem>
+        <MobileMenuItem onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-        </MenuItem>
+        </MobileMenuItem>
 
         {(user || organization) && (
-          <MenuItem
-            border="none"
-            _hover={{ background: "#ebeceeff" }}
-            p="5"
-            rounded="3"
-            transition="0.3s"
-            color="red"
-            onClick={user ? logout : logoutOrg}
-          >
+          <MobileMenuItem color="red" onClick={user ? logout : logoutOrg}>
             Logout
-          </MenuItem>
+          </MobileMenuItem>
         )}
       </MenuList>
     </Menu>

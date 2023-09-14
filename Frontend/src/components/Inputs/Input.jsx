@@ -11,7 +11,7 @@ export const InputHeader = () => {
         <Input
           h="2.5em"
           type="text"
-          placeholder="Buscar"
+          placeholder="Busca eventos"
           pl="3em"
           pt="1"
           rounded="40"
