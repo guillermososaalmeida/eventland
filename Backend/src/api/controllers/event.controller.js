@@ -32,14 +32,20 @@ const postEvent = async (req, res, next) => {
 
         if (savedEvent) {
           const { _id } = savedEvent;
+
           try {
-            await City.findByIdAndUpdate(req.body.city, {
+            await Establishment.findByIdAndUpdate(req.body.establishment, {
               $push: { events: _id },
             });
             try {
-              await Establishment.findByIdAndUpdate(req.body.establishment, {
+              let establishment = await Establishment.findById(
+                req.body.establishment,
+              );
+
+              await City.findByIdAndUpdate(establishment.city, {
                 $push: { events: _id },
               });
+
               try {
                 await Organization.findByIdAndUpdate(req.organization._id, {
                   $push: { events: _id },
