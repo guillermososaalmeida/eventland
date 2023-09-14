@@ -23,7 +23,7 @@ const EstablishmentSchema = new Schema(
       type: Number,
       required: false,
     },
-    city: { type: mongoose.Schema.Types.ObjectId, ref: "City" },
+    city: { type: mongoose.Schema.Types.ObjectId, ref: "City", required: true },
   },
   {
     timestamps: true,
