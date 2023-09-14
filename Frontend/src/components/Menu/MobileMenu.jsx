@@ -6,7 +6,7 @@ import {
   IconButton,
   useColorMode,
 } from "@chakra-ui/react";
-import { HamburgerIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
@@ -56,7 +56,7 @@ export const MobileMenu = () => {
           transition="0.3s"
           onClick={toggleColorMode}
         >
-          Toggle {colorMode === "light" ? "Dark" : "Light"}
+          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </MenuItem>
 
         {(user || organization) && (
