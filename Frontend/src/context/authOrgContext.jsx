@@ -51,7 +51,7 @@ export const AuthOrgContextProvider = ({ children }) => {
   const logoutOrg = () => {
     localStorage.removeItem("organization");
     setOrganization(null);
-    navigate("/loginorg");
+    navigate("/");
   };
 
   //! -----------------------------------------------------------------------

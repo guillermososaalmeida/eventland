@@ -8,9 +8,12 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/authContext";
+import { useOrgAuth } from "../../context/authOrgContext";
 export const MobileMenu = () => {
   const { colorMode, toggleColorMode } = useColorMode();
-
+  const { logout, user } = useAuth();
+  const { logoutOrg, organization } = useOrgAuth();
   return (
     <Menu>
       <MenuButton
@@ -55,6 +58,20 @@ export const MobileMenu = () => {
         >
           Toggle {colorMode === "light" ? "Dark" : "Light"}
         </MenuItem>
+
+        {(user || organization) && (
+          <MenuItem
+            border="none"
+            _hover={{ background: "#ebeceeff" }}
+            p="5"
+            rounded="3"
+            transition="0.3s"
+            color="red"
+            onClick={user ? logout : logoutOrg}
+          >
+            Logout
+          </MenuItem>
+        )}
       </MenuList>
     </Menu>
   );
