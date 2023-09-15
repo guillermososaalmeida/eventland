@@ -156,3 +156,11 @@ export const likeInterestedEvent = async () => {
     .then((res) => res)
     .catch((error) => error);
 };
+
+//!Get by id
+
+export const getUserById = async (id) => {
+  return APIUser.get(`/users/${id}`)
+    .then((res) => res)
+    .catch((error) => error);
+};

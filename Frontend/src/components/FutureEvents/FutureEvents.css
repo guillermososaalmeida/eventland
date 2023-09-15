@@ -94,7 +94,8 @@ h1.imageName {
   height: 2rem;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .spanActive {

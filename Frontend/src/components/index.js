@@ -17,3 +17,4 @@ export * from "./SingleEvent/SingleEvent";
 export * from "./FutureEvents/FutureEvents";
 export * from "./PastEvents/PastEvents";
 export * from "./Countdown/Countdown";
+export * from "./OrganizationsFavs/OrganizationsFav";

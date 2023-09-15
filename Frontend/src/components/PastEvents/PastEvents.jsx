@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { pastEvents } from "../../services/user.service";
-import "./PastEvents.css";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import { Button, useColorModeValue } from "@chakra-ui/react";
