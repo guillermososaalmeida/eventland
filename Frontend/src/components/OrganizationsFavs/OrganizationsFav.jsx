@@ -6,13 +6,6 @@ import { Button, useColorModeValue } from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 
 export const OrganizationsFav = () => {
-  //!PARA LOS EVENTOS, EL SERVICIO ME TRAÍA DIRECTAMENTE EL ARRAY
-  //!DE EVENTOS, ASÍ QUE PARA ORGANIZACIONES TENGO QUE TRAERME DEL
-  //!CONTEXTO EL USUARIO, QUE TIENE SUS ORGFAVS, CON ESO HACER LLAMADAS
-  //!DE FINDBYID Y GUARDARME LAS ORGANIZACIONES, A PARTIR DE AHÍ TODO
-  //!TENDRÍA QUE SER IGUAL.
-  //AL TRAER EL GETBYID DEL USER TE TRAE POPULADO LAS ORGS
-
   const { user } = useAuth();
   const [organizationsFav, setOrganizationsFav] = useState([{}]);
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
