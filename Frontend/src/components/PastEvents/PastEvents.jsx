@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { nextEvents } from "../../services/user.service";
-import "./FutureEvents.css";
+import { pastEvents } from "../../services/user.service";
+import "./PastEvents.css";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 
-export const FutureEvents = () => {
+export const PastEvents = () => {
   const [events, setEvents] = useState([{}]);
 
   useEffect(() => {
-    const getFutureEvents = async () => {
-      const res = await nextEvents();
+    const getPastEvents = async () => {
+      const res = await pastEvents();
       if (res.status === 200) setEvents(res.data.data);
     };
-    getFutureEvents();
+    getPastEvents();
   }, []);
   //Comentado en caso de que queramos poner los botones de navegación
   // const next =
@@ -69,7 +69,7 @@ export const FutureEvents = () => {
             alt="button to the previous image"
           />
         </button> */}
-      <h1 className="imageName">Futuros eventos</h1>
+      <h1 className="imageName">Eventos pasados</h1>
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -152,6 +152,6 @@ export const FutureEvents = () => {
       </div>
     </div>
   ) : (
-    <h2>No hay eventos futuros</h2>
+    <h2>No hay eventos pasados</h2>
   );
 };
