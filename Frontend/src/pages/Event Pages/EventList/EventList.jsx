@@ -1,13 +1,5 @@
-import {
-  Card,
-  Center,
-  Flex,
-  HStack,
-  Heading,
-  Image,
-  Stack,
-} from "@chakra-ui/react";
-import { useGetEventsFromSearchParams } from "../../hooks";
+import { Card, Center, HStack, Heading, Image, Stack } from "@chakra-ui/react";
+import { useGetEventsFromSearchParams } from "../../../hooks";
 import { Link } from "react-router-dom";
 
 export const EventList = () => {

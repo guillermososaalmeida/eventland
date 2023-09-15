@@ -4,7 +4,6 @@ import { Welcome } from "../pages/Welcome/Welcome";
 import {
   CheckCode,
   CityDetail,
-  EventDetail,
   ForgotPassword,
   Home,
   Login,
@@ -30,7 +29,7 @@ import {
 } from "../components";
 import App from "../App";
 import { WelcomeOrg } from "../pages/WelcomeOrg/WelcomeOrg";
-import { EventList } from "../pages/EventList";
+import { EventDetail, EventList } from "../pages/Event Pages";
 
 export const routes = createBrowserRouter([
   {

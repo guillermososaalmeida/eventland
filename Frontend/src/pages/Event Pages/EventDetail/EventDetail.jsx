@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getEventById } from "../../../services/event.service";
 import { Box, Heading, Image, Stack } from "@chakra-ui/react";
+import { Countdown } from "../../../components";
 
 export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
-  const { image, name, description } = event;
-  console.log("event", event);
+  const { image, name, description, date } = event;
+
+  console.log("event", date);
   useEffect(() => {
     (async () => {
       setEvent(await getEventById(id));
@@ -50,6 +52,7 @@ export const EventDetail = () => {
           >
             {event.city?.name}
           </Heading>
+          <Countdown date={event?.date} />
           <Image
             src={image}
             alt={name}
@@ -59,7 +62,9 @@ export const EventDetail = () => {
             }}
           />
         </Box>
-        <Box maxWidth="900px">{description}</Box>
+        <Box maxWidth="900px" p="2">
+          {description}
+        </Box>
       </Stack>
     </>
   );
