@@ -14,7 +14,7 @@ export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
   const { image, name, description, date } = event;
-  const bg = useColorModeValue("#ebeceeff", "#1a202cff");
+  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
 
   console.log("event", date);
   useEffect(() => {
@@ -59,7 +59,7 @@ export const EventDetail = () => {
           >
             {event.city?.name}
           </Heading>
-          <Countdown date={event?.date} />
+          {event.date && <Countdown date={event?.date} />}
           <Image
             src={image}
             alt={name}
