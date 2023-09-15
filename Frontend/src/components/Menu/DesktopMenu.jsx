@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import DesktopMenuItem from "./DesktopMenuItem";
 
-export const DesktopMenu = ({ switchMode }) => {
+export const DesktopMenu = ({ switchMode, login, register, profile }) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
@@ -12,37 +13,23 @@ export const DesktopMenu = ({ switchMode }) => {
     <>
       <ButtonGroup flexWrap="nowrap">
         <Button background="transparent" transition="0.3s">
-          <Link to="/login">Iniciar sesión</Link>
+          {!user && !organization ? login : profile}
         </Button>
         <Button background="transparent" transition="0.3s">
-          <Link to="/register">Registrarse</Link>
+          {register}
         </Button>
         <Button background="transparent" transition="0.3s">
           {switchMode}
         </Button>
       </ButtonGroup>
-      <Button
-        border="none"
-        p="5"
-        rounded="3"
-        transition="0.3s"
-        onClick={toggleColorMode}
-      >
+      <DesktopMenuItem onClick={toggleColorMode}>
         {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-      </Button>
+      </DesktopMenuItem>
 
       {(user || organization) && (
-        <Button
-          background="transparent"
-          border="none"
-          p="5"
-          rounded="3"
-          transition="0.3s"
-          color="red"
-          onClick={user ? logout : logoutOrg}
-        >
+        <DesktopMenuItem color="red" onClick={user ? logout : logoutOrg}>
           Logout
-        </Button>
+        </DesktopMenuItem>
       )}
     </>
   );
