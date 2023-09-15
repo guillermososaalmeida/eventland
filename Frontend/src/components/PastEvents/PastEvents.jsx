@@ -152,6 +152,6 @@ export const PastEvents = () => {
       </div>
     </div>
   ) : (
-    <h2>No hay eventos futuros</h2>
+    <h2>No hay eventos pasados</h2>
   );
 };
