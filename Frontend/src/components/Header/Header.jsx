@@ -1,11 +1,13 @@
-import { Flex } from "@chakra-ui/react";
+import { Center, Flex, Icon } from "@chakra-ui/react";
 import styled from "styled-components";
 import { InputHeader } from "../Inputs/Input";
 import { MobileMenu } from "../Menu/MobileMenu";
 import useWidth from "../../hooks/useWidth";
 import { DesktopMenu } from "../Menu/DesktopMenu";
 import { Link, useLocation } from "react-router-dom";
-
+import { CgProfile } from "react-icons/cg";
+import { useOrgAuth } from "../../context/authOrgContext";
+import { useAuth } from "../../context/authContext";
 const HeaderStyled = styled.header`
   display: flex;
   align-items: center;
@@ -15,6 +17,8 @@ const HeaderStyled = styled.header`
 `;
 
 export const Header = () => {
+  const { organization } = useOrgAuth();
+  const { user } = useAuth();
   const { width } = useWidth();
   const { pathname } = useLocation();
   const Menu = width < 500 ? MobileMenu : DesktopMenu;
@@ -52,6 +56,19 @@ export const Header = () => {
             <Link to="/registerorg">Regístrate</Link>
           ) : (
             <Link to="/register">Regístrate</Link>
+          )
+        }
+        profile={
+          pathname.includes("org") ? (
+            <Flex align="center">
+              <Icon as={CgProfile} />
+              <Link to="/organizationprofile">{organization.email}</Link>
+            </Flex>
+          ) : (
+            <Flex align="center">
+              <Icon as={CgProfile} />
+              <Link to="/profile">{user.email}</Link>
+            </Flex>
           )
         }
       />
