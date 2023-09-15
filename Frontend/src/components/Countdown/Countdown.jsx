@@ -30,10 +30,11 @@ export const Countdown = ({ date }) => {
       size="lg"
       rounded="7"
       position="absolute"
-      mt="22em"
       p="10px"
       fontSize="17"
-      ml="32.8em"
+      bottom="0"
+      right="0"
+      m="2"
     >
       {time}
     </Heading>
