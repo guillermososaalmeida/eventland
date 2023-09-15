@@ -10,7 +10,13 @@ import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MobileMenuItem } from "./MobileMenuItem";
 
-export const MobileMenu = ({ switchMode, login, register }) => {
+export const MobileMenu = ({
+  switchMode,
+  login,
+  register,
+  profile,
+  myEvents,
+}) => {
   const { colorMode, toggleColorMode } = useColorMode();
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
@@ -28,8 +34,14 @@ export const MobileMenu = ({ switchMode, login, register }) => {
       />
 
       <MenuList m="2" border="1px solid gray" rounded="3">
-        <MobileMenuItem>{login}</MobileMenuItem>
-        <MobileMenuItem>{register}</MobileMenuItem>
+        <MobileMenuItem>
+          {!user && !organization ? login : profile}
+        </MobileMenuItem>
+
+        <MobileMenuItem>
+          {!user && !organization ? register : myEvents}
+        </MobileMenuItem>
+
         <MobileMenuItem>{switchMode}</MobileMenuItem>
         <MobileMenuItem onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
