@@ -19,8 +19,8 @@ const HeaderStyled = styled.header`
 `;
 
 export const Header = () => {
-  const { organization } = useOrgAuth();
-  const { user } = useAuth();
+  const { organization, logoutOrg } = useOrgAuth();
+  const { user, logout } = useAuth();
   const { width } = useWidth();
   const { pathname } = useLocation();
   const Menu = width < 500 ? MobileMenu : DesktopMenu;
@@ -41,9 +41,9 @@ export const Header = () => {
       <Menu
         switchMode={
           pathname.includes("org") ? (
-            <Link to="/">Eventland para usuarios</Link>
+            <Link onClick={logoutOrg}>Eventland para usuarios</Link>
           ) : (
-            <Link to="/org">Crea tus propios eventos</Link>
+            <Link onClick={logout}>Crea tus propios eventos</Link>
           )
         }
         login={
