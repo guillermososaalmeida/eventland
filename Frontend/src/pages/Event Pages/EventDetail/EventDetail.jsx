@@ -14,7 +14,7 @@ export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
   const { image, name, description, date } = event;
-  const bg = useColorModeValue("#ebeceeff", "#1a202cff");
+  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
 
   console.log("event", date);
   useEffect(() => {
@@ -27,14 +27,15 @@ export const EventDetail = () => {
   return (
     <>
       <Stack align="center">
-        <Box maxWidth="900px">
+        <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
             position="absolute"
             bg={bg}
             rounded="10"
             p="4"
-            mt="1em"
-            ml="1em"
+            top="0"
+            left="0"
+            m="2"
           >
             {name}
           </Heading>
@@ -44,8 +45,9 @@ export const EventDetail = () => {
             bg={bg}
             rounded="10"
             p="4"
-            mt="7.5em"
-            ml="2.2em"
+            top="20"
+            left="0"
+            m="2"
           >
             {event.establishment?.name}
           </Heading>
@@ -54,12 +56,13 @@ export const EventDetail = () => {
             bg={bg}
             rounded="10"
             p="4"
-            mt="10em"
-            ml="18em"
+            bottom="12"
+            right="0"
+            m="2"
           >
             {event.city?.name}
           </Heading>
-          <Countdown date={event?.date} />
+          {event.date && <Countdown date={event?.date} />}
           <Image
             src={image}
             alt={name}
@@ -67,6 +70,7 @@ export const EventDetail = () => {
               e.target.src =
                 "https://res.cloudinary.com/dhr13yihn/image/upload/v1693994819/proyectoEventland/eventAssets/Illustration_of_a_group_of_people_all_feeling_different_emotions_dzvspy.jpg";
             }}
+            maxWidth="100%"
           />
         </Box>
         <Box maxWidth="900px" p="2">

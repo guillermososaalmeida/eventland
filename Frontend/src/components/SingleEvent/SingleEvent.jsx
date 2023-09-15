@@ -41,11 +41,12 @@ export const SingleEvent = () => {
         </CardBody>
 
         <CardFooter>
-          <Button variant="solid" colorScheme="blue">
-            <AddIcon />
-
-            <Link to={`/eventdetail/${event._id}`}>Info</Link>
-          </Button>
+          <Link to={`/eventdetail/${event._id}`}>
+            <Button variant="solid" colorScheme="blue">
+              <AddIcon />
+              Info
+            </Button>
+          </Link>
         </CardFooter>
       </Stack>
     </Card>
