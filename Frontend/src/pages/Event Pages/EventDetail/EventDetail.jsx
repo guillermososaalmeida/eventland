@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getEventById } from "../../../services/event.service";
-import { Box, Heading, Image, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Image,
+  Stack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Countdown } from "../../../components";
 
 export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
   const { image, name, description, date } = event;
+  const bg = useColorModeValue("#ebeceeff", "#1a202cff");
 
   console.log("event", date);
   useEffect(() => {
@@ -23,7 +30,7 @@ export const EventDetail = () => {
         <Box maxWidth="900px">
           <Heading
             position="absolute"
-            bg="#1a202ccc"
+            bg={bg}
             rounded="10"
             p="4"
             mt="1em"
@@ -34,7 +41,7 @@ export const EventDetail = () => {
           <Heading
             size="sm"
             position="absolute"
-            bg="#1a202ccc"
+            bg={bg}
             rounded="10"
             p="4"
             mt="7.5em"
@@ -44,7 +51,7 @@ export const EventDetail = () => {
           </Heading>
           <Heading
             position="absolute"
-            bg="#1a202ccc"
+            bg={bg}
             rounded="10"
             p="4"
             mt="10em"

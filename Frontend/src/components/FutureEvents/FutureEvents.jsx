@@ -3,9 +3,11 @@ import { nextEvents } from "../../services/user.service";
 import "./FutureEvents.css";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
+import { Button, useColorModeValue } from "@chakra-ui/react";
 
 export const FutureEvents = () => {
   const [events, setEvents] = useState([{}]);
+  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
 
   useEffect(() => {
     const getFutureEvents = async () => {
@@ -69,7 +71,9 @@ export const FutureEvents = () => {
             alt="button to the previous image"
           />
         </button> */}
-      <h1 className="imageName">Futuros eventos</h1>
+      <h1 className="imageName" style={{ backgroundColor: bg }}>
+        Futuros eventos
+      </h1>
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -85,14 +89,20 @@ export const FutureEvents = () => {
             >
               <div className="imageInnerContainer">
                 <img className="image" src={event.image} />
-                <section className="sectionImage">
+                <section
+                  className="sectionImage"
+                  style={{ backgroundColor: bg }}
+                >
                   <h2 className="imageName">{event.name}</h2>
-                  <button
-                    className="imageNavigate"
+                  <Button
                     onClick={() => navigate(`/eventdetail/${event._id}`)}
+                    _hover={{
+                      transform: "scale(1.1)",
+                    }}
+                    box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
                   >
                     VER EVENTO
-                  </button>
+                  </Button>
                 </section>
               </div>
             </div>
