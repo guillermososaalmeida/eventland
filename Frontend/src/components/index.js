@@ -15,3 +15,5 @@ export * from "./ProtectedRoutes/ProtectedOrg";
 export * from "./ProtectedRoutes/ProtectedOrgCheckChildren";
 export * from "./SingleEvent/SingleEvent";
 export * from "./FutureEvents/FutureEvents";
+export * from "./PastEvents/PastEvents";
+export * from "./Countdown/Countdown";
