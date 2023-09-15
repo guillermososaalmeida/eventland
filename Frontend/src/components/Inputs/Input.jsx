@@ -19,6 +19,7 @@ export const InputHeader = () => {
           <SearchIcon color="gray" />
         </InputLeftElement>
         <Input
+          w="100%"
           h="2.5em"
           type="text"
           placeholder="Busca eventos"
