@@ -43,7 +43,6 @@ export const FutureEvents = () => {
     activeIndex < events.length - 1
       ? setActiveIndex(activeIndex + 1)
       : setActiveIndex(0);
-    console.log(events);
   };
 
   const preIndex = () => {
