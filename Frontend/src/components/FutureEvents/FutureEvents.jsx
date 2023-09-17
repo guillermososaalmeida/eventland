@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
-import { nextEvents } from "../../services/user.service";
-import "./FutureEvents.css";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import { Button, useColorModeValue } from "@chakra-ui/react";
+import useNextEvents from "../../hooks/User Hooks/useNextEvents";
+import "./FutureEvents.css";
 
 export const FutureEvents = () => {
-  const [events, setEvents] = useState([{}]);
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
+  const events = useNextEvents();
 
-  useEffect(() => {
-    const getFutureEvents = async () => {
-      const res = await nextEvents();
-      if (res.status === 200) setEvents(res.data.data);
-    };
-    getFutureEvents();
-  }, []);
   //Comentado en caso de que queramos poner los botones de navegación
   // const next =
   //   "https://res.cloudinary.com/dhr13yihn/image/upload/v1694703917/arrow-left-3099_qst1pk.svg";

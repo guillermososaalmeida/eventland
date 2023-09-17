@@ -3,26 +3,28 @@ import { useParams } from "react-router-dom";
 import { getEventById } from "../../../services/event.service";
 import {
   Box,
+  Button,
   Heading,
   Image,
   Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Countdown } from "../../../components";
+import useEventAttend from "../../../hooks/User Hooks/useEventAttend";
 
 export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
-  const { image, name, description, date } = event;
+  const { image, name, description } = event;
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
+  const { isEventAttended, handleToggleAttend, isLoading } = useEventAttend(id);
+  const isPastEvent = event && new Date(event.date) < new Date();
 
-  console.log("event", date);
   useEffect(() => {
     (async () => {
       setEvent(await getEventById(id));
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -51,6 +53,19 @@ export const EventDetail = () => {
           >
             {event.establishment?.name}
           </Heading>
+          {isPastEvent ? null : (
+            <Button
+              position="absolute"
+              bottom="12"
+              bg={bg}
+              m="2"
+              onClick={handleToggleAttend}
+              isLoading={isLoading}
+            >
+              {isEventAttended ? "-" : "+"}
+            </Button>
+          )}
+
           <Heading
             position="absolute"
             bg={bg}

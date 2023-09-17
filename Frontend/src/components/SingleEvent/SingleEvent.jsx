@@ -31,17 +31,17 @@ export const SingleEvent = () => {
       <Image
         objectFit="cover"
         maxW={{ base: "100%", sm: "200px" }}
-        src={event.image}
-        alt={event.name}
+        src={event?.image}
+        alt={event?.name}
       />
 
       <Stack>
         <CardBody>
-          <Heading size="md">{event.name}</Heading>
+          <Heading size="md">{event?.name}</Heading>
         </CardBody>
 
         <CardFooter>
-          <Link to={`/eventdetail/${event._id}`}>
+          <Link to={`/eventdetail/${event?._id}`}>
             <Button variant="solid" colorScheme="blue">
               <AddIcon />
               Info

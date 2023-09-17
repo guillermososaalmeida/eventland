@@ -109,7 +109,7 @@ const getByName = async (req, res, next) => {
     if (filterEvent.length > 0) {
       return res.status(200).json({ data: filterEvent });
     } else {
-      res.status(404).json("event not found ❌");
+      res.status(200).json({ data: [] });
     }
   } catch (error) {
     return next(error);
