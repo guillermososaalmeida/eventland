@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getUserById, pastEvents } from "../../services/user.service";
+import { getUserById } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import { Button, useColorModeValue } from "@chakra-ui/react";
@@ -101,17 +101,9 @@ export const OrganizationsFav = () => {
                 >
                   <h2 className="imageName">{organization.name}</h2>
                   <Button
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-                    //!AUN NO HAY LA PAGINA EN DETALLE
-
-                    // onClick={() =>
-                    //   navigate(`/organizationdetail/${organization._id}`)
-                    // }
+                    onClick={() =>
+                      navigate(`/organizationdetail/${organization._id}`)
+                    }
                     _hover={{
                       transform: "scale(1.1)",
                     }}

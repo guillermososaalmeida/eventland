@@ -19,6 +19,7 @@ import {
   HomeOrg,
   OrganizationProfile,
   EventDetailOrg,
+  OrganizationDetail,
 } from "../pages/Organization pages";
 
 import {
@@ -139,6 +140,10 @@ export const routes = createBrowserRouter([
       {
         path: "/eventlist/:name",
         element: <EventList />,
+      },
+      {
+        path: "/organizationdetail/:id",
+        element: <OrganizationDetail />,
       },
     ],
   },

@@ -84,3 +84,11 @@ export const forgotPasswordOrg = async (formData) => {
     .then((res) => res)
     .catch((error) => error);
 };
+
+//!Get by id
+
+export const getOrgById = async (id) => {
+  return APIUser.get(`/organizations/${id}`)
+    .then((res) => res.data.data)
+    .catch((error) => error);
+};
