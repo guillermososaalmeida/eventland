@@ -3,6 +3,7 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import {
   FutureEvents,
+  InterestedEvents,
   OrganizationsFav,
   PastEvents,
   SingleEvent,
@@ -17,6 +18,7 @@ export const Home = () => {
       </Flex>
       <FutureEvents />
       <PastEvents />
+      <InterestedEvents />
       <OrganizationsFav />
     </>
   );
