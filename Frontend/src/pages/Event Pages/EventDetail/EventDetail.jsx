@@ -62,7 +62,6 @@ export const EventDetail = () => {
               m="2"
               onClick={handleToggleAttend}
               isLoading={isLoading}
-              transition="0.3s"
             >
               {isEventAttended ? "-" : "+"}
             </Button>
@@ -75,9 +74,8 @@ export const EventDetail = () => {
               m="2"
               onClick={handleToggleLiked}
               isLoading={isLoadingLiked}
-              transition="0.3s"
             >
-              {isEventLiked ? "Me interesa" : "No me interesa"}
+              {isEventLiked ? "No me interesa" : "Me interesa"}
             </Button>
           )}
 
