@@ -109,7 +109,7 @@ export const nextEvents = async () => {
     .catch((error) => error);
 };
 
-//! Get next events
+//! Get past events
 
 export const pastEvents = async () => {
   return APIUser.get("/users/get/past/events", {
@@ -121,10 +121,10 @@ export const pastEvents = async () => {
     .catch((error) => error);
 };
 
-//! Attend event
+//! Toggle event
 
-export const attendEvent = async () => {
-  return APIUser.get("/users/add/:id", {
+export const toggleEvent = async (id) => {
+  return APIUser.patch(`/users/add/${id}`, {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },

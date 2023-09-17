@@ -138,7 +138,7 @@ export const routes = createBrowserRouter([
         element: <EventDetailOrg />,
       },
       {
-        path: "/eventlist/:name",
+        path: "/eventlist/:name?",
         element: <EventList />,
       },
       {

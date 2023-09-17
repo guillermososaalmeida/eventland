@@ -1,4 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
+
 import { useNavigate } from "react-router-dom";
 //?--------------------------------------------------------------------------------------
 //! 1 ) ---------------------creamos el contexto----------------------------------------
@@ -48,9 +50,26 @@ export const AuthContextProvider = ({ children }) => {
 
   //! -------------------> logout++++++++++++++++++++++++++++++++++++
   const logout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-    navigate("/");
+    Swal.fire({
+      title: "¿Quieres cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgb(73, 193, 162)",
+      cancelButtonColor: "#d33",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setUser(() => null);
+        localStorage.removeItem("user");
+        navigate("/");
+        return Swal.fire({
+          icon: "success",
+          title: "Sesión cerrada",
+          text: "¡Hasta pronto!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   //! -----------------------------------------------------------------------
@@ -83,6 +102,7 @@ export const AuthContextProvider = ({ children }) => {
       logout,
       bridgeData,
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, allUser],
   );
 
@@ -93,6 +113,7 @@ export const AuthContextProvider = ({ children }) => {
 //! 3)--------- CustomHook que se encarga de utilizar el contexto------------------------
 //?--------------------------------------------------------------------------------------
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAuth = () => {
   return useContext(AuthContext);
 };

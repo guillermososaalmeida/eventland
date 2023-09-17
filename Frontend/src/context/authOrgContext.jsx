@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from "react";
+import Swal from "sweetalert2/dist/sweetalert2.all.js";
 import { useNavigate } from "react-router-dom";
 //?--------------------------------------------------------------------------------------
 //! 1 ) ---------------------creamos el contexto----------------------------------------
@@ -49,9 +50,26 @@ export const AuthOrgContextProvider = ({ children }) => {
 
   //! -------------------> logout++++++++++++++++++++++++++++++++++++
   const logoutOrg = () => {
-    localStorage.removeItem("organization");
-    setOrganization(null);
-    navigate("/");
+    Swal.fire({
+      title: "¿Quieres cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "rgb(73, 193, 162)",
+      cancelButtonColor: "#d33",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setOrganization(() => null);
+        localStorage.removeItem("organization");
+        navigate("/org");
+        return Swal.fire({
+          icon: "success",
+          title: "Sesión cerrada",
+          text: "¡Hasta pronto!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
   };
 
   //! -----------------------------------------------------------------------

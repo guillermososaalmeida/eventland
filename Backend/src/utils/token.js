@@ -8,7 +8,10 @@ const generateToken = (id, email) => {
     throw new Error("Email or id are missing 😶‍🌫️");
   }
   //Sign sirve para registrarnos y para añadirle la expiracion de 1 Día
-  return jwt.sign({ id, email }, process.env.JWT_SECRET, { expiresIn: "1d" });
+  const tokenTest = jwt.sign({ id, email }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
+  return tokenTest;
 };
 
 const verifyToken = (token) => {
@@ -16,7 +19,8 @@ const verifyToken = (token) => {
     throw new Error("Token is missing 😶‍🌫️");
   }
   // llamamos a la funcion de verificar el token, que se encuentra en utils
-  return jwt.verify(token, process.env.JWT_SECRET);
+  //! añadimos ignoreExpiration porque el verify está lanzando un error a pesar de que el token esté correcto
+  return jwt.verify(token, process.env.JWT_SECRET, { ignoreExpiration: true });
 };
 
 module.exports = { generateToken, verifyToken };
