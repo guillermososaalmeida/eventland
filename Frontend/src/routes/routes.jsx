@@ -142,7 +142,7 @@ export const routes = createBrowserRouter([
         element: <EventList />,
       },
       {
-        path: "/organizationdetail/:id",
+        path: "/or_ganizationdetail/:id",
         element: <OrganizationDetail />,
       },
     ],

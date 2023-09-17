@@ -102,7 +102,7 @@ export const OrganizationsFav = () => {
                   <h2 className="imageName">{organization.name}</h2>
                   <Button
                     onClick={() =>
-                      navigate(`/organizationdetail/${organization._id}`)
+                      navigate(`/or_ganizationdetail/${organization._id}`)
                     }
                     _hover={{
                       transform: "scale(1.1)",
