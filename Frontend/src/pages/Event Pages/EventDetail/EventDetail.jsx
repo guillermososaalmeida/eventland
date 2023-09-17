@@ -10,7 +10,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Countdown } from "../../../components";
-import useEventAttend from "../../../hooks/User Hooks/useEventAttend";
+import { useEventLiked, useEventAttend } from "../../../hooks";
 
 export const EventDetail = () => {
   const { id } = useParams();
@@ -18,6 +18,7 @@ export const EventDetail = () => {
   const { image, name, description } = event;
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { isEventAttended, handleToggleAttend, isLoading } = useEventAttend(id);
+  const { isEventLiked, handleToggleLiked, isLoadingLiked } = useEventLiked(id);
   const isPastEvent = event && new Date(event.date) < new Date();
 
   useEffect(() => {
@@ -61,8 +62,22 @@ export const EventDetail = () => {
               m="2"
               onClick={handleToggleAttend}
               isLoading={isLoading}
+              transition="0.3s"
             >
               {isEventAttended ? "-" : "+"}
+            </Button>
+          )}
+          {isPastEvent ? null : (
+            <Button
+              position="absolute"
+              bottom="1"
+              bg={bg}
+              m="2"
+              onClick={handleToggleLiked}
+              isLoading={isLoadingLiked}
+              transition="0.3s"
+            >
+              {isEventLiked ? "Me interesa" : "No me interesa"}
             </Button>
           )}
 

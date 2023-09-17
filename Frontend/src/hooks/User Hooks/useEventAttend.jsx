@@ -3,7 +3,7 @@ import useNextEvents from "./useNextEvents";
 import { toggleEvent } from "../../services/user.service";
 
 // Este hook crea su propio estado isEventAttended para así forzar el re-render
-const useEventAttend = (id) => {
+export const useEventAttend = (id) => {
   const events = useNextEvents();
   const [isLoading, setIsLoading] = useState(false);
   const [isEventAttended, setIsEventAttended] = useState(
@@ -23,5 +23,3 @@ const useEventAttend = (id) => {
   };
   return { isEventAttended, handleToggleAttend, isLoading };
 };
-
-export default useEventAttend;

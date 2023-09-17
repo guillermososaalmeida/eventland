@@ -22,7 +22,7 @@ export const SingleEvent = () => {
     getEvent();
   }, []);
 
-  return (
+  return event ? (
     <Card
       direction={{ base: "column", sm: "row" }}
       overflow="hidden"
@@ -50,5 +50,5 @@ export const SingleEvent = () => {
         </CardFooter>
       </Stack>
     </Card>
-  );
+  ) : null;
 };
