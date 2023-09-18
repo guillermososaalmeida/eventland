@@ -1,3 +1,4 @@
+import { updateOrgToken } from "../utils/updateOrgToken";
 import { APIUser } from "./service.config";
 
 //! Get by id
@@ -20,6 +21,25 @@ export const getEventByName = async (name) => {
 
 export const getAllEvents = async () => {
   return APIUser.get("/events/get/all")
+    .then((res) => res.data?.data)
+    .catch((error) => error);
+};
+
+//!Create event
+export const createEvent = async (formData) => {
+  return APIUser.post("/events/", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${updateOrgToken()}`,
+    },
+  })
+    .then((res) => res)
+    .catch((error) => error);
+};
+
+//!GetEstablishments
+export const getAllEstablishments = async () => {
+  return APIUser.get("/establishments/getAllEstablishments")
     .then((res) => res.data?.data)
     .catch((error) => error);
 };
