@@ -49,7 +49,8 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   //! -------------------> logout++++++++++++++++++++++++++++++++++++
-  const logout = () => {
+  const logout = (isOrg = false, setIsOrg) => {
+    console.log("isOrg", isOrg);
     Swal.fire({
       title: "¿Quieres cerrar sesión?",
       icon: "warning",
@@ -60,7 +61,12 @@ export const AuthContextProvider = ({ children }) => {
       if (result.isConfirmed) {
         setUser(() => null);
         localStorage.removeItem("user");
-        navigate("/");
+        if (isOrg) {
+          navigate("/");
+          setIsOrg(false);
+        } else {
+          navigate("/org");
+        }
         return Swal.fire({
           icon: "success",
           title: "Sesión cerrada",
