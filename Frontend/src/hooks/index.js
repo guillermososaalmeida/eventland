@@ -8,7 +8,6 @@ export * from "./User Hooks/useRegisterError";
 export * from "./User Hooks/useResendCodeError";
 export * from "./User Hooks/useDeleteUser";
 export * from "./User Hooks/useUpdateError";
-export * from "./User Hooks/useSingleEvent";
 export * from "./Organization Hooks/useOrgAutoLogin";
 export * from "./Organization Hooks/useOrgChangePasswordError";
 export * from "./Organization Hooks/useOrgCheckCodeError";

@@ -2,11 +2,16 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getEventById } from "../../../services/event.service";
 import {
+  Avatar,
+  AvatarGroup,
   Box,
   Button,
+  Divider,
+  Flex,
   Heading,
   Image,
   Stack,
+  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Countdown } from "../../../components";
@@ -66,18 +71,16 @@ export const EventDetail = () => {
               {isEventAttended ? "-" : "+"}
             </Button>
           )}
-          {isPastEvent ? null : (
-            <Button
-              position="absolute"
-              bottom="1"
-              bg={bg}
-              m="2"
-              onClick={handleToggleLiked}
-              isLoading={isLoadingLiked}
-            >
-              {isEventLiked ? "No me interesa" : "Me interesa"}
-            </Button>
-          )}
+          <Button
+            position="absolute"
+            bottom="1"
+            bg={bg}
+            m="2"
+            onClick={handleToggleLiked}
+            isLoading={isLoadingLiked}
+          >
+            {isEventLiked ? "No me interesa" : "Me interesa"}
+          </Button>
 
           <Heading
             position="absolute"
@@ -92,6 +95,7 @@ export const EventDetail = () => {
           </Heading>
           {event.date && <Countdown date={event?.date} />}
           <Image
+            rounded="10"
             src={image}
             alt={name}
             onError={(e) => {
@@ -101,9 +105,42 @@ export const EventDetail = () => {
             maxWidth="100%"
           />
         </Box>
-        <Box maxWidth="900px" p="2">
-          {description}
+        <Box maxWidth="900px" display="flex" alignItems="center" gap="2em">
+          <Text p="1em" mr="8em">
+            {description}
+          </Text>
+          <Box m="10">
+            <Text pr="1em" letterSpacing="1px" m="5">
+              Asistentes:
+            </Text>
+            <AvatarGroup size="md" max={3}>
+              {/* hacer un estado del array event.usersAttend */}
+              {event?.usersAttend?.map((user) => (
+                <Avatar name={user?.name} src={user?.image} key={user?._id} />
+              ))}
+            </AvatarGroup>
+          </Box>
         </Box>
+        <Divider />
+        <Flex maxWidth="900px" alignItems="center" gap="2em">
+          <Box p="1em" mr="8em">
+            <Flex>
+              <Avatar src={event?.organization?.image} />
+              <Heading p="4">{event?.organization?.name}</Heading>
+            </Flex>
+            <Text p="1em">{event?.organization?.description}</Text>
+          </Box>
+          <Box m="10">
+            <Text pr="1em" letterSpacing="1px" m="5">
+              Seguidores:
+            </Text>
+            <AvatarGroup size="md" max={3}>
+              {event?.organization?.usersFav?.map((user) => (
+                <Avatar name={user?.name} src={user?.image} key={user?._id} />
+              ))}
+            </AvatarGroup>
+          </Box>
+        </Flex>
       </Stack>
     </>
   );

@@ -49,7 +49,7 @@ export const PastEvents = () => {
       ? setActiveIndex(events.length - 1)
       : setActiveIndex(activeIndex - 1);
   };
-  return events.length ? (
+  return events.length > 0 ? (
     <div
       {...handlers}
       className="generalContainer"

@@ -756,7 +756,7 @@ const getPastEvents = async (req, res, next) => {
       );
       return res.status(200).json({ data: arrayPastEvents });
     } else {
-      return res.status(404).json("there's no events yet!");
+      return res.status(200).json({ data: [] });
     }
   } catch (error) {
     return next(error);
@@ -783,7 +783,7 @@ const getNextEvents = async (req, res, next) => {
       );
       return res.status(200).json({ data: arrayNextEvents });
     } else {
-      return res.status(404).json("there's no events yet!");
+      return res.status(200).json({ data: [] });
     }
   } catch (error) {
     return next(error);
@@ -811,7 +811,7 @@ const getSingleNextEvent = async (req, res, next) => {
       const nextEvent = arrayNextEvents.sort((a, b) => a.date - b.date);
       return res.status(200).json({ data: nextEvent[0] });
     } else {
-      return res.status(404).json("there's no events yet!");
+      return res.status(200).json({ data: false });
     }
   } catch (error) {
     return next(error);
