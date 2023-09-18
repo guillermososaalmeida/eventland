@@ -14,12 +14,13 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Countdown } from "../../../components";
+import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useEventLiked, useEventAttend } from "../../../hooks";
 
 export const EventDetail = () => {
   const { id } = useParams();
   const [event, setEvent] = useState({});
+  const [isFollowers, setIsFollowers] = useState();
   const { image, name, description } = event;
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { isEventAttended, handleToggleAttend, isLoading } = useEventAttend(id);
@@ -109,17 +110,11 @@ export const EventDetail = () => {
           <Text p="1em" mr="8em">
             {description}
           </Text>
-          <Box m="10">
-            <Text pr="1em" letterSpacing="1px" m="5">
-              Asistentes:
-            </Text>
-            <AvatarGroup size="md" max={3}>
-              {/* hacer un estado del array event.usersAttend */}
-              {event?.usersAttend?.map((user) => (
-                <Avatar name={user?.name} src={user?.image} key={user?._id} />
-              ))}
-            </AvatarGroup>
-          </Box>
+          <AvatarCustomGroup
+            event={event}
+            isFollowers={isFollowers}
+            setIsFollowers={setIsFollowers}
+          />
         </Box>
         <Divider />
         <Flex maxWidth="900px" alignItems="center" gap="2em">
