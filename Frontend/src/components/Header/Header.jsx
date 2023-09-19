@@ -38,6 +38,8 @@ export const Header = () => {
         switchMode={
           pathname.includes("org") ? (
             <Button
+              background="transparent"
+              transition="0.3s"
               onClick={() => {
                 setIsUser(() => true);
                 organization ? logoutOrg(isUser, setIsUser) : navigate("/");
@@ -47,6 +49,8 @@ export const Header = () => {
             </Button>
           ) : (
             <Button
+              background="transparent"
+              transition="0.3s"
               onClick={() => {
                 setIsOrg(() => true);
                 user ? logout(isOrg, setIsOrg) : navigate("/org");

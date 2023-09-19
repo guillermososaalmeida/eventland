@@ -42,7 +42,7 @@ export const MobileMenu = ({
           {!user && !organization ? register : myEvents}
         </MobileMenuItem>
 
-        <MobileMenuItem>{switchMode}</MobileMenuItem>
+        <div>{switchMode}</div>
         <MobileMenuItem onClick={toggleColorMode}>
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </MobileMenuItem>

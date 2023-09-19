@@ -33,9 +33,7 @@ export const DesktopMenu = ({
           {!user && !organization ? register : myEvents}
         </Button>
 
-        <Button background="transparent" transition="0.3s">
-          {switchMode}
-        </Button>
+        <div>{switchMode}</div>
       </ButtonGroup>
 
       <Menu>
