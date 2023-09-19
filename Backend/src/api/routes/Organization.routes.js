@@ -57,7 +57,7 @@ OrganizationRoutes.delete("/", [isAuthOrganization], deleteOrganization);
 OrganizationRoutes.get("/:id", getById);
 OrganizationRoutes.get("/name/:name", getByName);
 OrganizationRoutes.get("/get/all", getAllOrganizations);
-OrganizationRoutes.get("/get/next/events/:organization", getNextEvents);
-OrganizationRoutes.get("/get/past/events/:organization", getPastEvents);
+OrganizationRoutes.get("/get/next/events/:idOrg", getNextEvents);
+OrganizationRoutes.get("/get/past/events/:idOrg", getPastEvents);
 
 module.exports = OrganizationRoutes;
