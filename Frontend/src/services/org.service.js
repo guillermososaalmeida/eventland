@@ -103,7 +103,7 @@ export const getPastEventsfromOrg = async (id) => {
 
 //!Get next Events from Org
 
-export const getNexEventsfromOrg = async (id) => {
+export const getNextEventsfromOrg = async (id) => {
   return APIUser.get(`/organizations/get/next/events/${id}`)
     .then((res) => res.data.data)
     .catch((error) => error);
