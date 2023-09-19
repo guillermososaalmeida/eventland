@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import { Button, useColorModeValue } from "@chakra-ui/react";
 import "./OrgNextEvents.css";
@@ -10,15 +10,22 @@ export const OrgNextEvents = () => {
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { organization } = useOrgAuth();
   const [events, setEvents] = useState([{}]);
+  const organizationId = useParams();
+  console.log("organizationId", organizationId);
 
   useEffect(() => {
     const getFutureEvents = async () => {
-      const res = await getNextEventsfromOrg(organization._id);
-      setEvents(res);
+      if (organization) {
+        const res = await getNextEventsfromOrg(organization._id);
+        setEvents(res);
+      } else {
+        const res = await getNextEventsfromOrg(organizationId.id);
+        setEvents(res);
+        console.log("res", res);
+      }
     };
     getFutureEvents();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [organization, organization?._id, organizationId?.id]);
 
   //Comentado en caso de que queramos poner los botones de navegación
   // const next =

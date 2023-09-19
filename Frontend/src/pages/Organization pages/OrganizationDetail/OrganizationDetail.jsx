@@ -3,19 +3,21 @@ import { useParams } from "react-router-dom";
 
 import {
   Box,
+  Button,
+  Divider,
   Heading,
   Image,
   Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { getOrgById } from "../../../services/org.service";
+import { OrgNextEvents } from "../../../components/OrgNextEvents/OrgNextEvents";
 
 export const OrganizationDetail = () => {
   const { id } = useParams();
   const [organization, setOrganization] = useState({});
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
-
-  useEffect(() => {
+  const { isFollowing, handleFollow, isLoadingFollow } = useEffect(() => {
     (async () => {
       setOrganization(await getOrgById(id));
     })();
@@ -85,6 +87,15 @@ export const OrganizationDetail = () => {
             {"Contáctanos en: " + organization.email}
           </Heading>
 
+          <Button
+            position="absolute"
+            bottom="12"
+            bg={bg}
+            m="2"
+            onClick={handleFollow}
+            isLoading={isLoadingFollow}
+          ></Button>
+
           <Image
             src={organization.image}
             alt={organization.name}
@@ -98,7 +109,9 @@ export const OrganizationDetail = () => {
         <Box maxWidth="900px" p="2">
           {organization.description}
         </Box>
+        <Divider />
       </Stack>
+      <OrgNextEvents />
     </>
   );
 };
