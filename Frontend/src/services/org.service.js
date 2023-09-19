@@ -92,3 +92,19 @@ export const getOrgById = async (id) => {
     .then((res) => res.data.data)
     .catch((error) => error);
 };
+
+//!Get past Events from Org
+
+export const getPastEventsfromOrg = async (id) => {
+  return APIUser.get(`/organizations/get/past/events/${id}`)
+    .then((res) => res.data.data)
+    .catch((error) => error);
+};
+
+//!Get next Events from Org
+
+export const getNexEventsfromOrg = async (id) => {
+  return APIUser.get(`/organizations/get/next/events/${id}`)
+    .then((res) => res.data.data)
+    .catch((error) => error);
+};
