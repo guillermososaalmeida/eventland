@@ -8,7 +8,7 @@ export const HomeOrg = () => {
       <div>
         <Link to="/organizationprofile">Organization Profile</Link>
         <br />
-        <Link to="/createevent">Create Event</Link>
+        <Link to="/createeventorg">Create Event</Link>
         <br />
         <Link to="/eventdetailorg">Event Detail de Organización</Link>
       </div>

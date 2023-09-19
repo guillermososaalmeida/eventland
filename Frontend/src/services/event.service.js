@@ -43,3 +43,12 @@ export const getAllEstablishments = async () => {
     .then((res) => res.data?.data)
     .catch((error) => error);
 };
+
+//!Delete
+export const deleteEventService = async (id) => {
+  return APIUser.delete(`/events/${id}`, {
+    headers: { Authorization: `Bearer ${updateOrgToken()}` },
+  })
+    .then((res) => res)
+    .catch((error) => error);
+};

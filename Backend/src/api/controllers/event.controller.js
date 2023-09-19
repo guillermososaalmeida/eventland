@@ -227,7 +227,6 @@ const deleteEvent = async (req, res, next) => {
 
   try {
     const deletedEvent = await Event.findByIdAndDelete(id);
-
     if (deletedEvent) {
       if (deletedEvent.image) {
         deleteImgCloudinary(deletedEvent.image);
@@ -242,18 +241,29 @@ const deleteEvent = async (req, res, next) => {
             { eventsAttend: id },
             { $pull: { eventsAttend: id } },
           );
+
           try {
-            await Establishment.updateMany(
+            await Organization.updateMany(
               { events: id },
               { $pull: { events: id } },
             );
-            return res
-              .status(200)
-              .json({ message: "Evento eliminado exitosamente" });
+            try {
+              await Establishment.updateMany(
+                { events: id },
+                { $pull: { events: id } },
+              );
+              return res
+                .status(200)
+                .json({ message: "Evento eliminado exitosamente" });
+            } catch (error) {
+              return res
+                .status(404)
+                .json({ error: "Establishment not updated in field 'event'" });
+            }
           } catch (error) {
             return res
               .status(404)
-              .json({ error: "Establishment not updated in field 'event'" });
+              .json({ error: "Organization not updated in field 'events'" });
           }
         } catch (error) {
           return res

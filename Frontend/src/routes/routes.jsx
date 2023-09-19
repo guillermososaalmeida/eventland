@@ -98,7 +98,7 @@ export const routes = createBrowserRouter([
         ),
       },
       {
-        path: "/createevent",
+        path: "/createeventorg",
         element: <CreateEvent />,
       },
       {
@@ -134,7 +134,7 @@ export const routes = createBrowserRouter([
         element: <HomeOrg />,
       },
       {
-        path: "/eventdetailorg",
+        path: "/eventdetailorg/:id",
         element: <EventDetailOrg />,
       },
       {

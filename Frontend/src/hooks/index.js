@@ -17,5 +17,6 @@ export * from "./Organization Hooks/useOrgResendCodeError";
 export * from "./Organization Hooks/useOrgUpdateError";
 export * from "./Organization Hooks/useOrgDelete";
 export * from "./Event Hooks/useGetEventsFromSearchParams";
+export * from "./Event Hooks/useDeleteEvent";
 export * from "./User Hooks/useEventLiked";
 export * from "./User Hooks/useEventAttend";
