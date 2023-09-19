@@ -20,6 +20,5 @@ export * from "./Countdown/Countdown";
 export * from "./OrganizationsFavs/OrganizationsFav";
 export * from "./InterestedEvents/InterestedEvents";
 export * from "./AvatarCustomGroup/AvatarCustomGroup.1";
-export * from "./AvatarCustomGroup/AvatarCustomGroup";
 export * from "./OrgNextEvents/OrgNextEvents";
 export * from "./OrgPastEvents/OrgPastEvents";
