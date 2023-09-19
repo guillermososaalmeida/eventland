@@ -12,21 +12,21 @@ import {
 } from "@chakra-ui/react";
 import { getOrgById } from "../../../services/org.service";
 import { OrgNextEvents } from "../../../components/OrgNextEvents/OrgNextEvents";
+import { useFollowOrg } from "../../../hooks/User Hooks/useFollowOrg";
 
 export const OrganizationDetail = () => {
   const { id } = useParams();
   const [organization, setOrganization] = useState({});
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
-  const { isFollowing, handleFollow, isLoadingFollow } = useEffect(() => {
+  const { isFollowing, handleFollow, isLoadingFollow } = useFollowOrg(id);
+  useEffect(() => {
     (async () => {
       setOrganization(await getOrgById(id));
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id, isFollowing]);
 
   return (
     <>
-      {console.log(organization)}
       <Stack align="center">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -94,7 +94,9 @@ export const OrganizationDetail = () => {
             m="2"
             onClick={handleFollow}
             isLoading={isLoadingFollow}
-          ></Button>
+          >
+            {isFollowing ? "Dejar de seguir" : "Seguir"}
+          </Button>
 
           <Image
             src={organization.image}

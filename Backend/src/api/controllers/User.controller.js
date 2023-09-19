@@ -711,13 +711,13 @@ const toggleFavOrganization = async (req, res, next) => {
           });
         } catch (error) {
           return res.status(404).json({
-            error: "error pushing user  in event model",
+            error: "error pushing user  in organization model",
             message: error.message,
           });
         }
       } catch (error) {
         return res.status(404).json({
-          error: "error pushing event in user model",
+          error: "error pushing organization in user model",
           message: error.message,
         });
       }

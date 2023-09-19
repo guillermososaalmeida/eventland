@@ -11,7 +11,6 @@ export const OrgNextEvents = () => {
   const { organization } = useOrgAuth();
   const [events, setEvents] = useState([{}]);
   const organizationId = useParams();
-  console.log("organizationId", organizationId);
 
   useEffect(() => {
     const getFutureEvents = async () => {

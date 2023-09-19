@@ -135,8 +135,8 @@ export const toggleEvent = async (id) => {
 
 //! Fav organization
 
-export const favOrganization = async () => {
-  return APIUser.patch("/users/fav/:id", {
+export const favOrganization = async (id) => {
+  return APIUser.patch(`/users/fav/${id}`, {
     headers: {
       Authorization: `Bearer ${updateToken()}`,
     },

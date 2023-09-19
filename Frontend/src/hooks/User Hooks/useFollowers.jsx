@@ -10,14 +10,16 @@ const useFollowers = () => {
     const fetchData = async () => {
       try {
         const response = await getOrgById(id);
-        if (response.status === 200) setFollowers(response.data.data.usersFav);
+        setFollowers(response.usersFav);
       } catch (error) {
-        console.error("Error ");
+        console.error("Error al obtener la organización", error);
       }
     };
-  });
 
-  return <div>useFollowers</div>;
+    fetchData();
+  }, [id]);
+
+  return followers;
 };
 
 export default useFollowers;
