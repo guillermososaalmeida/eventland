@@ -19,4 +19,4 @@ export * from "./PastEvents/PastEvents";
 export * from "./Countdown/Countdown";
 export * from "./OrganizationsFavs/OrganizationsFav";
 export * from "./InterestedEvents/InterestedEvents";
-export * from "./AvatarCustomGroup/AvatarCustomGroup";
+export * from "./AvatarCustomGroup/AvatarCustomGroup.1";

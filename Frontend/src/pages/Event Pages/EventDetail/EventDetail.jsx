@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getEventById } from "../../../services/event.service";
 import {
-  Avatar,
-  AvatarGroup,
   Box,
   Button,
   Divider,
   Flex,
   Heading,
+  IconButton,
   Image,
   Stack,
   Text,
@@ -16,11 +15,12 @@ import {
 } from "@chakra-ui/react";
 import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useEventLiked, useEventAttend } from "../../../hooks";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 
 export const EventDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [event, setEvent] = useState({});
-  const [isFollowers, setIsFollowers] = useState();
   const { image, name, description } = event;
   const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { isEventAttended, handleToggleAttend, isLoading } = useEventAttend(id);
@@ -31,7 +31,7 @@ export const EventDetail = () => {
     (async () => {
       setEvent(await getEventById(id));
     })();
-  }, [id]);
+  }, [id, isEventAttended]);
 
   return (
     <>
@@ -110,30 +110,26 @@ export const EventDetail = () => {
           <Text p="1em" mr="8em">
             {description}
           </Text>
-          <AvatarCustomGroup
-            event={event}
-            isFollowers={isFollowers}
-            setIsFollowers={setIsFollowers}
-          />
+          <AvatarCustomGroup event={event} isEventAttended={isEventAttended} />
         </Box>
         <Divider />
         <Flex maxWidth="900px" alignItems="center" gap="2em">
           <Box p="1em" mr="8em">
-            <Flex>
-              <Avatar src={event?.organization?.image} />
+            <Flex align="center">
               <Heading p="4">{event?.organization?.name}</Heading>
+              <IconButton
+                bg="transparent"
+                aria-label="organization page"
+                icon={<InfoOutlineIcon />}
+                onClick={() =>
+                  navigate(`/or_ganizationdetail/${event?.organization?._id}`)
+                }
+              />
             </Flex>
             <Text p="1em">{event?.organization?.description}</Text>
           </Box>
-          <Box m="10">
-            <Text pr="1em" letterSpacing="1px" m="5">
-              Seguidores:
-            </Text>
-            <AvatarGroup size="md" max={3}>
-              {event?.organization?.usersFav?.map((user) => (
-                <Avatar name={user?.name} src={user?.image} key={user?._id} />
-              ))}
-            </AvatarGroup>
+          <Box m="10" pl="30">
+            <Image w="50%" src={event?.organization?.image} />
           </Box>
         </Flex>
       </Stack>
