@@ -562,8 +562,10 @@ const deleteOrganization = async (req, res, next) => {
 
 const getNextEvents = async (req, res, next) => {
   try {
-    if (req.organization.events?.length > 0) {
-      const events = req.organization.events;
+    const { idOrg } = req.params;
+    const organization = await Organization.findById(idOrg);
+    if (organization.events?.length > 0) {
+      const events = organization.events;
       const currentDate = new Date();
       const arrayNextEvents = [];
       await Promise.all(
@@ -590,8 +592,10 @@ const getNextEvents = async (req, res, next) => {
 
 const getPastEvents = async (req, res, next) => {
   try {
-    if (req.organization.events?.length > 0) {
-      const events = req.organization.events;
+    const { idOrg } = req.params;
+    const organization = await Organization.findById(idOrg);
+    if (organization.events?.length > 0) {
+      const events = organization.events;
       const currentDate = new Date();
       const arrayNextEvents = [];
       await Promise.all(
