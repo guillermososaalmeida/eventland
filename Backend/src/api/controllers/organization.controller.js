@@ -397,6 +397,10 @@ const update = async (req, res, next) => {
     patchOrganization.confirmationCode = req.organization.confirmationCode;
     patchOrganization.check = req.organization.check;
     patchOrganization.email = req.organization.email;
+    patchOrganization.events = req.organization.events;
+    patchOrganization.usersFav = req.organization.usersFav;
+    patchOrganization.city = req.organization.city;
+    patchOrganization.year = req.organization.year;
 
     // Ahora cogemos y actualizamos el usuario
 
