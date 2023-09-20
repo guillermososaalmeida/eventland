@@ -5,14 +5,23 @@ svg {
 .logo {
   width: 40px;
 }
-.textoCabecera {
+#textoCabecera {
   margin-top: 10vh;
+  font-family: "Montserrat Alternates", sans-serif;
+  letter-spacing: 4px;
 }
+
+#subtextoCabecera {
+  font-family: "Montserrat Alternates", sans-serif;
+  letter-spacing: 4px;
+}
+
 .fullContainer {
   display: flex;
   flex-direction: column;
   height: 80vh;
   width: 80vw;
+  align-items: center;
 }
 .grid {
   margin: 100px;
@@ -73,7 +82,7 @@ svg {
   border-radius: 10px;
 }
 
-@media (min-width: 390px) {
+@media (min-width: 300px) {
   .grid {
     right: 0;
     top: 40vh;
@@ -85,15 +94,18 @@ svg {
 @media (min-width: 768px) {
   .grid {
     right: 0;
-    top: 10vh;
+    top: 20vh;
     margin: 100px;
     height: 500px;
     width: 500px;
   }
+  .textoCabecera {
+    font-size: medium;
+  }
 }
 @media (min-width: 1280px) {
   .grid {
-    left: 400px;
+    right: 200px;
     margin: 175px;
     height: 650px;
     width: 650px;
