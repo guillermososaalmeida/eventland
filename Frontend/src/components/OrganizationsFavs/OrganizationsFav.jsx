@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 import { getUserById } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 
 export const OrganizationsFav = () => {
   const { user } = useAuth();
   const [organizationsFav, setOrganizationsFav] = useState([{}]);
-  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,14 +57,15 @@ export const OrganizationsFav = () => {
       : setActiveIndex(activeIndex - 1);
   };
   return organizationsFav.length ? (
-    <div
-      {...handlers}
-      className="generalContainer"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/*comentado en caso de que queramos poner los botones de navegación */}
-      {/* <div className="buttonsScrollContainer">
+    <Box bg={bg} color={color}>
+      <div
+        {...handlers}
+        className="generalContainer"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/*comentado en caso de que queramos poner los botones de navegación */}
+        {/* <div className="buttonsScrollContainer">
           <button
             onClick={() => {
               preIndex();
@@ -75,48 +77,48 @@ export const OrganizationsFav = () => {
               alt="button to the previous image"
             />
           </button> */}
-      <h1 className="imageName" style={{ backgroundColor: bg }}>
-        Organizaciones favoritas
-      </h1>
-      <div
-        className="inner"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-      >
-        {organizationsFav.length &&
-          organizationsFav.map((organization, index) => (
-            <div
-              key={index}
-              className="imageOuterContainer"
-              style={
-                index === organizationsFav.length - 1
-                  ? { position: "relative" }
-                  : null
-              }
-            >
-              <div className="imageInnerContainer">
-                <img className="image" src={organization.image} />
-                <section
-                  className="sectionImage"
-                  style={{ backgroundColor: bg }}
-                >
-                  <h2 className="imageName">{organization.name}</h2>
-                  <Button
-                    onClick={() =>
-                      navigate(`/or_ganizationdetail/${organization._id}`)
-                    }
-                    _hover={{
-                      transform: "scale(1.1)",
-                    }}
-                    box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+        <h1 className="imageName" style={{ backgroundColor: bg }}>
+          Organizaciones favoritas
+        </h1>
+        <div
+          className="inner"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        >
+          {organizationsFav.length &&
+            organizationsFav.map((organization, index) => (
+              <div
+                key={index}
+                className="imageOuterContainer"
+                style={
+                  index === organizationsFav.length - 1
+                    ? { position: "relative" }
+                    : null
+                }
+              >
+                <div className="imageInnerContainer">
+                  <img className="image" src={organization.image} />
+                  <section
+                    className="sectionImage"
+                    style={{ backgroundColor: bg }}
                   >
-                    VER ORGANIZACIÓN
-                  </Button>
-                </section>
+                    <h2 className="imageName">{organization.name}</h2>
+                    <Button
+                      onClick={() =>
+                        navigate(`/or_ganizationdetail/${organization._id}`)
+                      }
+                      _hover={{
+                        transform: "scale(1.1)",
+                      }}
+                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                    >
+                      VER ORGANIZACIÓN
+                    </Button>
+                  </section>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-      {/* <button onClick={() => nextIndex()}>
+            ))}
+        </div>
+        {/* <button onClick={() => nextIndex()}>
             <img
               className="imageNext"
               src={next}
@@ -124,9 +126,9 @@ export const OrganizationsFav = () => {
             />
           </button>
         </div> */}
-      <div className="setActiveIndexOuterDiv">
-        <div className="setActiveIndexInnerDiv">
-          {/* {events.map((element, index) => {
+        <div className="setActiveIndexOuterDiv">
+          <div className="setActiveIndexInnerDiv">
+            {/* {events.map((element, index) => {
               index == activeIndex ? (
                 <span
                   className="spanActive activeImg"
@@ -143,33 +145,36 @@ export const OrganizationsFav = () => {
                 ></span>
               );
             })} */}
-          {organizationsFav.map((element, index) => {
-            if (index == activeIndex) {
-              return (
-                <span
-                  key={index}
-                  className="spanActive activeImg"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              );
-            } else {
-              return (
-                <span
-                  key={index}
-                  className="spanActive"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              );
-            }
-          })}
+            {organizationsFav.map((element, index) => {
+              if (index == activeIndex) {
+                return (
+                  <span
+                    key={index}
+                    className="spanActive activeImg"
+                    onClick={() => {
+                      setActiveIndex(index);
+                    }}
+                  ></span>
+                );
+              } else {
+                return (
+                  <span
+                    key={index}
+                    className="spanActive"
+                    onClick={() => {
+                      setActiveIndex(index);
+                    }}
+                  ></span>
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </Box>
   ) : (
-    <h2>¡Todavía no tienes organizaciones favoritas!</h2>
+    <Box bg={bg} color={color}>
+      <h2>¡Todavía no tienes organizaciones favoritas!</h2>
+    </Box>
   );
 };

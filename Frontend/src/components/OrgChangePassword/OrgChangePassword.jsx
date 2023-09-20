@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { changePasswordOrgToken } from "../../services/org.service";
 import { useOrgChangePasswordError } from "../../hooks";
@@ -14,6 +14,8 @@ export const OrgChangePassword = () => {
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   //! -----------------1) LA FUNCIOON QUE GESTIONA EL FORMULARIO
 
@@ -55,7 +57,7 @@ export const OrgChangePassword = () => {
   //! no tenemos condicionales de navegacion porque cuando me desloguee el componente protected me llevara al login
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <div className="form-wrap">
         <h1>Change your password ♻</h1>
         <p>Please, enter your old and new passwords</p>
@@ -106,6 +108,6 @@ export const OrgChangePassword = () => {
           </div>
         </form>
       </div>
-    </>
+    </Box>
   );
 };

@@ -1,4 +1,10 @@
-import { Button, ButtonGroup, Icon, useColorMode } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Icon,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
@@ -12,8 +18,11 @@ export const DesktopMenu = ({
   myEvents,
 }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
+
   return (
     <>
       <ButtonGroup
@@ -22,28 +31,28 @@ export const DesktopMenu = ({
         w="60vw"
         gap="1em"
       >
-        <Button background="transparent" transition="0.3s">
+        <Button color={color} background="transparent" transition="0.3s">
           {!user && !organization ? login : profile}
         </Button>
 
-        <Button background="transparent" transition="0.3s">
+        <Button color={color} background="transparent" transition="0.3s">
           {!user && !organization ? register : myEvents}
         </Button>
 
         <div>{switchMode}</div>
 
-        <Button onClick={toggleColorMode} bg="transparent">
+        <Button color={color} onClick={toggleColorMode} bg="transparent">
           {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
         </Button>
-        {/*  {(user || organization) && ( */}
-        <Button
-          color="red"
-          onClick={user ? logout : logoutOrg}
-          bg="transparent"
-        >
-          <Icon as={AiOutlineLogout} />
-        </Button>
-        {/*   )}  */}
+        {(user || organization) && (
+          <Button
+            color="red"
+            onClick={user ? logout : logoutOrg}
+            bg="transparent"
+          >
+            <Icon as={AiOutlineLogout} />
+          </Button>
+        )}
       </ButtonGroup>
     </>
   );

@@ -19,8 +19,9 @@ import { AvatarFollowers } from "../../../components";
 export const OrganizationDetail = () => {
   const { id } = useParams();
   const [organization, setOrganization] = useState({});
-  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { isFollowing, handleFollow, isLoadingFollow } = useFollowOrg(id);
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     (async () => {
       setOrganization(await getOrgById(id));
@@ -28,7 +29,7 @@ export const OrganizationDetail = () => {
   }, [id, isFollowing]);
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <Stack align="center">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -119,6 +120,6 @@ export const OrganizationDetail = () => {
         <Divider />
       </Stack>
       <OrgNextEvents />
-    </>
+    </Box>
   );
 };

@@ -23,6 +23,8 @@ export const EventDetailOrg = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [event, setEvent] = useState({});
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   useEffect(() => {
     (async () => {
@@ -31,10 +33,9 @@ export const EventDetailOrg = () => {
   }, [id]);
   const [isFollowers, setIsFollowers] = useState();
   const { image, name, description } = event;
-  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <Stack align="center">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -119,6 +120,6 @@ export const EventDetailOrg = () => {
           Borrar evento
         </Button>
       </ButtonGroup>
-    </>
+    </Box>
   );
 };

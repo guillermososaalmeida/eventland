@@ -35,7 +35,8 @@ export const OrgFormProfile = () => {
     name: organization?.organization,
     description: organization?.description,
   };
-  const bg = useColorModeValue("red.500", "blue.500");
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   //!----------- cuestionario
 
@@ -77,7 +78,7 @@ export const OrgFormProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
-    <>
+    <Box bg={bg} color={color}>
       <Box
         display="flex"
         flexWrap="wrap"
@@ -141,6 +142,6 @@ export const OrgFormProfile = () => {
           />
         </ButtonGroup>
       </Box>
-    </>
+    </Box>
   );
 };

@@ -45,7 +45,8 @@ export const FormProfile = () => {
   const defauldData = {
     name: user?.user,
   };
-  const bg = useColorModeValue("red.500", "blue.500");
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   //!----------- cuestionario
 
@@ -91,6 +92,8 @@ export const FormProfile = () => {
   return (
     <>
       <Box
+        bg={bg}
+        color={color}
         display="flex"
         flexWrap="wrap"
         justifyContent="center"

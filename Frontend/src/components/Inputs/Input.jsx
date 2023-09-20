@@ -1,12 +1,18 @@
 import { SearchIcon } from "@chakra-ui/icons";
-import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
+import {
+  InputGroup,
+  InputLeftElement,
+  Input,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useOrgAuth } from "../../context/authOrgContext";
 
 export const InputHeader = () => {
   const navigate = useNavigate();
   const { organization } = useOrgAuth();
-
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const hover = useColorModeValue("#0a1b20", "#64635b");
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       const name = e.target.value;
@@ -29,13 +35,13 @@ export const InputHeader = () => {
           pl="3em"
           pt="1"
           rounded="40"
-          border="solid 1px #90a4ae"
+          border={`2px solid ${color}`}
           fontSize="15"
           fontFamily="sans-serif"
           letterSpacing="2px"
           fontWeight={"100"}
           transition="0.3s"
-          _hover={{ border: "solid 1px black" }}
+          _hover={{ border: `solid 2px ${hover}` }}
           onKeyDown={handleEnter}
         />
       </InputGroup>

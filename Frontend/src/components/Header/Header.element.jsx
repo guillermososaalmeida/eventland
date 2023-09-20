@@ -6,4 +6,5 @@ export const HeaderStyled = styled.header`
   padding: 1em;
   justify-content: space-between;
   width: 100vw;
+  height: 10vh;
 `;

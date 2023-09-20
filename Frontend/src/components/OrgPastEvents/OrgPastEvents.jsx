@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { getPastEventsfromOrg } from "../../services/org.service";
 
 export const OrgPastEvents = () => {
-  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   const { organization } = useOrgAuth();
   const [events, setEvents] = useState([{}]);
 
@@ -54,14 +55,15 @@ export const OrgPastEvents = () => {
       : setActiveIndex(activeIndex - 1);
   };
   return events.length > 0 ? (
-    <div
-      {...handlers}
-      className="generalContainer"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/*comentado en caso de que queramos poner los botones de navegación */}
-      {/* <div className="buttonsScrollContainer">
+    <Box bg={bg} color={color}>
+      <div
+        {...handlers}
+        className="generalContainer"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        {/*comentado en caso de que queramos poner los botones de navegación */}
+        {/* <div className="buttonsScrollContainer">
         <button
           onClick={() => {
             preIndex();
@@ -73,44 +75,44 @@ export const OrgPastEvents = () => {
             alt="button to the previous image"
           />
         </button> */}
-      <h1 className="imageName" style={{ backgroundColor: bg }}>
-        Eventos pasados
-      </h1>
-      <div
-        className="inner"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-      >
-        {events.length &&
-          events.map((event, index) => (
-            <div
-              key={index}
-              className="imageOuterContainer"
-              style={
-                index === events.length - 1 ? { position: "relative" } : null
-              }
-            >
-              <div className="imageInnerContainer">
-                <img className="image" src={event.image} />
-                <section
-                  className="sectionImage"
-                  style={{ backgroundColor: bg }}
-                >
-                  <h2 className="imageName">{event.name}</h2>
-                  <Button
-                    onClick={() => navigate(`/eventdetailorg/${event._id}`)}
-                    _hover={{
-                      transform: "scale(1.1)",
-                    }}
-                    box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+        <h1 className="imageName" style={{ backgroundColor: bg }}>
+          Eventos pasados
+        </h1>
+        <div
+          className="inner"
+          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+        >
+          {events.length &&
+            events.map((event, index) => (
+              <div
+                key={index}
+                className="imageOuterContainer"
+                style={
+                  index === events.length - 1 ? { position: "relative" } : null
+                }
+              >
+                <div className="imageInnerContainer">
+                  <img className="image" src={event.image} />
+                  <section
+                    className="sectionImage"
+                    style={{ backgroundColor: bg }}
                   >
-                    VER EVENTO
-                  </Button>
-                </section>
+                    <h2 className="imageName">{event.name}</h2>
+                    <Button
+                      onClick={() => navigate(`/eventdetailorg/${event._id}`)}
+                      _hover={{
+                        transform: "scale(1.1)",
+                      }}
+                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                    >
+                      VER EVENTO
+                    </Button>
+                  </section>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-      {/* <button onClick={() => nextIndex()}>
+            ))}
+        </div>
+        {/* <button onClick={() => nextIndex()}>
           <img
             className="imageNext"
             src={next}
@@ -118,9 +120,9 @@ export const OrgPastEvents = () => {
           />
         </button>
       </div> */}
-      <div className="setActiveIndexOuterDiv">
-        <div className="setActiveIndexInnerDiv">
-          {/* {events.map((element, index) => {
+        <div className="setActiveIndexOuterDiv">
+          <div className="setActiveIndexInnerDiv">
+            {/* {events.map((element, index) => {
             index == activeIndex ? (
               <span
                 className="spanActive activeImg"
@@ -137,33 +139,36 @@ export const OrgPastEvents = () => {
               ></span>
             );
           })} */}
-          {events.map((element, index) => {
-            if (index == activeIndex) {
-              return (
-                <span
-                  key={index}
-                  className="spanActive activeImg"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              );
-            } else {
-              return (
-                <span
-                  key={index}
-                  className="spanActive"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              );
-            }
-          })}
+            {events.map((element, index) => {
+              if (index == activeIndex) {
+                return (
+                  <span
+                    key={index}
+                    className="spanActive activeImg"
+                    onClick={() => {
+                      setActiveIndex(index);
+                    }}
+                  ></span>
+                );
+              } else {
+                return (
+                  <span
+                    key={index}
+                    className="spanActive"
+                    onClick={() => {
+                      setActiveIndex(index);
+                    }}
+                  ></span>
+                );
+              }
+            })}
+          </div>
         </div>
       </div>
-    </div>
+    </Box>
   ) : (
-    <h2>No hay eventos pasados</h2>
+    <Box bg={bg} color={color}>
+      <h2>No hay eventos pasados</h2>
+    </Box>
   );
 };

@@ -3,13 +3,15 @@ import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { forgotPasswordOrg } from "../../../services/org.service";
 import { useForgotPasswordError } from "../../../hooks";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 
 export const ForgotPasswordOrg = () => {
   const { handleSubmit, register } = useForm();
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [forgotOk, setForgotOk] = useState(false);
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   //! 1)-------------------- LA FUNCIOON QUE SE ENCARGA DE GESTIONAR LOS DATOS DEL FORMULARIO
 
@@ -31,7 +33,7 @@ export const ForgotPasswordOrg = () => {
   }
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <div className="ForgotPasswordBody">
         <div className="form-wrap">
           <h1>Change your password</h1>
@@ -67,6 +69,6 @@ export const ForgotPasswordOrg = () => {
           </form>
         </div>
       </div>
-    </>
+    </Box>
   );
 };

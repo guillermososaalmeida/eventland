@@ -10,6 +10,7 @@ import {
   FormLabel,
   Input,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { useRegisterError } from "../../../hooks";
 import { registerUser } from "../../../services/user.service";
@@ -28,6 +29,8 @@ export const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [okRegister, setOkRegister] = useState(false);
   const [gender, setGender] = useState(null);
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -65,7 +68,7 @@ export const Register = () => {
   }
   return (
     <>
-      <Box className="card">
+      <Box className="card" bg={bg} color={color}>
         <Text fontSize="3xl" as="b">
           Sign in
         </Text>

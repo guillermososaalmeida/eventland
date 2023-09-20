@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { BsHeartFill, BsHeart } from "react-icons/bs";
 import { getEventById } from "../../../services/event.service";
 import {
   Box,
@@ -24,11 +25,14 @@ export const EventDetail = () => {
   const navigate = useNavigate();
   const [event, setEvent] = useState({});
   const { image, name, description } = event;
-  const bg = useColorModeValue("#ebeceecc", "#1a202ccc");
   const { isEventAttended, handleToggleAttend, isLoading } = useEventAttend(id);
   const { isEventLiked, handleToggleLiked, isLoadingLiked } = useEventLiked(id);
   const isPastEvent = event && new Date(event.date) < new Date();
-
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bgh = useColorModeValue("#b6e9e984", "#173F4Baa");
+  const colorh = useColorModeValue("black", "#F4FAFF");
+  const bgatt = useColorModeValue("#3be1cd", "#3be1cd");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     (async () => {
       setEvent(await getEventById(id));
@@ -36,12 +40,13 @@ export const EventDetail = () => {
   }, [id, isEventAttended]);
 
   return (
-    <>
-      <Stack align="center">
+    <Box bg={bg} color={color} h="90vh">
+      <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
+            color={colorh}
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
             top="0"
@@ -51,9 +56,10 @@ export const EventDetail = () => {
             {name}
           </Heading>
           <Heading
+            color={colorh}
             size="sm"
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
             top="20"
@@ -62,34 +68,26 @@ export const EventDetail = () => {
           >
             {event.establishment?.name}
           </Heading>
-          {isPastEvent ? null : (
-            <Button
-              position="absolute"
-              bottom="12"
-              bg={bg}
-              m="2"
-              onClick={() =>
-                user ? handleToggleAttend() : navigate("/register")
-              }
-              isLoading={isLoading}
-            >
-              {isEventAttended ? "-" : "+"}
-            </Button>
-          )}
+
           <Button
+            rounded="50%"
+            h="15%"
+            w="8%"
             position="absolute"
             bottom="1"
-            bg={bg}
+            bg={bgh}
             m="2"
             onClick={() => (user ? handleToggleLiked() : navigate("/register"))}
             isLoading={isLoadingLiked}
+            _hover={{ background: bgatt }}
           >
-            {isEventLiked ? "No me interesa" : "Me interesa"}
+            {isEventLiked ? <BsHeartFill /> : <BsHeart />}
           </Button>
 
           <Heading
+            color={colorh}
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
             bottom="12"
@@ -114,9 +112,26 @@ export const EventDetail = () => {
           <Text p="1em" mr="8em">
             {description}
           </Text>
-          <AvatarCustomGroup event={event} isEventAttended={isEventAttended} />
+          <Box align="center">
+            {isPastEvent ? null : (
+              <Button
+                w="80%"
+                bg={bgatt}
+                onClick={() =>
+                  user ? handleToggleAttend() : navigate("/register")
+                }
+                isLoading={isLoading}
+              >
+                {isEventAttended ? "No asistiré" : "Asistiré"}
+              </Button>
+            )}
+            <AvatarCustomGroup
+              event={event}
+              isEventAttended={isEventAttended}
+            />
+          </Box>
         </Box>
-        <Divider />
+        <Divider border={`1.2px solid ${color}`} />
         <Flex maxWidth="900px" alignItems="center" gap="2em">
           <Box p="1em" mr="8em">
             <Flex align="center">
@@ -137,6 +152,6 @@ export const EventDetail = () => {
           </Box>
         </Flex>
       </Stack>
-    </>
+    </Box>
   );
 };

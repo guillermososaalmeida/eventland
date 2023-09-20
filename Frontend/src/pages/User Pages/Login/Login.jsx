@@ -4,7 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import { loginUserService } from "../../../services/user.service";
 import { useLoginError } from "../../../hooks";
 import { useAuth } from "../../../context/authContext";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +15,8 @@ export const Login = () => {
 
   const { handleSubmit, register } = useForm();
 
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   const formSubmit = async (formData) => {
     setIsLoading(true);
     setLoggedUser(await loginUserService(formData));
@@ -45,7 +47,7 @@ export const Login = () => {
   }
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <div className="form-wrap">
         <h1>Login</h1>
         <form onSubmit={handleSubmit(formSubmit)}>
@@ -91,6 +93,6 @@ export const Login = () => {
           <Link to="/forgotpassword/forgotpassword">Reset password</Link>
         </p>
       </div>
-    </>
+    </Box>
   );
 };

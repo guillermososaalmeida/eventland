@@ -5,6 +5,7 @@ import {
   Tab,
   TabPanel,
   Center,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { OrgChangePassword, OrgFormProfile } from "../../../components";
 
@@ -14,10 +15,18 @@ export const OrganizationProfile = () => {
   //?--------- Cambio de datos de la organizacion
 
   //?--------- Borrado de la organizacion
-
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   return (
     <>
-      <Tabs isFitted variant="enclosed" size="lg" w="80vw">
+      <Tabs
+        isFitted
+        variant="enclosed"
+        size="lg"
+        w="80vw"
+        bg={bg}
+        color={color}
+      >
         <TabList mb="1em">
           <Tab flexDir="column">
             <img

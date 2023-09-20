@@ -11,7 +11,7 @@ import {
   useAutoLogin,
   useResendCodeError,
 } from "../../../hooks";
-
+import { Box, useColorModeValue } from "@chakra-ui/react";
 export const CheckCode = () => {
   // eslint-disable-next-line no-unused-vars
   const { allUser, userLogin, setUser } = useAuth();
@@ -23,6 +23,8 @@ export const CheckCode = () => {
   const [okCheck, setOkCheck] = useState(false);
   const [okDeleteUser, setOkDeleteUser] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   //! -------FUNCION QUE GESTIONA LA DATA DEL FORMULARIO-------
   const formSubmit = async (formData) => {
     const userLocal = localStorage.getItem("user");
@@ -117,7 +119,7 @@ export const CheckCode = () => {
   }
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <div className="form-wrap">
         <h1>Verify your code 👌</h1>
         <p>Write the code sent to your email</p>
@@ -167,6 +169,6 @@ export const CheckCode = () => {
           </p>
         </form>
       </div>
-    </>
+    </Box>
   );
 };

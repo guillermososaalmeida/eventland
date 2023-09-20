@@ -1,6 +1,6 @@
 /* import { Link } from "react-router-dom";
  */
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading, Box, useColorModeValue } from "@chakra-ui/react";
 import {
   FutureEvents,
   InterestedEvents,
@@ -10,8 +10,10 @@ import {
 } from "../../../components";
 
 export const Home = () => {
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   return (
-    <>
+    <Box bg={bg} color={color}>
       <Flex>
         <Heading>Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
         <SingleEvent />
@@ -20,6 +22,6 @@ export const Home = () => {
       <PastEvents />
       <InterestedEvents />
       <OrganizationsFav />
-    </>
+    </Box>
   );
 };

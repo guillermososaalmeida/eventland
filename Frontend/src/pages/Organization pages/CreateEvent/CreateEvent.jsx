@@ -13,6 +13,7 @@ import {
   FormLabel,
   Input,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 
@@ -29,7 +30,8 @@ export const CreateEvent = () => {
   const [okCreate, setOkCreate] = useState(false);
   const [establishments, setEstablishments] = useState([{}]);
   const [selectedEstablishment, setSelectedEstablishment] = useState(null);
-
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     if (okCreate) {
       setSelectedEstablishment(null);
@@ -83,16 +85,7 @@ export const CreateEvent = () => {
   // }}
   return (
     <>
-      <Box
-        as="div"
-        className="form-wrap"
-        width="100vw"
-        p="1"
-        background="#ff8243"
-        border="1px yellow"
-        borderRadius={10}
-        boxShadow="dark-lg"
-      >
+      <Box className="card" bg={bg} color={color}>
         <Text fontSize="3xl" as="b">
           Create Event
         </Text>

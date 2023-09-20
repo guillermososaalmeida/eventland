@@ -5,10 +5,14 @@ import {
   Tab,
   TabPanel,
   Center,
+  Box,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { ChangePassword, FormProfile } from "../../../components";
 
 export const Profile = () => {
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   //? -------- Cambio de contraseña con token
 
   //?--------- Cambio de datos del usuario
@@ -16,7 +20,7 @@ export const Profile = () => {
   //?--------- Borrado del usuario
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <Tabs isFitted variant="enclosed" size="lg" w="80vw">
         <TabList mb="1em">
           <Tab flexDir="column">
@@ -49,6 +53,6 @@ export const Profile = () => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </>
+    </Box>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 import { loginOrgService } from "../../../services/org.service";
 import { useOrgLoginError } from "../../../hooks";
 import { useOrgAuth } from "../../../context/authOrgContext";
@@ -15,6 +15,8 @@ export const LoginOrg = () => {
 
   const { handleSubmit, register } = useForm();
 
+  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const color = useColorModeValue("#173F4B", "#f6f3e0");
   const formSubmit = async (formData) => {
     setIsLoading(true);
     setLoggedOrg(await loginOrgService(formData));
@@ -45,7 +47,7 @@ export const LoginOrg = () => {
   }
 
   return (
-    <>
+    <Box bg={bg} color={color}>
       <div className="form-wrap">
         <h1>Login</h1>
         <form onSubmit={handleSubmit(formSubmit)}>
@@ -91,6 +93,6 @@ export const LoginOrg = () => {
           <Link to="/forgotpassword/forgotpasswordorg">Reset password</Link>
         </p>
       </div>
-    </>
+    </Box>
   );
 };
