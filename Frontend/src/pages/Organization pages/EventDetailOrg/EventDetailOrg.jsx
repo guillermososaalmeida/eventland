@@ -107,8 +107,8 @@ export const EventDetailOrg = () => {
               Seguidores:
             </Text>
             <AvatarGroup size="md" max={3}>
-              {event?.organization?.usersFav?.map((user) => (
-                <Avatar name={user?.name} src={user?.image} key={user?._id} />
+              {event?.organization?.usersFav?.map((user, index) => (
+                <Avatar name={user?.name} src={user?.image} key={index} />
               ))}
             </AvatarGroup>
           </Box>
