@@ -6,7 +6,6 @@ export const AvatarFollowers = ({ organization, isFollowing }) => {
   useEffect(() => {
     setFollowersArray(organization?.usersFav);
   }, [organization.usersFav, isFollowing]);
-  console.log("organization", organization);
 
   return organization?.usersFav?.length > 0 ? (
     <Box m="10">

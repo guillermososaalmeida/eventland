@@ -1,9 +1,11 @@
 import { SearchIcon } from "@chakra-ui/icons";
 import { InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useOrgAuth } from "../../context/authOrgContext";
 
 export const InputHeader = () => {
   const navigate = useNavigate();
+  const { organization } = useOrgAuth();
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
@@ -12,7 +14,7 @@ export const InputHeader = () => {
     }
   };
 
-  return (
+  return organization ? null : (
     <>
       <InputGroup>
         <InputLeftElement pointerEvents="none" p="5">

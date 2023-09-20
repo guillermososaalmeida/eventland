@@ -23,13 +23,16 @@ export const Header = () => {
   return (
     <HeaderStyled>
       <Flex align="center" gap="1em">
-        <div>
+        <Button
+          w="10"
+          onClick={() => (organization ? navigate("/org") : navigate("/"))}
+        >
           <img
             src="https://res.cloudinary.com/dhr13yihn/image/upload/v1694439036/proyectoEventland/assets/OIG_gsdzjv.jpg"
             alt="Eventland logo"
             className="logo"
           />
-        </div>
+        </Button>
         <div>
           <InputHeader />
         </div>

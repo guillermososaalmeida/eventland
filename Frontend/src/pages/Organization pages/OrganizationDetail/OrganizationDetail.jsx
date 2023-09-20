@@ -99,6 +99,7 @@ export const OrganizationDetail = () => {
           </Button>
 
           <Image
+            minWidth="600px"
             src={organization.image}
             alt={organization.name}
             onError={(e) => {

@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 import { Welcome } from "../pages/Welcome/Welcome";
 import {
   CheckCode,
-  CityDetail,
   ForgotPassword,
   Home,
   Login,
@@ -48,9 +47,9 @@ export const routes = createBrowserRouter([
       {
         path: "/home",
         element: (
-          //  <Protected>
-          <Home />
-          //   </Protected>
+          <Protected>
+            <Home />
+          </Protected>
         ),
       },
       {
@@ -91,24 +90,17 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/eventdetail/:id",
-        element: (
-          //  <Protected>
-          <EventDetail />
-          //</Protected>
-        ),
+        element: <EventDetail />,
       },
       {
         path: "/createeventorg",
-        element: <CreateEvent />,
-      },
-      {
-        path: "/citydetail/:id",
         element: (
-          //  <Protected>
-          <CityDetail />
-          //  </Protected>
+          <ProtectedOrg>
+            <CreateEvent />
+          </ProtectedOrg>
         ),
       },
+
       {
         path: "/registerorg",
         element: <RegisterOrg />,
@@ -131,7 +123,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/homeorg",
-        element: <HomeOrg />,
+        element: (
+          <ProtectedOrg>
+            <HomeOrg />
+          </ProtectedOrg>
+        ),
       },
       {
         path: "/eventdetailorg/:id",
@@ -139,11 +135,19 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/eventlist/:name?",
-        element: <EventList />,
+        element: (
+          <Protected>
+            <EventList />
+          </Protected>
+        ),
       },
       {
         path: "/or_ganizationdetail/:id",
-        element: <OrganizationDetail />,
+        element: (
+          <Protected>
+            <OrganizationDetail />
+          </Protected>
+        ),
       },
     ],
   },
