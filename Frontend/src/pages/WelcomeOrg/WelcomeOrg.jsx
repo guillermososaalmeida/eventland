@@ -1,12 +1,13 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 
 export const WelcomeOrg = () => {
   return (
     <>
       <div className="fullContainer">
-        <Box p="5em">
-          <Heading w="15em">Crea eventos memorables con Eventland</Heading>
-        </Box>
+        <Heading w="15em" className="textoCabecera">
+          Crea eventos memorables con Eventland
+        </Heading>
+
         <div className="grid">
           <img
             className="image1"

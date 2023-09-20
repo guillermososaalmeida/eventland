@@ -5,6 +5,9 @@ svg {
 .logo {
   width: 40px;
 }
+.textoCabecera {
+  margin-top: 10vh;
+}
 .fullContainer {
   display: flex;
   flex-direction: column;
@@ -15,7 +18,7 @@ svg {
   margin: 100px;
   display: grid;
   position: absolute;
-  right: 0;
+
   top: 20vh;
   gap: 20px;
   height: 500px;
@@ -72,6 +75,7 @@ svg {
 
 @media (min-width: 390px) {
   .grid {
+    right: 0;
     top: 40vh;
     margin: 50px;
     height: 250px;
@@ -80,6 +84,7 @@ svg {
 }
 @media (min-width: 768px) {
   .grid {
+    right: 0;
     top: 10vh;
     margin: 100px;
     height: 500px;
@@ -88,6 +93,7 @@ svg {
 }
 @media (min-width: 1280px) {
   .grid {
+    left: 400px;
     margin: 175px;
     height: 650px;
     width: 650px;

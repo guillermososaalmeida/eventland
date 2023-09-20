@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 
 import "./Welcome.css";
 
@@ -6,11 +6,10 @@ export const Welcome = () => {
   return (
     <>
       <div className="fullContainer">
-        <Box p="5em">
-          <Heading w="15em">
-            Todos los eventos al alcance de tu mano en Eventland
-          </Heading>
-        </Box>
+        <Heading w="15em" className="textoCabecera">
+          Todos los eventos al alcance de tu mano en Eventland
+        </Heading>
+
         <div className="grid">
           <img
             className="image1"
