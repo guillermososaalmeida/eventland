@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Box,
+  useColorModeValue,
+  DarkMode,
+} from "@chakra-ui/react";
 import useNextEvents from "../../hooks/User Hooks/useNextEvents";
 import "./FutureEvents.css";
 
 export const FutureEvents = () => {
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bg = useColorModeValue("#f6f3e0ee", "#173F4Bee");
+  const bgver = useColorModeValue("teal", "teal");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const events = useNextEvents();
 
@@ -88,15 +95,18 @@ export const FutureEvents = () => {
                     style={{ backgroundColor: bg }}
                   >
                     <h2 className="imageName">{event.name}</h2>
-                    <Button
-                      onClick={() => navigate(`/eventdetail/${event._id}`)}
-                      _hover={{
-                        transform: "scale(1.1)",
-                      }}
-                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
-                    >
-                      VER EVENTO
-                    </Button>
+                    <DarkMode>
+                      <Button
+                        bg={bgver}
+                        onClick={() => navigate(`/eventdetail/${event._id}`)}
+                        _hover={{
+                          transform: "scale(1.1)",
+                        }}
+                        box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                      >
+                        VER EVENTO
+                      </Button>
+                    </DarkMode>
                   </section>
                 </div>
               </div>
@@ -155,10 +165,9 @@ export const FutureEvents = () => {
           </div>
         </div>
       </div>
+      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
-    <Box bg={bg} color={color}>
-      <h2>No hay eventos futuros</h2>
-    </Box>
+    <></>
   );
 };

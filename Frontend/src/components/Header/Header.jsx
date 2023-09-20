@@ -27,10 +27,10 @@ export const Header = () => {
   const { width } = useWidth();
   const { pathname } = useLocation();
   const Menu = width < 1000 ? MobileMenu : DesktopMenu;
-  const bg = useColorModeValue("#afd5c6", "#0f1521");
+  const bg = useColorModeValue("#77e3df", "#0f1521");
 
   return (
-    <Center bg={bg}>
+    <Center bg={bg} borderBottom="1.5px solid #173F4B">
       <HeaderStyled>
         <Flex align="center" gap="2em" w="40vw">
           <Button

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { pastEvents } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, Divider, useColorModeValue } from "@chakra-ui/react";
 
 export const PastEvents = () => {
   const [events, setEvents] = useState([{}]);
@@ -161,10 +161,9 @@ export const PastEvents = () => {
           </div>
         </div>
       </div>
+      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
-    <Box bg={bg} color={color}>
-      <h2>No hay eventos pasados</h2>
-    </Box>
+    <></>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserById } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Divider, Box, useColorModeValue } from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 
 export const OrganizationsFav = () => {
@@ -171,10 +171,9 @@ export const OrganizationsFav = () => {
           </div>
         </div>
       </div>
+      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
-    <Box bg={bg} color={color}>
-      <h2>¡Todavía no tienes organizaciones favoritas!</h2>
-    </Box>
+    <></>
   );
 };

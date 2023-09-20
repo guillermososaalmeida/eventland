@@ -29,7 +29,7 @@ export const EventDetail = () => {
   const { isEventLiked, handleToggleLiked, isLoadingLiked } = useEventLiked(id);
   const isPastEvent = event && new Date(event.date) < new Date();
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
-  const bgh = useColorModeValue("#b6e9e984", "#173F4Baa");
+  const bgh = useColorModeValue("#b6e9e9dd", "#173F4Baa");
   const colorh = useColorModeValue("black", "#F4FAFF");
   const bgatt = useColorModeValue("#3be1cd", "#3be1cd");
   const color = useColorModeValue("#173F4B", "#f6f3e0");

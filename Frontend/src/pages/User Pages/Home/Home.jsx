@@ -14,7 +14,7 @@ export const Home = () => {
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   return (
     <Box bg={bg} color={color}>
-      <Flex>
+      <Flex p="5">
         <Heading>Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
         <SingleEvent />
       </Flex>

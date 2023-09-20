@@ -47,7 +47,6 @@ export const Uploadfile = ({ registerForm }) => {
         document.getElementById("start").classList.add("hidden");
         document.getElementById("response").classList.remove("hidden");
         document.getElementById("notimage").classList.add("hidden");
-        // Thumbnail Preview
         document.getElementById("file-image").classList.remove("hidden");
         document.getElementById("file-image").src = URL.createObjectURL(file);
       } else {

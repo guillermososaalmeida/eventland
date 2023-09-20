@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, useColorModeValue, Box } from "@chakra-ui/react";
+import { Button, Divider, useColorModeValue, Box } from "@chakra-ui/react";
 import "./OrgNextEvents.css";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { getNextEventsfromOrg } from "../../services/org.service";
@@ -172,10 +172,9 @@ export const OrgNextEvents = () => {
           </div>
         </div>
       </div>
+      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
-    <Box bg={bg} color={color}>
-      <h2>No hay eventos futuros</h2>
-    </Box>
+    <></>
   );
 };

@@ -11,8 +11,8 @@ import { useOrgAuth } from "../../context/authOrgContext";
 export const InputHeader = () => {
   const navigate = useNavigate();
   const { organization } = useOrgAuth();
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
-  const hover = useColorModeValue("#0a1b20", "#64635b");
+  const color = useColorModeValue("#173f4b39", "#f6f3e0");
+  const hover = useColorModeValue("#0c1e24a4", "#64635b");
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       const name = e.target.value;

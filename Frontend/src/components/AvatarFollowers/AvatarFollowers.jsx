@@ -10,7 +10,7 @@ export const AvatarFollowers = ({ organization, isFollowing }) => {
   return organization?.usersFav?.length > 0 ? (
     <Box m="10">
       <Text pr="1em" letterSpacing="1px" m="5">
-        Asistentes:
+        Seguidores:
       </Text>
       <AvatarGroup size="md" max={3}>
         {followersArray?.map((follower) => (
