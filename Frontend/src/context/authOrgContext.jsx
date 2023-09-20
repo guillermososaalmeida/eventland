@@ -78,6 +78,14 @@ export const AuthOrgContextProvider = ({ children }) => {
     });
   };
 
+  //! -------------- logout for update
+
+  const logoutUpdateOrg = () => {
+    setOrganization(() => null);
+    localStorage.removeItem("organization");
+    navigate("/");
+  };
+
   //! -----------------------------------------------------------------------
   //? -------- PUENTE PARA CUANDO TENGAMOS PROBLEMAS DE ASYNCRONIA ----------
   //! -----------------------------------------------------------------------
@@ -107,6 +115,7 @@ export const AuthOrgContextProvider = ({ children }) => {
       organizationLogin,
       logoutOrg,
       bridgeDataOrg,
+      logoutUpdateOrg,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [organization, allOrganization],

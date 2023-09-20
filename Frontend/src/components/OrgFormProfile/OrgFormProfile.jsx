@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 export const OrgFormProfile = () => {
-  const { organization, setOrganization, logoutOrg } = useOrgAuth(); // destructuring de lo que necesitamos del context
+  const { organization, setOrganization, logoutUpdateOrg } = useOrgAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
   const [res, setRes] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -73,7 +73,7 @@ export const OrgFormProfile = () => {
   };
   console.log(defauldData);
   useEffect(() => {
-    useOrgUpdateError(res, setRes, setOrganization, logoutOrg);
+    useOrgUpdateError(res, setRes, setOrganization, logoutUpdateOrg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
