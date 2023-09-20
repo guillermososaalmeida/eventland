@@ -98,7 +98,7 @@ export const FormProfile = () => {
         alignItems="center"
       >
         <Box paddingInline="10px">
-          <FigureUser user={user} />
+          <FigureUser user={{ image: user.image, email: user.email }} />
         </Box>
         <Box>
           <Stack>

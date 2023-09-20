@@ -86,7 +86,12 @@ export const OrgFormProfile = () => {
         alignItems="center"
       >
         <Box paddingInline="10px">
-          <FigureOrg organization={organization} />
+          <FigureOrg
+            organization={{
+              image: organization.image,
+              email: organization.image,
+            }}
+          />
         </Box>
         <Box>
           <Stack>
