@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
   Heading,
   Image,
   Stack,
@@ -13,6 +14,7 @@ import {
 import { getOrgById } from "../../../services/org.service";
 import { OrgNextEvents } from "../../../components/OrgNextEvents/OrgNextEvents";
 import { useFollowOrg } from "../../../hooks/User Hooks/useFollowOrg";
+import { AvatarFollowers } from "../../../components";
 
 export const OrganizationDetail = () => {
   const { id } = useParams();
@@ -106,9 +108,13 @@ export const OrganizationDetail = () => {
             maxWidth="100%"
           />
         </Box>
-        <Box maxWidth="900px" p="2">
+        <Flex maxWidth="900px" p="2" align="center" gap="6em">
           {organization.description}
-        </Box>
+          <AvatarFollowers
+            organization={organization}
+            isFollowing={isFollowing}
+          />
+        </Flex>
         <Divider />
       </Stack>
       <OrgNextEvents />

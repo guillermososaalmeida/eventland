@@ -7,7 +7,7 @@ export const AvatarCustomGroup = ({ event, isEventAttended }) => {
     setUsersArray(event.usersAttend);
   }, [event.usersAttend, isEventAttended]);
 
-  return (
+  return event?.usersAttend?.length > 0 ? (
     <Box m="10">
       <Text pr="1em" letterSpacing="1px" m="5">
         Asistentes:
@@ -18,5 +18,5 @@ export const AvatarCustomGroup = ({ event, isEventAttended }) => {
         ))}
       </AvatarGroup>
     </Box>
-  );
+  ) : null;
 };
