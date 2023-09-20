@@ -16,9 +16,11 @@ import {
 import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useEventLiked, useEventAttend } from "../../../hooks";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { useAuth } from "../../../context/authContext";
 
 export const EventDetail = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [event, setEvent] = useState({});
   const { image, name, description } = event;
@@ -66,7 +68,9 @@ export const EventDetail = () => {
               bottom="12"
               bg={bg}
               m="2"
-              onClick={handleToggleAttend}
+              onClick={() =>
+                user ? handleToggleAttend() : navigate("/register")
+              }
               isLoading={isLoading}
             >
               {isEventAttended ? "-" : "+"}
@@ -77,7 +81,7 @@ export const EventDetail = () => {
             bottom="1"
             bg={bg}
             m="2"
-            onClick={handleToggleLiked}
+            onClick={() => (user ? handleToggleLiked() : navigate("/register"))}
             isLoading={isLoadingLiked}
           >
             {isEventLiked ? "No me interesa" : "Me interesa"}

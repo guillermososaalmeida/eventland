@@ -24,6 +24,7 @@ import {
 import {
   Protected,
   ProtectedCheckChildren,
+  ProtectedEvents,
   ProtectedOrg,
   ProtectedOrgCheckChildren,
 } from "../components";
@@ -90,7 +91,11 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/eventdetail/:id",
-        element: <EventDetail />,
+        element: (
+          <ProtectedEvents>
+            <EventDetail />
+          </ProtectedEvents>
+        ),
       },
       {
         path: "/createeventorg",
@@ -136,9 +141,9 @@ export const routes = createBrowserRouter([
       {
         path: "/eventlist/:name?",
         element: (
-          <Protected>
+          <ProtectedEvents>
             <EventList />
-          </Protected>
+          </ProtectedEvents>
         ),
       },
       {

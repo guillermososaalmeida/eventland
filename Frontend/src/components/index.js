@@ -23,3 +23,4 @@ export * from "./AvatarCustomGroup/AvatarCustomGroup.1";
 export * from "./OrgNextEvents/OrgNextEvents";
 export * from "./OrgPastEvents/OrgPastEvents";
 export * from "./AvatarFollowers/AvatarFollowers";
+export * from "./ProtectedRoutes/ProtectedEvents";

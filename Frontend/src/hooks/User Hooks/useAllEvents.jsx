@@ -9,16 +9,16 @@ const useAllEventsLiked = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await getUserById(user._id);
+        const response = await getUserById(user?._id);
         if (response.status === 200)
-          setAllEventsLiked(response.data.data.eventsInterested);
+          setAllEventsLiked(response?.data?.data?.eventsInterested);
       } catch (error) {
         console.error("Error al obtener el usuario:", error);
       }
     };
 
     fetchData();
-  }, [user._id]);
+  }, [user?._id]);
 
   return allEventsLiked;
 };
