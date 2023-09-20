@@ -5,3 +5,78 @@ svg {
 .logo {
   width: 40px;
 }
+.fullContainer {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  width: 80vw;
+}
+.grid {
+  margin: 100px;
+  display: grid;
+  position: absolute;
+  right: 0;
+  top: 20vh;
+  gap: 20px;
+  height: 500px;
+  width: 500px;
+  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-areas:
+    "- -- image4"
+    "- image2 image5"
+    "image1 image3 image6";
+}
+
+.image1 {
+  height: 100%;
+  width: 100%;
+  grid-area: image1;
+  border-radius: 10px;
+}
+
+.image2 {
+  height: 100%;
+  width: 100%;
+  grid-area: image2;
+  border-radius: 10px;
+}
+
+.image3 {
+  height: 100%;
+  width: 100%;
+  grid-area: image3;
+  border-radius: 10px;
+}
+
+.image4 {
+  height: 100%;
+  width: 100%;
+  grid-area: image4;
+  border-radius: 10px;
+}
+
+.image5 {
+  height: 100%;
+  width: 100%;
+  grid-area: image5;
+  border-radius: 10px;
+}
+
+.image6 {
+  height: 100%;
+  width: 100%;
+  grid-area: image6;
+  border-radius: 10px;
+}
+@media (min-width: 1280px) {
+  .grip {
+    height: 800px;
+    width: 800px;
+  }
+  @media (min-width: 390px) {
+    .grip {
+      height: 250px;
+      width: 250px;
+    }
+}

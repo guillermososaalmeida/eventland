@@ -1,16 +1,8 @@
-import {
-  Button,
-  ButtonGroup,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuList,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Button, ButtonGroup, Icon, useColorMode } from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
-import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import DesktopMenuItem from "./DesktopMenuItem";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export const DesktopMenu = ({
   switchMode,
@@ -24,7 +16,12 @@ export const DesktopMenu = ({
   const { logoutOrg, organization } = useOrgAuth();
   return (
     <>
-      <ButtonGroup flexWrap="nowrap">
+      <ButtonGroup
+        flexWrap="nowrap"
+        justifyContent="space-between"
+        w="60vw"
+        gap="1em"
+      >
         <Button background="transparent" transition="0.3s">
           {!user && !organization ? login : profile}
         </Button>
@@ -34,30 +31,20 @@ export const DesktopMenu = ({
         </Button>
 
         <div>{switchMode}</div>
-      </ButtonGroup>
 
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          aria-label="Options"
-          icon={<HamburgerIcon />}
-          variant="outline"
-          m="5"
-          border="none"
-          background="transparent"
-          color="gray"
-        />
-        <MenuList m="2" border="1px solid gray" rounded="3">
-          <DesktopMenuItem onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </DesktopMenuItem>
-          {(user || organization) && (
-            <DesktopMenuItem color="red" onClick={user ? logout : logoutOrg}>
-              Logout
-            </DesktopMenuItem>
-          )}
-        </MenuList>
-      </Menu>
+        <Button onClick={toggleColorMode} bg="transparent">
+          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+        </Button>
+        {/*  {(user || organization) && ( */}
+        <Button
+          color="red"
+          onClick={user ? logout : logoutOrg}
+          bg="transparent"
+        >
+          <Icon as={AiOutlineLogout} />
+        </Button>
+        {/*   )}  */}
+      </ButtonGroup>
     </>
   );
 };

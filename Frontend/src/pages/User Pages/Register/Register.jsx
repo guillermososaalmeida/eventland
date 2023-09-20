@@ -15,6 +15,7 @@ import { useRegisterError } from "../../../hooks";
 import { registerUser } from "../../../services/user.service";
 import { useAuth } from "../../../context/authContext";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
+import "./Register.css";
 
 export const Register = () => {
   const { allUser, setAllUser, bridgeData } = useAuth();
@@ -64,16 +65,7 @@ export const Register = () => {
   }
   return (
     <>
-      <Box
-        as="div"
-        className="form-wrap"
-        width="100vw"
-        p="1"
-        background="#ff8243"
-        border="1px yellow"
-        borderRadius={10}
-        boxShadow="dark-lg"
-      >
+      <Box className="card">
         <Text fontSize="3xl" as="b">
           Sign in
         </Text>
@@ -128,7 +120,7 @@ export const Register = () => {
                 boxShadow:
                   "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
               }}
-              background="#ff8243"
+              background="#3182ceff"
             >
               Hombre
             </Button>

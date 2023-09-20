@@ -1,3 +1,5 @@
+import { Heading } from "@chakra-ui/react";
+
 export const WelcomeOrg = () => {
-  return <div>WelcomeOrg</div>;
+  return <Heading>Crea eventos memorables con Eventland</Heading>;
 };

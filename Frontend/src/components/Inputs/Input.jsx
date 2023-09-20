@@ -21,7 +21,7 @@ export const InputHeader = () => {
           <SearchIcon color="gray" />
         </InputLeftElement>
         <Input
-          minW="15em"
+          minW="13em"
           w="100%"
           h="2.5em"
           type="text"

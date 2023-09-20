@@ -19,10 +19,10 @@ export const Header = () => {
   const { user, logout } = useAuth();
   const { width } = useWidth();
   const { pathname } = useLocation();
-  const Menu = width < 500 ? MobileMenu : DesktopMenu;
+  const Menu = width < 1000 ? MobileMenu : DesktopMenu;
   return (
     <HeaderStyled>
-      <Flex align="center" gap="1em">
+      <Flex align="center" gap="2em" w="40vw">
         <Button
           w="10"
           onClick={() => (organization ? navigate("/org") : navigate("/"))}

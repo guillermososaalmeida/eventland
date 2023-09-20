@@ -4,11 +4,13 @@ import {
   MenuList,
   IconButton,
   useColorMode,
+  Button,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MobileMenuItem } from "./MobileMenuItem";
+import useWidth from "../../hooks/useWidth";
 
 export const MobileMenu = ({
   switchMode,
@@ -20,39 +22,54 @@ export const MobileMenu = ({
   const { colorMode, toggleColorMode } = useColorMode();
   const { logout, user } = useAuth();
   const { logoutOrg, organization } = useOrgAuth();
+  const { width } = useWidth();
   return (
-    <Menu>
-      <MenuButton
-        as={IconButton}
-        aria-label="Options"
-        icon={<HamburgerIcon />}
-        variant="outline"
-        m="5"
-        border="none"
-        background="transparent"
-        color="gray"
-      />
+    <navbar>
+      {width > 630 ? (
+        <>
+          <Button background="transparent" transition="0.3s">
+            {!user && !organization ? login : profile}
+          </Button>
 
-      <MenuList m="2" border="1px solid gray" rounded="3">
-        <MobileMenuItem>
-          {!user && !organization ? login : profile}
-        </MobileMenuItem>
+          <Button background="transparent" transition="0.3s">
+            {!user && !organization ? register : myEvents}
+          </Button>
+        </>
+      ) : null}
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          aria-label="Options"
+          icon={<HamburgerIcon />}
+          variant="outline"
+          m="5"
+          border="none"
+          background="transparent"
+          color="gray"
+        />
+        <MenuList m="2" border="1px solid gray" rounded="3">
+          {width < 630 ? (
+            <>
+              <MobileMenuItem>
+                {!user && !organization ? login : profile}
+              </MobileMenuItem>
 
-        <MobileMenuItem>
-          {!user && !organization ? register : myEvents}
-        </MobileMenuItem>
-
-        <div>{switchMode}</div>
-        <MobileMenuItem onClick={toggleColorMode}>
-          {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-        </MobileMenuItem>
-
-        {(user || organization) && (
-          <MobileMenuItem color="red" onClick={user ? logout : logoutOrg}>
-            Logout
+              <MobileMenuItem>
+                {!user && !organization ? register : myEvents}
+              </MobileMenuItem>
+            </>
+          ) : null}
+          <div>{switchMode}</div>
+          <MobileMenuItem onClick={toggleColorMode}>
+            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
           </MobileMenuItem>
-        )}
-      </MenuList>
-    </Menu>
+          {(user || organization) && (
+            <MobileMenuItem color="red" onClick={user ? logout : logoutOrg}>
+              Logout
+            </MobileMenuItem>
+          )}
+        </MenuList>
+      </Menu>
+    </navbar>
   );
 };
