@@ -374,7 +374,10 @@ const update = async (req, res, next) => {
     patchUser.confirmationCode = req.user.confirmationCode;
     patchUser.check = req.user.check;
     patchUser.email = req.user.email;
-
+    patchUser.eventsInterested = req.user.eventsInterested;
+    patchUser.eventsAttend = req.user.eventsAttend;
+    patchUser.organizationsFav = req.user.organizationsFav;
+    patchUser.dateOfBirth = req.user.dateOfBirth;
     // Ahora cogemos y actualizamos el usuario
 
     try {
@@ -416,6 +419,7 @@ const update = async (req, res, next) => {
       }
       return res.status(200).json({
         testUpdate,
+        updateUser,
       });
     } catch (error) {
       return res.status(404).json(error.message);

@@ -1,8 +1,8 @@
-export const FigureUser = ({ user }) => {
+export const FigureUser = (user) => {
   return (
     <figure className="dataProfile">
-      <img src={user?.image} alt="user image" className="imageUser" />
-      <h4 className="emailUser">Email: {user?.email}</h4>
+      <img src={user.user.image} alt="user image" className="imageUser" />
+      <h4 className="emailUser">Email: {user.user.email}</h4>
     </figure>
   );
 };

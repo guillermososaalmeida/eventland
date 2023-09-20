@@ -85,7 +85,7 @@ export const FormProfile = () => {
   };
 
   useEffect(() => {
-    useUpdateError(res, setRes, setUser, logout);
+    useUpdateError(res, setRes, setUser, logout, navigate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
@@ -98,7 +98,7 @@ export const FormProfile = () => {
         alignItems="center"
       >
         <Box paddingInline="10px">
-          <FigureUser user={{ image: user.image, email: user.email }} />
+          <FigureUser user={user} />
         </Box>
         <Box>
           <Stack>
