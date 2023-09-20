@@ -1,5 +1,5 @@
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-export const useUpdateError = (res, setRes, setUser, logout) => {
+export const useUpdateError = (res, setRes, setUser, logoutUpdate) => {
   //!---------------------------------------> 200
   let contador;
   if (res?.data) {
@@ -24,7 +24,7 @@ export const useUpdateError = (res, setRes, setUser, logout) => {
       }
     });
     if (res?.status == 200) {
-      logout();
+      logoutUpdate();
       setRes(() => ({}));
       return Swal.fire({
         icon: "success",

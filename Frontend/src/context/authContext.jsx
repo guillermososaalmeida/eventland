@@ -84,13 +84,6 @@ export const AuthContextProvider = ({ children }) => {
     setUser(() => null);
     localStorage.removeItem("user");
     navigate("/");
-    return Swal.fire({
-      icon: "success",
-      title: "Sesión cerrada",
-      text: "Vuelve a iniciar sesión para actualizar los cambios",
-      showConfirmButton: false,
-      timer: 1500,
-    });
   };
 
   //! -----------------------------------------------------------------------

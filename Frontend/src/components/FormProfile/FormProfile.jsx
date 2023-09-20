@@ -29,7 +29,7 @@ import { useNavigate } from "react-router-dom";
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 //!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 export const FormProfile = () => {
-  const { user, setUser, logout } = useAuth(); // destructuring de lo que necesitamos del context
+  const { user, setUser, logoutUpdate } = useAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
   const [res, setRes] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -85,7 +85,7 @@ export const FormProfile = () => {
   };
 
   useEffect(() => {
-    useUpdateError(res, setRes, setUser, logout, navigate);
+    useUpdateError(res, setRes, setUser, logoutUpdate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
