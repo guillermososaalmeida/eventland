@@ -58,16 +58,7 @@ export const RegisterOrg = () => {
   }
   return (
     <>
-      <Box
-        as="div"
-        className="form-wrap"
-        width="100vw"
-        p="1"
-        background="#ff8243"
-        border="1px yellow"
-        borderRadius={10}
-        boxShadow="dark-lg"
-      >
+      <Box className="card">
         <Text fontSize="3xl" as="b">
           Sign in
         </Text>
@@ -132,7 +123,7 @@ export const RegisterOrg = () => {
             />
           </FormControl> */}
           <FormControl isInvalid={errors.name}>
-            <FormLabel htmlFor="year">Date of birth</FormLabel>
+            <FormLabel htmlFor="year">Year of creation</FormLabel>
             <Input
               type="year"
               id="year"

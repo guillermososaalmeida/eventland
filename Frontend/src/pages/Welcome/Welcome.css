@@ -69,14 +69,27 @@ svg {
   grid-area: image6;
   border-radius: 10px;
 }
-@media (min-width: 1280px) {
-  .grip {
-    height: 800px;
-    width: 800px;
+
+@media (min-width: 390px) {
+  .grid {
+    top: 40vh;
+    margin: 50px;
+    height: 250px;
+    width: 250px;
   }
-  @media (min-width: 390px) {
-    .grip {
-      height: 250px;
-      width: 250px;
-    }
+}
+@media (min-width: 768px) {
+  .grid {
+    top: 10vh;
+    margin: 100px;
+    height: 500px;
+    width: 500px;
+  }
+}
+@media (min-width: 1280px) {
+  .grid {
+    margin: 175px;
+    height: 650px;
+    width: 650px;
+  }
 }
