@@ -78,6 +78,21 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  //! -------------- logout for update
+
+  const logoutUpdate = () => {
+    setUser(() => null);
+    localStorage.removeItem("user");
+    navigate("/");
+    return Swal.fire({
+      icon: "success",
+      title: "Sesión cerrada",
+      text: "Vuelve a iniciar sesión para actualizar los cambios",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   //! -----------------------------------------------------------------------
   //? -------- PUENTE PARA CUANDO TENGAMOS PROBLEMAS DE ASYNCRONIA ----------
   //! -----------------------------------------------------------------------
@@ -107,6 +122,7 @@ export const AuthContextProvider = ({ children }) => {
       userLogin,
       logout,
       bridgeData,
+      logoutUpdate,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, allUser],
