@@ -67,11 +67,9 @@ export const OrganizationDetail = () => {
           >
             {organization.usersFav?.length
               ? organization.usersFav.length > 1
-                ? "La favorita de : " +
-                  organization.usersFav?.length +
-                  " usuarios"
-                : "La favorita de 1 usuario"
-              : "Sé el primero en darle fav"}
+                ? "La siguen : " + organization.usersFav?.length + " usuarios"
+                : "La sigue 1 usuario"
+              : "¡Sé el primero en seguirla!"}
           </Heading>
           <Heading
             bg={bg}

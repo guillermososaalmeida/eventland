@@ -85,7 +85,7 @@ export const FormProfile = () => {
   };
 
   useEffect(() => {
-    useUpdateError(res, setRes, setUser, logout);
+    useUpdateError(res, setRes, setUser, logout, navigate);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (

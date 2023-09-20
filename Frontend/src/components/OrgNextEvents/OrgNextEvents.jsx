@@ -104,7 +104,7 @@ export const OrgNextEvents = () => {
                 >
                   <h2 className="imageName">{event.name}</h2>
                   <Button
-                    onClick={() => navigate(`/eventdetail/${event._id}`)}
+                    onClick={() => navigate(`/eventdetailorg/${event._id}`)}
                     _hover={{
                       transform: "scale(1.1)",
                     }}
