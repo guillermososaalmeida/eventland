@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  Center,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -182,15 +183,7 @@ export const Register = () => {
                 </Flex>
               </FormControl>
               <Uploadfile />
-              {/* <FormControl isInvalid={errors.name}>
-                <FormLabel htmlFor="name">City</FormLabel>
-                <Input
-                  id="city"
-                  variant="filled"
-                  placeholder="city"
-                  {...register("city", {})}
-                />
-              </FormControl> */}
+
               <FormControl isInvalid={errors.name}>
                 <FormLabel htmlFor="dateOfBirth">Fecha de nacimiento</FormLabel>
                 <Input
@@ -201,14 +194,16 @@ export const Register = () => {
                   {...register("dateOfBirth", {})}
                 />
               </FormControl>
-              <Button
-                colorScheme="teal"
-                type="submit"
-                isLoading={isLoading}
-                isDisabled={!gender}
-              >
-                Enviar
-              </Button>
+              <Center>
+                <Button
+                  colorScheme="teal"
+                  type="submit"
+                  isLoading={isLoading}
+                  isDisabled={!gender}
+                >
+                  Enviar
+                </Button>
+              </Center>
             </form>
           </Box>
         </LightMode>

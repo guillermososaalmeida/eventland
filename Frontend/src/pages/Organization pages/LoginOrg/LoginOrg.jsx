@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { Button, Box, Input, useColorModeValue, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Input,
+  useColorModeValue,
+  Text,
+  Center,
+} from "@chakra-ui/react";
 import { loginOrgService } from "../../../services/org.service";
 import { useOrgLoginError } from "../../../hooks";
 import { useOrgAuth } from "../../../context/authOrgContext";
@@ -98,7 +105,7 @@ export const LoginOrg = () => {
                 {...register("password", {})}
               />
             </div>
-            <div className="btn_container">
+            <Center pt="5">
               <Button
                 className="btn"
                 type="submit"
@@ -107,7 +114,7 @@ export const LoginOrg = () => {
               >
                 Iniciar sesión
               </Button>
-            </div>
+            </Center>
           </form>
           <Link to="/forgotpassword/forgotpasswordorg">
             ¿Has olvidado tu contraseña?

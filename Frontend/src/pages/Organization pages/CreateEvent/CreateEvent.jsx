@@ -8,15 +8,20 @@ import { useCreateEventError } from "../../../hooks/Event Hooks/useCreateEventEr
 import {
   Box,
   Button,
+  Center,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
+  LightMode,
+  Select,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 import { useNavigate } from "react-router-dom";
+import "./CreateEvent.css";
+
 export const CreateEvent = () => {
   const {
     reset,
@@ -90,7 +95,7 @@ export const CreateEvent = () => {
       <div className="form-container">
         <Box className="card" color={color}>
           <Text fontSize="3xl" as="b">
-            Crear evento{" "}
+            Crear evento
           </Text>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl isInvalid={errors.name} isRequired>
@@ -133,22 +138,31 @@ export const CreateEvent = () => {
             <FormControl isRequired>
               <FormLabel htmlFor="establishment">Establecimiento</FormLabel>
 
-              <select
-                onChange={(event) => {
-                  const establishment = establishments.find(
-                    (x) => x._id === event.target.value,
-                  );
-                  if (establishment) setSelectedEstablishment(establishment);
-                  else setSelectedEstablishment(null);
-                }}
-              >
-                <option value={null}>Select an establishment</option>
-                {establishments.map((establishment, index) => (
-                  <option key={index} value={establishment._id}>
-                    {establishment.name}
-                  </option>
-                ))}
-              </select>
+              <LightMode>
+                <Select
+                  borderBottom={"1px solid #173F4B"}
+                  variant="flushed"
+                  placeholder="Selecciona el establecimiento"
+                  onChange={(event) => {
+                    const establishment = establishments.find(
+                      (x) => x._id === event.target.value,
+                    );
+                    if (establishment) setSelectedEstablishment(establishment);
+                    else setSelectedEstablishment(null);
+                  }}
+                >
+                  <option value={null}>Select an establishment</option>
+                  {establishments.map((establishment, index) => (
+                    <option
+                      key={index}
+                      value={establishment._id}
+                      className="option-form"
+                    >
+                      {establishment.name}
+                    </option>
+                  ))}
+                </Select>
+              </LightMode>
             </FormControl>
             <Uploadfile />
             <FormControl isInvalid={errors.name}>
@@ -165,14 +179,11 @@ export const CreateEvent = () => {
                 {...register("date")}
               />
             </FormControl>
-            <Button
-              mt={4}
-              colorScheme="teal"
-              type="submit"
-              isLoading={isLoading}
-            >
-              Crear evento
-            </Button>
+            <Center pt="5">
+              <Button colorScheme="teal" type="submit" isLoading={isLoading}>
+                Crear evento
+              </Button>
+            </Center>
           </form>
         </Box>
       </div>

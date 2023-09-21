@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import {
   Box,
   Button,
+  Center,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -158,14 +159,11 @@ export const RegisterOrg = () => {
                   {...register("year")}
                 />
               </FormControl>
-              <Button
-                mt={4}
-                colorScheme="teal"
-                type="submit"
-                isLoading={isLoading}
-              >
-                Registrar
-              </Button>
+              <Center pt="5">
+                <Button colorScheme="teal" type="submit" isLoading={isLoading}>
+                  Registrar
+                </Button>
+              </Center>
             </form>
           </Box>
         </LightMode>

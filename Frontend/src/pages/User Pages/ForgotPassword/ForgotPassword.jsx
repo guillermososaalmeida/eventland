@@ -3,7 +3,14 @@ import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { forgotPasswordUser } from "../../../services/user.service";
 import { useForgotPasswordError } from "../../../hooks";
-import { Button, Box, useColorModeValue, Text, Input } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  useColorModeValue,
+  Text,
+  Input,
+  Center,
+} from "@chakra-ui/react";
 
 export const ForgotPassword = () => {
   const { handleSubmit, register } = useForm();
@@ -59,7 +66,7 @@ export const ForgotPassword = () => {
                   Email
                 </label>
               </div>
-              <div className="btn_container">
+              <Center pt="5">
                 <Button
                   className="btn"
                   type="submit"
@@ -69,7 +76,7 @@ export const ForgotPassword = () => {
                 >
                   Cambiar contrasña
                 </Button>
-              </div>
+              </Center>
               <p className="bottom-text">
                 <small>
                   Introduce tu email para enviarte una nueva contraseña

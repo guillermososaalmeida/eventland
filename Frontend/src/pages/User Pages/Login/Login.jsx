@@ -4,7 +4,14 @@ import { Link, Navigate } from "react-router-dom";
 import { loginUserService } from "../../../services/user.service";
 import { useLoginError } from "../../../hooks";
 import { useAuth } from "../../../context/authContext";
-import { Button, Box, useColorModeValue, Input, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  useColorModeValue,
+  Input,
+  Text,
+  Center,
+} from "@chakra-ui/react";
 
 export const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -97,7 +104,7 @@ export const Login = () => {
                 {...register("password", {})}
               />
             </div>
-            <div className="btn_container">
+            <Center pt="5">
               <Button
                 className="btn"
                 type="submit"
@@ -106,7 +113,7 @@ export const Login = () => {
               >
                 Iniciar sesión
               </Button>
-            </div>
+            </Center>
           </form>
           <Link to="/forgotpassword/forgotpassword">
             ¿Has olvidado tu contraseña?

@@ -18,6 +18,7 @@ import {
   Text,
   Input,
   useColorModeValue,
+  Center,
 } from "@chakra-ui/react";
 export const CheckCodeOrg = () => {
   // eslint-disable-next-line no-unused-vars
@@ -154,27 +155,28 @@ export const CheckCodeOrg = () => {
             </div>
 
             <ButtonGroup width="500px" display="flex" justifyContent="start">
-              <Button
-                colorScheme="teal"
-                id="btnCheck"
-                className="btn"
-                type="submit"
-                disabled={send}
-                style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-              >
-                Verificar código
-              </Button>
-
-              <Button
-                colorScheme="teal"
-                id="btnResend"
-                className="btn"
-                disabled={send}
-                style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-                onClick={() => handleReSend()}
-              >
-                Reenviar código
-              </Button>
+              <Center pt="5">
+                <Button
+                  colorScheme="teal"
+                  id="btnCheck"
+                  className="btn"
+                  type="submit"
+                  disabled={send}
+                  style={{ background: send ? "#49c1a388" : "#49c1a2" }}
+                >
+                  Verificar código
+                </Button>
+                <Button
+                  colorScheme="teal"
+                  id="btnResend"
+                  className="btn"
+                  disabled={send}
+                  style={{ background: send ? "#49c1a388" : "#49c1a2" }}
+                  onClick={() => handleReSend()}
+                >
+                  Reenviar código
+                </Button>
+              </Center>
             </ButtonGroup>
 
             <p className="bottom-text">

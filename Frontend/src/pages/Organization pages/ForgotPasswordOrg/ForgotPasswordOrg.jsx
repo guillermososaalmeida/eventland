@@ -3,7 +3,14 @@ import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { forgotPasswordOrg } from "../../../services/org.service";
 import { useForgotPasswordError } from "../../../hooks";
-import { Button, Input, Box, Text, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Input,
+  Box,
+  Text,
+  useColorModeValue,
+  Center,
+} from "@chakra-ui/react";
 
 export const ForgotPasswordOrg = () => {
   const { handleSubmit, register } = useForm();
@@ -61,7 +68,7 @@ export const ForgotPasswordOrg = () => {
                 </label>
               </div>
 
-              <div className="btn_container">
+              <Center pt="5">
                 <Button
                   className="btn"
                   type="submit"
@@ -71,7 +78,7 @@ export const ForgotPasswordOrg = () => {
                 >
                   Cambiar contraseña
                 </Button>
-              </div>
+              </Center>
 
               <p className="bottom-text">
                 <small>
