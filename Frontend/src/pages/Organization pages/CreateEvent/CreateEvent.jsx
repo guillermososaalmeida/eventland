@@ -16,7 +16,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
-
+import { useNavigate } from "react-router-dom";
 export const CreateEvent = () => {
   const {
     reset,
@@ -24,7 +24,7 @@ export const CreateEvent = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
+  const navigate = useNavigate();
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [okCreate, setOkCreate] = useState(false);
@@ -79,9 +79,12 @@ export const CreateEvent = () => {
     }
   };
 
-  // {if (okCreate) {
-  //   return <Navigate to="/createevent" />;
-  // }}
+  // {
+  //   if (okCreate) {
+  //     return <Navigate to="/createeventorg" />;
+  //   }
+  // }
+  if (okCreate) navigate(0);
   return (
     <>
       <div className="form-container">
