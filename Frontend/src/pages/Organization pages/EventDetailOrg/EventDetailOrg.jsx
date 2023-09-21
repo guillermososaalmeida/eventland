@@ -11,6 +11,7 @@ import {
   Divider,
   Flex,
   Heading,
+  IconButton,
   Image,
   Stack,
   Text,
@@ -18,6 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useDeleteEvent } from "../../../hooks";
+import { DeleteIcon } from "@chakra-ui/icons";
 
 export const EventDetailOrg = () => {
   const navigate = useNavigate();
@@ -35,7 +37,7 @@ export const EventDetailOrg = () => {
   const { image, name, description } = event;
 
   return (
-    <Box bg={bg} color={color}>
+    <Box bg={bg} color={color} p="10" minH="92.9vh">
       <Stack align="center">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -88,6 +90,19 @@ export const EventDetailOrg = () => {
           <Text p="1em" mr="8em">
             {description}
           </Text>
+          <ButtonGroup
+            onClick={() => useDeleteEvent(navigate, id)}
+            size="sm"
+            isAttached
+            variant="outline"
+          >
+            <Button border={"1px solid #E53E3E"}>Borrar evento</Button>
+            <IconButton
+              border={"1px solid #E53E3E"}
+              aria-label="Borrar usuario"
+              icon={<DeleteIcon color="red" />}
+            />
+          </ButtonGroup>
           <AvatarCustomGroup
             event={event}
             isFollowers={isFollowers}
@@ -115,11 +130,6 @@ export const EventDetailOrg = () => {
           </Box>
         </Flex>
       </Stack>
-      <ButtonGroup size="sm" isAttached variant="outline">
-        <Button onClick={() => useDeleteEvent(navigate, id)}>
-          Borrar evento
-        </Button>
-      </ButtonGroup>
     </Box>
   );
 };
