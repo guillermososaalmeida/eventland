@@ -44,7 +44,8 @@ export const OrgFormProfile = () => {
       showCancelButton: true,
       confirmButtonColor: "rgb(73, 193, 162)",
       cancelButtonColor: "#d33",
-      confirmButtonText: "SI",
+      confirmButtonText: "SÍ",
+      cancelButtonText: "NO",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById("file-upload").files;

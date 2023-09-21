@@ -36,7 +36,8 @@ export const OrgChangePassword = () => {
         showCancelButton: true,
         confirmButtonColor: "rgb(74, 186, 158)",
         cancelButtonColor: "#c94c4c",
-        confirmButtonText: "YES",
+        confirmButtonText: "SÍ",
+        cancelButtonText: "NO",
       }).then(async (result) => {
         if (result.isConfirmed) {
           setIsLoading(true);

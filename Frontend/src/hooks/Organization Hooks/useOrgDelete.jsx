@@ -8,7 +8,8 @@ export const useOrgDelete = (setOrganization, navigate) => {
     showCancelButton: true,
     confirmButtonColor: "rgb(73, 193, 162)",
     cancelButtonColor: "#d33",
-    confirmButtonText: "YES",
+    confirmButtonText: "SÍ",
+    cancelButtonText: "NO",
   }).then(async (result) => {
     if (result.isConfirmed) {
       const res = await deleteOrgService();
