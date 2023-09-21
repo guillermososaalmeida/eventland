@@ -26,7 +26,7 @@ export const HomeOrg = () => {
           <Heading id="subtextoCabecera">Eventland</Heading>
           <Link to="/createeventorg">
             <Button w="15em" colorScheme="teal">
-              Create Event
+              Crear evento
             </Button>
           </Link>
         </Stack>
@@ -66,7 +66,7 @@ export const HomeOrg = () => {
       <Center>
         <Link to="/createeventorg">
           <Button w="15em" colorScheme="teal">
-            Create Event
+            Crear evento
           </Button>
         </Link>
       </Center>

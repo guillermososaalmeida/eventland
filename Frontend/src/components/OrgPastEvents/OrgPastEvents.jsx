@@ -1,26 +1,32 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Divider, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { useAuth } from "../../context/authContext";
 import { getPastEventsfromOrg } from "../../services/org.service";
 
 export const OrgPastEvents = () => {
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bg = useColorModeValue("#f6f3e0ee", "#173F4Bee");
+  const bgver = useColorModeValue("teal", "teal");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const { organization } = useOrgAuth();
   const { user } = useAuth();
   const [events, setEvents] = useState([{}]);
-
+  const organizationId = useParams();
   useEffect(() => {
     const getOldEvents = async () => {
-      const res = await getPastEventsfromOrg(organization._id);
-      setEvents(res);
+      if (organization) {
+        const res = await getPastEventsfromOrg(organization._id);
+        setEvents(res);
+      } else {
+        const res = await getPastEventsfromOrg(organization.id);
+        setEvents(res);
+      }
     };
     getOldEvents();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [organization, organization?._id, organizationId?.id]);
 
   //Comentado en caso de que queramos poner los botones de navegación
   // const next =
@@ -64,19 +70,6 @@ export const OrgPastEvents = () => {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/*comentado en caso de que queramos poner los botones de navegación */}
-        {/* <div className="buttonsScrollContainer">
-        <button
-          onClick={() => {
-            preIndex();
-          }}
-        >
-          <img
-            className="imagePrevious"
-            src={next}
-            alt="button to the previous image"
-          />
-        </button> */}
         <h1 className="imageName" style={{ backgroundColor: bg }}>
           Eventos pasados
         </h1>
@@ -102,6 +95,7 @@ export const OrgPastEvents = () => {
                     <h2 className="imageName">{event.name}</h2>
                     {organization ? (
                       <Button
+                        bg={bgver}
                         onClick={() => navigate(`/eventdetailorg/${event._id}`)}
                         _hover={{
                           transform: "scale(1.1)",
@@ -113,6 +107,7 @@ export const OrgPastEvents = () => {
                     ) : (
                       user && (
                         <Button
+                          bg={bgver}
                           onClick={() => navigate(`/eventdetail/${event._id}`)}
                           _hover={{
                             transform: "scale(1.1)",
@@ -128,33 +123,8 @@ export const OrgPastEvents = () => {
               </div>
             ))}
         </div>
-        {/* <button onClick={() => nextIndex()}>
-          <img
-            className="imageNext"
-            src={next}
-            alt="button to the next image"
-          />
-        </button>
-      </div> */}
         <div className="setActiveIndexOuterDiv">
           <div className="setActiveIndexInnerDiv">
-            {/* {events.map((element, index) => {
-            index == activeIndex ? (
-              <span
-                className="spanActive activeImg"
-                onClick={() => {
-                  setActiveIndex(index);
-                }}
-              ></span>
-            ) : (
-              <span
-                className="spanActive"
-                onClick={() => {
-                  setActiveIndex(index);
-                }}
-              ></span>
-            );
-          })} */}
             {events.map((element, index) => {
               if (index == activeIndex) {
                 return (
@@ -181,7 +151,6 @@ export const OrgPastEvents = () => {
           </div>
         </div>
       </div>
-      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
     <></>
