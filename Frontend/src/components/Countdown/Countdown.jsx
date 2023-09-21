@@ -1,10 +1,12 @@
 import { Heading, useColorModeValue } from "@chakra-ui/react";
 import { useState } from "react";
+import useWidth from "../../hooks/useWidth";
 
 export const Countdown = ({ date }) => {
   const bgh = useColorModeValue("#b6e9e984", "#173F4Baa");
   const colorh = useColorModeValue("black", "#F4FAFF");
   const [time, setTime] = useState("");
+  const { width } = useWidth();
   let countDownDate = new Date(date).getTime();
   let x = setInterval(() => {
     let now = new Date().getTime();
@@ -27,13 +29,13 @@ export const Countdown = ({ date }) => {
   }, 1000);
   return (
     <Heading
+      fontSize={width < 500 ? "8px" : width < 650 ? "11px" : "17px"}
       bg={bgh}
       color={colorh}
       size="lg"
       rounded="7"
       position="absolute"
       p="10px"
-      fontSize="17"
       bottom="0"
       right="0"
       m="2"

@@ -8,8 +8,10 @@ import {
   Divider,
   Flex,
   Heading,
+  Icon,
   IconButton,
   Image,
+  LightMode,
   Stack,
   Text,
   useColorModeValue,
@@ -18,6 +20,8 @@ import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useEventLiked, useEventAttend } from "../../../hooks";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../../context/authContext";
+import "./EventDetail.css";
+import useWidth from "../../../hooks/useWidth";
 
 export const EventDetail = () => {
   const { id } = useParams();
@@ -33,6 +37,8 @@ export const EventDetail = () => {
   const colorh = useColorModeValue("black", "#F4FAFF");
   const bgatt = useColorModeValue("#3be1cd", "#3be1cd");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const { width } = useWidth();
+
   useEffect(() => {
     (async () => {
       setEvent(await getEventById(id));
@@ -40,10 +46,11 @@ export const EventDetail = () => {
   }, [id, isEventAttended]);
 
   return (
-    <Box bg={bg} color={color} h="90vh">
+    <Box bg={bg} color={color}>
       <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
+            fontSize={width < 500 ? "12px" : width < 650 ? "20px" : "30px"}
             color={colorh}
             position="absolute"
             bg={bgh}
@@ -56,13 +63,14 @@ export const EventDetail = () => {
             {name}
           </Heading>
           <Heading
+            fontSize={width < 500 ? "8px" : width < 650 ? "14px" : "20px"}
             color={colorh}
             size="sm"
             position="absolute"
             bg={bgh}
             rounded="10"
             p="4"
-            top="20"
+            top={width < 500 ? "14" : "20"}
             left="0"
             m="2"
           >
@@ -70,7 +78,7 @@ export const EventDetail = () => {
           </Heading>
 
           <Button
-            rounded="50%"
+            rounded="50"
             h="15%"
             w="8%"
             position="absolute"
@@ -81,10 +89,11 @@ export const EventDetail = () => {
             isLoading={isLoadingLiked}
             _hover={{ background: bgatt }}
           >
-            {isEventLiked ? <BsHeartFill /> : <BsHeart />}
+            {isEventLiked ? <Icon as={BsHeartFill} /> : <Icon as={BsHeart} />}
           </Button>
 
           <Heading
+            fontSize={width < 500 ? "12px" : width < 650 ? "20px" : "30px"}
             color={colorh}
             position="absolute"
             bg={bgh}
@@ -108,22 +117,30 @@ export const EventDetail = () => {
             maxWidth="100%"
           />
         </Box>
-        <Box maxWidth="900px" display="flex" alignItems="center" gap="2em">
-          <Text p="1em" mr="8em">
-            {description}
-          </Text>
+        <Box
+          maxWidth="900px"
+          display="flex"
+          alignItems="center"
+          gap="2em"
+          m="10"
+          flexDir={width < 600 ? "column" : "row"}
+        >
+          <Text p="1em">{description}</Text>
           <Box align="center">
             {isPastEvent ? null : (
-              <Button
-                w="80%"
-                bg={bgatt}
-                onClick={() =>
-                  user ? handleToggleAttend() : navigate("/register")
-                }
-                isLoading={isLoading}
-              >
-                {isEventAttended ? "No asistiré" : "Asistiré"}
-              </Button>
+              <LightMode>
+                <Button
+                  minW="180px"
+                  w="80%"
+                  bg={bgatt}
+                  onClick={() =>
+                    user ? handleToggleAttend() : navigate("/register")
+                  }
+                  isLoading={isLoading}
+                >
+                  {isEventAttended ? "No asistiré" : "Asistiré"}
+                </Button>
+              </LightMode>
             )}
             <AvatarCustomGroup
               event={event}
@@ -132,8 +149,16 @@ export const EventDetail = () => {
           </Box>
         </Box>
         <Divider border={`1.2px solid ${color}`} />
-        <Flex maxWidth="900px" alignItems="center" gap="2em">
-          <Box p="1em" mr="8em">
+        <Flex
+          maxWidth="900px"
+          alignItems="center"
+          gap={width < 600 ? "2em" : "10em"}
+          m="10"
+          align="center"
+          justify="center"
+          flexDir={width < 600 ? "column" : "row"}
+        >
+          <Box>
             <Flex align="center">
               <Heading p="4">{event?.organization?.name}</Heading>
               <IconButton
@@ -147,8 +172,8 @@ export const EventDetail = () => {
             </Flex>
             <Text p="1em">{event?.organization?.description}</Text>
           </Box>
-          <Box m="10" pl="30">
-            <Image w="50%" src={event?.organization?.image} />
+          <Box>
+            <Image w="100%" src={event?.organization?.image} rounded="10" />
           </Box>
         </Flex>
       </Stack>

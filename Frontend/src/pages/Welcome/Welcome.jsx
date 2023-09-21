@@ -6,7 +6,7 @@ export const Welcome = () => {
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   return (
-    <Center bg={bg} color={color}>
+    <Center bg={bg} color={color} h="92.8vh">
       <div className="fullContainer">
         <Stack gap="2em">
           <Heading w="15em" id="textoCabecera" letterSpacing="1px">

@@ -4,12 +4,14 @@ import { useSwipeable } from "react-swipeable";
 import { Button, Divider, useColorModeValue, Box } from "@chakra-ui/react";
 import "./OrgNextEvents.css";
 import { useOrgAuth } from "../../context/authOrgContext";
+import { useAuth } from "../../context/authContext";
 import { getNextEventsfromOrg } from "../../services/org.service";
 
 export const OrgNextEvents = () => {
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const { organization } = useOrgAuth();
+  const { user } = useAuth();
   const [events, setEvents] = useState([{}]);
   const organizationId = useParams();
 
@@ -105,15 +107,29 @@ export const OrgNextEvents = () => {
                     style={{ backgroundColor: bg }}
                   >
                     <h2 className="imageName">{event.name}</h2>
-                    <Button
-                      onClick={() => navigate(`/eventdetailorg/${event._id}`)}
-                      _hover={{
-                        transform: "scale(1.1)",
-                      }}
-                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
-                    >
-                      VER EVENTO
-                    </Button>
+                    {organization ? (
+                      <Button
+                        onClick={() => navigate(`/eventdetailorg/${event._id}`)}
+                        _hover={{
+                          transform: "scale(1.1)",
+                        }}
+                        box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                      >
+                        VER EVENTO
+                      </Button>
+                    ) : (
+                      user && (
+                        <Button
+                          onClick={() => navigate(`/eventdetail/${event._id}`)}
+                          _hover={{
+                            transform: "scale(1.1)",
+                          }}
+                          box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                        >
+                          VER EVENTO
+                        </Button>
+                      )
+                    )}
                   </section>
                 </div>
               </div>

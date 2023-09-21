@@ -121,6 +121,13 @@ h1.imageName {
   .image {
     height: 425px;
   }
+  .imageName {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .buttonScrollContainer {
+    top: -16rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -128,33 +135,12 @@ h1.imageName {
     padding: 1.25rem;
     width: 40%;
   }
-}
-
-@media (min-width: 1280px) {
-  .imageName {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 768px) {
   .buttonScrollContainer {
     top: -15rem;
   }
-}
-
-@media (min-width: 1280px) {
-  .buttonScrollContainer {
-    top: -16rem;
-  }
-}
-
-@media (min-width: 768px) {
   .imagePrevious {
     width: 2.5rem;
   }
-}
-@media (min-width: 768px) {
   .imageNext {
     width: 2.5rem;
   }

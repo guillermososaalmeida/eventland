@@ -30,9 +30,9 @@ export const Header = () => {
   const bg = useColorModeValue("#77e3df", "#0f1521");
 
   return (
-    <Center bg={bg} borderBottom="1.5px solid #173F4B">
+    <Center bg={bg} borderBottom={`1.5px solid ${color}`}>
       <HeaderStyled>
-        <Flex align="center" gap="2em" w="40vw">
+        <Flex align="center" gap="2em" w="40vw" p="5">
           <Button
             w="10"
             onClick={() => (organization ? navigate("/org") : navigate("/"))}
