@@ -1,8 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
 
 export const useCreateEventError = (res, setCreateOk, setRes) => {
-  const { navigate } = useNavigate();
   //? si la respuesta es ok ---- > directamente esta el status en la primera clave es decir: res.status
   //? si la respuesta no esta ok--> res.response.status
   //! ------------------ 200 : todo ok
@@ -14,7 +12,6 @@ export const useCreateEventError = (res, setCreateOk, setRes) => {
       showConfirmButton: false,
       timer: 1500,
     });
-    navigate();
     setRes({});
   }
 
