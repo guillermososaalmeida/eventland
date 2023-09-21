@@ -37,7 +37,7 @@ export const useCreateEventError = (res, setCreateOk, setRes) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Sorry choose another name ❎",
+      text: "¡Lo sentimos! Escoge otro nombre ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -50,7 +50,7 @@ export const useCreateEventError = (res, setCreateOk, setRes) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Internal server error!❎ Please try again.",
+      text: "¡Error interno!❎ Por favor, prueba de nuevo.",
       showConfirmButton: false,
       timer: 1500,
     });

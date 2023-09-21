@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Divider, useColorModeValue, Box } from "@chakra-ui/react";
+import { Button, useColorModeValue, Box } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { useAuth } from "../../context/authContext";
 import { getNextEventsfromOrg } from "../../services/org.service";
@@ -71,19 +71,6 @@ export const OrgNextEvents = () => {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/*comentado en caso de que queramos poner los botones de navegación */}
-        {/* <div className="buttonsScrollContainer">
-        <button
-          onClick={() => {
-            preIndex();
-          }}
-        >
-          <img
-            className="imagePrevious"
-            src={next}
-            alt="button to the previous image"
-          />
-        </button> */}
         <h1 className="imageName" style={{ backgroundColor: bg }}>
           Futuros eventos
         </h1>
@@ -137,33 +124,9 @@ export const OrgNextEvents = () => {
               </div>
             ))}
         </div>
-        {/* <button onClick={() => nextIndex()}>
-          <img
-            className="imageNext"
-            src={next}
-            alt="button to the next image"
-          />
-        </button>
-      </div> */}
+
         <div className="setActiveIndexOuterDiv">
           <div className="setActiveIndexInnerDiv">
-            {/* {events.map((element, index) => {
-            index == activeIndex ? (
-              <span
-                className="spanActive activeImg"
-                onClick={() => {
-                  setActiveIndex(index);
-                }}
-              ></span>
-            ) : (
-              <span
-                className="spanActive"
-                onClick={() => {
-                  setActiveIndex(index);
-                }}
-              ></span>
-            );
-          })} */}
             {events.map((element, index) => {
               if (index == activeIndex) {
                 return (
@@ -190,7 +153,6 @@ export const OrgNextEvents = () => {
           </div>
         </div>
       </div>
-      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
     <></>

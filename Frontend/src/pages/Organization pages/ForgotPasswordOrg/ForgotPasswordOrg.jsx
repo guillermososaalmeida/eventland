@@ -10,7 +10,7 @@ export const ForgotPasswordOrg = () => {
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [forgotOk, setForgotOk] = useState(false);
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const color = useColorModeValue("#173F4B", "#173F4B");
 
   //! 1)-------------------- LA FUNCIOON QUE SE ENCARGA DE GESTIONAR LOS DATOS DEL FORMULARIO
 

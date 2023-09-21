@@ -18,8 +18,8 @@ export const useLoginError = (res, setRes, userLogin, setLoginOk) => {
 
     Swal.fire({
       icon: "success",
-      title: "Welcome to my Page",
-      text: "Login ok ✅",
+      title: "¡Bienvenidx!",
+      text: "Sesión iniciada ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -32,7 +32,7 @@ export const useLoginError = (res, setRes, userLogin, setLoginOk) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Unregistered user ❎",
+      text: "Usuario no registrado ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -45,7 +45,7 @@ export const useLoginError = (res, setRes, userLogin, setLoginOk) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Password dont match ❎",
+      text: "No coinciden las contraseñas ❎",
       showConfirmButton: false,
       timer: 1500,
     });

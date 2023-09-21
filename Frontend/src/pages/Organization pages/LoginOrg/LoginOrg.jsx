@@ -15,7 +15,7 @@ export const LoginOrg = () => {
 
   const { handleSubmit, register } = useForm();
 
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const color = useColorModeValue("#173F4B", "#173F4B");
   const formSubmit = async (formData) => {
     setIsLoading(true);
     setLoggedOrg(await loginOrgService(formData));

@@ -13,7 +13,7 @@ export const useOrgCheckCodeError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval Server Error ❎!",
+      text: "Internal Server Error ❎!",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -39,7 +39,7 @@ export const useOrgCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "success",
-      title: "Ok correct code ✅",
+      title: "Código correcto ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -66,7 +66,7 @@ export const useOrgCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "No correct Code ❎.",
+      title: "Código incorrecto ❎.",
       text: "Your organization is delete. Register again, please.",
       showConfirmButton: false,
       timer: 2500,
@@ -78,7 +78,7 @@ export const useOrgCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "No correct Code ❎.",
+      title: "Código incorrecto ❎.",
       text: "No delete organization. Try again, please.",
       showConfirmButton: false,
       timer: 2500,

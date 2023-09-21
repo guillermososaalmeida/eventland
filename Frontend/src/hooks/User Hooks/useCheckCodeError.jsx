@@ -6,14 +6,14 @@ export const useCheckCodeError = (
   setOkCheck,
   setOkDeleteUser,
   userlogin,
-  setUserNotFound
+  setUserNotFound,
 ) => {
   // ---------------------> 500
   if (res?.response?.status == 500) {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval Server Error ❎!",
+      text: "Internal Server Error ❎!",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -39,7 +39,7 @@ export const useCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "success",
-      title: "Ok correct code ✅",
+      title: "Código correcto ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -52,8 +52,8 @@ export const useCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
-      text: "No delete user. Try again, please.",
+      title: "Internal server error ❎.",
+      text: "Usuario no borrado, inténtalo otra vez",
       showConfirmButton: false,
       timer: 2500,
     });
@@ -66,8 +66,8 @@ export const useCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "No correct Code ❎.",
-      text: "Your user is delete. Register again, please.",
+      title: "Código incorrecto ❎.",
+      text: "Tu usurio se ha borrado, regístrate de nuevo",
       showConfirmButton: false,
       timer: 2500,
     });
@@ -78,8 +78,8 @@ export const useCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "No correct Code ❎.",
-      text: "No delete user. Try again, please.",
+      title: "Código incorrecto  ❎.",
+      text: "Tu usurio se ha borrado, regístrate de nuevo",
       showConfirmButton: false,
       timer: 2500,
     });
@@ -92,7 +92,7 @@ export const useCheckCodeError = (
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
+      title: "Internal server error ❎.",
       text: "No delete user. Try again, please.",
       showConfirmButton: false,
       timer: 1500,

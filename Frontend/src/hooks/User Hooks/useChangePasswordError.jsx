@@ -8,7 +8,7 @@ export const useChangePasswordError = (res, setRes, setUser) => {
     setRes(() => ({}));
     return Swal.fire({
       icon: "success",
-      title: "Change password ok ✅",
+      title: "Contraseña cambiada ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -31,7 +31,7 @@ export const useChangePasswordError = (res, setRes, setUser) => {
     return Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Old password don't match,  ❎ Try again, please",
+      text: "No coinciden las contraseñas,  ❎ Inténtalo otra vez",
       showConfirmButton: false,
       timer: 3000,
     });
@@ -42,8 +42,8 @@ export const useChangePasswordError = (res, setRes, setUser) => {
     setRes(() => ({}));
     return Swal.fire({
       icon: "error",
-      title: "Your new password is not strong enough ❎.",
-      text: "Please, try again",
+      title: "Tu nueva contraseña no es lo suficientemente fuerte ❎.",
+      text: "Por favor, inténtalo otra vez",
       showConfirmButton: false,
       timer: 3000,
     });

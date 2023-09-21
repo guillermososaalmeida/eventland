@@ -2,7 +2,14 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2/dist/sweetalert2.all.js";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  useColorModeValue,
+  Text,
+  Stack,
+  Input,
+} from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { changePasswordOrgToken } from "../../services/org.service";
 import { useOrgChangePasswordError } from "../../hooks";
@@ -24,7 +31,7 @@ export const OrgChangePassword = () => {
 
     if (newPassword == confirmPassword) {
       Swal.fire({
-        title: "Are you sure you want to change your password?",
+        title: "¿Quieres cambiar la contraseña?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "rgb(74, 186, 158)",
@@ -40,7 +47,7 @@ export const OrgChangePassword = () => {
     } else {
       Swal.fire({
         icon: "error",
-        title: " New Password don't match witch confirmation password❎.",
+        title: "La nueva contraseña no coincide con la anterior ❎.",
         showConfirmButton: false,
         timer: 2500,
       });
@@ -57,13 +64,21 @@ export const OrgChangePassword = () => {
   //! no tenemos condicionales de navegacion porque cuando me desloguee el componente protected me llevara al login
 
   return (
-    <Box bg={bg} color={color}>
-      <div className="form-wrap">
-        <h1>Change your password ♻</h1>
-        <p>Please, enter your old and new passwords</p>
-        <form onSubmit={handleSubmit(formSubmit)}>
+    <Box
+      bg={bg}
+      color={color}
+      align="start"
+      display="flex"
+      flexDir="column"
+      gap="2em"
+    >
+      <Text as="b">Por favor, introduce tu antigua contraseña</Text>
+      <form onSubmit={handleSubmit(formSubmit)}>
+        <Stack gap="2em">
           <div className="password_container form-group">
-            <input
+            <Input
+              rounded="5"
+              border={"1px solid #173F4B "}
               className="input_user"
               type="password"
               id="password"
@@ -72,11 +87,12 @@ export const OrgChangePassword = () => {
               {...register("password", { required: true })}
             />
             <label htmlFor="custom-input" className="custom-placeholder">
-              Old password
+              Antigua contraseña
             </label>
           </div>
           <div className="newPassword_container form-group">
-            <input
+            <Input
+              border={"1px solid #173F4B"}
               className="input_user"
               type="password"
               id="newPassword"
@@ -85,11 +101,13 @@ export const OrgChangePassword = () => {
               {...register("newPassword", { required: true })}
             />
             <label htmlFor="custom-input" className="custom-placeholder">
-              New password
+              Nueva contraseña
             </label>
           </div>
           <div className="confirmPassword_container form-group">
-            <input
+            <Input
+              rounded="5"
+              border={"1px solid #173F4B "}
               className="input_user"
               type="password"
               id="confirmPassword"
@@ -98,16 +116,20 @@ export const OrgChangePassword = () => {
               {...register("confirmPassword", { required: true })}
             />
             <label htmlFor="custom-input" className="custom-placeholder">
-              Confirm new password
+              Confirma tu nueva contraseña
             </label>
           </div>
-          <div className="btn_container">
-            <Button className="btn" type="submit" isLoading={isLoading}>
-              CHANGE PASSWORD
-            </Button>
-          </div>
-        </form>
-      </div>
+          <Button
+            justifySelf="center"
+            className="btn"
+            type="submit"
+            isLoading={isLoading}
+            colorScheme="teal"
+          >
+            Cambiar contraseña
+          </Button>
+        </Stack>
+      </form>
     </Box>
   );
 };

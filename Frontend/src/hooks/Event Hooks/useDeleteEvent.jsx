@@ -3,7 +3,7 @@ import { deleteEventService } from "../../services/event.service";
 
 export const useDeleteEvent = (navigate, id) => {
   Swal.fire({
-    title: "Are you sure you want to delete your event?",
+    title: "¿Quieres borrar el evento?",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "rgb(73, 193, 162)",
@@ -16,8 +16,8 @@ export const useDeleteEvent = (navigate, id) => {
         case 200:
           Swal.fire({
             icon: "success",
-            title: "Deleted Event",
-            text: "See you soon",
+            title: "Evento borrado",
+            text: "¡Hasta pronto!",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -27,8 +27,8 @@ export const useDeleteEvent = (navigate, id) => {
         default:
           Swal.fire({
             icon: "error",
-            title: "No deleted Event ❎",
-            text: "Please, try again",
+            title: "No se ha borrado el evento ❎",
+            text: "Por favor, inténtalo otra vez",
             showConfirmButton: false,
             timer: 1500,
           });
