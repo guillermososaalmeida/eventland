@@ -27,13 +27,20 @@ export const EventList = () => {
       <HStack
         flexWrap="wrap"
         gap="10"
-        p="5"
+        p="10"
         align={"center"}
         justifyContent="center"
       >
         {eventData?.length > 0 ? (
           eventData?.map((event) => (
-            <Card key={event._id} borderRadius="15">
+            <Card
+              transition="0.3s"
+              key={event._id}
+              borderRadius="15"
+              _hover={{
+                transform: "scale(1.1)",
+              }}
+            >
               <Center flexDir="column">
                 <Image
                   w="3xs"
@@ -43,7 +50,9 @@ export const EventList = () => {
                   alt={event.name}
                   borderRadius="15"
                 />
-                <Link to={`/eventdetail/${event._id}`}>{event?.name}</Link>
+                <Link to={`/eventdetail/${event._id}`}>
+                  <Text p="2">{event?.name}</Text>
+                </Link>
               </Center>
             </Card>
           ))

@@ -17,12 +17,22 @@ import {
   SingleEvent,
 } from "../../../components";
 import { useIsEmpty } from "../../../hooks";
+import { useEffect, useState } from "react";
+import { getSingleNextEvent } from "../../../services/user.service";
+import { ArrowRightIcon } from "@chakra-ui/icons";
 
 export const Home = () => {
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const isEmpty = useIsEmpty();
-  console.log("isEmpty", isEmpty);
+  const [event, setEvent] = useState({});
+  useEffect(() => {
+    const getEvent = async () => {
+      const data = await getSingleNextEvent();
+      setEvent(await data);
+    };
+    getEvent();
+  }, []);
 
   return isEmpty ? (
     <Center bg={bg} color={color} h="92.8vh">
@@ -64,8 +74,18 @@ export const Home = () => {
     </Center>
   ) : (
     <Box bg={bg} color={color} minH="92.9vh">
-      <Flex p="5">
-        <Heading p="10">Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
+      <Flex p="10" gap="2em">
+        <Stack justify="space-between">
+          <Heading>Tenemos miles de eventos, ¡encuentra el tuyo!</Heading>
+          {event ? (
+            <>
+              <Heading fontSize="2xl">
+                Aquí tienes el próximo
+                <ArrowRightIcon color={color} />
+              </Heading>
+            </>
+          ) : null}
+        </Stack>
         <SingleEvent />
       </Flex>
       <FutureEvents />
