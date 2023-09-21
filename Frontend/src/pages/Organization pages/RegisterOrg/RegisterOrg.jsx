@@ -61,84 +61,112 @@ export const RegisterOrg = () => {
   }
   return (
     <>
-      <Box className="card" bg={bg} color={color}>
-        <Text fontSize="3xl" as="b">
-          Sign in
-        </Text>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <FormControl isInvalid={errors.name} isRequired>
-            <FormLabel htmlFor="name">Name</FormLabel>
-            <Input
-              id="name"
-              variant="filled"
-              placeholder="name"
-              {...register("name", {
-                required: "This is required",
-                minLength: { value: 4, message: "Minimum length should be 4" },
-              })}
-            />
-            <FormErrorMessage>
-              {errors.name && errors.name.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              variant="filled"
-              autoComplete="false"
-              placeholder="password"
-              {...register("password", {
-                required: "This is required",
-              })}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="email">Email</FormLabel>
-            <Input
-              id="email"
-              variant="filled"
-              placeholder="your email"
-              {...register("email", {
-                required: "This is required",
-              })}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="description">Description</FormLabel>
-            <Input
-              id="description"
-              variant="filled"
-              placeholder="describe your organization"
-              {...register("description")}
-            />
-          </FormControl>
-
-          <Uploadfile />
-          {/* <FormControl isInvalid={errors.name}>
-            <FormLabel htmlFor="name">City</FormLabel>
-            <Input
-              id="city"
-              variant="filled"
-              placeholder="city"
-              {...register("city", {})}
-            />
-          </FormControl> */}
-          <FormControl isInvalid={errors.name}>
-            <FormLabel htmlFor="year">Year of creation</FormLabel>
-            <Input
-              type="year"
-              id="year"
-              variant="filled"
-              {...register("year")}
-            />
-          </FormControl>
-          <Button mt={4} colorScheme="teal" type="submit" isLoading={isLoading}>
-            Submit
-          </Button>
-        </form>
-      </Box>
+      <div className="form-container">
+        <Box className="card" color={color}>
+          <Text fontSize="3xl" as="b">
+            Regístrate
+          </Text>
+          <form onSubmit={handleSubmit(formSubmit)}>
+            <FormControl isInvalid={errors.name} isRequired>
+              <FormLabel htmlFor="name">Nombre</FormLabel>
+              <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                id="name"
+                variant="filled"
+                {...register("name", {
+                  required: "This is required",
+                  minLength: {
+                    value: 4,
+                    message: "Minimum length should be 4",
+                  },
+                })}
+              />
+              <FormErrorMessage>
+                {errors.name && errors.name.message}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="password">Contraseña</FormLabel>
+              <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                id="password"
+                type="password"
+                variant="filled"
+                autoComplete="false"
+                {...register("password", {
+                  required: "This is required",
+                })}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                id="email"
+                variant="filled"
+                {...register("email", {
+                  required: "This is required",
+                })}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="description">Descripción</FormLabel>
+              <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
+                id="description"
+                variant="filled"
+                placeholder="describe tu organización"
+                {...register("description")}
+              />
+            </FormControl>
+            <Uploadfile />
+            {/* <FormControl isInvalid={errors.name}>
+              <FormLabel htmlFor="name">City</FormLabel>
+              <Input
+                id="city"
+                variant="filled"
+                placeholder="city"
+                {...register("city", {})}
+              />
+            </FormControl> */}
+            <FormControl isInvalid={errors.name}>
+              <FormLabel htmlFor="year">Año de creación</FormLabel>
+              <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
+                type="year"
+                id="year"
+                variant="filled"
+                {...register("year")}
+              />
+            </FormControl>
+            <Button
+              mt={4}
+              colorScheme="teal"
+              type="submit"
+              isLoading={isLoading}
+            >
+              Registrar
+            </Button>
+          </form>
+        </Box>
+      </div>
     </>
   );
 };

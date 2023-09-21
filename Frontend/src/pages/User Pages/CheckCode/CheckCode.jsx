@@ -11,7 +11,14 @@ import {
   useAutoLogin,
   useResendCodeError,
 } from "../../../hooks";
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Input,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 export const CheckCode = () => {
   // eslint-disable-next-line no-unused-vars
   const { allUser, userLogin, setUser } = useAuth();
@@ -23,7 +30,6 @@ export const CheckCode = () => {
   const [okCheck, setOkCheck] = useState(false);
   const [okDeleteUser, setOkDeleteUser] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   //! -------FUNCION QUE GESTIONA LA DATA DEL FORMULARIO-------
   const formSubmit = async (formData) => {
@@ -119,56 +125,65 @@ export const CheckCode = () => {
   }
 
   return (
-    <Box bg={bg} color={color}>
-      <div className="form-wrap">
-        <h1>Verify your code 👌</h1>
-        <p>Write the code sent to your email</p>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <div className="user_container form-group">
-            <input
-              className="input_user"
-              type="text"
-              id="name"
-              name="name"
-              autoComplete="false"
-              {...register("confirmationCode", { required: false })}
-            />
-            <label htmlFor="custom-input" className="custom-placeholder">
-              Registration code
-            </label>
-          </div>
-
-          <div className="btn_container">
-            <button
-              id="btnCheck"
-              className="btn"
-              type="submit"
-              disabled={send}
-              style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-            >
-              Verify Code
-            </button>
-          </div>
-          <div className="btn_container">
-            <button
-              id="btnResend"
-              className="btn"
-              disabled={send}
-              style={{ background: send ? "#49c1a388" : "#49c1a2" }}
-              onClick={() => handleReSend()}
-            >
-              Resend Code
-            </button>
-          </div>
-
-          <p className="bottom-text">
-            <small>
-              If the code is not correct ❌, your user will be deleted from the
-              database and you will need to register again.{" "}
-            </small>
-          </p>
-        </form>
-      </div>
-    </Box>
+    <div className="form-container">
+      <Box color={color} className="card" maxW="600px">
+        <div className="form-wrap">
+          <Text fontSize="3xl" as="b">
+            Verifica tu código
+          </Text>
+          <p>Por favor, introduce el código que te hemos enviado el email</p>
+          <form onSubmit={handleSubmit(formSubmit)}>
+            <div className="user_container form-group">
+              <Input
+                border="none"
+                rounded="0"
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
+                className="input_user"
+                type="text"
+                id="name"
+                name="name"
+                autoComplete="false"
+                {...register("confirmationCode", { required: false })}
+              />
+              <label htmlFor="custom-input" className="custom-placeholder">
+                Código de confirmación
+              </label>
+            </div>
+            <ButtonGroup width="500px" display="flex" justifyContent="start">
+              <Button
+                colorScheme="teal"
+                id="btnCheck"
+                className="btn"
+                type="submit"
+                disabled={send}
+                style={{ background: send ? "#49c1a388" : "#49c1a2" }}
+              >
+                Verificar código
+              </Button>
+              <Button
+                colorScheme="teal"
+                id="btnResend"
+                className="btn"
+                disabled={send}
+                style={{ background: send ? "#49c1a388" : "#49c1a2" }}
+                onClick={() => handleReSend()}
+              >
+                Reenviar código
+              </Button>
+            </ButtonGroup>
+            <p className="bottom-text">
+              <small>
+                Si el código no es correcto, tu usuario se eliminará de nuestra
+                base de datos y será necesario que te registres de nuevo
+              </small>
+            </p>
+          </form>
+        </div>
+      </Box>
+    </div>
   );
 };

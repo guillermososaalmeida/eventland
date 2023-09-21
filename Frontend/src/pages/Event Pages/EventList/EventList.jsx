@@ -17,7 +17,7 @@ export const EventList = () => {
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const eventData = useGetEventsFromSearchParams();
   return (
-    <Box bg={bg} color={color}>
+    <Box bg={bg} color={color} minH="92.9vh">
       <Stack>
         <Heading p="5">Home</Heading>
         <Heading ml="5" size="4xs" fontSize="20">

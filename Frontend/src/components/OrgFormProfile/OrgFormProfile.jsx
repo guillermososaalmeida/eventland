@@ -13,6 +13,7 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
 import { Uploadfile } from "../UploadFile/UploadFile";
 import { FigureOrg } from "../FigureOrg/FigureOrg";
@@ -21,10 +22,6 @@ import { useOrgDelete, useOrgUpdateError } from "../../hooks";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { useNavigate } from "react-router-dom";
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
 export const OrgFormProfile = () => {
   const { organization, setOrganization, logoutUpdateOrg } = useOrgAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
@@ -42,12 +39,12 @@ export const OrgFormProfile = () => {
 
   const formSubmit = (formData) => {
     Swal.fire({
-      title: "Are you sure you want to change your data profile?",
+      title: "¿Estás seguro de que quieres editar tu perfil?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "rgb(73, 193, 162)",
       cancelButtonColor: "#d33",
-      confirmButtonText: "YES",
+      confirmButtonText: "SI",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById("file-upload").files;
@@ -78,8 +75,10 @@ export const OrgFormProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [res]);
   return (
-    <Box bg={bg} color={color}>
-      <Box
+    <>
+      <Stack
+        bg={bg}
+        color={color}
         display="flex"
         flexWrap="wrap"
         justifyContent="center"
@@ -90,19 +89,21 @@ export const OrgFormProfile = () => {
           <FigureOrg
             organization={{
               image: organization.image,
-              email: organization.image,
+              email: organization.email,
             }}
           />
         </Box>
-        <Box>
+        <Box w="100%">
           <Stack>
-            <Text as="b">Cambia tus datos de organizador</Text>
+            <Text as="b">Cambia los datos de tu organizador</Text>
             <Text>Por favor, introduce tus nuevos datos</Text>
           </Stack>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl>
+              <Divider borderColor="#173F4B" />
               <FormLabel>Nombre de la organización</FormLabel>
               <Input
+                border={"1px solid #173F4B"}
                 type="text"
                 autoComplete="false"
                 name="name"
@@ -111,8 +112,10 @@ export const OrgFormProfile = () => {
               />
             </FormControl>
             <FormControl>
+              <Divider borderColor="#173F4B" />
               <FormLabel>Descripción</FormLabel>
               <Input
+                border={"1px solid #173F4B"}
                 type="text"
                 autoComplete="false"
                 name="description"
@@ -120,10 +123,13 @@ export const OrgFormProfile = () => {
                 {...register("description")}
               />
             </FormControl>
-            <Uploadfile />
-
-            <Button type="submit" marginTop="5px" isLoading={isLoading} bg={bg}>
-              Change data profile
+            <FormControl>
+              <Divider borderColor="#173F4B" p="5" />
+              <FormLabel>Imagen</FormLabel>
+              <Uploadfile />
+            </FormControl>
+            <Button type="submit" isLoading={isLoading} colorScheme="teal">
+              Editar perfil
             </Button>
           </form>
         </Box>
@@ -135,13 +141,14 @@ export const OrgFormProfile = () => {
             useOrgDelete(setOrganization, navigate);
           }}
         >
-          <Button>Borrar organización</Button>
+          <Button border={"1px solid #173F4B"}>Borrar organización</Button>
           <IconButton
+            border={"1px solid #173F4B"}
             aria-label="Borrar organización"
             icon={<DeleteIcon color="red" />}
           />
         </ButtonGroup>
-      </Box>
-    </Box>
+      </Stack>
+    </>
   );
 };

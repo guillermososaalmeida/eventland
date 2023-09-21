@@ -14,13 +14,24 @@ export const useAutoLogin = async (allUser, userLogin) => {
 
     if (sendData?.status == 200) {
       // eslint-disable-next-line no-unsafe-optional-chaining
-      const { name, email, image, check } = sendData?.data?.user;
+      const {
+        name,
+        email,
+        image,
+        check,
+        eventsAttend,
+        eventsInterested,
+        organizationsFav,
+      } = sendData.data.user;
       const userCustom = {
         token: sendData.data.token,
         user: name,
         email,
         image,
         check,
+        eventsAttend,
+        eventsInterested,
+        organizationsFav,
         _id: sendData.data.user._id,
       };
 

@@ -72,11 +72,11 @@ export const Register = () => {
       <div className="form-container">
         <Box className="card">
           <Text fontSize="3xl" as="b">
-            Sign in
+            Regístrate
           </Text>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl isInvalid={errors.name} isRequired>
-              <FormLabel htmlFor="name">UserName</FormLabel>
+              <FormLabel htmlFor="name">Nombre de usuario</FormLabel>
               <Input
                 borderBottom={"1px solid #003b43"}
                 bg="transparent"
@@ -85,7 +85,6 @@ export const Register = () => {
                 _hover={{ background: "#173F4B33" }}
                 _focus={{ borderColor: "#173F4B" }}
                 _placeholder={{ color: "#003b43" }}
-                placeholder="name"
                 {...register("name", {
                   required: "This is required",
                   minLength: {
@@ -99,7 +98,7 @@ export const Register = () => {
               </FormErrorMessage>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">Contraseña</FormLabel>
               <Input
                 borderBottom={"1px solid #003b43"}
                 bg="transparent"
@@ -110,7 +109,6 @@ export const Register = () => {
                 type="password"
                 variant="filled"
                 autoComplete="false"
-                placeholder="password"
                 {...register("password", {
                   required: "This is required",
                 })}
@@ -126,14 +124,13 @@ export const Register = () => {
                 _placeholder={{ color: "#003b43" }}
                 id="email"
                 variant="filled"
-                placeholder="your email"
                 {...register("email", {
                   required: "This is required",
                 })}
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="gender">Gender</FormLabel>
+              <FormLabel htmlFor="gender">Género</FormLabel>
               {/*el onclick setea el estado de gender  */}
               <Flex>
                 <Button
@@ -193,9 +190,10 @@ export const Register = () => {
               />
             </FormControl> */}
             <FormControl isInvalid={errors.name}>
-              <FormLabel htmlFor="dateOfBirth">Date of birth</FormLabel>
+              <FormLabel htmlFor="dateOfBirth">Fecha de nacimiento</FormLabel>
 
               <Input
+                rounded="0"
                 type="date"
                 id="dateOfBirth"
                 variant="filled"
@@ -208,7 +206,7 @@ export const Register = () => {
               isLoading={isLoading}
               isDisabled={!gender}
             >
-              Submit
+              Enviar
             </Button>
           </form>
         </Box>

@@ -3,14 +3,13 @@ import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { forgotPasswordOrg } from "../../../services/org.service";
 import { useForgotPasswordError } from "../../../hooks";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Input, Box, Text, useColorModeValue } from "@chakra-ui/react";
 
 export const ForgotPasswordOrg = () => {
   const { handleSubmit, register } = useForm();
   const [res, setRes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [forgotOk, setForgotOk] = useState(false);
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
 
   //! 1)-------------------- LA FUNCIOON QUE SE ENCARGA DE GESTIONAR LOS DATOS DEL FORMULARIO
@@ -33,42 +32,56 @@ export const ForgotPasswordOrg = () => {
   }
 
   return (
-    <Box bg={bg} color={color}>
-      <div className="ForgotPasswordBody">
-        <div className="form-wrap">
-          <h1>Change your password</h1>
+    <div className="form-container">
+      <Box className="card" color={color}>
+        <div className="ForgotPasswordBody">
+          <div className="form-wrap">
+            <Text fontsize="3x1" as="b">
+              Cambiar contraseña
+            </Text>
 
-          <form onSubmit={handleSubmit(formSubmit)}>
-            <div className="user_container form-group">
-              <input
-                className="input_user"
-                type="text"
-                id="email"
-                name="email"
-                {...register("email", { required: true })}
-              />
-              <label htmlFor="custom-input" className="custom-placeholder">
-                Email
-              </label>
-            </div>
+            <form onSubmit={handleSubmit(formSubmit)}>
+              <div className="user_container form-group">
+                <Input
+                  borderBottom={"1px solid #003b43"}
+                  bg="transparent"
+                  _hover={{ background: "#173F4B33" }}
+                  _focus={{ borderColor: "#173F4B" }}
+                  _placeholder={{ color: "#003b43" }}
+                  className="input_user"
+                  type="text"
+                  id="email"
+                  name="email"
+                  border="none"
+                  rounded="0"
+                  {...register("email", { required: true })}
+                />
+                <label htmlFor="custom-input" className="custom-placeholder">
+                  Email
+                </label>
+              </div>
 
-            <div className="btn_container">
-              <Button
-                className="btn"
-                type="submit"
-                disabled={isLoading}
-                isLoading={isLoading}
-              >
-                Change password
-              </Button>
-            </div>
+              <div className="btn_container">
+                <Button
+                  className="btn"
+                  type="submit"
+                  disabled={isLoading}
+                  isLoading={isLoading}
+                  colorScheme="teal"
+                >
+                  Cambiar contraseña
+                </Button>
+              </div>
 
-            <p className="bottom-text">
-              <small>Enter your email to send you the new password 💌</small>
-            </p>
-          </form>
+              <p className="bottom-text">
+                <small>
+                  Introduce tu email para enviarte una nueva contraseña
+                </small>
+              </p>
+            </form>
+          </div>
         </div>
-      </div>
-    </Box>
+      </Box>
+    </div>
   );
 };

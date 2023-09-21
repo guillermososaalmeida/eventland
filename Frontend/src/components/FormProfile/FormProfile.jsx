@@ -14,8 +14,9 @@ import {
   Stack,
   Text,
   useRadioGroup,
-  HStack,
   useColorModeValue,
+  Flex,
+  Divider,
 } from "@chakra-ui/react";
 import { RadioCard } from "../RadioCard/RadioCard";
 import { Uploadfile } from "../UploadFile/UploadFile";
@@ -24,10 +25,7 @@ import { updateUser } from "../../services/user.service";
 import { useDeleteUser, useUpdateError } from "../../hooks";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
-//!AÑADIR TAMBIÉN QUE PUEDA CAMBIAR CITY
+
 export const FormProfile = () => {
   const { user, setUser, logoutUpdate } = useAuth(); // destructuring de lo que necesitamos del context
   const { register, handleSubmit } = useForm();
@@ -52,12 +50,12 @@ export const FormProfile = () => {
 
   const formSubmit = (formData) => {
     Swal.fire({
-      title: "Are you sure you want to change your data profile?",
+      title: "¿Estás seguro de que quieres editar tu perfil?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "rgb(73, 193, 162)",
       cancelButtonColor: "#d33",
-      confirmButtonText: "YES",
+      confirmButtonText: "SI",
     }).then(async (result) => {
       if (result.isConfirmed) {
         const inputFile = document.getElementById("file-upload").files;
@@ -91,7 +89,7 @@ export const FormProfile = () => {
   }, [res]);
   return (
     <>
-      <Box
+      <Stack
         bg={bg}
         color={color}
         display="flex"
@@ -103,15 +101,18 @@ export const FormProfile = () => {
         <Box paddingInline="10px">
           <FigureUser user={user} />
         </Box>
-        <Box>
+        <Box w="100%">
           <Stack>
-            <Text as="b">Change your data profile</Text>
-            <Text>Please, enter your new data profile</Text>
+            <Text as="b">Cambia los datos de tu perfil</Text>
+            <Text>Por favor, introduce tus nuevos datos</Text>
           </Stack>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl>
-              <FormLabel>Username</FormLabel>
+              <Divider borderColor="#173F4B" />
+
+              <FormLabel>Nombre de usuario</FormLabel>
               <Input
+                border={"1px solid #173F4B"}
                 type="text"
                 autoComplete="false"
                 name="name"
@@ -119,25 +120,32 @@ export const FormProfile = () => {
                 {...register("name")}
               />
             </FormControl>
-            <Uploadfile />
-            <HStack
-              {...group}
-              onClick={(e) => {
-                console.log(e.target.value);
-                setGender(e.target.value);
-              }}
-            >
-              {options.map((value) => {
-                const radio = getRadioProps({ value });
-                return (
-                  <RadioCard key={value} {...radio}>
-                    {value}
-                  </RadioCard>
-                );
-              })}
-            </HStack>
-            <Button type="submit" marginTop="5px" isLoading={isLoading} bg={bg}>
-              Change data profile
+
+            <Flex flexDir="column">
+              <Divider borderColor="#173F4B" p="5" />
+              <FormLabel>Imagen</FormLabel>
+              <Uploadfile />
+              <Divider borderColor="#173F4B" p="5" />
+              <FormLabel>Género</FormLabel>
+
+              <Flex
+                {...group}
+                onClick={(e) => {
+                  setGender(e.target.value);
+                }}
+              >
+                {options.map((value) => {
+                  const radio = getRadioProps({ value });
+                  return (
+                    <RadioCard key={value} {...radio}>
+                      {value}
+                    </RadioCard>
+                  );
+                })}
+              </Flex>
+            </Flex>
+            <Button type="submit" isLoading={isLoading} colorScheme="teal">
+              Editar perfil
             </Button>
           </form>
         </Box>
@@ -149,13 +157,14 @@ export const FormProfile = () => {
             useDeleteUser(setUser, navigate);
           }}
         >
-          <Button>Borrar usuario</Button>
+          <Button border={"1px solid #173F4B"}>Borrar usuario</Button>
           <IconButton
+            border={"1px solid #173F4B"}
             aria-label="Borrar usuario"
             icon={<DeleteIcon color="red" />}
           />
         </ButtonGroup>
-      </Box>
+      </Stack>
     </>
   );
 };

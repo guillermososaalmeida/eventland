@@ -20,3 +20,4 @@ export * from "./Event Hooks/useGetEventsFromSearchParams";
 export * from "./Event Hooks/useDeleteEvent";
 export * from "./User Hooks/useEventLiked";
 export * from "./User Hooks/useEventAttend";
+export * from "./User Hooks/useIsEmpty";

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, Navigate } from "react-router-dom";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, Input, useColorModeValue, Text } from "@chakra-ui/react";
 import { loginOrgService } from "../../../services/org.service";
 import { useOrgLoginError } from "../../../hooks";
 import { useOrgAuth } from "../../../context/authOrgContext";
@@ -15,7 +15,6 @@ export const LoginOrg = () => {
 
   const { handleSubmit, register } = useForm();
 
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const formSubmit = async (formData) => {
     setIsLoading(true);
@@ -47,52 +46,74 @@ export const LoginOrg = () => {
   }
 
   return (
-    <Box bg={bg} color={color}>
-      <div className="form-wrap">
-        <h1>Login</h1>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <div className="email_container form-group">
-            <p>email</p>
-            <label
-              htmlFor="custom-input"
-              className="custom-placeholder"
-            ></label>
-            <input
-              className="input_user"
-              type="email"
-              id="email"
-              name="email"
-              autoComplete="false"
-              {...register("email", {})}
-            />
-          </div>
-          <div className="password_container form-group">
-            <p>password</p>
-            <label
-              htmlFor="custom-input"
-              className="custom-placeholder"
-            ></label>
+    <div className="form-container">
+      <Box color={color} className="card">
+        <div className="form-wrap">
+          <Text fontSize="3xl" as="b">
+            Inicia sesión
+          </Text>
+          <form onSubmit={handleSubmit(formSubmit)}>
+            <div className="email_container form-group">
+              <p>email</p>
+              <label
+                htmlFor="custom-input"
+                className="custom-placeholder"
+              ></label>
+              <Input
+                border="none"
+                rounded="0"
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
+                className="input_user"
+                type="email"
+                id="email"
+                name="email"
+                autoComplete="false"
+                {...register("email", {})}
+              />
+            </div>
+            <div className="password_container form-group">
+              <p>contraseña</p>
+              <label
+                htmlFor="custom-input"
+                className="custom-placeholder"
+              ></label>
 
-            <input
-              className="input_user"
-              type="password"
-              id="password"
-              name="password"
-              autoComplete="false"
-              {...register("password", {})}
-            />
-          </div>
-          <div className="btn_container">
-            <Button className="btn" type="submit" isLoading={isLoading}>
-              Login
-            </Button>
-          </div>
-        </form>
-        <p>
-          Forgot password?
-          <Link to="/forgotpassword/forgotpasswordorg">Reset password</Link>
-        </p>
-      </div>
-    </Box>
+              <Input
+                border="none"
+                rounded="0"
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
+                className="input_user"
+                type="password"
+                id="password"
+                name="password"
+                autoComplete="false"
+                {...register("password", {})}
+              />
+            </div>
+            <div className="btn_container">
+              <Button
+                className="btn"
+                type="submit"
+                isLoading={isLoading}
+                colorScheme="teal"
+              >
+                Iniciar sesión
+              </Button>
+            </div>
+          </form>
+          <Link to="/forgotpassword/forgotpasswordorg">
+            ¿Has olvidado tu contraseña?
+          </Link>
+        </div>
+      </Box>
+    </div>
   );
 };

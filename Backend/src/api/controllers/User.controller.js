@@ -29,13 +29,22 @@ const register = async (req, res, next) => {
     await User.syncIndexes();
 
     let confirmationCode = randomCode();
+    let eventsAttend = [];
+    let eventsInterested = [];
+    let organizationsFav = [];
 
     const { email, name } = req.body;
 
     const userExist = await User.findOne({ email: email }, { name: name });
 
     if (!userExist) {
-      const newUser = new User({ ...req.body, confirmationCode });
+      const newUser = new User({
+        ...req.body,
+        confirmationCode,
+        eventsAttend,
+        eventsInterested,
+        organizationsFav,
+      });
 
       if (req.file) {
         newUser.image = catchImg;

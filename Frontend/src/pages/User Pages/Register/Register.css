@@ -1,8 +1,8 @@
 /* Glassmorphism card effect */
 .card {
-  backdrop-filter: blur(18px) saturate(100%);
-  -webkit-backdrop-filter: blur(16px) saturate(100%);
-  background-color: #b0d9dc7d;
+  backdrop-filter: blur(26px) saturate(100%);
+  -webkit-backdrop-filter: blur(20px) saturate(100%);
+  background-color: #bceef27d;
   border-radius: 12px;
   border: 1px solid rgba(63, 114, 192, 0.3);
   width: 50%;
@@ -15,8 +15,8 @@
   align-items: center;
   justify-content: center;
   padding: 1em;
-  background-image: url("https://res.cloudinary.com/dhr13yihn/image/upload/v1695296004/proyectoEventland/assets/Captura_de_pantalla_2023-09-21_132504_i54jne.png");
-  background-size: 450px;
+  background-image: url("https://res.cloudinary.com/dhr13yihn/image/upload/v1695223761/proyectoEventland/assets/OIG_ovz6jg.jpg");
+  background-size: 750px;
   background-position: center;
 }
 
