@@ -34,7 +34,7 @@ export const OrganizationDetail = () => {
   }, [id, isFollowing]);
 
   return (
-    <Box bg={bg} color={color} minH="92.9vh">
+    <Box bg={bg} color={color} minH="92.9vh" p="10">
       <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -99,6 +99,7 @@ export const OrganizationDetail = () => {
           </Heading>
 
           <Image
+            rounded="10"
             src={organization.image}
             alt={organization.name}
             onError={(e) => {

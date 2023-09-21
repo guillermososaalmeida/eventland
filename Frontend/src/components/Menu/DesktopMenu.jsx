@@ -25,8 +25,18 @@ export const DesktopMenu = ({
 
   return (
     <>
-      <ButtonGroup flexWrap="nowrap" justifyContent="space-between" w="60vw">
-        <Button color={color} background="transparent" transition="0.3s">
+      <ButtonGroup
+        flexWrap="nowrap"
+        display="flex"
+        justifyContent="space-between"
+        w="60vw"
+      >
+        <Button
+          color={color}
+          background="transparent"
+          transition="0.3s"
+          pr="20"
+        >
           {!user && !organization ? login : profile}
         </Button>
 

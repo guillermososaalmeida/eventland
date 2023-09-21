@@ -46,7 +46,7 @@ export const EventDetail = () => {
   }, [id, isEventAttended]);
 
   return (
-    <Box bg={bg} color={color}>
+    <Box bg={bg} color={color} p="10">
       <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
