@@ -24,7 +24,13 @@ export const EventList = () => {
           Todos los eventos aquí
         </Heading>
       </Stack>
-      <HStack flexWrap="wrap" gap="10" p="5">
+      <HStack
+        flexWrap="wrap"
+        gap="10"
+        p="5"
+        align={"center"}
+        justifyContent="center"
+      >
         {eventData?.length > 0 ? (
           eventData?.map((event) => (
             <Card key={event._id} borderRadius="15">
