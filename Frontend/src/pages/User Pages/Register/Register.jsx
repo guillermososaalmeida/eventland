@@ -20,6 +20,7 @@ import { registerUser } from "../../../services/user.service";
 import { useAuth } from "../../../context/authContext";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 import "./Register.css";
+import useWidth from "../../../hooks/useWidth";
 
 export const Register = () => {
   const { allUser, setAllUser, bridgeData } = useAuth();
@@ -34,6 +35,8 @@ export const Register = () => {
   const [gender, setGender] = useState(false);
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#173F4B");
+  const bgb = useColorModeValue("#f6f3e0bb", "#f6f3e0bb");
+  const { width } = useWidth();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -135,47 +138,35 @@ export const Register = () => {
               <FormControl isRequired>
                 <FormLabel htmlFor="gender">Género</FormLabel>
                 {/*el onclick setea el estado de gender  */}
-                <Flex>
+                <Flex justify={width < 1100 ? null : "space-evenly"}>
                   <Button
+                    bg={bgb}
                     onClick={() => {
                       setGender("hombre");
-                    }}
-                    _focus={{
-                      boxShadow:
-                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
                     }}
                   >
                     Hombre
                   </Button>
                   <Button
+                    bg={bgb}
                     onClick={() => {
                       setGender("mujer");
-                    }}
-                    _focus={{
-                      boxShadow:
-                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
                     }}
                   >
                     Mujer
                   </Button>
                   <Button
+                    bg={bgb}
                     onClick={() => {
                       setGender("otros");
-                    }}
-                    _focus={{
-                      boxShadow:
-                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
                     }}
                   >
                     Otros
                   </Button>
                   <Button
+                    bg={bgb}
                     onClick={() => {
                       setGender("prefiero no decirlo");
-                    }}
-                    _focus={{
-                      boxShadow:
-                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
                     }}
                   >
                     Prefiero no decirlo
