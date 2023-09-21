@@ -1,9 +1,57 @@
 /* Glassmorphism card effect */
 .card {
-  padding: 2em;
   backdrop-filter: blur(18px) saturate(100%);
   -webkit-backdrop-filter: blur(16px) saturate(100%);
-  background-color: #3f476c44;
+  background-color: #b0d9dc7d;
   border-radius: 12px;
-  border: 1px solid rgba(209, 213, 219, 0.3);
+  border: 1px solid rgba(63, 114, 192, 0.3);
+  width: 50%;
+  padding: 1em;
+}
+
+.form-container {
+  min-height: 92.9vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1em;
+  background-image: url("https://res.cloudinary.com/dhr13yihn/image/upload/v1695223761/proyectoEventland/assets/OIG_ovz6jg.jpg");
+  background-color: #938451;
+  background-size: 400px;
+}
+
+.chakra-form-control {
+  padding-top: 10px;
+}
+
+.chakra-button {
+  margin: 1em;
+}
+
+.css-k008qs {
+  & button {
+    background: #f6f3e0aa;
+    &:hover {
+      background-color: #13c1ac88;
+    }
+  }
+}
+
+#dateOfBirth {
+  background: #f6f3e0aa;
+}
+
+@media (max-width: 1100px) {
+  .css-k008qs {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 650px) {
+  .card {
+    width: 90%;
+  }
+  #start {
+    font-size: 10px;
+  }
 }

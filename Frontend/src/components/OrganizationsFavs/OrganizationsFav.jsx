@@ -8,7 +8,8 @@ import { useAuth } from "../../context/authContext";
 export const OrganizationsFav = () => {
   const { user } = useAuth();
   const [organizationsFav, setOrganizationsFav] = useState([{}]);
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bg = useColorModeValue("#f6f3e0ee", "#173F4Bee");
+  const bgver = useColorModeValue("teal", "teal");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +58,7 @@ export const OrganizationsFav = () => {
       : setActiveIndex(activeIndex - 1);
   };
   return organizationsFav.length ? (
-    <Box bg={bg} color={color}>
+    <Box bg={bg} color={color} p="12">
       <div
         {...handlers}
         className="generalContainer"
@@ -103,6 +104,7 @@ export const OrganizationsFav = () => {
                   >
                     <h2 className="imageName">{organization.name}</h2>
                     <Button
+                      bg={bgver}
                       onClick={() =>
                         navigate(`/or_ganizationdetail/${organization._id}`)
                       }

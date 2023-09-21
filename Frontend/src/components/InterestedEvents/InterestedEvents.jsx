@@ -8,7 +8,8 @@ import { useAuth } from "../../context/authContext";
 export const InterestedEvents = () => {
   const { user } = useAuth();
   const [interestedEvents, setInterestedEvents] = useState([{}]);
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bg = useColorModeValue("#f6f3e0ee", "#173F4Bee");
+  const bgver = useColorModeValue("teal", "teal");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     const fetchData = async () => {
@@ -102,8 +103,9 @@ export const InterestedEvents = () => {
                     className="sectionImage"
                     style={{ backgroundColor: bg }}
                   >
-                    <h2 className="imageName">{event.name}</h2>
+                    <h2 className="imageName imageTitle">{event.name}</h2>
                     <Button
+                      bg={bgver}
                       onClick={() => navigate(`/eventdetail/${event._id}`)}
                       _hover={{
                         transform: "scale(1.1)",

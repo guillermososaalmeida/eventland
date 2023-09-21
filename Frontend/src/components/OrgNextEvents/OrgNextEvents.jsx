@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
 import { Button, Divider, useColorModeValue, Box } from "@chakra-ui/react";
-import "./OrgNextEvents.css";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { useAuth } from "../../context/authContext";
 import { getNextEventsfromOrg } from "../../services/org.service";
 
 export const OrgNextEvents = () => {
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bg = useColorModeValue("#f6f3e0ee", "#173F4Bee");
+  const bgver = useColorModeValue("teal", "teal");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const { organization } = useOrgAuth();
   const { user } = useAuth();
@@ -109,6 +109,7 @@ export const OrgNextEvents = () => {
                     <h2 className="imageName">{event.name}</h2>
                     {organization ? (
                       <Button
+                        bg={bgver}
                         onClick={() => navigate(`/eventdetailorg/${event._id}`)}
                         _hover={{
                           transform: "scale(1.1)",
@@ -120,6 +121,7 @@ export const OrgNextEvents = () => {
                     ) : (
                       user && (
                         <Button
+                          bg={bgver}
                           onClick={() => navigate(`/eventdetail/${event._id}`)}
                           _hover={{
                             transform: "scale(1.1)",

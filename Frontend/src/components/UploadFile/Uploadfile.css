@@ -41,6 +41,7 @@ i.fa {
 }
 
 #file-drag {
+  height: 170px;
   display: flex;
   flex-direction: column;
   gap: 2rem;

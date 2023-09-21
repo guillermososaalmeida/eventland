@@ -15,7 +15,7 @@ export const Home = () => {
   return (
     <Box bg={bg} color={color}>
       <Flex p="5">
-        <Heading>Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
+        <Heading p="10">Tenemos miles de eventos ¡encuentra el tuyo!</Heading>
         <SingleEvent />
       </Flex>
       <FutureEvents />

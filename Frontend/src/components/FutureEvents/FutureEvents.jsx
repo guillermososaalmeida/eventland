@@ -52,7 +52,7 @@ export const FutureEvents = () => {
       : setActiveIndex(activeIndex - 1);
   };
   return events.length > 0 ? (
-    <Box bg={bg} color={color} m="5">
+    <Box bg={bg} color={color} p="12">
       <div
         {...handlers}
         className="generalContainer"

@@ -20,7 +20,6 @@ import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useEventLiked, useEventAttend } from "../../../hooks";
 import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../../context/authContext";
-import "./EventDetail.css";
 import useWidth from "../../../hooks/useWidth";
 
 export const EventDetail = () => {

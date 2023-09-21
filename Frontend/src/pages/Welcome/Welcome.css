@@ -15,18 +15,19 @@ svg {
   font-family: "Montserrat Alternates", sans-serif;
   letter-spacing: 4px;
 }
-
 .fullContainer {
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   height: 93vh;
   width: 100vw;
   align-items: center;
+  justify-content: center;
 }
 .grid {
   margin: 100px;
   display: grid;
-  position: absolute;
+  /* position: absolute; */
 
   top: 20vh;
   gap: 20px;
@@ -83,31 +84,65 @@ svg {
 }
 
 @media (min-width: 300px) {
+  .fullContainer {
+    align-items: center;
+    justify-content: space-around;
+    height: 93vh;
+  }
   .grid {
     right: 0;
     top: 40vh;
-    margin: 50px;
+    margin: 0;
     height: 250px;
     width: 250px;
+  }
+  #textoCabecera {
+    margin: 0;
+    font-size: 19px;
   }
 }
 @media (min-width: 768px) {
   .grid {
     right: 0;
     top: 20vh;
-    margin: 100px;
+    padding: 0px;
     height: 500px;
     width: 500px;
   }
-  .textoCabecera {
-    font-size: medium;
+  #textoCabecera {
+    font-size: 40px;
+  }
+  #subtextoCabecera {
+    font-size: 55px;
   }
 }
+
 @media (min-width: 1280px) {
+  .fullContainer {
+    flex-direction: row;
+  }
+  .grid {
+    margin: 0;
+    right: 200px;
+
+    height: 650px;
+    width: 650px;
+  }
+  #textoCabecera {
+    font-size: 30px;
+  }
+}
+@media (min-width: 1440px) {
+  .fullContainer {
+    flex-direction: row;
+  }
   .grid {
     right: 200px;
     margin: 175px;
     height: 650px;
     width: 650px;
+  }
+  #textoCabecera {
+    font-size: 30px;
   }
 }
