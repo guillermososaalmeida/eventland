@@ -30,7 +30,6 @@ export const CreateEvent = () => {
   const [okCreate, setOkCreate] = useState(false);
   const [establishments, setEstablishments] = useState([{}]);
   const [selectedEstablishment, setSelectedEstablishment] = useState(null);
-  const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   useEffect(() => {
     if (okCreate) {
@@ -85,70 +84,80 @@ export const CreateEvent = () => {
   // }}
   return (
     <>
-      <Box className="card" bg={bg} color={color}>
-        <Text fontSize="3xl" as="b">
-          Create Event
-        </Text>
-        <form onSubmit={handleSubmit(formSubmit)}>
-          <FormControl isInvalid={errors.name} isRequired>
-            <FormLabel htmlFor="name">Name</FormLabel>
-            <Input
-              id="name"
-              variant="filled"
-              placeholder="name"
-              {...register("name", {
-                required: "This is required",
-                minLength: { value: 4, message: "Minimum length should be 4" },
-              })}
-            />
-            <FormErrorMessage>
-              {errors.name && errors.name.message}
-            </FormErrorMessage>
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="description">Description</FormLabel>
-            <Input
-              id="description"
-              variant="filled"
-              placeholder="describe your organization"
-              {...register("description")}
-            />
-          </FormControl>
-          <FormControl isRequired>
-            <FormLabel htmlFor="establishment">Establishment</FormLabel>
+      <div className="form-container">
+        <Box className="card" color={color}>
+          <Text fontSize="3xl" as="b">
+            Create Event
+          </Text>
+          <form onSubmit={handleSubmit(formSubmit)}>
+            <FormControl isInvalid={errors.name} isRequired>
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input
+                id="name"
+                variant="filled"
+                placeholder="name"
+                {...register("name", {
+                  required: "This is required",
+                  minLength: {
+                    value: 4,
+                    message: "Minimum length should be 4",
+                  },
+                })}
+              />
+              <FormErrorMessage>
+                {errors.name && errors.name.message}
+              </FormErrorMessage>
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="description">Description</FormLabel>
+              <Input
+                id="description"
+                variant="filled"
+                placeholder="describe your organization"
+                {...register("description")}
+              />
+            </FormControl>
+            <FormControl isRequired>
+              <FormLabel htmlFor="establishment">Establishment</FormLabel>
 
-            <select
-              onChange={(event) => {
-                const establishment = establishments.find(
-                  (x) => x._id === event.target.value,
-                );
-                if (establishment) setSelectedEstablishment(establishment);
-                else setSelectedEstablishment(null);
-              }}
+              <select
+                onChange={(event) => {
+                  const establishment = establishments.find(
+                    (x) => x._id === event.target.value,
+                  );
+                  if (establishment) setSelectedEstablishment(establishment);
+                  else setSelectedEstablishment(null);
+                }}
+              >
+                <option value={null}>Select an establishment</option>
+                {establishments.map((establishment, index) => (
+                  <option key={index} value={establishment._id}>
+                    {establishment.name}
+                  </option>
+                ))}
+              </select>
+            </FormControl>
+            <Uploadfile />
+            <FormControl isInvalid={errors.name}>
+              <FormLabel htmlFor="date">Date</FormLabel>
+              <Input
+                type="date"
+                id="date"
+                variant="filled"
+                {...register("date")}
+              />
+            </FormControl>
+            <Button
+              mt={4}
+              colorScheme="teal"
+              type="submit"
+              isLoading={isLoading}
             >
-              <option value={null}>Select an establishment</option>
-              {establishments.map((establishment, index) => (
-                <option key={index} value={establishment._id}>
-                  {establishment.name}
-                </option>
-              ))}
-            </select>
-          </FormControl>
-          <Uploadfile />
-          <FormControl isInvalid={errors.name}>
-            <FormLabel htmlFor="date">Date</FormLabel>
-            <Input
-              type="date"
-              id="date"
-              variant="filled"
-              {...register("date")}
-            />
-          </FormControl>
-          <Button mt={4} colorScheme="teal" type="submit" isLoading={isLoading}>
-            Submit
-          </Button>
-        </form>
-      </Box>
+              Submit
+            </Button>
+          </form>
+        </Box>
+      </div>
     </>
   );
 };

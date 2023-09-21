@@ -9,7 +9,7 @@ export const WelcomeOrg = () => {
         <div className="fullContainer">
           <Stack gap="2em">
             <Heading w="15em" id="textoCabecera" letterSpacing="1px">
-              Asiste a lo mejor, guarda lo inolvidable
+              Da vida a tus ideas, crea eventos únicos
             </Heading>
             <Heading id="subtextoCabecera">Eventland</Heading>
           </Stack>

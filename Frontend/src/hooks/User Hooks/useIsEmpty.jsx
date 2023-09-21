@@ -11,8 +11,6 @@ export const useIsEmpty = () => {
       try {
         const response = await getUserById(user?._id);
         if (response.status === 200) {
-          console.log("response", response);
-
           if (
             response.data.data.eventsAttend.length == 0 &&
             response.data.data.eventsInterested.length == 0 &&

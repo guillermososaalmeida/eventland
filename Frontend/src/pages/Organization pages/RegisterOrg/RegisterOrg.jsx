@@ -64,7 +64,7 @@ export const RegisterOrg = () => {
       <div className="form-container">
         <Box className="card" color={color}>
           <Text fontSize="3xl" as="b">
-            Regístrate
+            Registra tu organización
           </Text>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl isInvalid={errors.name} isRequired>
