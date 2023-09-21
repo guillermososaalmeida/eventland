@@ -30,7 +30,7 @@ export const CreateEvent = () => {
   const [okCreate, setOkCreate] = useState(false);
   const [establishments, setEstablishments] = useState([{}]);
   const [selectedEstablishment, setSelectedEstablishment] = useState(null);
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const color = useColorModeValue("#173F4B", "#173F4B");
   useEffect(() => {
     if (okCreate) {
       setSelectedEstablishment(null);
@@ -87,12 +87,17 @@ export const CreateEvent = () => {
       <div className="form-container">
         <Box className="card" color={color}>
           <Text fontSize="3xl" as="b">
-            Create Event
+            Crear evento{" "}
           </Text>
           <form onSubmit={handleSubmit(formSubmit)}>
             <FormControl isInvalid={errors.name} isRequired>
-              <FormLabel htmlFor="name">Name</FormLabel>
+              <FormLabel htmlFor="name">Nombre</FormLabel>
               <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
                 id="name"
                 variant="filled"
                 placeholder="name"
@@ -109,8 +114,13 @@ export const CreateEvent = () => {
               </FormErrorMessage>
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="description">Description</FormLabel>
+              <FormLabel htmlFor="description">Descripción</FormLabel>
               <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
                 id="description"
                 variant="filled"
                 placeholder="describe your organization"
@@ -118,7 +128,7 @@ export const CreateEvent = () => {
               />
             </FormControl>
             <FormControl isRequired>
-              <FormLabel htmlFor="establishment">Establishment</FormLabel>
+              <FormLabel htmlFor="establishment">Establecimiento</FormLabel>
 
               <select
                 onChange={(event) => {
@@ -139,8 +149,13 @@ export const CreateEvent = () => {
             </FormControl>
             <Uploadfile />
             <FormControl isInvalid={errors.name}>
-              <FormLabel htmlFor="date">Date</FormLabel>
+              <FormLabel htmlFor="date">Fecha</FormLabel>
               <Input
+                borderBottom={"1px solid #003b43"}
+                bg="transparent"
+                _hover={{ background: "#173F4B33" }}
+                _focus={{ borderColor: "#173F4B" }}
+                _placeholder={{ color: "#003b43" }}
                 type="date"
                 id="date"
                 variant="filled"
@@ -153,7 +168,7 @@ export const CreateEvent = () => {
               type="submit"
               isLoading={isLoading}
             >
-              Submit
+              Crear evento
             </Button>
           </form>
         </Box>

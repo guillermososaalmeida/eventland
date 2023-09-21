@@ -3,12 +3,12 @@ import { deleteUserService } from "../../services/user.service";
 
 export const useDeleteUser = (setUser, navigate) => {
   Swal.fire({
-    title: "Are you sure you want to delete your profile?",
+    title: "¿Quieres borrar tu perfil?",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "rgb(73, 193, 162)",
     cancelButtonColor: "#d33",
-    confirmButtonText: "YES",
+    confirmButtonText: "SI",
   }).then(async (result) => {
     if (result.isConfirmed) {
       const res = await deleteUserService();
@@ -16,8 +16,8 @@ export const useDeleteUser = (setUser, navigate) => {
         case 200:
           Swal.fire({
             icon: "success",
-            title: "Deleted User",
-            text: "See you soon",
+            title: "Usuario borrado",
+            text: "¿Hasta pronto!",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -29,8 +29,8 @@ export const useDeleteUser = (setUser, navigate) => {
         default:
           Swal.fire({
             icon: "error",
-            title: "No deleted User ❎",
-            text: "Please, try again",
+            title: "No se ha borrado el usuario ❎",
+            text: "Por favor, inténtalo de nuevo",
             showConfirmButton: false,
             timer: 1500,
           });

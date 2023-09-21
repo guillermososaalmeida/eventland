@@ -9,7 +9,7 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Enter a valid email address ❎",
+      text: "Introduce un email válido ❎",
       showConfirmButton: false,
       timer: 3000,
     });
@@ -24,7 +24,7 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "No update password,  ❎ Try again, please",
+      text: "Contraseña no actualizada,  ❎ Por favor, inténtalo otra vez",
       showConfirmButton: false,
       timer: 3000,
     });
@@ -36,8 +36,8 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
     setRes(() => ({}));
     Swal.fire({
       icon: "success",
-      title: "Change password ok",
-      text: "Send email with your new password ✅",
+      title: "Contraseña cambiada",
+      text: "Email enviado con la nueva contraseña ✅",
       showConfirmButton: false,
       timer: 3000,
     });
@@ -53,8 +53,8 @@ export const useForgotPasswordError = (res, setRes, setForgotOk) => {
     setRes(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Error send incorrect email",
-      text: "We don't change your password, your email isn't valid ❎",
+      title: "Error al enviar el email",
+      text: "No hemos cambiado tu contraseña, tu email no es válido ❎",
       showConfirmButton: false,
       timer: 1500,
     });

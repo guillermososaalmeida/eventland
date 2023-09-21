@@ -21,11 +21,13 @@ export const HomeOrg = () => {
       <div className="fullContainer">
         <Stack gap="2em">
           <Heading w="15em" id="textoCabecera" letterSpacing="1px">
-            Empieza buscando tu primer evento
+            Empieza creando tu primer evento
           </Heading>
           <Heading id="subtextoCabecera">Eventland</Heading>
           <Link to="/createeventorg">
-            <Button>Create Event</Button>
+            <Button w="15em" colorScheme="teal">
+              Create Event
+            </Button>
           </Link>
         </Stack>
         <div className="grid">
@@ -58,12 +60,16 @@ export const HomeOrg = () => {
     </Center>
   ) : (
     <Box bg={bg} color={color} minH="92.9vh">
-      <Heading p="10">Comienza creando tu primer evento!</Heading>
-      <div>
+      <Heading p="10">
+        Todos los eventos que has organizado, en un solo lugar
+      </Heading>
+      <Center>
         <Link to="/createeventorg">
-          <Button>Create Event</Button>
+          <Button w="15em" colorScheme="teal">
+            Create Event
+          </Button>
         </Link>
-      </div>
+      </Center>
       <OrgNextEvents />
       <OrgPastEvents />
     </Box>

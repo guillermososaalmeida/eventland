@@ -34,7 +34,7 @@ export const OrganizationDetail = () => {
   }, [id, isFollowing]);
 
   return (
-    <Box bg={bg} color={color}>
+    <Box bg={bg} color={color} minH="92.9vh">
       <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -126,7 +126,7 @@ export const OrganizationDetail = () => {
             />
           </Box>
         </Flex>
-        <Divider />
+        <Divider border={`1.2px solid ${color}`} />
       </Stack>
       <OrgNextEvents />
     </Box>

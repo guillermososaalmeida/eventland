@@ -14,7 +14,7 @@ export const useOrgChangePasswordError = (
     navigate("/loginorg");
     return Swal.fire({
       icon: "success",
-      title: "Change password ok ✅",
+      title: "Contraseña cambiada ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -38,7 +38,7 @@ export const useOrgChangePasswordError = (
     return Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Old password don't match,  ❎ Try again, please",
+      text: "No coinciden las contraseñas,  ❎ Por favor, inténtalo otra vez",
       showConfirmButton: false,
       timer: 3000,
     });

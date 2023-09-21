@@ -10,7 +10,7 @@ export const useOrgResendCodeError = (
     setResResend(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Error send email with your code ✅",
+      title: "Error al enviar el email ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -22,7 +22,7 @@ export const useOrgResendCodeError = (
     setResResend(() => ({}));
     Swal.fire({
       icon: "success",
-      title: "Ok send email with your code ✅",
+      title: "Email enviado ✅",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -38,8 +38,8 @@ export const useOrgResendCodeError = (
     setResResend(() => ({}));
     Swal.fire({
       icon: "error",
-      title: "Interval server error ❎.",
-      text: "No delete user. Try again, please.",
+      title: "Internal server error ❎.",
+      text: "Usuario no borrado, inténtalo otra vez",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -50,7 +50,7 @@ export const useOrgResendCodeError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval Server Error! Don't send email ❎!",
+      text: "Internal Server Error! Don't send email ❎!",
       showConfirmButton: false,
       timer: 1500,
     });

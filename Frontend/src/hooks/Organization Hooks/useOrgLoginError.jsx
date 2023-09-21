@@ -24,7 +24,7 @@ export const useOrgLoginError = (
 
     Swal.fire({
       icon: "success",
-      title: "Welcome to my Page",
+      title: "¡Bienvenidx!",
       text: "Login ok ✅",
       showConfirmButton: false,
       timer: 1500,
@@ -38,7 +38,7 @@ export const useOrgLoginError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Unregistered user ❎",
+      text: "Usuario sin registrar ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -51,7 +51,7 @@ export const useOrgLoginError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Password dont match ❎",
+      text: "Contraseñas no coinciden ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -63,7 +63,7 @@ export const useOrgLoginError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Interval Server Error ❎!",
+      text: "Internal Server Error ❎!",
       showConfirmButton: false,
       timer: 1500,
     });

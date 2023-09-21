@@ -17,7 +17,7 @@ export const useOrgRegisterError = (
 
     Swal.fire({
       icon: "success",
-      title: "Welcome to my Page 💌",
+      title: "¡Bienvenidx!",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -30,7 +30,7 @@ export const useOrgRegisterError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Please , your email already exists !❎",
+      text: "Por favor, este email ya existe ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -41,7 +41,7 @@ export const useOrgRegisterError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Min 8 characters, 1 upper case, 1 lower case and a special character ❎",
+      text: "Mínimo 8 caracteres,con mayúscula, minúscula y un carácter especial ❎",
       showConfirmButton: false,
       timer: 3000,
     });
@@ -57,7 +57,7 @@ export const useOrgRegisterError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Sorry choose another name ❎",
+      text: "Escoge otro nombre ❎",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -85,7 +85,7 @@ export const useOrgRegisterError = (
     Swal.fire({
       icon: "error",
       title: "Oops...",
-      text: "Register ok, error to resend code ❎",
+      text: "Usuario registrado, error al enviar el código ❎",
       showConfirmButton: false,
       timer: 1500,
     });

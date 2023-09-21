@@ -3,7 +3,7 @@ import { deleteOrgService } from "../../services/org.service";
 
 export const useOrgDelete = (setOrganization, navigate) => {
   Swal.fire({
-    title: "Are you sure you want to delete your profile?",
+    title: "¿Seguro que quieres borrar el perfil?",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "rgb(73, 193, 162)",
@@ -16,7 +16,7 @@ export const useOrgDelete = (setOrganization, navigate) => {
         case 200:
           Swal.fire({
             icon: "success",
-            title: "Deleted Organization",
+            title: "Organización borrada",
             text: "See you soon",
             showConfirmButton: false,
             timer: 1500,
@@ -29,7 +29,7 @@ export const useOrgDelete = (setOrganization, navigate) => {
         default:
           Swal.fire({
             icon: "error",
-            title: "No deleted Organization ❎",
+            title: "La organización no se ha borrado ❎",
             text: "Please, try again",
             showConfirmButton: false,
             timer: 1500,

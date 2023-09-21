@@ -10,6 +10,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  LightMode,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -31,7 +32,7 @@ export const Register = () => {
   const [okRegister, setOkRegister] = useState(false);
   const [gender, setGender] = useState(false);
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const color = useColorModeValue("#173F4B", "#173F4B");
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -70,146 +71,147 @@ export const Register = () => {
   return (
     <>
       <div className="form-container">
-        <Box className="card">
-          <Text fontSize="3xl" as="b">
-            Regístrate
-          </Text>
-          <form onSubmit={handleSubmit(formSubmit)}>
-            <FormControl isInvalid={errors.name} isRequired>
-              <FormLabel htmlFor="name">Nombre de usuario</FormLabel>
-              <Input
-                borderBottom={"1px solid #003b43"}
-                bg="transparent"
-                id="name"
-                variant="filled"
-                _hover={{ background: "#173F4B33" }}
-                _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "#003b43" }}
-                {...register("name", {
-                  required: "This is required",
-                  minLength: {
-                    value: 4,
-                    message: "Minimum length should be 4",
-                  },
-                })}
-              />
-              <FormErrorMessage>
-                {errors.name && errors.name.message}
-              </FormErrorMessage>
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel htmlFor="password">Contraseña</FormLabel>
-              <Input
-                borderBottom={"1px solid #003b43"}
-                bg="transparent"
-                _hover={{ background: "#173F4B33" }}
-                _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "#003b43" }}
-                id="password"
-                type="password"
-                variant="filled"
-                autoComplete="false"
-                {...register("password", {
-                  required: "This is required",
-                })}
-              />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel htmlFor="email">Email</FormLabel>
-              <Input
-                borderBottom={"1px solid #003b43"}
-                bg="transparent"
-                _hover={{ background: "#173F4B33" }}
-                _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "#003b43" }}
-                id="email"
-                variant="filled"
-                {...register("email", {
-                  required: "This is required",
-                })}
-              />
-            </FormControl>
-            <FormControl isRequired>
-              <FormLabel htmlFor="gender">Género</FormLabel>
-              {/*el onclick setea el estado de gender  */}
-              <Flex>
-                <Button
-                  onClick={() => {
-                    setGender("hombre");
-                  }}
-                  _focus={{
-                    boxShadow:
-                      "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
-                  }}
-                >
-                  Hombre
-                </Button>
-                <Button
-                  onClick={() => {
-                    setGender("mujer");
-                  }}
-                  _focus={{
-                    boxShadow:
-                      "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
-                  }}
-                >
-                  Mujer
-                </Button>
-                <Button
-                  onClick={() => {
-                    setGender("otros");
-                  }}
-                  _focus={{
-                    boxShadow:
-                      "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
-                  }}
-                >
-                  Otros
-                </Button>
-                <Button
-                  onClick={() => {
-                    setGender("prefiero no decirlo");
-                  }}
-                  _focus={{
-                    boxShadow:
-                      "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
-                  }}
-                >
-                  Prefiero no decirlo
-                </Button>
-              </Flex>
-            </FormControl>
-            <Uploadfile />
-            {/* <FormControl isInvalid={errors.name}>
-              <FormLabel htmlFor="name">City</FormLabel>
-              <Input
-                id="city"
-                variant="filled"
-                placeholder="city"
-                {...register("city", {})}
-              />
-            </FormControl> */}
-            <FormControl isInvalid={errors.name}>
-              <FormLabel htmlFor="dateOfBirth">Fecha de nacimiento</FormLabel>
-
-              <Input
-                rounded="0"
-                type="date"
-                id="dateOfBirth"
-                variant="filled"
-                {...register("dateOfBirth", {})}
-              />
-            </FormControl>
-            <Button
-              colorScheme="teal"
-              type="submit"
-              isLoading={isLoading}
-              isDisabled={!gender}
-            >
-              Enviar
-            </Button>
-          </form>
-        </Box>
+        <LightMode>
+          <Box className="card" color={color}>
+            <Text fontSize="3xl" as="b">
+              Regístrate
+            </Text>
+            <form onSubmit={handleSubmit(formSubmit)}>
+              <FormControl isInvalid={errors.name} isRequired>
+                <FormLabel htmlFor="name">Nombre de usuario</FormLabel>
+                <Input
+                  borderBottom={"1px solid #003b43"}
+                  bg="transparent"
+                  id="name"
+                  variant="filled"
+                  _hover={{ background: "#173F4B33" }}
+                  _focus={{ borderColor: "#173F4B" }}
+                  _placeholder={{ color: "#003b43" }}
+                  {...register("name", {
+                    required: "This is required",
+                    minLength: {
+                      value: 4,
+                      message: "Minimum length should be 4",
+                    },
+                  })}
+                />
+                <FormErrorMessage>
+                  {errors.name && errors.name.message}
+                </FormErrorMessage>
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="password">Contraseña</FormLabel>
+                <Input
+                  borderBottom={"1px solid #003b43"}
+                  bg="transparent"
+                  _hover={{ background: "#173F4B33" }}
+                  _focus={{ borderColor: "#173F4B" }}
+                  _placeholder={{ color: "#003b43" }}
+                  id="password"
+                  type="password"
+                  variant="filled"
+                  autoComplete="false"
+                  {...register("password", {
+                    required: "This is required",
+                  })}
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <Input
+                  borderBottom={"1px solid #003b43"}
+                  bg="transparent"
+                  _hover={{ background: "#173F4B33" }}
+                  _focus={{ borderColor: "#173F4B" }}
+                  _placeholder={{ color: "#003b43" }}
+                  id="email"
+                  variant="filled"
+                  {...register("email", {
+                    required: "This is required",
+                  })}
+                />
+              </FormControl>
+              <FormControl isRequired>
+                <FormLabel htmlFor="gender">Género</FormLabel>
+                {/*el onclick setea el estado de gender  */}
+                <Flex>
+                  <Button
+                    onClick={() => {
+                      setGender("hombre");
+                    }}
+                    _focus={{
+                      boxShadow:
+                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                    }}
+                  >
+                    Hombre
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setGender("mujer");
+                    }}
+                    _focus={{
+                      boxShadow:
+                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                    }}
+                  >
+                    Mujer
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setGender("otros");
+                    }}
+                    _focus={{
+                      boxShadow:
+                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                    }}
+                  >
+                    Otros
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setGender("prefiero no decirlo");
+                    }}
+                    _focus={{
+                      boxShadow:
+                        "0 0 1px 2px rgba(88, 144, 255, .75), 0 1px 1px rgba(0, 0, 0, .15)",
+                    }}
+                  >
+                    Prefiero no decirlo
+                  </Button>
+                </Flex>
+              </FormControl>
+              <Uploadfile />
+              {/* <FormControl isInvalid={errors.name}>
+                <FormLabel htmlFor="name">City</FormLabel>
+                <Input
+                  id="city"
+                  variant="filled"
+                  placeholder="city"
+                  {...register("city", {})}
+                />
+              </FormControl> */}
+              <FormControl isInvalid={errors.name}>
+                <FormLabel htmlFor="dateOfBirth">Fecha de nacimiento</FormLabel>
+                <Input
+                  rounded="0"
+                  type="date"
+                  id="dateOfBirth"
+                  variant="filled"
+                  {...register("dateOfBirth", {})}
+                />
+              </FormControl>
+              <Button
+                colorScheme="teal"
+                type="submit"
+                isLoading={isLoading}
+                isDisabled={!gender}
+              >
+                Enviar
+              </Button>
+            </form>
+          </Box>
+        </LightMode>
       </div>
     </>
   );

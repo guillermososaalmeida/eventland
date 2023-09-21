@@ -30,7 +30,7 @@ export const CheckCode = () => {
   const [okCheck, setOkCheck] = useState(false);
   const [okDeleteUser, setOkDeleteUser] = useState(false);
   const [userNotFound, setUserNotFound] = useState(false);
-  const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const color = useColorModeValue("#173F4B", "#173F4B");
   //! -------FUNCION QUE GESTIONA LA DATA DEL FORMULARIO-------
   const formSubmit = async (formData) => {
     const userLocal = localStorage.getItem("user");

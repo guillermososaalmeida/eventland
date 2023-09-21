@@ -29,7 +29,7 @@ export const ChangePassword = () => {
 
     if (newPassword == confirmPassword) {
       Swal.fire({
-        title: "Are you sure you want to change your password?",
+        title: "¿Quieres cambiar la contraseña?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "rgb(74, 186, 158)",
@@ -45,7 +45,7 @@ export const ChangePassword = () => {
     } else {
       Swal.fire({
         icon: "error",
-        title: " New Password don't match witch confirmation password❎.",
+        title: " La nueva contraseña no coincide con la anterior❎.",
         showConfirmButton: false,
         timer: 2500,
       });

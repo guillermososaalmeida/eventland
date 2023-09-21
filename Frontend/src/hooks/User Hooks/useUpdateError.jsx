@@ -28,7 +28,7 @@ export const useUpdateError = (res, setRes, setUser, logoutUpdate) => {
       setRes(() => ({}));
       return Swal.fire({
         icon: "success",
-        title: `Update data user✅`,
+        title: `Datos actualizados ✅`,
         text: ` Update: ${check} `,
         showConfirmButton: false,
         timer: 1500,
@@ -53,7 +53,7 @@ export const useUpdateError = (res, setRes, setUser, logoutUpdate) => {
       setRes(() => ({}));
       return Swal.fire({
         icon: "error",
-        title: `Error update data user ❌`,
+        title: `Error al actualizar el usuario ❌`,
         showConfirmButton: false,
         timer: 1500,
       });
