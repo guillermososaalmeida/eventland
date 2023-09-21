@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { getUserById } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Divider, Box, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Box,
+  useColorModeValue,
+  DarkMode,
+} from "@chakra-ui/react";
 import { useAuth } from "../../context/authContext";
 
 export const InterestedEvents = () => {
@@ -103,17 +109,19 @@ export const InterestedEvents = () => {
                     className="sectionImage"
                     style={{ backgroundColor: bg }}
                   >
-                    <h2 className="imageName imageTitle">{event.name}</h2>
-                    <Button
-                      bg={bgver}
-                      onClick={() => navigate(`/eventdetail/${event._id}`)}
-                      _hover={{
-                        transform: "scale(1.1)",
-                      }}
-                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
-                    >
-                      VER EVENTO
-                    </Button>
+                    <h2 className="imageName">{event.name}</h2>
+                    <DarkMode>
+                      <Button
+                        bg={bgver}
+                        onClick={() => navigate(`/eventdetail/${event._id}`)}
+                        _hover={{
+                          transform: "scale(1.1)",
+                        }}
+                        box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                      >
+                        VER EVENTO
+                      </Button>
+                    </DarkMode>
                   </section>
                 </div>
               </div>
