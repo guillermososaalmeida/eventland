@@ -33,6 +33,7 @@ export const EventDetail = () => {
   const isPastEvent = event && new Date(event.date) < new Date();
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const bgh = useColorModeValue("#b6e9e9dd", "#173F4Baa");
+
   const colorh = useColorModeValue("black", "#F4FAFF");
   const bgatt = useColorModeValue("#3be1cd", "#3be1cd");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
@@ -77,12 +78,12 @@ export const EventDetail = () => {
           </Heading>
 
           <Button
+            bg={bgh}
             rounded="50"
-            h="15%"
-            w="8%"
+            h="fit-content"
+            w="20px"
             position="absolute"
             bottom="1"
-            bg={bgh}
             m="2"
             onClick={() => (user ? handleToggleLiked() : navigate("/register"))}
             isLoading={isLoadingLiked}
@@ -172,7 +173,7 @@ export const EventDetail = () => {
             <Text p="1em">{event?.organization?.description}</Text>
           </Box>
           <Box>
-            <Image w="100%" src={event?.organization?.image} rounded="10" />
+            <Image w="1000px" src={event?.organization?.image} rounded="10" />
           </Box>
         </Flex>
       </Stack>

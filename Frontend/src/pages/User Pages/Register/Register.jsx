@@ -78,13 +78,13 @@ export const Register = () => {
             <FormControl isInvalid={errors.name} isRequired>
               <FormLabel htmlFor="name">UserName</FormLabel>
               <Input
-                borderBottom={"1px solid #f6f3e0"}
+                borderBottom={"1px solid #003b43"}
                 bg="transparent"
                 id="name"
                 variant="filled"
                 _hover={{ background: "#173F4B33" }}
                 _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "000000aa" }}
+                _placeholder={{ color: "#003b43" }}
                 placeholder="name"
                 {...register("name", {
                   required: "This is required",
@@ -101,11 +101,11 @@ export const Register = () => {
             <FormControl isRequired>
               <FormLabel htmlFor="password">Password</FormLabel>
               <Input
-                borderBottom={"1px solid #f6f3e0"}
+                borderBottom={"1px solid #003b43"}
                 bg="transparent"
                 _hover={{ background: "#173F4B33" }}
                 _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "#f6f3e0" }}
+                _placeholder={{ color: "#003b43" }}
                 id="password"
                 type="password"
                 variant="filled"
@@ -119,11 +119,11 @@ export const Register = () => {
             <FormControl isRequired>
               <FormLabel htmlFor="email">Email</FormLabel>
               <Input
-                borderBottom={"1px solid #f6f3e0"}
+                borderBottom={"1px solid #003b43"}
                 bg="transparent"
                 _hover={{ background: "#173F4B33" }}
                 _focus={{ borderColor: "#173F4B" }}
-                _placeholder={{ color: "#f6f3e0" }}
+                _placeholder={{ color: "#003b43" }}
                 id="email"
                 variant="filled"
                 placeholder="your email"
