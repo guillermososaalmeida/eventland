@@ -74,7 +74,7 @@ export const Home = () => {
     </Center>
   ) : (
     <Box bg={bg} color={color} minH="92.9vh">
-      <Flex p="10" gap="2em">
+      <Flex p="10" gap="2em" justify="center" w="98vw">
         <Stack justify="space-between">
           <Heading>Tenemos miles de eventos, ¡encuentra el tuyo!</Heading>
           {event ? (
