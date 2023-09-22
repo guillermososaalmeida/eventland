@@ -179,8 +179,8 @@ export const InterestedEvents = () => {
             })}
           </div>
         </div>
+        <Divider border={`1.2px solid ${color}`} />
       </div>
-      <Divider border={`1.2px solid ${color}`} />
     </Box>
   ) : (
     <></>
