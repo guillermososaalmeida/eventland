@@ -106,6 +106,8 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const [isReload, setIsReload] = useState(true);
+
   const value = useMemo(
     () => ({
       user,
@@ -116,6 +118,8 @@ export const AuthContextProvider = ({ children }) => {
       logout,
       bridgeData,
       logoutUpdate,
+      isReload,
+      setIsReload,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [user, allUser],
