@@ -122,7 +122,7 @@ export const AuthContextProvider = ({ children }) => {
       setIsReload,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [user, allUser],
+    [user, allUser, isReload],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
