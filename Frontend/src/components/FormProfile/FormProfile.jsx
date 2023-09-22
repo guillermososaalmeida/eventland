@@ -17,6 +17,7 @@ import {
   useColorModeValue,
   Flex,
   Divider,
+  Center,
 } from "@chakra-ui/react";
 import { RadioCard } from "../RadioCard/RadioCard";
 import { Uploadfile } from "../UploadFile/UploadFile";
@@ -129,22 +130,23 @@ export const FormProfile = () => {
               <Divider borderColor="#173F4B" p="5" />
               <FormLabel>Género</FormLabel>
 
-              <Flex
-                justify="space-evenly"
-                {...group}
-                onClick={(e) => {
-                  setGender(e.target.value);
-                }}
-              >
-                {options.map((value) => {
-                  const radio = getRadioProps({ value });
-                  return (
-                    <RadioCard key={value} {...radio}>
-                      {value}
-                    </RadioCard>
-                  );
-                })}
-              </Flex>
+              <Center>
+                <Flex
+                  {...group}
+                  onClick={(e) => {
+                    setGender(e.target.value);
+                  }}
+                >
+                  {options.map((value) => {
+                    const radio = getRadioProps({ value });
+                    return (
+                      <RadioCard key={value} {...radio}>
+                        {value}
+                      </RadioCard>
+                    );
+                  })}
+                </Flex>
+              </Center>
             </Flex>
             <Button type="submit" isLoading={isLoading} colorScheme="teal">
               Editar perfil
