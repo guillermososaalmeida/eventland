@@ -1,0 +1,25 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/" },
+    { "src": "/org", "dest": "/" },
+    { "src": "/home", "dest": "/" },
+    { "src": "/register", "dest": "/" },
+    { "src": "/check", "dest": "/" },
+    { "src": "/login", "dest": "/" },
+    { "src": "/forgotpassword/forgotpassword", "dest": "/" },
+    { "src": "/profile", "dest": "/" },
+    { "src": "/organizationprofile", "dest": "/" },
+    { "src": "/eventdetail/:id", "dest": "/" },
+    { "src": "/", "dest": "/" },
+    { "src": "/dashboard", "dest": "/" },
+    { "src": "/createeventorg", "dest": "/" },
+    { "src": "/registerorg", "dest": "/" },
+    { "src": "/checkorg", "dest": "/" },
+    { "src": "/loginorg", "dest": "/" },
+    { "src": "/forgotpassword/forgotpasswordorg", "dest": "/homeorg" },
+    { "src": "/eventdetailorg/:id", "dest": "/" },
+    { "src": "/eventlist/:name?", "dest": "/" },
+    { "src": "/or_ganizationdetail/:id", "dest": "/" },
+    { "src": "/[^.]+", "dest": "/", "status": 200 }
+  ]
+}

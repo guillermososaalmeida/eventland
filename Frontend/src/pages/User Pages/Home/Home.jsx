@@ -20,12 +20,15 @@ import { useIsEmpty } from "../../../hooks";
 import { useEffect, useState } from "react";
 import { getSingleNextEvent } from "../../../services/user.service";
 import { ArrowRightIcon } from "@chakra-ui/icons";
+import { useAuth } from "../../../context/authContext";
 
 export const Home = () => {
+  const { allUser } = useAuth();
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const isEmpty = useIsEmpty();
   const [event, setEvent] = useState({});
+
   useEffect(() => {
     const getEvent = async () => {
       const data = await getSingleNextEvent();
@@ -33,7 +36,7 @@ export const Home = () => {
     };
     getEvent();
   }, []);
-
+  if (allUser?.data?.confirmationCode) window.location.reload();
   return isEmpty ? (
     <Center bg={bg} color={color} h="92.8vh">
       <div className="fullContainer">
