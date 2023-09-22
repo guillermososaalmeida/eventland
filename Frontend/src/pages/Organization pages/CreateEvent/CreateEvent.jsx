@@ -36,6 +36,7 @@ export const CreateEvent = () => {
   const [establishments, setEstablishments] = useState([{}]);
   const [selectedEstablishment, setSelectedEstablishment] = useState(null);
   const color = useColorModeValue("#173F4B", "#173F4B");
+
   useEffect(() => {
     if (okCreate) {
       setSelectedEstablishment(null);
@@ -56,8 +57,8 @@ export const CreateEvent = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    useCreateEventError(res, setOkCreate, setRes);
-  }, [res]);
+    useCreateEventError(res, setOkCreate, setRes, navigate);
+  }, [navigate, res]);
 
   const formSubmit = async (formData) => {
     if (!selectedEstablishment) return;
@@ -108,7 +109,7 @@ export const CreateEvent = () => {
                 _placeholder={{ color: "#003b43" }}
                 id="name"
                 variant="filled"
-                placeholder="name"
+                placeholder="nombre del evento"
                 {...register("name", {
                   required: "This is required",
                   minLength: {
@@ -131,7 +132,7 @@ export const CreateEvent = () => {
                 _placeholder={{ color: "#003b43" }}
                 id="description"
                 variant="filled"
-                placeholder="describe your organization"
+                placeholder="describe tu evento"
                 {...register("description")}
               />
             </FormControl>
@@ -151,7 +152,7 @@ export const CreateEvent = () => {
                     else setSelectedEstablishment(null);
                   }}
                 >
-                  <option value={null}>Select an establishment</option>
+                  <option value={null}>Selecciona el establecimiento</option>
                   {establishments.map((establishment, index) => (
                     <option
                       key={index}

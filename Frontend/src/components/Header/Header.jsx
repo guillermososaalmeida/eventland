@@ -16,6 +16,7 @@ import { useAuth } from "../../context/authContext";
 import "./Header.css";
 import { HeaderStyled } from "./Header.element";
 import { useState } from "react";
+import { RxDashboard } from "react-icons/rx";
 
 export const Header = () => {
   const color = useColorModeValue("#173F4B", "#f6f3e0");
@@ -106,7 +107,10 @@ export const Header = () => {
           }
           myEvents={
             pathname.includes("org") ? (
-              <Link to="/homeorg">Mis eventos</Link>
+              <>
+                <Icon as={RxDashboard} />
+                <Link to="/homeorg">Mis eventos</Link>
+              </>
             ) : (
               <Link to="/home">Mis eventos</Link>
             )
