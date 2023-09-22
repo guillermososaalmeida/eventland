@@ -14,6 +14,7 @@ import {
   LightMode,
   Text,
   useColorModeValue,
+  useRadioGroup,
 } from "@chakra-ui/react";
 import { useRegisterError } from "../../../hooks";
 import { registerUser } from "../../../services/user.service";
@@ -21,6 +22,7 @@ import { useAuth } from "../../../context/authContext";
 import { Uploadfile } from "../../../components/UploadFile/UploadFile";
 import "./Register.css";
 import useWidth from "../../../hooks/useWidth";
+import { RadioCard } from "../../../components";
 
 export const Register = () => {
   const { allUser, setAllUser, bridgeData } = useAuth();
@@ -37,6 +39,13 @@ export const Register = () => {
   const color = useColorModeValue("#173F4B", "#173F4B");
   const bgb = useColorModeValue("#f6f3e0bb", "#f6f3e0bb");
   const { width } = useWidth();
+  const options = ["hombre", "mujer", "otros", "prefiero no decirlo"];
+
+  const { getRootProps, getRadioProps } = useRadioGroup({
+    name: "framework",
+    defaultValue: "",
+  });
+  const group = getRootProps();
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -138,39 +147,21 @@ export const Register = () => {
               <FormControl isRequired>
                 <FormLabel htmlFor="gender">Género</FormLabel>
                 {/*el onclick setea el estado de gender  */}
-                <Flex justify={width < 1100 ? null : "space-evenly"}>
-                  <Button
-                    bg={bgb}
-                    onClick={() => {
-                      setGender("hombre");
-                    }}
-                  >
-                    Hombre
-                  </Button>
-                  <Button
-                    bg={bgb}
-                    onClick={() => {
-                      setGender("mujer");
-                    }}
-                  >
-                    Mujer
-                  </Button>
-                  <Button
-                    bg={bgb}
-                    onClick={() => {
-                      setGender("otros");
-                    }}
-                  >
-                    Otros
-                  </Button>
-                  <Button
-                    bg={bgb}
-                    onClick={() => {
-                      setGender("prefiero no decirlo");
-                    }}
-                  >
-                    Prefiero no decirlo
-                  </Button>
+                <Flex
+                  justify="space-evenly"
+                  {...group}
+                  onClick={(e) => {
+                    setGender(e.target.value);
+                  }}
+                >
+                  {options.map((value) => {
+                    const radio = getRadioProps({ value });
+                    return (
+                      <RadioCard key={value} {...radio}>
+                        {value}
+                      </RadioCard>
+                    );
+                  })}
                 </Flex>
               </FormControl>
               <Uploadfile />

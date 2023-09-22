@@ -130,6 +130,7 @@ export const FormProfile = () => {
               <FormLabel>Género</FormLabel>
 
               <Flex
+                justify="space-evenly"
                 {...group}
                 onClick={(e) => {
                   setGender(e.target.value);
