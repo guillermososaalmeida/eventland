@@ -20,13 +20,18 @@ import {
 import { AvatarCustomGroup, Countdown } from "../../../components";
 import { useDeleteEvent } from "../../../hooks";
 import { DeleteIcon } from "@chakra-ui/icons";
+import useWidth from "../../../hooks/useWidth";
 
 export const EventDetailOrg = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [event, setEvent] = useState({});
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
+  const bgh = useColorModeValue("#b6e9e9dd", "#173F4Baa");
+
+  const colorh = useColorModeValue("black", "#F4FAFF");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
+  const { width } = useWidth();
 
   useEffect(() => {
     (async () => {
@@ -37,12 +42,14 @@ export const EventDetailOrg = () => {
   const { image, name, description } = event;
 
   return (
-    <Box bg={bg} color={color} p="10" minH="92.9vh">
-      <Stack align="center">
+    <Box bg={bg} color={color} p="10">
+      <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
+            fontSize={width < 500 ? "12px" : width < 650 ? "20px" : "30px"}
+            color={colorh}
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
             top="0"
@@ -52,20 +59,24 @@ export const EventDetailOrg = () => {
             {name}
           </Heading>
           <Heading
+            fontSize={width < 500 ? "8px" : width < 650 ? "14px" : "20px"}
+            color={colorh}
             size="sm"
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
-            top="20"
+            top={width < 500 ? "14" : "20"}
             left="0"
             m="2"
           >
             {event.establishment?.name}
           </Heading>
           <Heading
+            fontSize={width < 500 ? "12px" : width < 650 ? "20px" : "30px"}
+            color={colorh}
             position="absolute"
-            bg={bg}
+            bg={bgh}
             rounded="10"
             p="4"
             bottom="12"
@@ -86,33 +97,50 @@ export const EventDetailOrg = () => {
             maxWidth="100%"
           />
         </Box>
-        <Box maxWidth="900px" display="flex" alignItems="center" gap="2em">
-          <Text p="1em" mr="8em">
-            {description}
-          </Text>
-          <ButtonGroup
-            onClick={() => useDeleteEvent(navigate, id)}
-            size="sm"
-            isAttached
-            variant="outline"
-          >
-            <Button border={"1px solid #E53E3E"}>Borrar evento</Button>
-            <IconButton
-              border={"1px solid #E53E3E"}
-              aria-label="Borrar usuario"
-              icon={<DeleteIcon color="red" />}
-            />
-          </ButtonGroup>
+        <Box
+          maxWidth="900px"
+          display="flex"
+          alignItems="center"
+          gap="2em"
+          m="10"
+          flexDir={width < 600 ? "column" : "row"}
+        >
+          <Flex>
+            <Text p="1em" mr="8em">
+              {description}
+            </Text>
+            <ButtonGroup
+              onClick={() => useDeleteEvent(navigate, id)}
+              size="sm"
+              isAttached
+              variant="outline"
+            >
+              <Button border={"1px solid #E53E3E"}>Borrar evento</Button>
+              <IconButton
+                border={"1px solid #E53E3E"}
+                aria-label="Borrar usuario"
+                icon={<DeleteIcon color="red" />}
+              />
+            </ButtonGroup>
+          </Flex>
           <AvatarCustomGroup
             event={event}
             isFollowers={isFollowers}
             setIsFollowers={setIsFollowers}
           />
         </Box>
-        <Divider />
-        <Flex maxWidth="900px" alignItems="center" gap="2em">
-          <Box p="1em" mr="8em">
-            <Flex>
+        <Divider border={`1.2px solid ${color}`} />
+        <Flex
+          maxWidth="900px"
+          alignItems="center"
+          gap={width < 600 ? "2em" : "10em"}
+          m="10"
+          align="center"
+          justify="center"
+          flexDir={width < 600 ? "column" : "row"}
+        >
+          <Box>
+            <Flex align="center">
               <Avatar src={event?.organization?.image} />
               <Heading p="4">{event?.organization?.name}</Heading>
             </Flex>
