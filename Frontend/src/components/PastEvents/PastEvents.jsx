@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { pastEvents } from "../../services/user.service";
 import { useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Box, Divider, useColorModeValue } from "@chakra-ui/react";
+import {
+  Button,
+  Box,
+  Divider,
+  useColorModeValue,
+  DarkMode,
+} from "@chakra-ui/react";
 
 export const PastEvents = () => {
   const [events, setEvents] = useState([{}]);
@@ -94,15 +100,17 @@ export const PastEvents = () => {
                     style={{ backgroundColor: bg }}
                   >
                     <h2 className="imageName">{event.name}</h2>
-                    <Button
-                      onClick={() => navigate(`/eventdetail/${event._id}`)}
-                      _hover={{
-                        transform: "scale(1.1)",
-                      }}
-                      box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
-                    >
-                      VER EVENTO
-                    </Button>
+                    <DarkMode>
+                      <Button
+                        onClick={() => navigate(`/eventdetail/${event._id}`)}
+                        _hover={{
+                          transform: "scale(1.1)",
+                        }}
+                        box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                      >
+                        VER EVENTO
+                      </Button>
+                    </DarkMode>
                   </section>
                 </div>
               </div>
