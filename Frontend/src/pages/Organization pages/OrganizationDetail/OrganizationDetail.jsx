@@ -68,22 +68,7 @@ export const OrganizationDetail = () => {
                 : "Con un evento organizado"
               : "¡Estate atento para cuando organize su primer evento!"}
           </Heading>
-          <Heading
-            fontSize={width < 500 ? "8px" : width < 650 ? "14px" : "20px"}
-            position="absolute"
-            bg={bgh}
-            rounded="10"
-            bottom="12"
-            p="2"
-            right="0"
-            m="2"
-          >
-            {organization.usersFav?.length
-              ? organization.usersFav.length > 1
-                ? "La siguen : " + organization.usersFav?.length + " usuarios"
-                : "La sigue 1 usuario"
-              : "¡Sé el primero en seguirla!"}
-          </Heading>
+
           <Heading
             fontSize={width < 500 ? "8px" : width < 650 ? "12px" : "17px"}
             bg={bgh}
