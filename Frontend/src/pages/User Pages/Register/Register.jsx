@@ -148,7 +148,6 @@ export const Register = () => {
                 <FormLabel htmlFor="gender">Género</FormLabel>
                 {/*el onclick setea el estado de gender  */}
                 <Flex
-                  justify="space-evenly"
                   {...group}
                   onClick={(e) => {
                     setGender(e.target.value);

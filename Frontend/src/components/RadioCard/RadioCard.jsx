@@ -10,6 +10,7 @@ export function RadioCard(props) {
 
   return (
     <Box
+      m="5"
       bg={bg}
       color={color}
       as="label"
