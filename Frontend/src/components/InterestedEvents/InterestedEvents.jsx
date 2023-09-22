@@ -30,9 +30,7 @@ export const InterestedEvents = () => {
 
     fetchData();
   }, [user._id]);
-  //Comentado en caso de que queramos poner los botones de navegación
-  // const next =
-  //   "https://res.cloudinary.com/dhr13yihn/image/upload/v1694703917/arrow-left-3099_qst1pk.svg";
+
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -72,19 +70,6 @@ export const InterestedEvents = () => {
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        {/*comentado en caso de que queramos poner los botones de navegación */}
-        {/* <div className="buttonsScrollContainer">
-          <button
-            onClick={() => {
-              preIndex();
-            }}
-          >
-            <img
-              className="imagePrevious"
-              src={next}
-              alt="button to the previous image"
-            />
-          </button> */}
         <h1 className="imageName" style={{ backgroundColor: bg }}>
           Eventos que te interesan
         </h1>
@@ -127,33 +112,9 @@ export const InterestedEvents = () => {
               </div>
             ))}
         </div>
-        {/* <button onClick={() => nextIndex()}>
-            <img
-              className="imageNext"
-              src={next}
-              alt="button to the next image"
-            />
-          </button>
-        </div> */}
+
         <div className="setActiveIndexOuterDiv">
           <div className="setActiveIndexInnerDiv">
-            {/* {events.map((element, index) => {
-              index == activeIndex ? (
-                <span
-                  className="spanActive activeImg"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              ) : (
-                <span
-                  className="spanActive"
-                  onClick={() => {
-                    setActiveIndex(index);
-                  }}
-                ></span>
-              );
-            })} */}
             {interestedEvents.map((element, index) => {
               if (index == activeIndex) {
                 return (

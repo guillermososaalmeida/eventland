@@ -5,12 +5,14 @@ import {
   IconButton,
   useColorMode,
   Button,
+  Icon,
 } from "@chakra-ui/react";
 import { HamburgerIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../context/authContext";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { MobileMenuItem } from "./MobileMenuItem";
 import useWidth from "../../hooks/useWidth";
+import { AiOutlineLogout } from "react-icons/ai";
 
 export const MobileMenu = ({
   switchMode,
@@ -24,7 +26,7 @@ export const MobileMenu = ({
   const { logoutOrg, organization } = useOrgAuth();
   const { width } = useWidth();
   return (
-    <navbar>
+    <nav>
       {width > 630 ? (
         <>
           <Button background="transparent" transition="0.3s">
@@ -65,11 +67,11 @@ export const MobileMenu = ({
           </MobileMenuItem>
           {(user || organization) && (
             <MobileMenuItem color="red" onClick={user ? logout : logoutOrg}>
-              Logout
+              <Icon as={AiOutlineLogout} />
             </MobileMenuItem>
           )}
         </MenuList>
       </Menu>
-    </navbar>
+    </nav>
   );
 };

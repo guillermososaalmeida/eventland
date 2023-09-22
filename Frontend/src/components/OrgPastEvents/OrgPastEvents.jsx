@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import { Button, Box, useColorModeValue } from "@chakra-ui/react";
+import { Button, Box, useColorModeValue, DarkMode } from "@chakra-ui/react";
 import { useOrgAuth } from "../../context/authOrgContext";
 import { useAuth } from "../../context/authContext";
 import { getPastEventsfromOrg } from "../../services/org.service";
@@ -88,27 +88,18 @@ export const OrgPastEvents = () => {
               >
                 <div className="imageInnerContainer">
                   <img className="image" src={event.image} />
-                  <section
-                    className="sectionImage"
-                    style={{ backgroundColor: bg }}
-                  >
-                    <h2 className="imageName">{event.name}</h2>
-                    {organization ? (
-                      <Button
-                        bg={bgver}
-                        onClick={() => navigate(`/eventdetailorg/${event._id}`)}
-                        _hover={{
-                          transform: "scale(1.1)",
-                        }}
-                        box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
-                      >
-                        VER EVENTO
-                      </Button>
-                    ) : (
-                      user && (
+                  <DarkMode>
+                    <section
+                      className="sectionImage"
+                      style={{ backgroundColor: bg }}
+                    >
+                      <h2 className="imageName">{event.name}</h2>
+                      {organization ? (
                         <Button
                           bg={bgver}
-                          onClick={() => navigate(`/eventdetail/${event._id}`)}
+                          onClick={() =>
+                            navigate(`/eventdetailorg/${event._id}`)
+                          }
                           _hover={{
                             transform: "scale(1.1)",
                           }}
@@ -116,9 +107,24 @@ export const OrgPastEvents = () => {
                         >
                           VER EVENTO
                         </Button>
-                      )
-                    )}
-                  </section>
+                      ) : (
+                        user && (
+                          <Button
+                            bg={bgver}
+                            onClick={() =>
+                              navigate(`/eventdetail/${event._id}`)
+                            }
+                            _hover={{
+                              transform: "scale(1.1)",
+                            }}
+                            box-shadow="0px 0px 10px rgba(0, 0, 0, 0.2)"
+                          >
+                            VER EVENTO
+                          </Button>
+                        )
+                      )}
+                    </section>
+                  </DarkMode>
                 </div>
               </div>
             ))}
