@@ -9,7 +9,7 @@ const APIHeaders = {
 };
 
 export const APIUser = axios.create({
-  baseURL: `http://localhost:8080/api/v1`,
+  baseURL: `https://eventland-a2if.onrender.com/api/v1`,
   headers: APIHeaders,
   timeout: 60000,
 });

@@ -253,7 +253,7 @@ const forgotPassword = async (req, res, next) => {
     if (organizationDb) {
       return res.redirect(
         307,
-        `http://localhost:8080/api/v1/organizations/sendPassword/${organizationDb._id}`,
+        `https://eventland-a2if.onrender.com/api/v1/organizations/sendPassword/${organizationDb._id}`,
       );
     } else {
       return res.status(404).json("Organization no register");
