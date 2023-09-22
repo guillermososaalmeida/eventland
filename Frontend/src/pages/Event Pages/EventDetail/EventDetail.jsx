@@ -46,7 +46,7 @@ export const EventDetail = () => {
   }, [id, isEventAttended]);
 
   return (
-    <Box bg={bg} color={color} p="10">
+    <Box bg={bg} color={color} p="10" minH="92.9vh">
       <Stack align="center" p="1em">
         <Box maxWidth="900px" position="relative" display="inline-block">
           <Heading
@@ -107,6 +107,7 @@ export const EventDetail = () => {
           </Heading>
           {event.date && <Countdown date={event?.date} />}
           <Image
+            minW={width < 400 ? "300px" : "600px"}
             rounded="10"
             src={image}
             alt={name}
