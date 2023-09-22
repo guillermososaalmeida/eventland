@@ -20,21 +20,12 @@ import { useIsEmpty } from "../../../hooks";
 import { useEffect, useState } from "react";
 import { getSingleNextEvent } from "../../../services/user.service";
 import { ArrowRightIcon } from "@chakra-ui/icons";
-import { useAuth } from "../../../context/authContext";
 
 export const Home = () => {
-  const { isReload, setIsReload } = useAuth();
   const bg = useColorModeValue("#f6f3e0", "#173F4B");
   const color = useColorModeValue("#173F4B", "#f6f3e0");
   const isEmpty = useIsEmpty();
   const [event, setEvent] = useState({});
-  useEffect(() => {
-    if (isReload) {
-      setIsReload(() => false);
-
-      window.location.reload();
-    }
-  }, []);
 
   useEffect(() => {
     const getEvent = async () => {
