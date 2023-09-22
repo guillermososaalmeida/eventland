@@ -1,25 +1,25 @@
-const express = require("express");
+// const express = require("express");
 
-const {
-  postComment,
-  getById,
-  getAllComments,
-  deleteComment,
-} = require("../controllers/Comment.controller");
-const {
-  isAuthUser,
-  isAuthUserOwnerDelete,
-} = require("../../middleware/authUser.middleware");
+// const {
+//   postComment,
+//   getById,
+//   getAllComments,
+//   deleteComment,
+// } = require("../controllers/Comment.controller");
+// const {
+//   isAuthUser,
+//   isAuthUserOwnerDelete,
+// } = require("../../middleware/authUser.middleware");
 
-const CommentRoutes = express.Router();
+// const CommentRoutes = express.Router();
 
-//! POST
-CommentRoutes.post("/:event", [isAuthUser], postComment);
+// //! POST
+// CommentRoutes.post("/:event", [isAuthUser], postComment);
 
-//! GET
-CommentRoutes.get("/:id", getById);
-CommentRoutes.get("/get/all", getAllComments);
+// //! GET
+// CommentRoutes.get("/:id", getById);
+// CommentRoutes.get("/get/all", getAllComments);
 
-//! DELETE
-CommentRoutes.delete("/:id", [isAuthUserOwnerDelete], deleteComment);
-module.exports = CommentRoutes;
+// //! DELETE
+// CommentRoutes.delete("/:id", [isAuthUserOwnerDelete], deleteComment);
+// module.exports = CommentRoutes;
