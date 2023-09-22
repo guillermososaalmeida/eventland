@@ -29,10 +29,11 @@ export const Home = () => {
   const [isReload, setIsReload] = useState(true);
   useEffect(() => {
     if (isReload) {
-      window.location.reload();
       setIsReload(false);
+
+      window.location.reload();
     }
-  }, [isReload]);
+  }, []);
 
   useEffect(() => {
     const getEvent = async () => {
