@@ -18,7 +18,7 @@ import {
   Text,
   Input,
   useColorModeValue,
-  Center,
+  Flex,
 } from "@chakra-ui/react";
 export const CheckCodeOrg = () => {
   // eslint-disable-next-line no-unused-vars
@@ -155,7 +155,7 @@ export const CheckCodeOrg = () => {
             </div>
 
             <ButtonGroup width="500px" display="flex" justifyContent="start">
-              <Center pt="5">
+              <Flex>
                 <Button
                   colorScheme="teal"
                   id="btnCheck"
@@ -176,7 +176,7 @@ export const CheckCodeOrg = () => {
                 >
                   Reenviar código
                 </Button>
-              </Center>
+              </Flex>
             </ButtonGroup>
 
             <p className="bottom-text">

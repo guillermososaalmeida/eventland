@@ -15,7 +15,7 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Center,
+  Flex,
   Input,
   Text,
   useColorModeValue,
@@ -155,7 +155,7 @@ export const CheckCode = () => {
               </label>
             </div>
             <ButtonGroup width="500px" display="flex" justifyContent="start">
-              <Center pt="5">
+              <Flex>
                 <Button
                   colorScheme="teal"
                   id="btnCheck"
@@ -176,7 +176,7 @@ export const CheckCode = () => {
                 >
                   Reenviar código
                 </Button>
-              </Center>
+              </Flex>
             </ButtonGroup>
             <p className="bottom-text">
               <small>
